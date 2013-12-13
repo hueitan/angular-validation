@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="myApp">
+
+<head>
+    <title>Angular Validation</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script src="dist/angular-validation.js"></script>
+    <script src="dist/angular-validation-message.js"></script>
+    <script src="demo/demo.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.0.2/css/foundation.min.css"/>
+    <link rel="stylesheet" href="demo/main.css"/>
+
+</head>
+
+<body ng-controller="validation">
+
+<div class="row">
+    <div class="small-12 medium-9 large-6 large-centered columns">
+        <form>
+            <h1>Angular Validation</h1>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 medium-9 large-6 large-centered columns">
+        <form name="Form">
+            <fieldset>
+                <legend>Form</legend>
+
+                <label>Required</label>
+                <input type="text"
+                       name="require"
+                       ng-model="form.required"
+                       validator="required"
+                       required-error-message="Required"
+                       required-success-message="Good Required"
+                       valid-message="Valid"
+                       invalid-message="Invalid"/>
+
+                <label>Required + Url</label>
+                <input type="text"
+                       name="requireUrl"
+                       ng-model="form.requiredUrl"
+                       validator="required,url"
+                       required-error-message="Required"
+                       required-success-message="Good Required"
+                       url-error-message="Error url"
+                       url-success-message="Good Url"
+                       valid-message="Valid"
+                       invalid-message="Invalid"/>
+
+                <label>Required + Url ( Using Default Message )</label>
+                <input type="text" ng-model="form.requiredUrlDefault" validator="required,url"/>
+
+                <label>Required ( Invalid Callback alert)</label>
+                <input type="text" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
+            </fieldset>
+
+            <button class="button" ng-disabled="!Form.$valid">Submit</button>
+            <!--<pre>{{ form | json }}</pre>-->
+        </form>
+    </div>
+</div>
+
+</html>
