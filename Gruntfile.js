@@ -57,6 +57,11 @@ module.exports = function (grunt) {
                 spawn: false,
                 interrupt: true
             }
+        },
+        karma: {
+            unit: {
+                configFile: 'test/karma.conf.js'
+            }
         }
     });
 
@@ -66,6 +71,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-karma');
 
     // Register Task
     grunt.registerTask('dev', ['connect', 'watch']);

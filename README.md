@@ -1,4 +1,6 @@
-angular-validation [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
+angular-validation
+[![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
+[![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
 =========================
 Requirement
 -----
@@ -149,6 +151,7 @@ var defaultMsg = {
 ```
 **Test**
 ```
+Karma Test done by Travis-ci,
 When you are done, test it on `http://localhost:8080`
 ```
 
