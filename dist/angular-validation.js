@@ -1,8 +1,6 @@
-
 (function () {
     angular.module('validation', ['validation.provider', 'validation.directive']);
 }).call(this);
-
 (function () {
     angular.module('validation.provider', [])
         .provider('validationProvider', function () {
@@ -12,6 +10,18 @@
              * @type {{}}
              */
             var valid = {};
+
+
+            /**
+             * Define validation type RegExp
+             * @type {{required: RegExp, url: RegExp, email: RegExp}}
+             */
+            var expression = {
+                required: /.+/gi,
+                url: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+                email: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+                number: /^\d+$/
+            };
 
 
             /**
@@ -26,6 +36,14 @@
                 url: {
                     error: 'This should be Url',
                     success: 'It\'s Url'
+                },
+                email: {
+                    error: 'This should be Email',
+                    success: 'It\'s Email'
+                },
+                number: {
+                    error: 'This should be Number',
+                    success: 'It\'s Number'
                 }
             };
 
@@ -64,6 +82,7 @@
             this.$get = function () {
                 return {
                     valid: valid,
+                    expression: expression,
                     defaultMsg: defaultMsg,
                     errorHTML: errorHTML,
                     successHTML: successHTML,
@@ -74,7 +93,6 @@
 
         });
 }).call(this);
-
 (function () {
     angular.module('validation.directive', ['validation.provider'])
         .directive('validator', ['validationProvider', function ($validationProvider) {
@@ -134,44 +152,35 @@
                      * Check Every validator
                      */
                     validator.forEach(function (validation) {
-                        switch (validation) {
-                            case 'required':
-                                /**
-                                 * Validator 'required'
-                                 * valid iff value exists
-                                 */
-                                scope.$watch('model', function (value) {
-                                    if (value) {
-                                        validFunc(element, attrs.requiredSuccessMessage, validation, scope.validCallback());
-                                        ctrl.$setValidity(ctrl.$name, true);
-                                    } else {
-                                        invalidFunc(element, attrs.requiredErrorMessage, validation, scope.invalidCallback());
-                                        ctrl.$setValidity(ctrl.$name, false);
-                                    }
-                                });
-                                break;
-                            case 'url':
-                                /**
-                                 * Validator 'url'
-                                 * valid iff the input is url format
-                                 */
-                                var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
-                                scope.$watch('model', function (value) {
-                                    if (expression.test(value)) {
-                                        validFunc(element, attrs.urlSuccessMessage, validation);
-                                        ctrl.$setValidity(ctrl.$name, true);
-                                    } else {
-                                        invalidFunc(element, attrs.urlErrorMessage, validation);
-                                        ctrl.$setValidity(ctrl.$name, false);
-                                    }
-                                });
-                                break;
-                            default:
-                                /**
-                                 * Default
-                                 */
-                                break;
-                        }
+                        var successMessage = validation + 'SuccessMessage',
+                            errorMessage = validation + 'ErrorMessage';
+
+                        /**
+                         * Set Validity to false when Initial
+                         */
+                        ctrl.$setValidity(ctrl.$name, false);
+
+                        scope.$watch('model', function (value) {
+
+                            /**
+                             * dirty, pristine, viewValue control here
+                             */
+                            if (ctrl.$pristine && ctrl.$viewValue) {
+                            }
+                            else if (ctrl.$pristine) {
+                                return;
+                            }
+
+                            if ($validationProvider.expression[validation].test(value)) {
+                                validFunc(element, attrs[successMessage], validation, scope.validCallback());
+                                ctrl.$setValidity(ctrl.$name, true);
+                            } else {
+                                invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
+                                ctrl.$setValidity(ctrl.$name, false);
+                            }
+                        });
+
+
                     });
                 }
             }

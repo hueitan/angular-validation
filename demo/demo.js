@@ -3,8 +3,10 @@ angular.module('myApp', ['validation']);
 
 function validation($scope, $injector) {
 
+    // Injector
     var validationProvider = $injector.get('validationProvider');
 
+    // Initial Value
     $scope.form = {
         requiredCallback: 'required'
     };
@@ -13,10 +15,7 @@ function validation($scope, $injector) {
         alert('Error ' + message)
     };
 
-    /**
-     *
-     * @type {{url: {error: string, success: string}}}
-     */
+    // Give Default Message
     var defaultMsg = {
         url: {
             error: 'This is a error url given by user',
