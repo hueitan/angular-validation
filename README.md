@@ -1,4 +1,4 @@
-angular-validation
+angular-validation [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
 =========================
 Requirement
 -----
