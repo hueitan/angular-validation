@@ -23,7 +23,7 @@
 
             /**
              * default error, success message
-             * @type {{required: {error: string, success: string}, url: {error: string, success: string}}}
+             * @type {{required: {error: string, success: string}, url: {error: string, success: string}, email: {error: string, success: string}, number: {error: string, success: string}}}
              */
             var defaultMsg = {
                 required: {
@@ -43,6 +43,16 @@
                     success: 'It\'s Number'
                 }
             };
+
+            /**
+             * Allow user to set a custom Expression, do remember set the default message using setupDefaultMsg
+             * @param obj
+             */
+            var setupExpression = function (obj) {
+                angular.extend(expression, obj);
+            };
+
+
 
             /**
              * Allow user to set default message
@@ -83,6 +93,7 @@
                     defaultMsg: defaultMsg,
                     errorHTML: errorHTML,
                     successHTML: successHTML,
+                    setupExpression: setupExpression,
                     setupDefaultMsg: setupDefaultMsg
                 }
             };

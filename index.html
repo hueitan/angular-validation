@@ -59,8 +59,11 @@
                        email-error-message="Error Number"
                        email-success-message="Good Number"/>
 
-                <label>Required ( Invalid Callback alert)</label>
+                <label>Required (Invalid Callback alert)</label>
                 <input type="text" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
+
+                <label>IP address (Custom setup the new validator)</label>
+                <input type="text" ng-model="form.ip" validator="ip"/>
             </fieldset>
 
             <button class="button" ng-disabled="!Form.$valid">Submit</button>
