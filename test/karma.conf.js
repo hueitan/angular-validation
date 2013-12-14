@@ -40,7 +40,7 @@ module.exports = function(config) {
 
         // enable / disable watching file and executing tests whenever any file changes
         // CLI --auto-watch --no-auto-watch
-        autoWatch: true,
+        autoWatch: false,
 
         // Start these browsers, currently available:
         // - Chrome
@@ -59,7 +59,7 @@ module.exports = function(config) {
 
         // Auto run tests on start (when browsers are captured) and exit
         // CLI --single-run --no-single-run
-        singleRun: false,
+        singleRun: true,
 
         // report which specs are slower than 500ms
         // CLI --report-slower-than 500
