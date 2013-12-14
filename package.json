@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Angular Validation",
   "homepage": "",
+  "scripts": {
+      "test": "grunt karma"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",

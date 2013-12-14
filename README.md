@@ -1,7 +1,8 @@
 angular-validation
+=========================
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
 [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
-=========================
+
 Requirement
 -----
 [AngularJS](http://angularjs.org) 1.2.4
