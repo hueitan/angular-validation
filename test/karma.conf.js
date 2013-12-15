@@ -8,7 +8,9 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'test/lib/angular.1.2.4.min.js',
-            'test/test.js'
+            'test/lib/angular-mocks.1.2.4.js',
+            'dist/angular-validation.js',
+            'test/unit/*.js'
         ],
 
         // list of files to exclude
