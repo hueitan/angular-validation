@@ -1,59 +1,25 @@
 'use strict';
 
-/* jasmine specs for provider go here */
+/* jasmine specs for directives go here */
 
-describe('provider', function () {
-    beforeEach(module('validation.provider'));
+describe('directives', function() {
+    beforeEach(module('validation.directive'));
 
+    describe('Check Validation', function() {
+        it('required as example', function() {
+            inject(function($compile, $rootScope) {
+                var scope = $rootScope.$new();
+                var element = $compile('<input type="text" ng-model="required" validator="required"></span>')(scope);
 
-    describe('expression', function () {
-        it('shoud be define, object, every key should be RegExp', inject(function (validationProvider) {
-            expect(validationProvider.expression).toBeDefined();
-            expect(validationProvider.expression).toEqual(jasmine.any(Object));
-            for (var key in validationProvider.expression) {
-                expect(validationProvider.expression[key]).toEqual(jasmine.any(RegExp));
-            }
-        }));
-    });
+                expect(element.hasClass('ng-invalid')).toBe(true);
 
-    describe('setup Expression', function () {
-        it('After setup, it should still be expression(Regex)', inject(function (validationProvider) {
-            validationProvider.setupExpression({ huei: /^huei$/ });
+                // Given input value
+                scope.$apply(function () {
+                    scope.required = 'Required';
+                });
 
-            expect(validationProvider.expression).toBeDefined();
-            expect(validationProvider.expression).toEqual(jasmine.any(Object));
-            for (var key in validationProvider.expression) {
-                expect(validationProvider.expression[key]).toEqual(jasmine.any(RegExp));
-            }
-        }));
-    });
-
-    describe('defaultMsg', function () {
-        it('shoud be define, object, every key should be object', inject(function (validationProvider) {
-            expect(validationProvider.defaultMsg).toBeDefined();
-            expect(validationProvider.defaultMsg).toEqual(jasmine.any(Object));
-            for (var key in validationProvider.defaultMsg) {
-                expect(validationProvider.defaultMsg[key]).toEqual(jasmine.any(Object));
-            }
-        }));
-    });
-
-    describe('setup defaultMsg', function () {
-        it('After setup, it should still be Msg', inject(function (validationProvider) {
-            var obj = {
-                huei: {
-                    error: 'It\'s should be huei',
-                    success: 'It\'s huei'
-                }
-            };
-
-            validationProvider.setupExpression(obj);
-
-            expect(validationProvider.defaultMsg).toBeDefined();
-            expect(validationProvider.defaultMsg).toEqual(jasmine.any(Object));
-            for (var key in validationProvider.defaultMsg) {
-                expect(validationProvider.defaultMsg[key]).toEqual(jasmine.any(Object));
-            }
-        }));
+                expect(element.hasClass('ng-invalid')).toBe(false);
+            });
+        });
     });
 });
