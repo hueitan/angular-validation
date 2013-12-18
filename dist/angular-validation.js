@@ -3,13 +3,14 @@
 }).call(this);
 (function () {
     angular.module('validation.provider', [])
-        .provider('validationProvider', function () {
+        .provider('$validation', function () {
 
             /**
              * true if the form is true, else false
              * @type {{}}
              */
             var valid = {};
+
 
 
             /**
@@ -22,6 +23,7 @@
                 email: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
                 number: /^\d+$/
             };
+
 
 
             /**
@@ -47,6 +49,8 @@
                 }
             };
 
+
+
             /**
              * Allow user to set a custom Expression, do remember set the default message using setupDefaultMsg
              * @param obj
@@ -65,6 +69,8 @@
                 angular.extend(defaultMsg, obj);
             };
 
+
+
             /**
              * Error message HTML, here's the default
              * @param message
@@ -75,6 +81,7 @@
             };
 
 
+
             /**
              * Success message HTML, here's the default
              * @param message
@@ -83,6 +90,7 @@
             var successHTML = function (message) {
                 return '<p class="success">' + message + '</p>';
             };
+
 
 
             /**
@@ -106,7 +114,7 @@
 }).call(this);
 (function () {
     angular.module('validation.directive', ['validation.provider'])
-        .directive('validator', ['validationProvider', function ($validationProvider) {
+        .directive('validator', ['$validation', function ($validationProvider) {
 
             /**
              * Do this function iff validation valid

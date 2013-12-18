@@ -1,6 +1,6 @@
 (function () {
     angular.module('validation.provider', [])
-        .provider('validationProvider', function () {
+        .provider('$validation', function () {
 
             /**
              * true if the form is true, else false

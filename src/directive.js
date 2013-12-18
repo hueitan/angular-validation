@@ -1,6 +1,6 @@
 (function () {
     angular.module('validation.directive', ['validation.provider'])
-        .directive('validator', ['validationProvider', function ($validationProvider) {
+        .directive('validator', ['$validation', function ($validationProvider) {
 
             /**
              * Do this function iff validation valid
