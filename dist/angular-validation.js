@@ -5,12 +5,6 @@
     angular.module('validation.provider', [])
         .provider('$validation', function () {
 
-            /**
-             * true if the form is true, else false
-             * @type {{}}
-             */
-            var valid = {};
-
 
             /**
              * Define validation type RegExp
@@ -58,11 +52,31 @@
 
 
             /**
+             * Get the Expression
+             * @param exprs
+             * @returns {*}
+             */
+            var getExpression = function (exprs) {
+                return expression[exprs];
+            };
+
+
+            /**
              * Allow user to set default message
              * @param obj
              */
             var setupDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
+            };
+
+
+            /**
+             * Get the Default Message
+             * @param msg
+             * @returns {*}
+             */
+            var getDefaultMsg = function (msg) {
+                return defaultMsg[msg];
             };
 
 
@@ -99,13 +113,6 @@
                     return false;
                 }
 
-                // check if form not given
-                for (var k in valid) {
-                    if (valid[k] == false) {
-                        return false;
-                    }
-                }
-
                 return true;
             };
 
@@ -123,26 +130,21 @@
                         form[k].$render();
                     }
                 }
-
-                for (var k in valid) {
-                    valid[k] = false;
-                }
             };
 
 
             /**
              * $get
-             * @returns {{valid: {}, defaultMsg: {required: {error: string, success: string}, url: {error: string, success: string}}, errorHTML: Function, successHTML: Function}}
+             * @returns {{errorHTML: Function, successHTML: Function, setupExpression: Function, getExpression: Function, setupDefaultMsg: Function, getDefaultMsg: Function, checkValid: Function, reset: Function}}
              */
             this.$get = function () {
                 return {
-                    valid: valid,
-                    expression: expression,
-                    defaultMsg: defaultMsg,
                     errorHTML: errorHTML,
                     successHTML: successHTML,
                     setupExpression: setupExpression,
+                    getExpression: getExpression,
                     setupDefaultMsg: setupDefaultMsg,
+                    getDefaultMsg: getDefaultMsg,
                     checkValid: checkValid,
                     reset: reset
                 }
@@ -163,8 +165,7 @@
              * @param callback
              */
             var validFunc = function (element, validMessage, validation, callback) {
-                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.defaultMsg[validation].success));
-                $validationProvider.valid[validation] = true;
+                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
                 if (callback) callback();
             };
 
@@ -174,10 +175,10 @@
              * @param element
              * @param validMessage
              * @param validation
+             * @param callback
              */
             var invalidFunc = function (element, validMessage, validation, callback) {
-                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.defaultMsg[validation].error));
-                $validationProvider.valid[validation] = false;
+                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
                 if (callback) callback();
             };
 
@@ -223,21 +224,18 @@
                             if (ctrl.$pristine && ctrl.$viewValue) {
                                 ctrl.$setViewValue(ctrl.$viewValue);
                             } else if (ctrl.$pristine) {
-                                $validationProvider.valid[validation] = false;
                                 element.next().html('');
                                 return;
                             }
 
-                            if ($validationProvider.expression[validation].test(value)) {
+                            if ($validationProvider.getExpression(validation).test(value)) {
                                 validFunc(element, attrs[successMessage], validation, scope.validCallback());
 
                                 ctrl.$setValidity(ctrl.$name, true);
-                                $validationProvider.valid[validation] = true;
                             } else {
                                 invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
 
                                 ctrl.$setValidity(ctrl.$name, false);
-                                $validationProvider.valid[validation] = false;
                             }
                         });
 

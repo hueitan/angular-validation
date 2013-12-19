@@ -49,11 +49,31 @@
 
 
             /**
+             * Get the Expression
+             * @param exprs
+             * @returns {*}
+             */
+            var getExpression = function (exprs) {
+                return expression[exprs];
+            };
+
+
+            /**
              * Allow user to set default message
              * @param obj
              */
             var setupDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
+            };
+
+
+            /**
+             * Get the Default Message
+             * @param msg
+             * @returns {*}
+             */
+            var getDefaultMsg = function (msg) {
+                return defaultMsg[msg];
             };
 
 
@@ -112,16 +132,16 @@
 
             /**
              * $get
-             * @returns {{expression: {required: RegExp, url: RegExp, email: RegExp}, defaultMsg: {required: {error: string, success: string}, url: {error: string, success: string}, email: {error: string, success: string}, number: {error: string, success: string}}, errorHTML: Function, successHTML: Function, setupExpression: Function, setupDefaultMsg: Function, checkValid: Function, reset: Function}}
+             * @returns {{errorHTML: Function, successHTML: Function, setupExpression: Function, getExpression: Function, setupDefaultMsg: Function, getDefaultMsg: Function, checkValid: Function, reset: Function}}
              */
             this.$get = function () {
                 return {
-                    expression: expression,
-                    defaultMsg: defaultMsg,
                     errorHTML: errorHTML,
                     successHTML: successHTML,
                     setupExpression: setupExpression,
+                    getExpression: getExpression,
                     setupDefaultMsg: setupDefaultMsg,
+                    getDefaultMsg: getDefaultMsg,
                     checkValid: checkValid,
                     reset: reset
                 }

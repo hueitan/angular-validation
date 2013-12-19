@@ -15,6 +15,9 @@ angular.module('myApp', ['validation'])
             reset: $validationProvider.reset
         };
 
+        $scope.form2 = {
+            reset: $validationProvider.reset
+        };
 
         // Callback method
         $scope.error = function (message) {

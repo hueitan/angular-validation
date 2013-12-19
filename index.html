@@ -76,7 +76,7 @@
     <!--
     <div class="small-12 medium-12 large-6 columns">
 
-        <form name="Form2" ng-submit="form2.submit()">
+        <form name="Form2">
             <fieldset>
                 <legend>Form ($submit)</legend>
 
@@ -95,10 +95,10 @@
 
 
             <ul class="button-group">
-                <li><a href="#" class="button">Submit</a></li>
-                <li><a href="#" class="button alert">Reset</a></li>
+                <li><button class="button">Submit</button></li>
+                <li><button class="button alert" ng-click="form.reset(Form2)">Reset</button></li>
             </ul>
-            <!--<pre>{{ form | json }}</pre>
+            <!-- <pre>{{ form | json }}</pre>
         </form>
     </div>
     -->

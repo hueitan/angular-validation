@@ -10,7 +10,7 @@
              * @param callback
              */
             var validFunc = function (element, validMessage, validation, callback) {
-                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.defaultMsg[validation].success));
+                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
                 if (callback) callback();
             };
 
@@ -20,9 +20,10 @@
              * @param element
              * @param validMessage
              * @param validation
+             * @param callback
              */
             var invalidFunc = function (element, validMessage, validation, callback) {
-                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.defaultMsg[validation].error));
+                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
                 if (callback) callback();
             };
 
@@ -72,7 +73,7 @@
                                 return;
                             }
 
-                            if ($validationProvider.expression[validation].test(value)) {
+                            if ($validationProvider.getExpression(validation).test(value)) {
                                 validFunc(element, attrs[successMessage], validation, scope.validCallback());
 
                                 ctrl.$setValidity(ctrl.$name, true);

@@ -5,36 +5,11 @@
 describe('provider', function () {
     beforeEach(module('validation.provider'));
 
-
-    describe('expression', function () {
-        it('shoud be define, object, every key should be RegExp', inject(function ($validation) {
-            expect($validation.expression).toBeDefined();
-            expect($validation.expression).toEqual(jasmine.any(Object));
-            for (var key in $validation.expression) {
-                expect($validation.expression[key]).toEqual(jasmine.any(RegExp));
-            }
-        }));
-    });
-
     describe('setup Expression', function () {
         it('After setup, it should still be expression(Regex)', inject(function ($validation) {
             $validation.setupExpression({ huei: /^huei$/ });
 
-            expect($validation.expression).toBeDefined();
-            expect($validation.expression).toEqual(jasmine.any(Object));
-            for (var key in $validation.expression) {
-                expect($validation.expression[key]).toEqual(jasmine.any(RegExp));
-            }
-        }));
-    });
-
-    describe('defaultMsg', function () {
-        it('shoud be define, object, every key should be object', inject(function ($validation) {
-            expect($validation.defaultMsg).toBeDefined();
-            expect($validation.defaultMsg).toEqual(jasmine.any(Object));
-            for (var key in $validation.defaultMsg) {
-                expect($validation.defaultMsg[key]).toEqual(jasmine.any(Object));
-            }
+            expect($validation.getExpression('huei')).toEqual(jasmine.any(RegExp));
         }));
     });
 
@@ -47,19 +22,18 @@ describe('provider', function () {
                 }
             };
 
-            $validation.setupExpression(obj);
+            $validation.setupDefaultMsg(obj);
 
-            expect($validation.defaultMsg).toBeDefined();
-            expect($validation.defaultMsg).toEqual(jasmine.any(Object));
-            for (var key in $validation.defaultMsg) {
-                expect($validation.defaultMsg[key]).toEqual(jasmine.any(Object));
+            expect($validation.getDefaultMsg('huei')).toEqual(jasmine.any(Object));
+            for (var key in $validation.getDefaultMsg('huei')) {
+                expect($validation.getDefaultMsg('huei')[key]).toEqual(jasmine.any(String));
             }
         }));
     });
 
     describe('checkValid', function () {
-       it('It should be Valid when start', inject(function ($validation){
-           expect($validation.checkValid()).toBe(true);
-       }));
+        it('It should be Valid when start', inject(function ($validation) {
+            expect($validation.checkValid()).toBe(true);
+        }));
     });
 });
