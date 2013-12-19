@@ -56,15 +56,15 @@ Add Valid Callback Function, `invalid-callback` & `valid-callback`
 
 ```html
 <label>Required (Invalid Callback alert)</label>
-<input type="text" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
+<input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-Setup a new Validation
+Setup a new Validation `setupExpression()` `setupDefaultMsg()`
 
 ```html
 <!-- View -->
 <label>IP address (Custom setup the new validator)</label>
-<input type="text" ng-model="form.ip" validator="ip"/>
+<input type="text" name="ip" ng-model="form.ip" validator="ip"/>
 ```
 
 ```javascript
@@ -96,7 +96,7 @@ validationProvider.setupDefaultMsg(validMsg); // setup valid message
 
 ```
 
-Check form whether valid, return `true` if valid
+Check form whether valid, return `true` if valid. `checkValid()`
 ```html
 <form name="Form">
     ...
@@ -105,13 +105,12 @@ Check form whether valid, return `true` if valid
     <!-- or Check the specific form(Form) valid from angular `$valid` -->
     <button ng-disabled="form.checkValid(Form)"></button>
 </form>
+```
 
-<script>
+```javascript
     // ...
     $scope.form.checkValid = validationProvider.checkValid;
     // ...
-</script>
-
 ```
 Built-in validation <small>in angular-validation</small>
 ===
