@@ -2,12 +2,6 @@
     angular.module('validation.provider', [])
         .provider('$validation', function () {
 
-            /**
-             * true if the form is true, else false
-             * @type {{}}
-             */
-            var valid = {};
-
 
             /**
              * Define validation type RegExp
@@ -96,13 +90,6 @@
                     return false;
                 }
 
-                // check if form not given
-                for (var k in valid) {
-                    if (valid[k] == false) {
-                        return false;
-                    }
-                }
-
                 return true;
             };
 
@@ -120,20 +107,15 @@
                         form[k].$render();
                     }
                 }
-
-                for (var k in valid) {
-                    valid[k] = false;
-                }
             };
 
 
             /**
              * $get
-             * @returns {{valid: {}, defaultMsg: {required: {error: string, success: string}, url: {error: string, success: string}}, errorHTML: Function, successHTML: Function}}
+             * @returns {{expression: {required: RegExp, url: RegExp, email: RegExp}, defaultMsg: {required: {error: string, success: string}, url: {error: string, success: string}, email: {error: string, success: string}, number: {error: string, success: string}}, errorHTML: Function, successHTML: Function, setupExpression: Function, setupDefaultMsg: Function, checkValid: Function, reset: Function}}
              */
             this.$get = function () {
                 return {
-                    valid: valid,
                     expression: expression,
                     defaultMsg: defaultMsg,
                     errorHTML: errorHTML,

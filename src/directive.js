@@ -11,7 +11,6 @@
              */
             var validFunc = function (element, validMessage, validation, callback) {
                 element.next().html($validationProvider.successHTML(validMessage || $validationProvider.defaultMsg[validation].success));
-                $validationProvider.valid[validation] = true;
                 if (callback) callback();
             };
 
@@ -24,7 +23,6 @@
              */
             var invalidFunc = function (element, validMessage, validation, callback) {
                 element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.defaultMsg[validation].error));
-                $validationProvider.valid[validation] = false;
                 if (callback) callback();
             };
 
@@ -70,7 +68,6 @@
                             if (ctrl.$pristine && ctrl.$viewValue) {
                                 ctrl.$setViewValue(ctrl.$viewValue);
                             } else if (ctrl.$pristine) {
-                                $validationProvider.valid[validation] = false;
                                 element.next().html('');
                                 return;
                             }
@@ -79,12 +76,10 @@
                                 validFunc(element, attrs[successMessage], validation, scope.validCallback());
 
                                 ctrl.$setValidity(ctrl.$name, true);
-                                $validationProvider.valid[validation] = true;
                             } else {
                                 invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
 
                                 ctrl.$setValidity(ctrl.$name, false);
-                                $validationProvider.valid[validation] = false;
                             }
                         });
 

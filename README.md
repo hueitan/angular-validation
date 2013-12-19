@@ -106,7 +106,7 @@ Reset the specific Form. `reset()`
     <button ng-disabled="form.checkValid()"></button>
     <!-- or Check the specific form(Form) valid from angular `$valid` -->
     <button ng-disabled="form.checkValid(Form)"></button>
-    <-- Reset the specific Form -->
+    <!-- Reset the specific Form -->
     <button ng-click="form.reset(Form)"></button>
 </form>
 ```
