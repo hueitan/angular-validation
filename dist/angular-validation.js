@@ -12,7 +12,6 @@
             var valid = {};
 
 
-
             /**
              * Define validation type RegExp
              * @type {{required: RegExp, url: RegExp, email: RegExp}}
@@ -23,7 +22,6 @@
                 email: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
                 number: /^\d+$/
             };
-
 
 
             /**
@@ -50,7 +48,6 @@
             };
 
 
-
             /**
              * Allow user to set a custom Expression, do remember set the default message using setupDefaultMsg
              * @param obj
@@ -60,7 +57,6 @@
             };
 
 
-
             /**
              * Allow user to set default message
              * @param obj
@@ -68,7 +64,6 @@
             var setupDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
             };
-
 
 
             /**
@@ -81,7 +76,6 @@
             };
 
 
-
             /**
              * Success message HTML, here's the default
              * @param message
@@ -90,7 +84,6 @@
             var successHTML = function (message) {
                 return '<p class="success">' + message + '</p>';
             };
-
 
 
             /**
@@ -180,22 +173,26 @@
                         ctrl.$setValidity(ctrl.$name, false);
 
                         scope.$watch('model', function (value) {
-
                             /**
                              * dirty, pristine, viewValue control here
                              */
                             if (ctrl.$pristine && ctrl.$viewValue) {
-                            }
-                            else if (ctrl.$pristine) {
+
+                            } else if (ctrl.$pristine) {
+                                $validationProvider.valid[validation] = false;
                                 return;
                             }
 
                             if ($validationProvider.expression[validation].test(value)) {
                                 validFunc(element, attrs[successMessage], validation, scope.validCallback());
+
                                 ctrl.$setValidity(ctrl.$name, true);
+                                $validationProvider.valid[validation] = true;
                             } else {
                                 invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
+
                                 ctrl.$setValidity(ctrl.$name, false);
+                                $validationProvider.valid[validation] = false;
                             }
                         });
 
