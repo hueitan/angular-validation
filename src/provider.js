@@ -97,13 +97,33 @@
                 }
 
                 // check if form not given
-                for(var k in valid) {
-                    if(valid[k] == false) {
+                for (var k in valid) {
+                    if (valid[k] == false) {
                         return false;
                     }
                 }
 
                 return true;
+            };
+
+
+            /**
+             * reset the specific form
+             * @param form
+             */
+            var reset = function (form) {
+                for (var k in form) {
+                    if (form[k].$dirty) {
+                        form[k].$setViewValue(null);
+                        form[k].$setPristine();
+                        form[k].$setValidity(form[k].$name, false);
+                        form[k].$render();
+                    }
+                }
+
+                for (var k in valid) {
+                    valid[k] = false;
+                }
             };
 
 
@@ -120,7 +140,8 @@
                     successHTML: successHTML,
                     setupExpression: setupExpression,
                     setupDefaultMsg: setupDefaultMsg,
-                    checkValid: checkValid
+                    checkValid: checkValid,
+                    reset: reset
                 }
             };
 

@@ -100,13 +100,33 @@
                 }
 
                 // check if form not given
-                for(var k in valid) {
-                    if(valid[k] == false) {
+                for (var k in valid) {
+                    if (valid[k] == false) {
                         return false;
                     }
                 }
 
                 return true;
+            };
+
+
+            /**
+             * reset the specific form
+             * @param form
+             */
+            var reset = function (form) {
+                for (var k in form) {
+                    if (form[k].$dirty) {
+                        form[k].$setViewValue(null);
+                        form[k].$setPristine();
+                        form[k].$setValidity(form[k].$name, false);
+                        form[k].$render();
+                    }
+                }
+
+                for (var k in valid) {
+                    valid[k] = false;
+                }
             };
 
 
@@ -123,7 +143,8 @@
                     successHTML: successHTML,
                     setupExpression: setupExpression,
                     setupDefaultMsg: setupDefaultMsg,
-                    checkValid: checkValid
+                    checkValid: checkValid,
+                    reset: reset
                 }
             };
 
@@ -142,8 +163,7 @@
              * @param callback
              */
             var validFunc = function (element, validMessage, validation, callback) {
-                element.next().remove();
-                element.after($validationProvider.successHTML(validMessage || $validationProvider.defaultMsg[validation].success));
+                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.defaultMsg[validation].success));
                 $validationProvider.valid[validation] = true;
                 if (callback) callback();
             };
@@ -156,8 +176,7 @@
              * @param validation
              */
             var invalidFunc = function (element, validMessage, validation, callback) {
-                element.next().remove();
-                element.after($validationProvider.errorHTML(validMessage || $validationProvider.defaultMsg[validation].error));
+                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.defaultMsg[validation].error));
                 $validationProvider.valid[validation] = false;
                 if (callback) callback();
             };
@@ -202,9 +221,10 @@
                              * dirty, pristine, viewValue control here
                              */
                             if (ctrl.$pristine && ctrl.$viewValue) {
-
+                                ctrl.$setViewValue(ctrl.$viewValue);
                             } else if (ctrl.$pristine) {
                                 $validationProvider.valid[validation] = false;
+                                element.next().html('');
                                 return;
                             }
 

@@ -11,7 +11,8 @@ angular.module('myApp', ['validation'])
         // Initial Value
         $scope.form = {
             requiredCallback: 'required',
-            checkValid: $validationProvider.checkValid
+            checkValid: $validationProvider.checkValid,
+            reset: $validationProvider.reset
         };
 
 

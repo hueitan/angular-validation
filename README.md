@@ -96,7 +96,9 @@ validationProvider.setupDefaultMsg(validMsg); // setup valid message
 
 ```
 
-Check form whether valid, return `true` if valid. `checkValid()`
+Check form whether valid, return `true` if valid. `checkValid()`<br/>
+Reset the specific Form. `reset()`
+
 ```html
 <form name="Form">
     ...
@@ -104,12 +106,16 @@ Check form whether valid, return `true` if valid. `checkValid()`
     <button ng-disabled="form.checkValid()"></button>
     <!-- or Check the specific form(Form) valid from angular `$valid` -->
     <button ng-disabled="form.checkValid(Form)"></button>
+    <-- Reset the specific Form -->
+    <button ng-click="form.reset(Form)"></button>
 </form>
 ```
 
 ```javascript
     // ...
     $scope.form.checkValid = validationProvider.checkValid;
+    // ...
+    $scope.form.reset = validationProvider.reset;
     // ...
 ```
 Built-in validation <small>in angular-validation</small>
