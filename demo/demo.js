@@ -16,6 +16,7 @@ angular.module('myApp', ['validation'])
         };
 
         $scope.form2 = {
+            checkValid: $validationProvider.checkValid,
             reset: $validationProvider.reset
         };
 

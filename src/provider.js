@@ -105,12 +105,7 @@
              * @returns {boolean}
              */
             var checkValid = function (form) {
-
-                if (form && form.$valid == false) {
-                    return false;
-                }
-
-                return true;
+                return !(form && form.$valid == false);
             };
 
 

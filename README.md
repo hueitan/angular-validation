@@ -59,6 +59,17 @@ Add Valid Callback Function, `invalid-callback` & `valid-callback`
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
+Select the validation method `watch` `blur`, default as `watch`
+
+```html
+<label>Watch method</label>
+<input type="text" name="number" ng-model="form.number" validator="number" valid-method="watch"/>
+<input type="text" name="number" ng-model="form.number" validator="number"/>
+
+<label>Blur method</label>
+<input type="text" name="number" ng-model="form.number" validator="number" valid-method="blur"/>
+```
+
 Setup a new Validation `setupExpression()` `setupDefaultMsg()`
 
 ```html
