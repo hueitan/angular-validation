@@ -87,6 +87,30 @@
 
 
             /**
+             * Check form valid, return true
+             * checkValid(): Check the entire form valid from angular-validation `valid`
+             * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
+             * @param form
+             * @returns {boolean}
+             */
+            var checkValid = function (form) {
+
+                if (form && form.$valid == false) {
+                    return false;
+                }
+
+                // check if form not given
+                for(var k in valid) {
+                    if(valid[k] == false) {
+                        return false;
+                    }
+                }
+
+                return true;
+            };
+
+
+            /**
              * $get
              * @returns {{valid: {}, defaultMsg: {required: {error: string, success: string}, url: {error: string, success: string}}, errorHTML: Function, successHTML: Function}}
              */
@@ -98,7 +122,8 @@
                     errorHTML: errorHTML,
                     successHTML: successHTML,
                     setupExpression: setupExpression,
-                    setupDefaultMsg: setupDefaultMsg
+                    setupDefaultMsg: setupDefaultMsg,
+                    checkValid: checkValid
                 }
             };
 

@@ -96,6 +96,23 @@ validationProvider.setupDefaultMsg(validMsg); // setup valid message
 
 ```
 
+Check form whether valid, return `true` if valid
+```html
+<form name="Form">
+    ...
+    <!-- Check the entire form valid from angular-validation `valid` -->
+    <button ng-disabled="form.checkValid()"></button>
+    <!-- or Check the specific form(Form) valid from angular `$valid` -->
+    <button ng-disabled="form.checkValid(Form)"></button>
+</form>
+
+<script>
+    // ...
+    $scope.form.checkValid = validationProvider.checkValid;
+    // ...
+</script>
+
+```
 Built-in validation <small>in angular-validation</small>
 ===
 

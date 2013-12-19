@@ -66,7 +66,7 @@
 
 
             <ul class="button-group">
-                <li><button class="button" ng-disabled="!Form.$valid">Submit</button></li>
+                <li><button class="button" ng-disabled="!form.checkValid(Form)">Submit</button></li>
             </ul>
             <!--<pre>{{ form | json }}</pre>-->
         </form>
@@ -97,7 +97,7 @@
                 <li><a href="#" class="button">Submit</a></li>
                 <li><a href="#" class="button alert">Reset</a></li>
             </ul>
-            <!--<pre>{{ form | json }}</pre>-->
+            <!--<pre>{{ form | json }}</pre>
         </form>
     </div>
     -->
