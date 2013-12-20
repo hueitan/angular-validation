@@ -158,9 +158,11 @@
              * @param validMessage
              * @param validation
              * @param callback
+             * @param ctrl
              */
-            var validFunc = function (element, validMessage, validation, callback) {
+            var validFunc = function (element, validMessage, validation, callback, ctrl) {
                 element.next().html($validationProvider.successHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
             };
 
@@ -171,9 +173,11 @@
              * @param validMessage
              * @param validation
              * @param callback
+             * @param ctrl
              */
-            var invalidFunc = function (element, validMessage, validation, callback) {
+            var invalidFunc = function (element, validMessage, validation, callback, ctrl) {
                 element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
             };
 
@@ -220,13 +224,9 @@
                                 var value = element[0].value;
                                 scope.$apply(function () {
                                     if ($validationProvider.getExpression(validation).test(value)) {
-                                        validFunc(element, attrs[successMessage], validation, scope.validCallback());
-
-                                        ctrl.$setValidity(ctrl.$name, true);
+                                        validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
                                     } else {
-                                        invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
-
-                                        ctrl.$setValidity(ctrl.$name, false);
+                                        invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
                                     }
                                 });
                             });
@@ -252,13 +252,9 @@
                             }
 
                             if ($validationProvider.getExpression(validation).test(value)) {
-                                validFunc(element, attrs[successMessage], validation, scope.validCallback());
-
-                                ctrl.$setValidity(ctrl.$name, true);
+                                validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
                             } else {
-                                invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback());
-
-                                ctrl.$setValidity(ctrl.$name, false);
+                                invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
                             }
                         });
 
