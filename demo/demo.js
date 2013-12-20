@@ -20,6 +20,13 @@ angular.module('myApp', ['validation'])
             reset: $validationProvider.reset
         };
 
+        $scope.form3 = {
+            submit: function () {
+                $validationProvider.submit($scope);
+            },
+            reset: $validationProvider.reset
+        };
+
         // Callback method
         $scope.error = function (message) {
             alert('Error ' + message)

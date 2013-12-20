@@ -32,6 +32,28 @@
             };
 
 
+            /**
+             * Check Validation
+             * @param scope
+             * @param element
+             * @param attrs
+             * @param ctrl
+             * @param validation
+             * @param value
+             */
+            var checkValidation = function (scope, element, attrs, ctrl, validation, value) {
+                var successMessage = validation + 'SuccessMessage',
+                    errorMessage = validation + 'ErrorMessage';
+
+                if ($validationProvider.getExpression(validation).test(value)) {
+                    validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
+                } else {
+                    invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                }
+
+            };
+
+
             return {
                 restrict: 'A',
                 require: 'ngModel',
@@ -49,40 +71,52 @@
                      */
                     var validator = attrs.validator.split(',');
 
+
                     /**
                      * Valid/Invalid Message
                      */
                     element.after('<span></span>');
 
+
                     /**
                      * Check Every validator
                      */
                     validator.forEach(function (validation) {
-                        var successMessage = validation + 'SuccessMessage',
-                            errorMessage = validation + 'ErrorMessage';
 
                         /**
                          * Set Validity to false when Initial
                          */
                         ctrl.$setValidity(ctrl.$name, false);
 
+
                         /**
                          * Validate blur method
                          */
                         if (attrs.validMethod === 'blur') {
+
                             element.bind('blur', function () {
                                 var value = element[0].value;
                                 scope.$apply(function () {
-                                    if ($validationProvider.getExpression(validation).test(value)) {
-                                        validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
-                                    } else {
-                                        invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
-                                    }
+                                    checkValidation(scope, element, attrs, ctrl, validation, value);
                                 });
                             });
 
                             return;
                         }
+
+
+                        /**
+                         * Validate submit method
+                         */
+                        if (attrs.validMethod === 'submit') {
+                            scope.$on('submitValidate', function () {
+                                var value = element[0].value;
+                                checkValidation(scope, element, attrs, ctrl, validation, value);
+                            });
+
+                            return;
+                        }
+
 
                         /**
                          * Validate watch method
@@ -100,12 +134,7 @@
                                 element.next().html('');
                                 return;
                             }
-
-                            if ($validationProvider.getExpression(validation).test(value)) {
-                                validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
-                            } else {
-                                invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
-                            }
+                            checkValidation(scope, element, attrs, ctrl, validation, value);
                         });
 
 

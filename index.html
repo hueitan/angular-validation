@@ -104,6 +104,36 @@
 
 </div>
 
+<div class="row">
+
+    <div class="small-12 medium-12 large-6 columns">
+
+            <form name="Form3">
+            <fieldset>
+                <legend>Form ($submit)</legend>
+
+                <label>Required</label>
+                <input type="text" name="require" ng-model="form3.required" validator="required" valid-method="submit"/>
+
+                <label>Url</label>
+                <input type="text" name="url" ng-model="form3.url" validator="url" valid-method="submit"/>
+
+                <label>Email</label>
+                <input type="text" name="email" ng-model="form3.email" validator="email" valid-method="submit"/>
+
+                <label>Number</label>
+                <input type="text" name="number" ng-model="form3.number" validator="number" valid-method="submit"/>
+            </fieldset>
+
+
+            <ul class="button-group">
+                <li><button class="button" ng-click="form3.submit()">Submit</button></li>
+                <!--<li><button class="button alert" ng-click="form3.reset(Form3)">Reset</button></li>-->
+            </ul>
+            <!-- <pre>{{ form | json }}</pre> -->
+        </form>
+    </div>
+</div>
 <a href="https://github.com/huei90/angular-validation"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>

@@ -110,6 +110,15 @@
 
 
             /**
+             * Check the form when click submit, when `validMethod = submit`
+             * @param scope
+             */
+            var submit = function (scope) {
+                scope.$broadcast('submitValidate');
+            };
+
+
+            /**
              * reset the specific form
              * @param form
              */
@@ -138,10 +147,10 @@
                     setupDefaultMsg: setupDefaultMsg,
                     getDefaultMsg: getDefaultMsg,
                     checkValid: checkValid,
+                    submit: submit,
                     reset: reset
                 }
             };
-
 
         });
 }).call(this);

@@ -59,7 +59,7 @@ Add Valid Callback Function, `invalid-callback` & `valid-callback`
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-Select the validation method `watch` `blur`, default as `watch`
+Select the validation method `watch` `blur` `submit`, default as `watch`
 
 ```html
 <label>Watch method</label>
@@ -68,6 +68,21 @@ Select the validation method `watch` `blur`, default as `watch`
 
 <label>Blur method</label>
 <input type="text" name="number" ng-model="form.number" validator="number" valid-method="blur"/>
+
+<label>Submit method</label>
+<form name="Form">
+    <input type="text" name="number" ng-model="form.number" validator="number" valid-method="submit"/>
+    <button ng-click="form.submit()"></button>
+</form>
+<script>
+    // ... submit method
+    $scope.form = {
+        submit: function () {
+            $validationProvider.submit($scope);
+        }
+    };
+    // ...
+</script>
 ```
 
 Setup a new Validation `setupExpression()` `setupDefaultMsg()`
