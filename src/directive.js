@@ -93,7 +93,6 @@
                          * Validate blur method
                          */
                         if (attrs.validMethod === 'blur') {
-
                             element.bind('blur', function () {
                                 var value = element[0].value;
                                 scope.$apply(function () {

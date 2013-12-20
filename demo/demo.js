@@ -22,7 +22,7 @@ angular.module('myApp', ['validation'])
 
         $scope.form3 = {
             submit: function () {
-                $validationProvider.submit($scope);
+                $validationProvider.submit($scope)
             },
             reset: $validationProvider.reset
         };

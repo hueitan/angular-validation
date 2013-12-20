@@ -5,7 +5,6 @@
     <title>Angular Validation</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.0.2/css/foundation.min.css"/>
     <link rel="stylesheet" href="demo/main.css"/>
-
 </head>
 
 <body ng-controller="index">
@@ -14,13 +13,10 @@
     <div class="small-12 medium-9 large-6 large-centered columns">
         <h1>Angular Validation</h1>
     </div>
-
-
 </div>
 
 <div class="row">
     <div class="small-12 medium-12 large-6 columns">
-
         <form name="Form">
             <fieldset>
                 <legend>Form ($watch)</legend>
@@ -64,7 +60,6 @@
                 <input type="text" name="ip" ng-model="form.ip" validator="ip"/>
             </fieldset>
 
-
             <ul class="button-group">
                 <li><button class="button" ng-disabled="!form.checkValid(Form)">Submit</button></li>
                 <li><button class="button alert" ng-click="form.reset(Form)">Reset</button></li>
@@ -74,7 +69,6 @@
     </div>
 
     <div class="small-12 medium-12 large-6 columns">
-
         <form name="Form2">
             <fieldset>
                 <legend>Form ($blur)</legend>
@@ -92,7 +86,6 @@
                 <input type="text" name="number" ng-model="form2.number" validator="number" valid-method="blur"/>
             </fieldset>
 
-
             <ul class="button-group">
                 <li><button class="button" ng-disabled="!form2.checkValid(Form2)">Submit</button></li>
                 <!--<li><button class="button alert" ng-click="form2.reset(Form2)">Reset</button></li>-->
@@ -100,15 +93,11 @@
             <!-- <pre>{{ form | json }}</pre> -->
         </form>
     </div>
-
-
 </div>
 
 <div class="row">
-
     <div class="small-12 medium-12 large-6 columns">
-
-            <form name="Form3">
+        <form name="Form3">
             <fieldset>
                 <legend>Form ($submit)</legend>
 
@@ -125,7 +114,6 @@
                 <input type="text" name="number" ng-model="form3.number" validator="number" valid-method="submit"/>
             </fieldset>
 
-
             <ul class="button-group">
                 <li><button class="button" ng-click="form3.submit()">Submit</button></li>
                 <!--<li><button class="button alert" ng-click="form3.reset(Form3)">Reset</button></li>-->
@@ -134,6 +122,7 @@
         </form>
     </div>
 </div>
+
 <a href="https://github.com/huei90/angular-validation"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
