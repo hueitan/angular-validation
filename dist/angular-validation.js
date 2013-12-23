@@ -23,16 +23,6 @@
 
 
             /**
-             * broadcast Channel
-             * @type {{submit: string}}
-             */
-            var broadcastChannel = {
-                submit: 'submit',
-                reset: 'reset'
-            };
-
-
-            /**
              * Define validation type RegExp
              * @type {{required: RegExp, url: RegExp, email: RegExp}}
              */
@@ -145,7 +135,12 @@
              * @returns {promise|*}
              */
             var submit = function (scope, form) {
-                scope.$broadcast(broadcastChannel.submit);
+
+                for (var k in form) {
+                    if (form[k].hasOwnProperty('$dirty')) {
+                        scope.$broadcast(k + 'submit');
+                    }
+                }
 
                 var deferred = $q.defer();
                 deferred.promise.success = function (fn) {
@@ -180,15 +175,14 @@
              */
             var reset = function (scope, form) {
                 for (var k in form) {
-                    if (form[k].$dirty) {
+                    if (form[k].hasOwnProperty('$dirty')) {
                         form[k].$setViewValue(null);
                         form[k].$setPristine();
                         form[k].$setValidity(form[k].$name, false);
                         form[k].$render();
+                        scope.$broadcast(k + 'reset');
                     }
                 }
-
-                scope.$broadcast(broadcastChannel.reset);
             };
 
 
@@ -308,6 +302,14 @@
 
 
                         /**
+                         * Reset the validation for specific form
+                         */
+                        scope.$on(ctrl.$name + 'reset', function () {
+                            element.next().html('');
+                        });
+
+
+                        /**
                          * Validate blur method
                          */
                         if (attrs.validMethod === 'blur') {
@@ -326,13 +328,9 @@
                          * Validate submit method
                          */
                         if (attrs.validMethod === 'submit') {
-                            scope.$on('submit', function (event) {
+                            scope.$on(ctrl.$name + 'submit', function () {
                                 var value = element[0].value;
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
-                            });
-
-                            scope.$on('reset', function (event) {
-                                element.next().html('');
                             });
 
                             return;

@@ -23,7 +23,7 @@
 
                 <label>Required</label>
                 <input type="text"
-                       name="require"
+                       name="requireWatch"
                        ng-model="form.required"
                        validator="required"
                        required-error-message="Required"
@@ -31,7 +31,7 @@
 
                 <label>Url</label>
                 <input type="text"
-                       name="url"
+                       name="urlWatch"
                        ng-model="form.url"
                        validator="url"
                        url-error-message="Error Url"
@@ -39,7 +39,7 @@
 
                 <label>Email</label>
                 <input type="text"
-                       name="email"
+                       name="emailWatch"
                        ng-model="form.email"
                        validator="email"
                        email-error-message="Error Email"
@@ -47,7 +47,7 @@
 
                 <label>Number</label>
                 <input type="text"
-                       name="number"
+                       name="numberWatch"
                        ng-model="form.number"
                        validator="number"
                        email-error-message="Error Number"
@@ -57,7 +57,7 @@
                 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 
                 <label>IP address (Custom setup the new validator)</label>
-                <input type="text" name="ip" ng-model="form.ip" validator="ip"/>
+                <input type="text" name="ipWatch" ng-model="form.ip" validator="ip"/>
             </fieldset>
 
             <ul class="button-group">
@@ -75,22 +75,22 @@
                 <legend>Form ($blur)</legend>
 
                 <label>Required</label>
-                <input type="text" name="require" ng-model="form2.required" validator="required" valid-method="blur"/>
+                <input type="text" name="requireBlur" ng-model="form2.required" validator="required" valid-method="blur"/>
 
                 <label>Url</label>
-                <input type="text" name="url" ng-model="form2.url" validator="url" valid-method="blur"/>
+                <input type="text" name="urlBlur" ng-model="form2.url" validator="url" valid-method="blur"/>
 
                 <label>Email</label>
-                <input type="text" name="email" ng-model="form2.email" validator="email" valid-method="blur"/>
+                <input type="text" name="emailBlur" ng-model="form2.email" validator="email" valid-method="blur"/>
 
                 <label>Number</label>
-                <input type="text" name="number" ng-model="form2.number" validator="number" valid-method="blur"/>
+                <input type="text" name="numberBlur" ng-model="form2.number" validator="number" valid-method="blur"/>
             </fieldset>
 
             <ul class="button-group">
                 <li><button class="button" ng-click="form2.submit(Form2)">Submit</button></li>
+                <li><button class="button alert" ng-click="form2.reset(Form2)">Reset</button></li>
                 <li><button class="button secondary" ng-disabled="!form2.checkValid(Form2)">checkValid = {{ form2.checkValid(Form2) }}</button></li>
-                <!--<li><button class="button alert" ng-click="form2.reset(Form2)">Reset</button></li>-->
             </ul>
             <!-- <pre>{{ form | json }}</pre> -->
         </form>
@@ -104,16 +104,16 @@
                 <legend>Form ($submit)</legend>
 
                 <label>Required</label>
-                <input type="text" name="require" ng-model="form3.required" validator="required" valid-method="submit"/>
+                <input type="text" name="requireSubmit" ng-model="form3.required" validator="required" valid-method="submit"/>
 
                 <label>Url</label>
-                <input type="text" name="url" ng-model="form3.url" validator="url" valid-method="submit"/>
+                <input type="text" name="urlSubmit" ng-model="form3.url" validator="url" valid-method="submit"/>
 
                 <label>Email</label>
-                <input type="text" name="email" ng-model="form3.email" validator="email" valid-method="submit"/>
+                <input type="text" name="emailSubmit" ng-model="form3.email" validator="email" valid-method="submit"/>
 
                 <label>Number</label>
-                <input type="text" name="number" ng-model="form3.number" validator="number" valid-method="submit"/>
+                <input type="text" name="numberSubmit" ng-model="form3.number" validator="number" valid-method="submit"/>
             </fieldset>
 
             <ul class="button-group">

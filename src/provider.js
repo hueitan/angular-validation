@@ -20,16 +20,6 @@
 
 
             /**
-             * broadcast Channel
-             * @type {{submit: string}}
-             */
-            var broadcastChannel = {
-                submit: 'submit',
-                reset: 'reset'
-            };
-
-
-            /**
              * Define validation type RegExp
              * @type {{required: RegExp, url: RegExp, email: RegExp}}
              */
@@ -142,7 +132,12 @@
              * @returns {promise|*}
              */
             var submit = function (scope, form) {
-                scope.$broadcast(broadcastChannel.submit);
+
+                for (var k in form) {
+                    if (form[k].hasOwnProperty('$dirty')) {
+                        scope.$broadcast(k + 'submit');
+                    }
+                }
 
                 var deferred = $q.defer();
                 deferred.promise.success = function (fn) {
@@ -177,15 +172,14 @@
              */
             var reset = function (scope, form) {
                 for (var k in form) {
-                    if (form[k].$dirty) {
+                    if (form[k].hasOwnProperty('$dirty')) {
                         form[k].$setViewValue(null);
                         form[k].$setPristine();
                         form[k].$setValidity(form[k].$name, false);
                         form[k].$render();
+                        scope.$broadcast(k + 'reset');
                     }
                 }
-
-                scope.$broadcast(broadcastChannel.reset);
             };
 
 

@@ -93,6 +93,14 @@
 
 
                         /**
+                         * Reset the validation for specific form
+                         */
+                        scope.$on(ctrl.$name + 'reset', function () {
+                            element.next().html('');
+                        });
+
+
+                        /**
                          * Validate blur method
                          */
                         if (attrs.validMethod === 'blur') {
@@ -111,13 +119,9 @@
                          * Validate submit method
                          */
                         if (attrs.validMethod === 'submit') {
-                            scope.$on('submit', function (event) {
+                            scope.$on(ctrl.$name + 'submit', function () {
                                 var value = element[0].value;
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
-                            });
-
-                            scope.$on('reset', function (event) {
-                                element.next().html('');
                             });
 
                             return;
