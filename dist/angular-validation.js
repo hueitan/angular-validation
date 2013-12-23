@@ -27,7 +27,8 @@
              * @type {{submit: string}}
              */
             var broadcastChannel = {
-                submit: 'submit'
+                submit: 'submit',
+                reset: 'reset'
             };
 
 
@@ -152,9 +153,10 @@
 
             /**
              * reset the specific form
+             * @param scope
              * @param form
              */
-            var reset = function (form) {
+            var reset = function (scope, form) {
                 for (var k in form) {
                     if (form[k].$dirty) {
                         form[k].$setViewValue(null);
@@ -163,6 +165,8 @@
                         form[k].$render();
                     }
                 }
+
+                scope.$broadcast(broadcastChannel.reset);
             };
 
 
@@ -305,6 +309,10 @@
                             scope.$on('submit', function (event) {
                                 var value = element[0].value;
                                 return checkValidation(scope, element, attrs, ctrl, validation, value);
+                            });
+
+                            scope.$on('reset', function (event) {
+                                element.next().html('');
                             });
 
                             return;

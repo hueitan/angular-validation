@@ -12,24 +12,30 @@ angular.module('myApp', ['validation'])
         $scope.form = {
             requiredCallback: 'required',
             checkValid: $validationProvider.checkValid,
-            reset: $validationProvider.reset
+            reset: function (form) {
+                $validationProvider.reset($scope, form)
+            }
         };
 
         $scope.form2 = {
             checkValid: $validationProvider.checkValid,
-            reset: $validationProvider.reset
+            reset: function (form) {
+                $validationProvider.reset($scope, form)
+            }
         };
 
         $scope.form3 = {
             submit: function (form) {
                 var validate = $validationProvider.submit($scope, form);
                 if (validate) {
-                    $scope.success('form3');
+                    $scope.success('form');
                 } else {
-                    $scope.error('form3');
+                    $scope.error('form');
                 }
             },
-            reset: $validationProvider.reset
+            reset: function (form) {
+                $validationProvider.reset($scope, form)
+            }
         };
 
         // Callback method

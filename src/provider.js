@@ -24,7 +24,8 @@
              * @type {{submit: string}}
              */
             var broadcastChannel = {
-                submit: 'submit'
+                submit: 'submit',
+                reset: 'reset'
             };
 
 
@@ -149,9 +150,10 @@
 
             /**
              * reset the specific form
+             * @param scope
              * @param form
              */
-            var reset = function (form) {
+            var reset = function (scope, form) {
                 for (var k in form) {
                     if (form[k].$dirty) {
                         form[k].$setViewValue(null);
@@ -160,6 +162,8 @@
                         form[k].$render();
                     }
                 }
+
+                scope.$broadcast(broadcastChannel.reset);
             };
 
 

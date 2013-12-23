@@ -75,7 +75,7 @@ Select the validation method `watch` `blur` `submit`, default as `watch`
     <button ng-click="form.submit()"></button>
 </form>
 <script>
-    // ... submit method
+    // ... submit method, it will check `checkValid(Form)`
     $scope.form = {
         submit: function () {
             var validate = $validationProvider.submit($scope); // return true iff form is valid
@@ -144,11 +144,12 @@ Reset the specific Form. `reset()`
 ```
 
 ```javascript
-    // ...
+    // ... checkValid
     $scope.form.checkValid = validationProvider.checkValid;
-    // ...
-    $scope.form.reset = validationProvider.reset;
-    // ...
+    // ... reset
+    $scope.form.reset = function (form) {
+        validationProvider.reset($scope, form);
+    };
 ```
 Built-in validation <small>in angular-validation</small>
 ===

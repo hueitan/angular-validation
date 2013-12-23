@@ -118,6 +118,10 @@
                                 return checkValidation(scope, element, attrs, ctrl, validation, value);
                             });
 
+                            scope.$on('reset', function (event) {
+                                element.next().html('');
+                            });
+
                             return;
                         }
 
