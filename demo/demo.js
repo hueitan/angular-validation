@@ -21,15 +21,24 @@ angular.module('myApp', ['validation'])
         };
 
         $scope.form3 = {
-            submit: function () {
-                $validationProvider.submit($scope)
+            submit: function (form) {
+                var validate = $validationProvider.submit($scope, form);
+                if (validate) {
+                    $scope.success('form3');
+                } else {
+                    $scope.error('form3');
+                }
             },
             reset: $validationProvider.reset
         };
 
         // Callback method
+        $scope.success = function (message) {
+            alert('Success ' + message);
+        };
+
         $scope.error = function (message) {
-            alert('Error ' + message)
+            alert('Error ' + message);
         };
 
 

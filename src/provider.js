@@ -3,6 +3,31 @@
         .provider('$validation', function () {
 
 
+            var $injector,
+                $http,
+                $q;
+
+
+            /**
+             * Setup the provider
+             * @param injector
+             */
+            var setup = function (injector) {
+                $injector = injector;
+                $http = $injector.get('$http');
+                $q = $injector.get('$q');
+            };
+
+
+            /**
+             * broadcast Channel
+             * @type {{submit: string}}
+             */
+            var broadcastChannel = {
+                submit: 'submit'
+            };
+
+
             /**
              * Define validation type RegExp
              * @type {{required: RegExp, url: RegExp, email: RegExp}}
@@ -112,9 +137,13 @@
             /**
              * Check the form when click submit, when `validMethod = submit`
              * @param scope
+             * @param form
+             * @returns {boolean}
              */
-            var submit = function (scope) {
-                scope.$broadcast('submitValidate');
+            var submit = function (scope, form) {
+                scope.$broadcast(broadcastChannel.submit);
+
+                return checkValid(form);
             };
 
 
@@ -138,7 +167,8 @@
              * $get
              * @returns {{errorHTML: Function, successHTML: Function, setupExpression: Function, getExpression: Function, setupDefaultMsg: Function, getDefaultMsg: Function, checkValid: Function, reset: Function}}
              */
-            this.$get = function () {
+            this.$get = function ($injector) {
+                setup($injector);
                 return {
                     errorHTML: errorHTML,
                     successHTML: successHTML,

@@ -78,7 +78,13 @@ Select the validation method `watch` `blur` `submit`, default as `watch`
     // ... submit method
     $scope.form = {
         submit: function () {
-            $validationProvider.submit($scope);
+            var validate = $validationProvider.submit($scope); // return true iff form is valid
+
+            if (validate) {
+                // Success callback
+            } else {
+                // Error callback
+            }
         }
     };
     // ...
