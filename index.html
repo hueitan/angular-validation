@@ -61,8 +61,9 @@
             </fieldset>
 
             <ul class="button-group">
-                <li><button class="button" ng-disabled="!form.checkValid(Form)">Submit</button></li>
+                <li><button class="button" ng-click="form.submit(Form)">Submit</button></li>
                 <li><button class="button alert" ng-click="form.reset(Form)">Reset</button></li>
+                <li><button class="button secondary" ng-disabled="!form.checkValid(Form)">checkValid = {{ form.checkValid(Form) }}</button></li>
             </ul>
             <!--<pre>{{ form | json }}</pre>-->
         </form>
@@ -87,7 +88,8 @@
             </fieldset>
 
             <ul class="button-group">
-                <li><button class="button" ng-disabled="!form2.checkValid(Form2)">Submit</button></li>
+                <li><button class="button" ng-click="form2.submit(Form2)">Submit</button></li>
+                <li><button class="button secondary" ng-disabled="!form2.checkValid(Form2)">checkValid = {{ form2.checkValid(Form2) }}</button></li>
                 <!--<li><button class="button alert" ng-click="form2.reset(Form2)">Reset</button></li>-->
             </ul>
             <!-- <pre>{{ form | json }}</pre> -->
@@ -117,6 +119,7 @@
             <ul class="button-group">
                 <li><button class="button" ng-click="form3.submit(Form3)">Submit</button></li>
                 <li><button class="button alert" ng-click="form3.reset(Form3)">Reset</button></li>
+                <li><button class="button secondary" ng-disabled="!form3.checkValid(Form3)">checkValid = {{ form3.checkValid(Form3) }}</button></li>
             </ul>
             <!-- <pre>{{ form | json }}</pre> -->
         </form>
