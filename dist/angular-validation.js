@@ -107,22 +107,22 @@
 
 
             /**
-             * Error message HTML, here's the default
+             * Invalid message HTML, here's the default
              * @param message
              * @returns {string}
              */
             var errorHTML = function (message) {
-                return '<p class="error">' + message + '</p>';
+                return '<p class="validation-invalid">' + message + '</p>';
             };
 
 
             /**
-             * Success message HTML, here's the default
+             * Valid message HTML, here's the default
              * @param message
              * @returns {string}
              */
             var successHTML = function (message) {
-                return '<p class="success">' + message + '</p>';
+                return '<p class="validation-valid">' + message + '</p>';
             };
 
 
@@ -208,7 +208,6 @@
                 element.next().html($validationProvider.successHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
                 ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
-                return true;
             };
 
 
@@ -225,7 +224,6 @@
                 element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
                 ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
-                return false;
             };
 
 
@@ -244,9 +242,9 @@
                     errorMessage = validation + 'ErrorMessage';
 
                 if ($validationProvider.getExpression(validation).test(value)) {
-                    return validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
+                    validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
                 } else {
-                    return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                    invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
                 }
 
             };
@@ -308,7 +306,7 @@
                         if (attrs.validMethod === 'submit') {
                             scope.$on('submit', function (event) {
                                 var value = element[0].value;
-                                return checkValidation(scope, element, attrs, ctrl, validation, value);
+                                checkValidation(scope, element, attrs, ctrl, validation, value);
                             });
 
                             scope.$on('reset', function (event) {

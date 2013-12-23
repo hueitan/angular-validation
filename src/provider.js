@@ -104,22 +104,22 @@
 
 
             /**
-             * Error message HTML, here's the default
+             * Invalid message HTML, here's the default
              * @param message
              * @returns {string}
              */
             var errorHTML = function (message) {
-                return '<p class="error">' + message + '</p>';
+                return '<p class="validation-invalid">' + message + '</p>';
             };
 
 
             /**
-             * Success message HTML, here's the default
+             * Valid message HTML, here's the default
              * @param message
              * @returns {string}
              */
             var successHTML = function (message) {
-                return '<p class="success">' + message + '</p>';
+                return '<p class="validation-valid">' + message + '</p>';
             };
 
 

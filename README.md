@@ -151,6 +151,22 @@ Reset the specific Form. `reset()`
         validationProvider.reset($scope, form);
     };
 ```
+
+Set the valid/invalid message style CSS
+```html
+<span><p class="validation-valid">Your valid message here<p></span>
+<span><p class="validation-invalid">Your invalid message here<p></span>
+```
+```css
+.validation-valid {
+    <!-- valid style -->
+}
+
+.validation-invalid {
+    <!-- invalid style -->
+}
+```
+
 Built-in validation <small>in angular-validation</small>
 ===
 

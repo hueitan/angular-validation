@@ -1,7 +1,8 @@
-.error {
+.validation-valid {
+    color: blue;
+}
+
+.validation-invalid {
     color: red;
 }
 
-.success {
-    color: blue;
-}
