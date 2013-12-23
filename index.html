@@ -10,14 +10,21 @@
 <body ng-controller="index">
 
 <div class="row">
-    <div class="small-12 medium-9 large-6 large-centered columns">
-        <h1>Angular Validation</h1>
+    <div class="small-12 medium-12 large-9 large-centered columns">
+        <h1>Angular Validation.
+            <small>
+                <a href="#form1">Watch</a>.
+                <a href="#form2">Blur</a>.
+                <a href="#form3">Submit</a>.
+                method
+            </small>
+        </h1>
     </div>
 </div>
 
 <div class="row">
     <div class="small-12 medium-12 large-6 columns">
-        <form name="Form">
+        <form name="Form" id="form1">
             <fieldset>
                 <legend>Form ($watch)</legend>
 
@@ -27,7 +34,7 @@
                        ng-model="form.required"
                        validator="required"
                        required-error-message="Required"
-                       required-success-message="Good Required"/>
+                       required-success-message="Good Required" autofocus="autofocus"/>
 
                 <label>Url</label>
                 <input type="text"
@@ -70,7 +77,7 @@
     </div>
 
     <div class="small-12 medium-12 large-6 columns">
-        <form name="Form2">
+        <form name="Form2" id="form2">
             <fieldset>
                 <legend>Form ($blur)</legend>
 
@@ -99,7 +106,7 @@
 
 <div class="row">
     <div class="small-12 medium-12 large-6 columns">
-        <form name="Form3">
+        <form name="Form3" id="form3">
             <fieldset>
                 <legend>Form ($submit)</legend>
 
@@ -126,8 +133,7 @@
     </div>
 </div>
 
-<a href="https://github.com/huei90/angular-validation"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
+<a href="https://github.com/huei90/angular-validation"><img src="demo/iconmonstr-github-10-icon-128.png" id="github-link" alt="Fork me on Github"/></a>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
 <script src="dist/angular-validation.js"></script>
 <script src="demo/demo.js"></script>
