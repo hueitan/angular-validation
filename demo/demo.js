@@ -26,12 +26,9 @@ angular.module('myApp', ['validation'])
 
         $scope.form3 = {
             submit: function (form) {
-                var validate = $validationProvider.submit($scope, form);
-                if (validate) {
-                    $scope.success('form');
-                } else {
-                    $scope.error('form');
-                }
+                $validationProvider.submit($scope, form)
+                    .success($scope.success)
+                    .error($scope.error);
             },
             reset: function (form) {
                 $validationProvider.reset($scope, form)

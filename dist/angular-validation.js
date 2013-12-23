@@ -142,12 +142,34 @@
              * Check the form when click submit, when `validMethod = submit`
              * @param scope
              * @param form
-             * @returns {boolean}
+             * @returns {promise|*}
              */
             var submit = function (scope, form) {
                 scope.$broadcast(broadcastChannel.submit);
 
-                return checkValid(form);
+                var deferred = $q.defer();
+                deferred.promise.success = function (fn) {
+                    deferred.promise.then(function (value) {
+                        fn(value);
+                    });
+                    return deferred.promise;
+                };
+
+                deferred.promise.error = function (fn) {
+                    deferred.promise.then(null, function (value) {
+                        fn(value);
+                    });
+                    return deferred.promise;
+                };
+
+                if (checkValid(form)) {
+                    deferred.resolve('success');
+                }
+                else {
+                    deferred.reject('error');
+                }
+
+                return deferred.promise;
             };
 
 
