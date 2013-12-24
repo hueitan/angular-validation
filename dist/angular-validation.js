@@ -124,7 +124,7 @@
              * @returns {boolean}
              */
             var checkValid = function (form) {
-                return !(form && form.$valid == false);
+                return !(form && form.$valid === false);
             };
 
 
@@ -202,7 +202,7 @@
                     checkValid: checkValid,
                     validate: validate,
                     reset: reset
-                }
+                };
             };
 
         });
@@ -365,6 +365,6 @@
 
                     });
                 }
-            }
+            };
         }]);
 }).call(this);
