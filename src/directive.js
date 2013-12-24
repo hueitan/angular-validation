@@ -35,7 +35,7 @@
 
 
             /**
-             * Check Validation
+             * Check Validation with Function or RegExp
              * @param scope
              * @param element
              * @param attrs
@@ -46,13 +46,20 @@
              */
             var checkValidation = function (scope, element, attrs, ctrl, validation, value) {
                 var successMessage = validation + 'SuccessMessage',
-                    errorMessage = validation + 'ErrorMessage';
+                    errorMessage = validation + 'ErrorMessage',
+                    expressionType = $validationProvider.getExpression(validation).constructor,
+                    valid = false;
 
-                if ($validationProvider.getExpression(validation).test(value)) {
-                    validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
-                } else {
-                    invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                // Check with Function
+                if (expressionType === Function) {
+                    valid = $validationProvider.getExpression(validation)(value);
                 }
+                // Check with RegExp
+                else if (expressionType === RegExp) {
+                    valid = $validationProvider.getExpression(validation).test(value);
+                }
+
+                valid ? validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl) : invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
 
             };
 

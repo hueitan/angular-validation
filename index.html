@@ -10,13 +10,15 @@
 <body ng-controller="index">
 
 <div class="row">
-    <div class="small-12 medium-12 large-9 large-centered columns">
+    <div class="small-12 medium-12 large-12 large-centered columns">
         <h1>Angular Validation.
             <small>
                 <a href="#form1">Watch</a>.
                 <a href="#form2">Blur</a>.
                 <a href="#form3">Submit</a>.
-                method
+                method.
+                <a href="#form4">Additions</a>.
+                validation
             </small>
         </h1>
     </div>
@@ -129,6 +131,22 @@
                 <li><button class="button secondary" ng-disabled="!form3.checkValid(Form3)">checkValid = {{ form3.checkValid(Form3) }}</button></li>
             </ul>
             <!-- <pre>{{ form | json }}</pre> -->
+        </form>
+    </div>
+    <div class="small-12 medium-12 large-6 columns">
+        <form name="Form4" id="form4">
+            <fieldset>
+                <legend>Form (Additions validation)</legend>
+
+                <div class="row collapse">
+                    <div class="small-9 columns">
+                        <input type="text" validator="huei" name="huei" ng-model="form4.huei" placeholder="It's must be 'Huei Tan'">
+                    </div>
+                    <div class="small-3 columns">
+                        <span class="postfix radius">With <a href="https://github.com/huei90/angular-validation#custom-function-huei" target="_blank">Function</a> </span>
+                    </div>
+                </div>
+            </fieldset>
         </form>
     </div>
 </div>

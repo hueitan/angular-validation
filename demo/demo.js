@@ -91,4 +91,24 @@ angular.module('myApp', ['validation'])
         $validationProvider.setupDefaultMsg({ ip: { error: 'This no ip', success: 'this ip'}});
         $validationProvider.setupExpression({ ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/ });
 
+        /**
+         * Additions validation
+         */
+        $validationProvider.setupExpression({
+            /**
+             * @param value , user input
+             * @returns {boolean} true iff valid
+             */
+            huei: function (value) {
+                return value === 'Huei Tan';
+            }
+        });
+
+        $validationProvider.setupDefaultMsg({
+            huei: {
+                error: 'This should be Huei Tan',
+                success: 'Thanks!'
+            }
+        });
+
     }]);

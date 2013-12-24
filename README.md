@@ -87,12 +87,16 @@ Select the validation method `watch` `blur` `submit`, default as `watch`
 </script>
 ```
 
-Setup a new Validation `setupExpression()` `setupDefaultMsg()`
+Setup a new Validation `setupExpression()` `setupDefaultMsg()` with `RegExp` or `Function`
 
 ```html
 <!-- View -->
-<label>IP address (Custom setup the new validator)</label>
+<label>IP address (Custom setup the new validator - RegExp)</label>
 <input type="text" name="ip" ng-model="form.ip" validator="ip"/>
+
+<a name="custom-function-huei"></a>
+<label>Huei (Custom setup the new validator - Function)</label>
+<input type="text" name="huei" ng-model="form.huei" validator="huei"/>
 ```
 
 ```javascript
@@ -104,23 +108,42 @@ angular.module('yourApp', ['validation']);
 // Now you can use validationProvider in your Angular Controller
 function validation($scope, $injector) {
 
-var validationProvider = $injector.get('validationProvider'); // inject validationProvider
+    var validationProvider = $injector.get('validationProvider'); // inject validationProvider
 
-var expression = {
-    ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-};
+    // Setup `ip` validation
+    var expression = {
+        ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+    };
 
-var validMsg = {
-    ip: {
-    error: 'This isn\'t ip address',
-    success: 'It\'s ip'
-    }
-};
+    var validMsg = {
+        ip: {
+            error: 'This isn\'t ip address',
+            success: 'It\'s ip'
+        }
+    };
 
-validationProvider.setupExpression(expression); // setup expression
-validationProvider.setupDefaultMsg(validMsg); // setup valid message
+    validationProvider.setupExpression(expression); // setup expression
+    validationProvider.setupDefaultMsg(validMsg); // setup valid message
 
-};
+    // Setup `huei` validation
+    validationProvider.setupExpression({
+        /**
+        * @param value , user input
+        * @returns {boolean} true iff valid
+        */
+        huei: function (value) {
+            return value === 'Huei Tan';
+        }
+    });
+
+    validationProvider.setupDefaultMsg({
+        huei: {
+            error: 'This should be Huei Tan',
+            success: 'Thanks!'
+        }
+    });
+
+}
 
 ```
 
