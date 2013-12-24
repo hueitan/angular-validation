@@ -88,13 +88,12 @@ Select the validation method `watch` `blur` `submit`, default as `watch`
 ```
 
 Setup a new Validation `setupExpression()` `setupDefaultMsg()` with `RegExp` or `Function`
-
+<a name="custom-function-huei"></a>
 ```html
 <!-- View -->
 <label>IP address (Custom setup the new validator - RegExp)</label>
 <input type="text" name="ip" ng-model="form.ip" validator="ip"/>
 
-<a name="custom-function-huei"></a>
 <label>Huei (Custom setup the new validator - Function)</label>
 <input type="text" name="huei" ng-model="form.huei" validator="huei"/>
 ```
