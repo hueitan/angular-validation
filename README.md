@@ -59,7 +59,8 @@ Add Valid Callback Function, `invalid-callback` & `valid-callback`
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-Select the validation method `watch` `blur` `submit`, default as `watch`
+Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
+`validationProvider.validate($scope, form).success(callback).error(callback)` use callback to continue your submit
 
 ```html
 <label>Watch method</label>
@@ -75,10 +76,10 @@ Select the validation method `watch` `blur` `submit`, default as `watch`
     <button ng-click="form.submit()"></button>
 </form>
 <script>
-    // ... submit method, it will check `checkValid(Form)`
+    // ... validate method, it will check `checkValid(Form)`
     $scope.form = {
         submit: function () {
-            $validationProvider.submit($scope, form)
+            $validationProvider.validate($scope, form)
                 .success(successCallback)
                 .error(errorCallback);
         }

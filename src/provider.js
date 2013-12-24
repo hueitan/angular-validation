@@ -126,12 +126,12 @@
 
 
             /**
-             * Check the form when click submit, when `validMethod = submit`
+             * Validate the form when click submit, when `validMethod = submit`
              * @param scope
              * @param form
              * @returns {promise|*}
              */
-            var submit = function (scope, form) {
+            var validate = function (scope, form) {
 
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
@@ -197,7 +197,7 @@
                     setupDefaultMsg: setupDefaultMsg,
                     getDefaultMsg: getDefaultMsg,
                     checkValid: checkValid,
-                    submit: submit,
+                    validate: validate,
                     reset: reset
                 }
             };
