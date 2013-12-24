@@ -97,12 +97,38 @@
 
 
             /**
+             * Override the errorHTML function
+             * @param func
+             */
+            var setupErrorHTML = function (func) {
+                if (func.constructor !== Function) {
+                    return;
+                }
+
+                this.errorHTML = func;
+            };
+
+
+            /**
              * Invalid message HTML, here's the default
              * @param message
              * @returns {string}
              */
             var errorHTML = function (message) {
                 return '<p class="validation-invalid">' + message + '</p>';
+            };
+
+
+            /**
+             * Override the successHTML function
+             * @param func
+             */
+            var setupSuccessHTML = function (func) {
+                if (func.constructor !== Function) {
+                    return;
+                }
+
+                this.successHTML = func;
             };
 
 
@@ -123,6 +149,9 @@
              * @returns {boolean}
              */
             var checkValid = function (form) {
+                if (form.$valid === undefined) {
+                    return false;
+                }
                 return (form && form.$valid === true);
             };
 
@@ -192,7 +221,9 @@
             this.$get = function ($injector) {
                 setup($injector);
                 return {
+                    setupErrorHTML: setupErrorHTML,
                     errorHTML: errorHTML,
+                    setupSuccessHTML: setupSuccessHTML,
                     successHTML: successHTML,
                     setupExpression: setupExpression,
                     getExpression: getExpression,

@@ -186,6 +186,20 @@ Set the valid/invalid message style CSS
 }
 ```
 
+Custom the valid/invalid message style HTML,<br/>
+`setupErrorHTML(func)` `setupSuccessHTML(func)`, input should be a `function` and given `parameter` which is the valid/invalid message declared
+in `getDefaultMsg()`,and finally return the HTML code
+```javascript
+        $validationProvider.setupErrorHTML(function (msg) {
+            // remember to return your HTML
+            // eg: return <p class="invalid">msg</p>;
+        });
+
+        $validationProvider.setupSuccessHTML(function (msg) {
+            // eg: return <p class="valid">msg</p>;
+        });
+```
+
 Built-in validation <small>in angular-validation</small>
 ===
 

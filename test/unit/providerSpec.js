@@ -33,7 +33,7 @@ describe('provider', function () {
 
     describe('checkValid', function () {
         it('It should be Valid when start', inject(function ($validation) {
-            expect($validation.checkValid()).toBe(true);
+            expect($validation.checkValid()).toBe(false);
         }));
     });
 });
