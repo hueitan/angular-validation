@@ -115,13 +115,12 @@
 
             /**
              * Check form valid, return true
-             * checkValid(): Check the entire form valid from angular-validation `valid`
              * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
              * @param form
              * @returns {boolean}
              */
             var checkValid = function (form) {
-                return !(form && form.$valid === false);
+                return (form && form.$valid === true);
             };
 
 
