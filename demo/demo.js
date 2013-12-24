@@ -18,7 +18,7 @@ angular.module('myApp', ['validation'])
                     .error($scope.error);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form)
+                $validationProvider.reset($scope, form);
             }
         };
 
@@ -30,7 +30,7 @@ angular.module('myApp', ['validation'])
                     .error($scope.error);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form)
+                $validationProvider.reset($scope, form);
             }
         };
 
@@ -42,7 +42,7 @@ angular.module('myApp', ['validation'])
                     .error($scope.error);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form)
+                $validationProvider.reset($scope, form);
             }
         };
 

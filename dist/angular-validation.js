@@ -309,6 +309,15 @@
 
 
                         /**
+                         * Click submit form, check the validity when submit
+                         */
+                        scope.$on(ctrl.$name + 'submit', function () {
+                            var value = element[0].value;
+                            checkValidation(scope, element, attrs, ctrl, validation, value);
+                        });
+
+
+                        /**
                          * Reset the validation for specific form
                          */
                         scope.$on(ctrl.$name + 'reset', function () {
@@ -335,11 +344,6 @@
                          * Validate submit method
                          */
                         if (attrs.validMethod === 'submit') {
-                            scope.$on(ctrl.$name + 'submit', function () {
-                                var value = element[0].value;
-                                checkValidation(scope, element, attrs, ctrl, validation, value);
-                            });
-
                             return;
                         }
 
