@@ -105,7 +105,7 @@
                     return;
                 }
 
-                this.errorHTML = func;
+                this.getErrorHTML = func;
             };
 
 
@@ -128,7 +128,7 @@
                     return;
                 }
 
-                this.successHTML = func;
+                this.getSuccessHTML = func;
             };
 
 
@@ -239,7 +239,10 @@
 }).call(this);
 (function () {
     angular.module('validation.directive', ['validation.provider'])
-        .directive('validator', ['$validation', function ($validationProvider) {
+        .directive('validator', ['$injector', function ($injector) {
+
+            var $validationProvider = $injector.get('$validation'),
+                $q = $injector.get('$q');
 
             /**
              * Do this function iff validation valid
@@ -287,19 +290,34 @@
                 var successMessage = validation + 'SuccessMessage',
                     errorMessage = validation + 'ErrorMessage',
                     expressionType = $validationProvider.getExpression(validation).constructor,
-                    valid = false;
+                    valid = {
+                        success: function () {
+                            validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
+                        },
+                        error: function () {
+                            invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                        }
+                    };
 
                 // Check with Function
                 if (expressionType === Function) {
-                    valid = $validationProvider.getExpression(validation)(value);
+                    return $q.all([$validationProvider.getExpression(validation)(value)])
+                        .then(function (data) {
+                            if (data && data.length > 0 && data[0]) {
+                                return valid.success();
+                            } else {
+                                return valid.error();
+                            }
+                        }, function () {
+                            return valid.error();
+                        });
                 }
                 // Check with RegExp
                 else if (expressionType === RegExp) {
-                    valid = $validationProvider.getExpression(validation).test(value);
+                    return $validationProvider.getExpression(validation).test(value) ? valid.success() : valid.error();
+                } else {
+                    return valid.error();
                 }
-
-                valid ? validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl) : invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
-
             };
 
 

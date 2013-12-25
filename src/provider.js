@@ -102,7 +102,7 @@
                     return;
                 }
 
-                this.errorHTML = func;
+                this.getErrorHTML = func;
             };
 
 
@@ -125,7 +125,7 @@
                     return;
                 }
 
-                this.successHTML = func;
+                this.getSuccessHTML = func;
             };
 
 

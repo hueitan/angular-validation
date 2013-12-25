@@ -7,7 +7,7 @@ describe('provider', function () {
 
     describe('setup Expression', function () {
         it('After setup, it should still be expression(Regex)', inject(function ($validation) {
-            $validation.setupExpression({ huei: /^huei$/ });
+            $validation.setExpression({ huei: /^huei$/ });
 
             expect($validation.getExpression('huei')).toEqual(jasmine.any(RegExp));
         }));
@@ -22,7 +22,7 @@ describe('provider', function () {
                 }
             };
 
-            $validation.setupDefaultMsg(obj);
+            $validation.setDefaultMsg(obj);
 
             expect($validation.getDefaultMsg('huei')).toEqual(jasmine.any(Object));
             for (var key in $validation.getDefaultMsg('huei')) {
