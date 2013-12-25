@@ -133,6 +133,11 @@ function validation($scope, $injector) {
         */
         huei: function (value) {
             return value === 'Huei Tan';
+            // or you can do
+            return $q.all([obj]).then(function () {
+            // ...
+            return true;
+            })
         }
     });
 

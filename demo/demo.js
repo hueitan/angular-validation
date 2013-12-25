@@ -101,11 +101,6 @@ angular.module('myApp', ['validation'])
              */
             huei: function (value) {
                 return value === 'Huei Tan';
-                // or you can do
-                return $q.all([obj]).then(function () {
-                    // ...
-                    return true;
-                })
             }
         });
 
