@@ -13,9 +13,7 @@ angular.module('myApp', ['validation'])
             requiredCallback: 'required',
             checkValid: $validationProvider.checkValid,
             submit: function (form) {
-                $validationProvider.validate($scope, form)
-                    .success($scope.success)
-                    .error($scope.error);
+                $validationProvider.validate($scope, form);
             },
             reset: function (form) {
                 $validationProvider.reset($scope, form);
@@ -25,9 +23,7 @@ angular.module('myApp', ['validation'])
         $scope.form2 = {
             checkValid: $validationProvider.checkValid,
             submit: function (form) {
-                $validationProvider.validate($scope, form)
-                    .success($scope.success)
-                    .error($scope.error);
+                $validationProvider.validate($scope, form);
             },
             reset: function (form) {
                 $validationProvider.reset($scope, form);
