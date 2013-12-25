@@ -8,7 +8,8 @@
 
             var $injector,
                 $http,
-                $q;
+                $q,
+                _this = this;
 
 
             /**
@@ -62,7 +63,7 @@
              * Allow user to set a custom Expression, do remember set the default message using setDefaultMsg
              * @param obj
              */
-            var setExpression = function (obj) {
+            this.setExpression = function (obj) {
                 angular.extend(expression, obj);
             };
 
@@ -72,7 +73,7 @@
              * @param exprs
              * @returns {*}
              */
-            var getExpression = function (exprs) {
+            this.getExpression = function (exprs) {
                 return expression[exprs];
             };
 
@@ -81,7 +82,7 @@
              * Allow user to set default message
              * @param obj
              */
-            var setDefaultMsg = function (obj) {
+            this.setDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
             };
 
@@ -91,7 +92,7 @@
              * @param msg
              * @returns {*}
              */
-            var getDefaultMsg = function (msg) {
+            this.getDefaultMsg = function (msg) {
                 return defaultMsg[msg];
             };
 
@@ -100,12 +101,12 @@
              * Override the errorHTML function
              * @param func
              */
-            var setErrorHTML = function (func) {
+            this.setErrorHTML = function (func) {
                 if (func.constructor !== Function) {
                     return;
                 }
 
-                this.getErrorHTML = func;
+                _this.getErrorHTML = func;
             };
 
 
@@ -114,7 +115,7 @@
              * @param message
              * @returns {string}
              */
-            var getErrorHTML = function (message) {
+            this.getErrorHTML = function (message) {
                 return '<p class="validation-invalid">' + message + '</p>';
             };
 
@@ -123,12 +124,12 @@
              * Override the successHTML function
              * @param func
              */
-            var setSuccessHTML = function (func) {
+            this.setSuccessHTML = function (func) {
                 if (func.constructor !== Function) {
                     return;
                 }
 
-                this.getSuccessHTML = func;
+                _this.getSuccessHTML = func;
             };
 
 
@@ -137,7 +138,7 @@
              * @param message
              * @returns {string}
              */
-            var getSuccessHTML = function (message) {
+            this.getSuccessHTML = function (message) {
                 return '<p class="validation-valid">' + message + '</p>';
             };
 
@@ -148,7 +149,7 @@
              * @param form
              * @returns {boolean}
              */
-            var checkValid = function (form) {
+            this.checkValid = function (form) {
                 if (form.$valid === undefined) {
                     return false;
                 }
@@ -162,7 +163,7 @@
              * @param form
              * @returns {promise|*}
              */
-            var validate = function (scope, form) {
+            this.validate = function (scope, form) {
 
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
@@ -185,7 +186,7 @@
                     return deferred.promise;
                 };
 
-                if (checkValid(form)) {
+                if (_this.checkValid(form)) {
                     deferred.resolve('success');
                 }
                 else {
@@ -201,7 +202,7 @@
              * @param scope
              * @param form
              */
-            var reset = function (scope, form) {
+            this.reset = function (scope, form) {
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
                         form[k].$setViewValue(null);
@@ -221,17 +222,17 @@
             this.$get = function ($injector) {
                 setup($injector);
                 return {
-                    setErrorHTML: setErrorHTML,
-                    getErrorHTML: getErrorHTML,
-                    setSuccessHTML: setSuccessHTML,
-                    getSuccessHTML: getSuccessHTML,
-                    setExpression: setExpression,
-                    getExpression: getExpression,
-                    setDefaultMsg: setDefaultMsg,
-                    getDefaultMsg: getDefaultMsg,
-                    checkValid: checkValid,
-                    validate: validate,
-                    reset: reset
+                    setErrorHTML: this.setErrorHTML,
+                    getErrorHTML: this.getErrorHTML,
+                    setSuccessHTML: this.setSuccessHTML,
+                    getSuccessHTML: this.getSuccessHTML,
+                    setExpression: this.setExpression,
+                    getExpression: this.getExpression,
+                    setDefaultMsg: this.setDefaultMsg,
+                    getDefaultMsg: this.getDefaultMsg,
+                    checkValid: this.checkValid,
+                    validate: this.validate,
+                    reset: this.reset
                 };
             };
 

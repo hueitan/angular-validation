@@ -4,8 +4,8 @@ angular.module('myApp', ['validation'])
 
         // Injector
         var $validationProvider = $injector.get('$validation'),
-            expression = {},
-            defaultMsg = {};
+            expression,
+            defaultMsg;
 
 
         // Initial Value
