@@ -11,6 +11,7 @@ describe('directives', function() {
                 var scope = $rootScope.$new();
                 var element = $compile('<input type="text" ng-model="required" validator="required"></span>')(scope);
 
+                expect(element.hasClass('ng-pristine')).toBe(true);
                 expect(element.hasClass('ng-invalid')).toBe(true);
 
                 // Given input value
@@ -18,6 +19,7 @@ describe('directives', function() {
                     scope.required = 'Required';
                 });
 
+                expect(element.hasClass('ng-dirty')).toBe(true);
                 expect(element.hasClass('ng-invalid')).toBe(false);
             });
         });

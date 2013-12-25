@@ -6,10 +6,13 @@ describe('provider', function () {
     beforeEach(module('validation.provider'));
 
     describe('setup Expression', function () {
-        it('After setup, it should still be expression(Regex)', inject(function ($validation) {
+        it('After setup, it should still be expression(Regex or Function)', inject(function ($validation) {
             $validation.setExpression({ huei: /^huei$/ });
-
             expect($validation.getExpression('huei')).toEqual(jasmine.any(RegExp));
+            $validation.setExpression({ huei: function () {
+                return true;
+            }});
+            expect($validation.getExpression('huei')).toEqual(jasmine.any(Function));
         }));
     });
 

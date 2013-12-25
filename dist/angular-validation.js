@@ -347,6 +347,14 @@
 
 
                     /**
+                     * Don't showup the validation Message
+                     */
+                    if (attrs.noValidationMessage) {
+                        element.next().css('display', 'none');
+                    }
+
+
+                    /**
                      * Check Every validator
                      */
                     validator.forEach(function (validation) {

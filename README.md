@@ -52,6 +52,12 @@ Use Default Valid Message<br/>
 <input type="text" name="number" ng-model="form.number" validator="number"/>
 ```
 
+<a name="no-validation-message"></a>
+Don't show the Valid Message `no-validation-message="true"`
+```html
+<label>Number</label>
+<input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="true"/>
+```
 Add Valid Callback Function, `invalid-callback` & `valid-callback`
 
 ```html

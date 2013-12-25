@@ -146,6 +146,18 @@
                         <span class="postfix radius">With <a href="https://github.com/huei90/angular-validation#custom-function-huei" target="_blank">Function</a> </span>
                     </div>
                 </div>
+
+                <div class="row collapse">
+                    <div class="small-7 columns">
+                        <input type="text" validator="huei" name="noMsg" ng-model="form4.noMsg" no-validation-message="true" placeholder="It's must be 'Huei Tan'">
+                    </div>
+                    <div class="small-5 columns">
+                        <span class="postfix radius">
+                            <span ng-if="!Form4.noMsg.$valid">type: Huei Tan</span>
+                            <span ng-if="Form4.noMsg.$valid"><a href="https://github.com/huei90/angular-validation#no-validation-message" target="_blank">no-validation-message</a></span>
+                        </span>
+                    </div>
+                </div>
             </fieldset>
         </form>
     </div>
