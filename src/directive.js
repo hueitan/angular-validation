@@ -12,7 +12,7 @@
              * @returns {}
              */
             var validFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.successHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
                 ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
             };
@@ -28,7 +28,7 @@
              * @returns {}
              */
             var invalidFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.errorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
                 ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
             };

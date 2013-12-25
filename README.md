@@ -88,7 +88,7 @@ Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
 </script>
 ```
 
-Setup a new Validation `setupExpression()` `setupDefaultMsg()` with `RegExp` or `Function`
+Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function`
 <a name="custom-function-huei"></a>
 ```html
 <!-- View -->
@@ -122,11 +122,11 @@ function validation($scope, $injector) {
         }
     };
 
-    validationProvider.setupExpression(expression); // setup expression
-    validationProvider.setupDefaultMsg(validMsg); // setup valid message
+    validationProvider.setExpression(expression); // set expression
+    validationProvider.setDefaultMsg(validMsg); // set valid message
 
     // Setup `huei` validation
-    validationProvider.setupExpression({
+    validationProvider.setExpression({
         /**
         * @param value , user input
         * @returns {boolean} true iff valid
@@ -136,7 +136,7 @@ function validation($scope, $injector) {
         }
     });
 
-    validationProvider.setupDefaultMsg({
+    validationProvider.setDefaultMsg({
         huei: {
             error: 'This should be Huei Tan',
             success: 'Thanks!'
@@ -187,15 +187,15 @@ Set the valid/invalid message style CSS
 ```
 
 Custom the valid/invalid message style HTML,<br/>
-`setupErrorHTML(func)` `setupSuccessHTML(func)`, input should be a `function` and given `parameter` which is the valid/invalid message declared
+`setErrorHTML(func)` `setSuccessHTML(func)`, input should be a `function` and given `parameter` which is the valid/invalid message declared
 in `getDefaultMsg()`,and finally return the HTML code
 ```javascript
-$validationProvider.setupErrorHTML(function (msg) {
+$validationProvider.setErrorHTML(function (msg) {
     // remember to return your HTML
     // eg: return <p class="invalid">msg</p>;
 });
 
-$validationProvider.setupSuccessHTML(function (msg) {
+$validationProvider.setSuccessHTML(function (msg) {
     // eg: return <p class="valid">msg</p>;
 });
 ```

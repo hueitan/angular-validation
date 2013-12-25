@@ -56,10 +56,10 @@
 
 
             /**
-             * Allow user to set a custom Expression, do remember set the default message using setupDefaultMsg
+             * Allow user to set a custom Expression, do remember set the default message using setDefaultMsg
              * @param obj
              */
-            var setupExpression = function (obj) {
+            var setExpression = function (obj) {
                 angular.extend(expression, obj);
             };
 
@@ -78,7 +78,7 @@
              * Allow user to set default message
              * @param obj
              */
-            var setupDefaultMsg = function (obj) {
+            var setDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
             };
 
@@ -97,7 +97,7 @@
              * Override the errorHTML function
              * @param func
              */
-            var setupErrorHTML = function (func) {
+            var setErrorHTML = function (func) {
                 if (func.constructor !== Function) {
                     return;
                 }
@@ -111,7 +111,7 @@
              * @param message
              * @returns {string}
              */
-            var errorHTML = function (message) {
+            var getErrorHTML = function (message) {
                 return '<p class="validation-invalid">' + message + '</p>';
             };
 
@@ -120,7 +120,7 @@
              * Override the successHTML function
              * @param func
              */
-            var setupSuccessHTML = function (func) {
+            var setSuccessHTML = function (func) {
                 if (func.constructor !== Function) {
                     return;
                 }
@@ -134,7 +134,7 @@
              * @param message
              * @returns {string}
              */
-            var successHTML = function (message) {
+            var getSuccessHTML = function (message) {
                 return '<p class="validation-valid">' + message + '</p>';
             };
 
@@ -213,18 +213,18 @@
 
             /**
              * $get
-             * @returns {{errorHTML: Function, successHTML: Function, setupExpression: Function, getExpression: Function, setupDefaultMsg: Function, getDefaultMsg: Function, checkValid: Function, reset: Function}}
+             * @returns {{setErrorHTML: *, getErrorHTML: Function, setSuccessHTML: *, getSuccessHTML: Function, setExpression: *, getExpression: Function, setDefaultMsg: *, getDefaultMsg: Function, checkValid: Function, validate: Function, reset: Function}}
              */
             this.$get = function ($injector) {
                 setup($injector);
                 return {
-                    setupErrorHTML: setupErrorHTML,
-                    errorHTML: errorHTML,
-                    setupSuccessHTML: setupSuccessHTML,
-                    successHTML: successHTML,
-                    setupExpression: setupExpression,
+                    setErrorHTML: setErrorHTML,
+                    getErrorHTML: getErrorHTML,
+                    setSuccessHTML: setSuccessHTML,
+                    getSuccessHTML: getSuccessHTML,
+                    setExpression: setExpression,
                     getExpression: getExpression,
-                    setupDefaultMsg: setupDefaultMsg,
+                    setDefaultMsg: setDefaultMsg,
                     getDefaultMsg: getDefaultMsg,
                     checkValid: checkValid,
                     validate: validate,

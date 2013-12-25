@@ -66,7 +66,7 @@ angular.module('myApp', ['validation'])
             }
         };
 
-        $validationProvider.setupDefaultMsg(defaultMsg);
+        $validationProvider.setDefaultMsg(defaultMsg);
 
 
         /**
@@ -84,17 +84,17 @@ angular.module('myApp', ['validation'])
             }
         };
 
-        $validationProvider.setupExpression(expression);
-        $validationProvider.setupDefaultMsg(defaultMsg);
+        $validationProvider.setExpression(expression);
+        $validationProvider.setDefaultMsg(defaultMsg);
 
         // or we can just setup directly
-        $validationProvider.setupDefaultMsg({ ip: { error: 'This no ip', success: 'this ip'}});
-        $validationProvider.setupExpression({ ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/ });
+        $validationProvider.setDefaultMsg({ ip: { error: 'This no ip', success: 'this ip'}});
+        $validationProvider.setExpression({ ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/ });
 
         /**
          * Additions validation
          */
-        $validationProvider.setupExpression({
+        $validationProvider.setExpression({
             /**
              * @param value , user input
              * @returns {boolean} true iff valid
@@ -104,7 +104,7 @@ angular.module('myApp', ['validation'])
             }
         });
 
-        $validationProvider.setupDefaultMsg({
+        $validationProvider.setDefaultMsg({
             huei: {
                 error: 'This should be Huei Tan',
                 success: 'Thanks!'
