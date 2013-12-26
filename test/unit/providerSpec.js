@@ -7,6 +7,7 @@ describe('provider', function () {
     var $rootScope,
         $compile,
         $scope,
+        $timeout,
         element,
         validationProvider,
         myApp;
@@ -26,17 +27,27 @@ describe('provider', function () {
         $rootScope = $injector.get('$rootScope');
         $compile = $injector.get('$compile');
         $scope = $rootScope.$new();
+        $timeout = $injector.get('$timeout');
 
         element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
     }));
 
     it('set/get Expression (RegExp or Function)', inject(function () {
-        validationProvider.setExpression({ huei: /^huei$/ });
-        expect(validationProvider.getExpression('huei')).toEqual(jasmine.any(RegExp));
-        validationProvider.setExpression({ huei: function () {
-            return true;
-        }});
-        expect(validationProvider.getExpression('huei')).toEqual(jasmine.any(Function));
+        var model = {
+            huei: /^huei$/
+        };
+
+        validationProvider.setExpression(model);
+        expect(validationProvider.getExpression('huei')).toEqual(model.huei);
+
+        model = {
+            huei: function () {
+                return true;
+            }
+        };
+
+        validationProvider.setExpression(model);
+        expect(validationProvider.getExpression('huei')).toBe(model.huei);
     }));
 
     it('set/get DefaultMsg (String)', inject(function () {
@@ -49,10 +60,10 @@ describe('provider', function () {
 
         validationProvider.setDefaultMsg(obj);
 
-        expect(validationProvider.getDefaultMsg('huei')).toEqual(jasmine.any(Object));
+        expect(validationProvider.getDefaultMsg('huei')).toEqual(obj.huei);
         for (var key in validationProvider.getDefaultMsg('huei')) {
             expect(key).toMatch(/^error$|^success$/);
-            expect(validationProvider.getDefaultMsg('huei')[key]).toEqual(jasmine.any(String));
+            expect(validationProvider.getDefaultMsg('huei')[key]).toEqual(obj.huei[key]);
         }
     }));
 
@@ -95,20 +106,47 @@ describe('provider', function () {
     }));
 
     it('validate - submit', inject(function () {
-        var submitSpy = jasmine.createSpy('submitSpy');
+        var submitSpy = jasmine.createSpy('submitSpy'),
+            successSpy = jasmine.createSpy('successSpy'),
+            errorSpy = jasmine.createSpy('errorSpy'),
+            successSpy2 = jasmine.createSpy('successSpy2'),
+            errorSpy2 = jasmine.createSpy('errorSpy2');
+
+        // test .success()
         $scope.$on('requiredsubmit', function () {
             submitSpy();
         });
         $scope.$apply(function () {
             $scope.required = 'Required';
         });
-        validationProvider.validate($scope, $scope.Form);
-        expect(submitSpy).toHaveBeenCalled();
-    }));
+        validationProvider.validate($scope, $scope.Form)
+            .success(function () {
+                successSpy();
+            })
+            .error(function () {
+                errorSpy();
+            });
 
-    it('no-validation-message', inject(function () {
-        element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></span></form>')($scope);
-        var display = element.find('span').css('display');
-        expect(display).toBe('none');
-    }))
+        $timeout.flush();
+        expect(submitSpy).toHaveBeenCalled();
+        expect(successSpy).toHaveBeenCalled();
+        expect(errorSpy).not.toHaveBeenCalled();
+
+        // test .error()
+        $scope.$apply(function () {
+            $scope.required = '';
+        });
+
+        validationProvider.validate($scope, $scope.Form)
+            .success(function () {
+                successSpy2();
+            })
+            .error(function () {
+                errorSpy2();
+            });
+
+        $timeout.flush();
+        expect(errorSpy2).toHaveBeenCalled();
+        expect(successSpy2).not.toHaveBeenCalled();
+    }));
 });

@@ -56,5 +56,11 @@ describe('directives', function () {
             expect(element.hasClass('ng-invalid')).toBe(true);
             expect(element.find('p').hasClass('validation-invalid')).toBe(true);
         });
+
+        it('no-validation-message', inject(function () {
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></span></form>')($scope);
+            var display = element.find('span').css('display');
+            expect(display).toBe('none');
+        }))
     });
 });
