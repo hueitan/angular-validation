@@ -18,7 +18,7 @@ describe('directives', function () {
             $compile = $injector.get('$compile');
             $scope = $rootScope.$new();
 
-            element = $compile('<form name="Form"><input type="text" ng-model="required" validator="required"></span></form>')($scope);
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
         }));
 
         it('Initial should be pristine and invalid', function () {

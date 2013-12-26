@@ -27,7 +27,7 @@ describe('provider', function () {
         $compile = $injector.get('$compile');
         $scope = $rootScope.$new();
 
-        element = $compile('<form name="Form"><input type="text" ng-model="required" validator="required"></span></form>')($scope);
+        element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
     }));
 
     it('set/get Expression (RegExp or Function)', inject(function () {
@@ -83,4 +83,32 @@ describe('provider', function () {
         });
         expect(validationProvider.checkValid($scope.Form)).toBe(false);
     }));
+
+    it('reset', inject(function () {
+        var resetSpy = jasmine.createSpy('resetSpy');
+        $scope.$on('requiredreset', function () {
+            resetSpy();
+        });
+        validationProvider.reset($scope, $scope.Form);
+        expect(element.find('p')[0]).toBeUndefined();
+        expect(resetSpy).toHaveBeenCalled();
+    }));
+
+    it('validate - submit', inject(function () {
+        var submitSpy = jasmine.createSpy('submitSpy');
+        $scope.$on('requiredsubmit', function () {
+            submitSpy();
+        });
+        $scope.$apply(function () {
+            $scope.required = 'Required';
+        });
+        validationProvider.validate($scope, $scope.Form);
+        expect(submitSpy).toHaveBeenCalled();
+    }));
+
+    it('no-validation-message', inject(function () {
+        element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></span></form>')($scope);
+        var display = element.find('span').css('display');
+        expect(display).toBe('none');
+    }))
 });
