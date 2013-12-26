@@ -2,26 +2,57 @@
 
 /* jasmine specs for directives go here */
 
-describe('directives', function() {
+describe('directives', function () {
+
+    var $scope,
+        $rootScope,
+        $compile,
+        element;
+
     beforeEach(module('validation.directive'));
 
-    describe('Check Validation', function() {
-        it('required as example', function() {
-            inject(function($compile, $rootScope) {
-                var scope = $rootScope.$new();
-                var element = $compile('<input type="text" ng-model="required" validator="required"></span>')(scope);
+    describe('Example of Required', function () {
 
-                expect(element.hasClass('ng-pristine')).toBe(true);
-                expect(element.hasClass('ng-invalid')).toBe(true);
+        beforeEach(inject(function ($injector) {
+            $rootScope = $injector.get('$rootScope');
+            $compile = $injector.get('$compile');
+            $scope = $rootScope.$new();
 
-                // Given input value
-                scope.$apply(function () {
-                    scope.required = 'Required';
-                });
+            element = $compile('<form name="Form"><input type="text" ng-model="required" validator="required"></span></form>')($scope);
+        }));
 
-                expect(element.hasClass('ng-dirty')).toBe(true);
-                expect(element.hasClass('ng-invalid')).toBe(false);
+        it('Initial should be pristine and invalid', function () {
+            expect($scope.Form.$pristine).toBe(true);
+            expect(element.hasClass('ng-pristine')).toBe(true);
+            expect($scope.Form.$invalid).toBe(true);
+        });
+
+        it('After Input should be dirty and valid', function () {
+
+            $scope.$apply(function () {
+                $scope.required = 'Required';
             });
+
+            expect($scope.Form.$dirty).toBe(true);
+            expect(element.hasClass('ng-dirty')).toBe(true);
+            expect($scope.Form.$valid).toBe(true);
+            expect(element.hasClass('ng-valid')).toBe(true);
+        });
+
+        it('Input null should be dirty and invalid (after Input)', function () {
+
+            $scope.$apply(function () {
+                $scope.required = 'Required';
+            });
+
+            $scope.$apply(function () {
+                $scope.required = '';
+            });
+
+            expect($scope.Form.$dirty).toBe(true);
+            expect(element.hasClass('ng-dirty')).toBe(true);
+            expect($scope.Form.$invalid).toBe(true);
+            expect(element.hasClass('ng-invalid')).toBe(true);
         });
     });
 });

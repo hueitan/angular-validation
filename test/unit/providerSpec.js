@@ -3,34 +3,41 @@
 /* jasmine specs for provider go here */
 
 describe('provider', function () {
-    beforeEach(module('validation.provider'));
 
-    describe('setup Expression', function () {
-        it('After setup, it should still be expression(Regex or Function)', inject(function ($validation) {
-            $validation.setExpression({ huei: /^huei$/ });
-            expect($validation.getExpression('huei')).toEqual(jasmine.any(RegExp));
-            $validation.setExpression({ huei: function () {
-                return true;
-            }});
-            expect($validation.getExpression('huei')).toEqual(jasmine.any(Function));
-        }));
+    var validationProvider;
+
+    beforeEach(function () {
+        return angular.module('myApp', ['validation'])
+            .config(function ($validationProvider) {
+                validationProvider = $validationProvider;
+            })
     });
+    beforeEach(module('myApp'));
 
-    describe('setup defaultMsg', function () {
-        it('After setup, it should still be Msg', inject(function ($validation) {
-            var obj = {
-                huei: {
-                    error: 'It\'s should be huei',
-                    success: 'It\'s huei'
-                }
-            };
+    it('set/get Expression (RegExp or Function)', inject(function () {
+        validationProvider.setExpression({ huei: /^huei$/ });
+        expect(validationProvider.getExpression('huei')).toEqual(jasmine.any(RegExp));
+        validationProvider.setExpression({ huei: function () {
+            return true;
+        }});
+        expect(validationProvider.getExpression('huei')).toEqual(jasmine.any(Function));
+    }));
 
-            $validation.setDefaultMsg(obj);
-
-            expect($validation.getDefaultMsg('huei')).toEqual(jasmine.any(Object));
-            for (var key in $validation.getDefaultMsg('huei')) {
-                expect($validation.getDefaultMsg('huei')[key]).toEqual(jasmine.any(String));
+    it('set/get DefaultMsg (String)', inject(function () {
+        var obj = {
+            huei: {
+                error: 'It\'s should be huei',
+                success: 'It\'s huei'
             }
-        }));
-    });
+        };
+
+        validationProvider.setDefaultMsg(obj);
+
+        expect(validationProvider.getDefaultMsg('huei')).toEqual(jasmine.any(Object));
+        for (var key in validationProvider.getDefaultMsg('huei')) {
+            expect(key).toMatch(/^error$|^success$/);
+            expect(validationProvider.getDefaultMsg('huei')[key]).toEqual(jasmine.any(String));
+        }
+    }));
+
 });
