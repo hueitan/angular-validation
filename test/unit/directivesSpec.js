@@ -27,7 +27,7 @@ describe('directives', function () {
             expect($scope.Form.$invalid).toBe(true);
         });
 
-        it('After Input should be dirty and valid', function () {
+        it('After Input should be dirty, valid, has class "validation-valid"', function () {
 
             $scope.$apply(function () {
                 $scope.required = 'Required';
@@ -37,9 +37,10 @@ describe('directives', function () {
             expect(element.hasClass('ng-dirty')).toBe(true);
             expect($scope.Form.$valid).toBe(true);
             expect(element.hasClass('ng-valid')).toBe(true);
+            expect(element.find('p').hasClass('validation-valid')).toBe(true);
         });
 
-        it('Input null should be dirty and invalid (after Input)', function () {
+        it('Input null should be dirty and invalid (after Input), has class "validation-invalid', function () {
 
             $scope.$apply(function () {
                 $scope.required = 'Required';
@@ -53,6 +54,7 @@ describe('directives', function () {
             expect(element.hasClass('ng-dirty')).toBe(true);
             expect($scope.Form.$invalid).toBe(true);
             expect(element.hasClass('ng-invalid')).toBe(true);
+            expect(element.find('p').hasClass('validation-invalid')).toBe(true);
         });
     });
 });

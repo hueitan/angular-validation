@@ -4,15 +4,31 @@
 
 describe('provider', function () {
 
-    var validationProvider;
+    var $rootScope,
+        $compile,
+        $scope,
+        element,
+        validationProvider,
+        myApp;
 
     beforeEach(function () {
-        return angular.module('myApp', ['validation'])
+        myApp = angular.module('myApp', ['validation'])
             .config(function ($validationProvider) {
                 validationProvider = $validationProvider;
-            })
+            });
+
+        return myApp;
     });
+
     beforeEach(module('myApp'));
+
+    beforeEach(inject(function ($injector) {
+        $rootScope = $injector.get('$rootScope');
+        $compile = $injector.get('$compile');
+        $scope = $rootScope.$new();
+
+        element = $compile('<form name="Form"><input type="text" ng-model="required" validator="required"></span></form>')($scope);
+    }));
 
     it('set/get Expression (RegExp or Function)', inject(function () {
         validationProvider.setExpression({ huei: /^huei$/ });
@@ -40,4 +56,31 @@ describe('provider', function () {
         }
     }));
 
+    it('set/get successHTML', inject(function () {
+        validationProvider.setSuccessHTML(function (msg) {
+            return '<p class="success">' + msg + '</p>';
+        });
+
+        expect(validationProvider.getSuccessHTML('true')).toEqual('<p class="success">true</p>');
+    }));
+
+    it('set/get errorHTML', inject(function () {
+        validationProvider.setErrorHTML(function (msg) {
+            return '<p class="error">' + msg + '</p>';
+        });
+
+        expect(validationProvider.getErrorHTML('error')).toEqual('<p class="error">error</p>');
+    }));
+
+    it('checkValid', inject(function () {
+        expect(validationProvider.checkValid($scope.Form)).toBe(false);
+        $scope.$apply(function () {
+            $scope.required = 'required';
+        });
+        expect(validationProvider.checkValid($scope.Form)).toBe(true);
+        $scope.$apply(function () {
+            $scope.required = '';
+        });
+        expect(validationProvider.checkValid($scope.Form)).toBe(false);
+    }));
 });
