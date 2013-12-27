@@ -7,6 +7,7 @@ describe('directives', function () {
     var $scope,
         $rootScope,
         $compile,
+        $timeout,
         element;
 
     beforeEach(module('validation.directive'));
@@ -16,6 +17,7 @@ describe('directives', function () {
         beforeEach(inject(function ($injector) {
             $rootScope = $injector.get('$rootScope');
             $compile = $injector.get('$compile');
+            $timeout = $injector.get('$timeout');
             $scope = $rootScope.$new();
 
             element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
@@ -58,9 +60,47 @@ describe('directives', function () {
         });
 
         it('no-validation-message', inject(function () {
+            var display;
+            // given no-validation-message="true"
             element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></span></form>')($scope);
-            var display = element.find('span').css('display');
+            $timeout.flush();
+            display = element.find('span').css('display');
             expect(display).toBe('none');
+
+            // given no-validation-message="false"
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="false"></span></form>')($scope);
+            $timeout.flush();
+            display = element.find('span').css('display');
+            expect(display).toBe('block');
+
+            // given no-validation-message="{{ noValidMessage }}" -> 'true'
+            $scope.noValidMessage = 'true';
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="{{ noValidMessage }}"></span></form>')($scope);
+            $timeout.flush();
+            display = element.find('span').css('display');
+            expect(display).toBe('none');
+
+            // given no-validation-message="{{ noValidMessage }}" -> true
+            $scope.$apply(function () {
+                $scope.noValidMessage = true;
+            });
+            display = element.find('span').css('display');
+            expect(display).toBe('none');
+
+            // given no-validation-message="{{ noValidMessage }}" -> 'false'
+            $scope.$apply(function () {
+                $scope.noValidMessage = 'false';
+            });
+            display = element.find('span').css('display');
+            expect(display).toBe('block');
+
+            // given no-validation-message="{{ noValidMessage }}" -> false
+            $scope.$apply(function () {
+                $scope.noValidMessage = false;
+            });
+            display = element.find('span').css('display');
+            expect(display).toBe('block');
+
         }))
     });
 });

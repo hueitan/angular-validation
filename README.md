@@ -57,6 +57,8 @@ Don't show the Valid Message `no-validation-message="true"`
 ```html
 <label>Number</label>
 <input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="true"/>
+<!-- or {{ your.Scope.Name }} -->
+<input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="{{ noValidationMessage }}"/>
 ```
 Add Valid Callback Function, `invalid-callback` & `valid-callback`
 
