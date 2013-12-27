@@ -68,14 +68,24 @@ describe('provider', function () {
     }));
 
     it('set/get successHTML', inject(function () {
+        validationProvider.setSuccessHTML('sethtml');
+        expect(validationProvider.getSuccessHTML('true')).not.toEqual('sethtml');
+        expect(validationProvider.getSuccessHTML('true')).toEqual('<p class="validation-valid">true</p>');
+
         validationProvider.setSuccessHTML(function (msg) {
             return '<p class="success">' + msg + '</p>';
         });
 
         expect(validationProvider.getSuccessHTML('true')).toEqual('<p class="success">true</p>');
+
+
     }));
 
     it('set/get errorHTML', inject(function () {
+        validationProvider.setErrorHTML('sethtml');
+        expect(validationProvider.getErrorHTML('false')).not.toEqual('sethtml');
+        expect(validationProvider.getErrorHTML('false')).toEqual('<p class="validation-invalid">false</p>');
+
         validationProvider.setErrorHTML(function (msg) {
             return '<p class="error">' + msg + '</p>';
         });
@@ -109,6 +119,7 @@ describe('provider', function () {
         var submitSpy = jasmine.createSpy('submitSpy'),
             successSpy = jasmine.createSpy('successSpy'),
             errorSpy = jasmine.createSpy('errorSpy'),
+            submitSpy2 = jasmine.createSpy('submitSpy2'),
             successSpy2 = jasmine.createSpy('successSpy2'),
             errorSpy2 = jasmine.createSpy('errorSpy2');
 
@@ -137,6 +148,10 @@ describe('provider', function () {
             $scope.required = '';
         });
 
+        $scope.$on('requiredsubmit', function () {
+            submitSpy2();
+        });
+
         validationProvider.validate($scope, $scope.Form)
             .success(function () {
                 successSpy2();
@@ -146,7 +161,8 @@ describe('provider', function () {
             });
 
         $timeout.flush();
-        expect(errorSpy2).toHaveBeenCalled();
+        expect(submitSpy2).toHaveBeenCalled();
         expect(successSpy2).not.toHaveBeenCalled();
+        expect(errorSpy2).toHaveBeenCalled();
     }));
 });
