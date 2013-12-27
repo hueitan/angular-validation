@@ -25,6 +25,6 @@
     "karma-coffee-preprocessor": "~0.1.1",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.11.12",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.7.2"
   }
 }
