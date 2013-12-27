@@ -158,6 +158,19 @@
                         </span>
                     </div>
                 </div>
+
+                <div class="row collapse">
+                    <div class="small-7 columns">
+                        <input type="text" validator="huei" name="canChange" huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange" placeholder="Type Wrong !!">
+                    </div>
+                    <div class="small-5 columns">
+                        <span class="postfix radius">
+                            <span ng-if="!form4.show"><a href="javascript:void(0);" ng-click="form4.changeMsg();form4.show = true;">Change Error Msg</a></span>
+                            <span ng-if="form4.show">Type Again <a href="https://github.com/huei90/angular-validation/blob/master/demo/demo.js#L45" target="_blank">#</a></span>
+                        </span>
+                    </div>
+                </div>
+
             </fieldset>
         </form>
     </div>

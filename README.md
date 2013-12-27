@@ -29,6 +29,9 @@ Add Valid Message (error, success) for validation `required` <br/>
        validator="required"
        required-error-message="Required"
        required-success-message="Good Required"/>
+       <!-- or you can try
+       required-error-message="{{ RequiredMsg }}"
+       -->
 ```
 
 Add Valid Message (error, success) for validation `email` <br/>

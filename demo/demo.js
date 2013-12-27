@@ -42,6 +42,13 @@ angular.module('myApp', ['validation'])
             }
         };
 
+        $scope.form4 = {
+            changeErrorMsg: 'This is the First Error Msg',
+            changeMsg: function () {
+                $scope.form4.changeErrorMsg = 'This is the Second Error Msg';
+            }
+        };
+
         // Callback method
         $scope.success = function (message) {
             alert('Success ' + message);
