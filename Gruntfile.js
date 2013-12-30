@@ -3,6 +3,8 @@ module.exports = function (grunt) {
     // Variable
     var ROOT_PATH = '.';
 
+    require('time-grunt')(grunt);
+
     // Grunt Config
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -65,13 +67,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-karma');
+    require( "load-grunt-tasks" )( grunt );
 
     // Register Task
     grunt.registerTask('dev', ['connect', 'watch']);
