@@ -43,7 +43,7 @@ Add Valid Message (error, success) for validation `email` <br/>
        name="email"
        ng-model="form.email"
        validator="email"
-       email-error-message="Error Number"
+       email-error-message="Error Email"
        email-success-message="Good Email"/>
 ```
 
