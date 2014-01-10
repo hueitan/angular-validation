@@ -11,6 +11,10 @@ DEMO
 -----
 http://huei90.github.io/angular-validation/
 
+License
+-----
+MIT
+
 Using angular-validation
 ---
 ```javascript
@@ -280,3 +284,9 @@ When you are done, test it on `http://localhost:8080`
 ```
 
 **Give me a PR** <small> Thanks for it </small>
+
+**Who does the exactly same job ?**
+
+1. https://github.com/kelp404/angular-validator
+2. https://github.com/nelsonomuto/angular-ui-form-validation
+3. (Waiting list..)
