@@ -1,9 +1,9 @@
 .validation-valid {
-    color: blue;
+    color: #0074D9;
 }
 
 .validation-invalid {
-    color: red;
+    color: #FF4136;
 }
 
 #github-link {
