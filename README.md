@@ -247,8 +247,9 @@ Developer <small>Adding a new validation</small>
 git clone https://github.com/huei90/angular-validation.git
 ```
 
-**Download the dependencies**
+**Install Grunt and Download dependencies**
 ```
+npm install -g grunt-cli
 npm install
 ```
 
