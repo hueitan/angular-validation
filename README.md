@@ -75,7 +75,7 @@ Add Valid Callback Function, `invalid-callback` & `valid-callback`
 ```
 
 Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
-`validationProvider.validate($scope, form).success(callback).error(callback)` use callback to continue your submit
+`validationProvider.validate(form).success(callback).error(callback)` use callback to continue your submit
 
 ```html
 <label>Watch method</label>
@@ -94,7 +94,7 @@ Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
     // ... validate method, it will check `checkValid(Form)`
     $scope.form = {
         submit: function () {
-            $validationProvider.validate($scope, form)
+            $validationProvider.validate(form)
                 .success(successCallback)
                 .error(errorCallback);
         }
@@ -187,7 +187,7 @@ Reset the specific Form. `reset()`
     $scope.form.checkValid = validationProvider.checkValid;
     // ... reset
     $scope.form.reset = function (form) {
-        validationProvider.reset($scope, form);
+        validationProvider.reset(form);
     };
 ```
 

@@ -110,7 +110,7 @@ describe('provider', function () {
         $scope.$on('requiredreset', function () {
             resetSpy();
         });
-        validationProvider.reset($scope, $scope.Form);
+        validationProvider.reset($scope.Form);
         expect(element.find('p')[0]).toBeUndefined();
         expect(resetSpy).toHaveBeenCalled();
     }));
@@ -130,7 +130,7 @@ describe('provider', function () {
         $scope.$apply(function () {
             $scope.required = 'Required';
         });
-        validationProvider.validate($scope, $scope.Form)
+        validationProvider.validate($scope.Form)
             .success(function () {
                 successSpy();
             })
@@ -152,7 +152,7 @@ describe('provider', function () {
             submitSpy2();
         });
 
-        validationProvider.validate($scope, $scope.Form)
+        validationProvider.validate($scope.Form)
             .success(function () {
                 successSpy2();
             })

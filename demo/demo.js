@@ -13,32 +13,32 @@ angular.module('myApp', ['validation'])
             requiredCallback: 'required',
             checkValid: $validationProvider.checkValid,
             submit: function (form) {
-                $validationProvider.validate($scope, form);
+                $validationProvider.validate(form);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form);
+                $validationProvider.reset(form);
             }
         };
 
         $scope.form2 = {
             checkValid: $validationProvider.checkValid,
             submit: function (form) {
-                $validationProvider.validate($scope, form);
+                $validationProvider.validate(form);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form);
+                $validationProvider.reset(form);
             }
         };
 
         $scope.form3 = {
             checkValid: $validationProvider.checkValid,
             submit: function (form) {
-                $validationProvider.validate($scope, form)
+                $validationProvider.validate(form)
                     .success($scope.success)
                     .error($scope.error);
             },
             reset: function (form) {
-                $validationProvider.reset($scope, form);
+                $validationProvider.reset(form);
             }
         };
 
