@@ -23,8 +23,9 @@ angular.module('yourApp', ['validation']);
 
 Writing your Code
 ====
-Add Valid Message (error, success) for validation `required` <br/>
+**Add Valid Message (error, success) for validation `required`** <br/>
 `required-error-message` and `required-success-message`
+
 ```html
 <label>Required</label>
 <input type="text"
@@ -38,7 +39,7 @@ Add Valid Message (error, success) for validation `required` <br/>
        -->
 ```
 
-Add Valid Message (error, success) for validation `email` <br/>
+**Add Valid Message (error, success) for validation `email`** <br/>
 `email-error-message` and `email-success-message`
 
 ```html
@@ -51,7 +52,7 @@ Add Valid Message (error, success) for validation `email` <br/>
        email-success-message="Good Email"/>
 ```
 
-Use Default Valid Message<br/>
+**Use Default Valid Message** <br/>
 *you don't need to give valid message*
 
 ```html
@@ -60,21 +61,23 @@ Use Default Valid Message<br/>
 ```
 
 <a name="no-validation-message"></a>
-Don't show the Valid Message `no-validation-message="true"`
+**Don't show the Valid Message `no-validation-message="true"`**
+
 ```html
 <label>Number</label>
 <input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="true"/>
 <!-- or {{ your.Scope.Name }} -->
 <input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="{{ noValidationMessage }}"/>
 ```
-Add Valid Callback Function, `invalid-callback` & `valid-callback`
+
+**Add Valid Callback Function, `invalid-callback` & `valid-callback`**
 
 ```html
 <label>Required (Invalid Callback alert)</label>
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
+**Select the validation method `watch` `blur` `submit`, default as `watch`** <br/>
 `validationProvider.validate(form).success(callback).error(callback)` use callback to continue your submit
 
 ```html
@@ -88,12 +91,12 @@ Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
 <label>Submit method</label>
 <form name="Form">
     <input type="text" name="number" ng-model="form.number" validator="number" valid-method="submit"/>
-    <button ng-click="form.submit()"></button>
+    <button ng-click="form.submit(Form)"></button>
 </form>
 <script>
     // ... validate method, it will check `checkValid(Form)`
     $scope.form = {
-        submit: function () {
+        submit: function (form) {
             $validationProvider.validate(form)
                 .success(successCallback)
                 .error(errorCallback);
@@ -103,8 +106,9 @@ Select the validation method `watch` `blur` `submit`, default as `watch`<br/>
 </script>
 ```
 
-Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function`
+**Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function`**
 <a name="custom-function-huei"></a>
+
 ```html
 <!-- View -->
 <label>IP address (Custom setup the new validator - RegExp)</label>
@@ -167,8 +171,8 @@ function validation($scope, $injector) {
 
 ```
 
-Check form whether valid, return `true` if valid. `checkValid()`<br/>
-Reset the specific Form. `reset()`
+**Check form whether valid, return `true` if valid. `checkValid()`** <br/>
+**Reset the specific Form. `reset()`**
 
 ```html
 <form name="Form">
@@ -191,11 +195,13 @@ Reset the specific Form. `reset()`
     };
 ```
 
-Set the valid/invalid message style CSS
+**Set the valid/invalid message style CSS**
+
 ```html
 <span><p class="validation-valid">Your valid message here<p></span>
 <span><p class="validation-invalid">Your invalid message here<p></span>
 ```
+
 ```css
 .validation-valid {
     <!-- valid style -->
@@ -206,9 +212,10 @@ Set the valid/invalid message style CSS
 }
 ```
 
-Custom the valid/invalid message style HTML in `.config()`,<br/>
+**Custom the valid/invalid message style HTML in `.config()`,** <br/>
 `setErrorHTML(func)` `setSuccessHTML(func)`, input should be a `function` and given `parameter` which is the valid/invalid message declared
 in `getDefaultMsg()`,and finally return the HTML code
+
 ```javascript
 // your angular
 .config(function ($validationProvider) {
