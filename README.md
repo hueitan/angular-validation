@@ -298,3 +298,11 @@ When you are done, test it on `http://localhost:8080`
 1. https://github.com/kelp404/angular-validator
 2. https://github.com/nelsonomuto/angular-ui-form-validation
 3. (Waiting list..)
+
+
+**Note**
+
+1. More Status 
+       https://github.com/angular/angular.js/issues/583#issuecomment-31277556
+2. ngForm module ideas 
+       https://docs.google.com/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit
