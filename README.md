@@ -5,7 +5,7 @@ angular-validation
 
 Requirement
 -----
-[AngularJS](http://angularjs.org) > 1.2.4
+[AngularJS](http://angularjs.org) > 1.2.0
 
 DEMO
 -----
