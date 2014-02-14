@@ -11,6 +11,8 @@ DEMO
 -----
 http://huei90.github.io/angular-validation/
 
+http://plnkr.co/edit/Nwk9cT (Bootstrap framework)
+
 License
 -----
 MIT
