@@ -244,7 +244,8 @@
         .directive('validator', ['$injector', function ($injector) {
 
             var $validationProvider = $injector.get('$validation'),
-                $q = $injector.get('$q');
+                $q = $injector.get('$q'),
+                $timeout = $injector.get('$timeout');
 
             /**
              * Do this function iff validation valid
@@ -346,31 +347,22 @@
                      */
                     element.after('<span></span>');
 
+                    /**
+                     * Set Validity to false when Initial
+                     */
+                    ctrl.$setValidity(ctrl.$name, false);
 
                     /**
-                     * Don't showup the validation Message
+                     * Reset the validation for specific form
                      */
-                    attrs.$observe('noValidationMessage', function (value) {
-                        var el = element.next();
-                        if (value == "true" || value == true) {
-                            el.css('display', 'none');
-                        } else if (value == "false" || value == false) {
-                            el.css('display', 'block');
-                        } else {
-                        }
+                    scope.$on(ctrl.$name + 'reset', function () {
+                        element.next().html('');
                     });
-
 
                     /**
                      * Check Every validator
                      */
                     validator.forEach(function (validation) {
-
-                        /**
-                         * Set Validity to false when Initial
-                         */
-                        ctrl.$setValidity(ctrl.$name, false);
-
 
                         /**
                          * Click submit form, check the validity when submit
@@ -379,15 +371,6 @@
                             var value = element[0].value;
                             checkValidation(scope, element, attrs, ctrl, validation, value);
                         });
-
-
-                        /**
-                         * Reset the validation for specific form
-                         */
-                        scope.$on(ctrl.$name + 'reset', function () {
-                            element.next().html('');
-                        });
-
 
                         /**
                          * Validate blur method
@@ -402,7 +385,6 @@
 
                             return;
                         }
-
 
                         /**
                          * Validate submit method
@@ -430,8 +412,23 @@
                             checkValidation(scope, element, attrs, ctrl, validation, value);
                         });
 
-
                     });
+
+                    $timeout(function () {
+                        /**
+                         * Don't showup the validation Message
+                         */
+                        attrs.$observe('noValidationMessage', function (value) {
+                            var el = element.next();
+                            if (value == "true" || value == true) {
+                                el.css('display', 'none');
+                            } else if (value == "false" || value == false) {
+                                el.css('display', 'block');
+                            } else {
+                            }
+                        });
+                    });
+
                 }
             };
         }]);
