@@ -219,7 +219,7 @@
              * $get
              * @returns {{setErrorHTML: *, getErrorHTML: Function, setSuccessHTML: *, getSuccessHTML: Function, setExpression: *, getExpression: Function, setDefaultMsg: *, getDefaultMsg: Function, checkValid: Function, validate: Function, reset: Function}}
              */
-            this.$get = function ($injector) {
+            this.$get = ['$injector', function ($injector) {
                 setup($injector);
                 return {
                     setErrorHTML: this.setErrorHTML,
@@ -234,7 +234,7 @@
                     validate: this.validate,
                     reset: this.reset
                 };
-            };
+            }];
 
         });
 }).call(this);
