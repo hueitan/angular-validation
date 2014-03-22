@@ -1,6 +1,6 @@
 {
     "name": "angular-validation",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "description": "Angular Validation",
     "homepage": "",
     "scripts": {
@@ -12,12 +12,12 @@
         "grunt-contrib-watch": "~0.5.3",
         "grunt-contrib-connect": "~0.7.0",
         "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-uglify": "~0.3.2",
+        "grunt-contrib-uglify": "~0.4.0",
         "grunt-contrib-copy": "~0.5.0",
         "grunt-contrib-clean": "~0.5.0",
         "time-grunt": "~0.2.5",
         "load-grunt-tasks": "~0.4.0",
-        "karma-chrome-launcher": "~0.1.1",
+        "karma-chrome-launcher": "~0.1.2",
         "karma-firefox-launcher": "~0.1.2",
         "karma-script-launcher": "~0.1.0",
         "karma-html2js-preprocessor": "~0.1.0",
@@ -26,7 +26,7 @@
         "karma-requirejs": "~0.2.0",
         "karma-coffee-preprocessor": "~0.1.1",
         "karma-phantomjs-launcher": "~0.1.1",
-        "karma": "~0.11.12",
+        "karma": "~0.11.14",
         "grunt-karma": "~0.7.2"
     }
 }
