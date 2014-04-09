@@ -1,12 +1,22 @@
 {
     "name": "angular-validation",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Angular Validation",
-    "homepage": "https://github.com/huei90/angular-validation",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/huei90/angular-validation"
+    },
+    "homepage": "http://huei90.github.io/angular-validation/",
     "scripts": {
         "test": "grunt karma"
     },
-    "dependencies": {},
+    "author": {
+        "name": "Huei Tan",
+        "email": "huei90@gmail.com"
+    },
+    "license": "MIT",
+    "keywords": ["angular", "validation", "angular validation", "validator", "client-side"],
+    "bugs": "https://github.com/huei90/angular-validation/issues",
     "devDependencies": {
         "grunt": "~0.4.4",
         "grunt-contrib-watch": "~0.6.1",

@@ -1,4 +1,4 @@
-angular-validation
+angular-validation 1.0.6
 =========================
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
 [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
@@ -16,6 +16,14 @@ http://plnkr.co/edit/Nwk9cT (Bootstrap framework)
 License
 -----
 MIT
+
+Install
+-----
+Install with npm
+
+```
+npm install angular-validation
+```
 
 Using angular-validation
 ---
