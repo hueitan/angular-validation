@@ -316,3 +316,19 @@ When you are done, test it on `http://localhost:8080`
        https://github.com/angular/angular.js/issues/583#issuecomment-31277556
 2. ngForm module ideas 
        https://docs.google.com/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit
+
+Q & A
+=====
+1. Can I validate the form when init ? [#10](https://github.com/huei90/angular-validation/issues/10)
+
+```html
+<form name="Form">
+    <input type="text" name="number" ng-model="form.number" validator="number"/>
+    <button id="button1111" ng-click="form.submit(Form)">Show</button>
+</form>
+```
+```javascript
+$timeout(function () { // call $timeout to make sure the Form Constructor is generated
+    $validationProvider.validate($scope.Form); // $scope.Form is html form name `Form Constructor`
+});
+```
