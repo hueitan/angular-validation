@@ -240,6 +240,18 @@ in `getDefaultMsg()`,and finally return the HTML code
 });
 ```
 
+**disable/enable show success/error message**<br/>
+`default: true`<br/>
+Easily disable success/error message
+
+```javascript
+// your angular
+.config(function ($validationProvider) {
+    $validationProvider.showSuccessMessage = false; // or true(default)
+    $validationProvider.showErrorMessage = false; // or true(default)
+});
+```
+
 Built-in validation <small>in angular-validation</small>
 ===
 
