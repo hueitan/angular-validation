@@ -143,6 +143,24 @@
 
 
             /**
+             * Whether show the validation success message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showSuccessMessage = false;
+             * @type {boolean}
+             */
+            this.showSuccessMessage = true;
+
+
+            /**
+             * Whether show the validation error message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showErrorMessage = false;
+             * @type {boolean}
+             */
+            this.showErrorMessage = true;
+
+
+            /**
              * Check form valid, return true
              * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
              * @param form
@@ -227,6 +245,8 @@
                     getExpression: this.getExpression,
                     setDefaultMsg: this.setDefaultMsg,
                     getDefaultMsg: this.getDefaultMsg,
+                    showSuccessMessage: this.showSuccessMessage,
+                    showErrorMessage: this.showErrorMessage,
                     checkValid: this.checkValid,
                     validate: this.validate,
                     reset: this.reset

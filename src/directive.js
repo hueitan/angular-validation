@@ -16,7 +16,11 @@
              * @returns {}
              */
             var validFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                if ($validationProvider.showSuccessMessage) {
+                    element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                } else {
+                    element.next().html('');
+                }
                 ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
             };
@@ -32,7 +36,11 @@
              * @returns {}
              */
             var invalidFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                if ($validationProvider.showErrorMessage) {
+                    element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                } else {
+                    element.next().html('');
+                }
                 ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
             };

@@ -146,6 +146,24 @@
 
 
             /**
+             * Whether show the validation success message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showSuccessMessage = false;
+             * @type {boolean}
+             */
+            this.showSuccessMessage = true;
+
+
+            /**
+             * Whether show the validation error message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showErrorMessage = false;
+             * @type {boolean}
+             */
+            this.showErrorMessage = true;
+
+
+            /**
              * Check form valid, return true
              * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
              * @param form
@@ -230,6 +248,8 @@
                     getExpression: this.getExpression,
                     setDefaultMsg: this.setDefaultMsg,
                     getDefaultMsg: this.getDefaultMsg,
+                    showSuccessMessage: this.showSuccessMessage,
+                    showErrorMessage: this.showErrorMessage,
                     checkValid: this.checkValid,
                     validate: this.validate,
                     reset: this.reset
@@ -257,7 +277,11 @@
              * @returns {}
              */
             var validFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                if ($validationProvider.showSuccessMessage) {
+                    element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                } else {
+                    element.next().html('');
+                }
                 ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
             };
@@ -273,7 +297,11 @@
              * @returns {}
              */
             var invalidFunc = function (element, validMessage, validation, callback, ctrl) {
-                element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                if ($validationProvider.showErrorMessage) {
+                    element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                } else {
+                    element.next().html('');
+                }
                 ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
             };
