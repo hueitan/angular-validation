@@ -123,6 +123,10 @@
                      * Reset the validation for specific form
                      */
                     scope.$on(ctrl.$name + 'reset', function () {
+                        ctrl.$setViewValue(null);
+                        ctrl.$setPristine();
+                        ctrl.$setValidity(ctrl.$name, false);
+                        ctrl.$render();
                         element.next().html('');
                     });
 

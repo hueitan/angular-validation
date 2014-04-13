@@ -220,10 +220,6 @@
             this.reset = function (form) {
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
-                        form[k].$setViewValue(null);
-                        form[k].$setPristine();
-                        form[k].$setValidity(form[k].$name, false);
-                        form[k].$render();
                         $scope.$broadcast(k + 'reset');
                     }
                 }
