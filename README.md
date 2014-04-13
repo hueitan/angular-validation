@@ -87,7 +87,7 @@ Writing your Code
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-**Select the validation method `watch` `blur` `submit`, default as `watch`** <br/>
+**Select the validation method `watch` `blur` `submit` `submit-only`, default as `watch`** <br/>
 `validationProvider.validate(form).success(callback).error(callback)` use callback to continue your submit
 
 ```html
@@ -103,6 +103,13 @@ Writing your Code
     <input type="text" name="number" ng-model="form.number" validator="number" valid-method="submit"/>
     <button ng-click="form.submit(Form)"></button>
 </form>
+
+<label>Submit Only method</label>
+<form name="Form">
+    <input type="text" name="number" ng-model="form.number" validator="number" valid-method="submit-only"/>
+    <button ng-click="form.submit(Form)"></button>
+</form>
+
 <script>
     // ... validate method, it will check `checkValid(Form)`
     $scope.form = {

@@ -49,6 +49,16 @@ angular.module('myApp', ['validation'])
             }
         };
 
+        $scope.form5 = {
+            checkValid: $validationProvider.checkValid,
+            submit: function (form) {
+                $validationProvider.validate(form);
+            },
+            reset: function (form) {
+                $validationProvider.reset(form);
+            }
+        };
+
         // Callback method
         $scope.success = function (message) {
             alert('Success ' + message);

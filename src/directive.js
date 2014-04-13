@@ -100,6 +100,17 @@
                     invalidCallback: '&'
                 },
                 link: function (scope, element, attrs, ctrl) {
+
+                    /**
+                     * watch
+                     * @type {watch}
+                     *
+                     * Use to collect scope.$watch method
+                     *
+                     * use watch() to destroy the $watch method
+                     */
+                    var watch = function () {};
+
                     /**
                      * validator
                      * @type {*|Array}
@@ -107,7 +118,6 @@
                      * Convert user input String to Array
                      */
                     var validator = attrs.validator.split(',');
-
 
                     /**
                      * Valid/Invalid Message
@@ -123,6 +133,15 @@
                      * Reset the validation for specific form
                      */
                     scope.$on(ctrl.$name + 'reset', function () {
+
+                        /**
+                         * clear scope.$watch here
+                         * when reset status
+                         * clear the $watch method to prevent
+                         * $watch again while reset the form
+                         */
+                        watch();
+
                         ctrl.$setViewValue(null);
                         ctrl.$setPristine();
                         ctrl.$setValidity(ctrl.$name, false);
@@ -140,6 +159,25 @@
                          */
                         scope.$on(ctrl.$name + 'submit', function () {
                             var value = element[0].value;
+
+                            if (attrs.validMethod === 'submit') {
+
+                                watch(); // clear previous scope.$watch
+                                watch = scope.$watch('model', function (value) {
+
+                                    // scope.$watch will translate '' to undefined
+                                    // undefined will pass the required submit /^.+/
+                                    // cause some error in this validation
+                                    if (value === undefined) {
+                                        value = '';
+                                    }
+
+                                    checkValidation(scope, element, attrs, ctrl, validation, value);
+                                });
+
+                                return;
+                            }
+
                             checkValidation(scope, element, attrs, ctrl, validation, value);
                         });
 
@@ -158,9 +196,9 @@
                         }
 
                         /**
-                         * Validate submit method
+                         * Validate submit & submit-only method
                          */
-                        if (attrs.validMethod === 'submit') {
+                        if (attrs.validMethod === 'submit' || attrs.validMethod === 'submit-only') {
                             return;
                         }
 

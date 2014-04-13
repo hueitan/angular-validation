@@ -12,13 +12,15 @@
 <div class="row">
     <div class="small-12 medium-12 large-12 large-centered columns">
         <h1>Angular Validation.
+
             <small>
                 <a href="#form1">Watch</a>.
                 <a href="#form2">Blur</a>.
                 <a href="#form3">Submit</a>.
-                method.
+                <a href="#form5">Submit-only</a>.
+                <!--method.-->
                 <a href="#form4">Additions</a>.
-                validation
+                <!--validation-->
             </small>
         </h1>
     </div>
@@ -172,6 +174,27 @@
                 </div>
 
             </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 medium-12 large-6 columns">
+        <form name="Form5" id="form5">
+            <fieldset>
+                <legend>Form ($submit-only)</legend>
+                <label>Required</label>
+                <input type="text" name="emailSubmitOnly" ng-model="form5.required" validator="required" valid-method="submit-only"/>
+                <label>Email</label>
+                <input type="text" name="emailSubmitOnly" ng-model="form5.email" validator="email" valid-method="submit-only"/>
+            </fieldset>
+
+            <ul class="button-group">
+                <li><button class="button" ng-click="form5.submit(Form5)">Submit</button></li>
+                <li><button class="button alert" ng-click="form5.reset(Form5)">Reset</button></li>
+                <li><button class="button secondary" ng-disabled="!form5.checkValid(Form5)">checkValid = {{ form2.checkValid(Form2) }}</button></li>
+            </ul>
+            <!-- <pre>{{ form | json }}</pre> -->
         </form>
     </div>
 </div>
