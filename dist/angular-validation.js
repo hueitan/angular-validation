@@ -399,7 +399,7 @@
                          */
                         watch();
 
-                        ctrl.$setViewValue(null);
+                        ctrl.$setViewValue('');
                         ctrl.$setPristine();
                         ctrl.$setValidity(ctrl.$name, false);
                         ctrl.$render();
@@ -423,9 +423,9 @@
                                 watch = scope.$watch('model', function (value) {
 
                                     // scope.$watch will translate '' to undefined
-                                    // undefined will pass the required submit /^.+/
+                                    // undefined/null will pass the required submit /^.+/
                                     // cause some error in this validation
-                                    if (value === undefined) {
+                                    if (value === undefined || value === null) {
                                         value = '';
                                     }
 
