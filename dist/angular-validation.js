@@ -417,10 +417,16 @@
                         scope.$on(ctrl.$name + 'submit', function () {
                             var value = element[0].value;
 
-                            if (attrs.validMethod === 'submit') {
+                            checkValidation(scope, element, attrs, ctrl, validation, value);
 
+                            if (attrs.validMethod === 'submit') {
                                 watch(); // clear previous scope.$watch
-                                watch = scope.$watch('model', function (value) {
+                                watch = scope.$watch('model', function (value, oldValue) {
+
+                                    // don't watch when init
+                                    if (value === oldValue) {
+                                        return;
+                                    }
 
                                     // scope.$watch will translate '' to undefined
                                     // undefined/null will pass the required submit /^.+/
@@ -432,10 +438,8 @@
                                     checkValidation(scope, element, attrs, ctrl, validation, value);
                                 });
 
-                                return;
                             }
 
-                            checkValidation(scope, element, attrs, ctrl, validation, value);
                         });
 
                         /**
