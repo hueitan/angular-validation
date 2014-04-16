@@ -123,7 +123,7 @@ Writing your Code
 </script>
 ```
 
-**Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function`**
+**Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
 <a name="custom-function-huei"></a>
 
 ```html
@@ -136,56 +136,48 @@ Writing your Code
 ```
 
 ```javascript
-// Controller
-
 // your module
-angular.module('yourApp', ['validation']);
+angular.module('yourApp', ['validation'])
+    .config(['$validationProvider', function ($validationProvider) {
+        // Setup `ip` validation
+        var expression = {
+            ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+        };
 
-// Now you can use validationProvider in your Angular Controller
-function validation($scope, $injector) {
+        var validMsg = {
+            ip: {
+                error: 'This isn\'t ip address',
+                success: 'It\'s ip'
+            }
+        };
 
-    var validationProvider = $injector.get('validationProvider'); // inject validationProvider
+        validationProvider.setExpression(expression); // set expression
+        validationProvider.setDefaultMsg(validMsg); // set valid message
 
-    // Setup `ip` validation
-    var expression = {
-        ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-    };
+        // Setup `huei` validation
+        validationProvider.setExpression({
 
-    var validMsg = {
-        ip: {
-            error: 'This isn\'t ip address',
-            success: 'It\'s ip'
-        }
-    };
+            /**
+            * @param value , user input
+            * @returns {boolean} true iff valid
+            */
+            huei: function (value) {
+                return value === 'Huei Tan';
+                // or you can do
+                return $q.all([obj]).then(function () {
+                // ...
+                    return true;
+                })
+            }
+        });
 
-    validationProvider.setExpression(expression); // set expression
-    validationProvider.setDefaultMsg(validMsg); // set valid message
-
-    // Setup `huei` validation
-    validationProvider.setExpression({
-        /**
-        * @param value , user input
-        * @returns {boolean} true iff valid
-        */
-        huei: function (value) {
-            return value === 'Huei Tan';
-            // or you can do
-            return $q.all([obj]).then(function () {
-            // ...
-            return true;
-            })
-        }
-    });
-
-    validationProvider.setDefaultMsg({
-        huei: {
-            error: 'This should be Huei Tan',
-            success: 'Thanks!'
-        }
-    });
-
-}
-
+        validationProvider.setDefaultMsg({
+            huei: {
+                error: 'This should be Huei Tan',
+                success: 'Thanks!'
+            }
+        });
+    }]);
 ```
 
 **Check form whether valid, return `true` if valid. `checkValid()`** <br/>
@@ -235,7 +227,7 @@ in `getDefaultMsg()`,and finally return the HTML code
 
 ```javascript
 // your angular
-.config(function ($validationProvider) {
+.config(['$validationProvider', function ($validationProvider) {
     $validationProvider.setErrorHTML(function (msg) {
         // remember to return your HTML
         // eg: return '<p class="invalid">' + msg + '</p>';
@@ -244,7 +236,7 @@ in `getDefaultMsg()`,and finally return the HTML code
     $validationProvider.setSuccessHTML(function (msg) {
         // eg: return '<p class="valid">' + msg + '</p>';
     });
-});
+}]);
 ```
 
 **disable/enable show success/error message**<br/>
@@ -253,10 +245,10 @@ Easily disable success/error message
 
 ```javascript
 // your angular
-.config(function ($validationProvider) {
+.config(['$validationProvider', function ($validationProvider) {
     $validationProvider.showSuccessMessage = false; // or true(default)
     $validationProvider.showErrorMessage = false; // or true(default)
-});
+}]);
 ```
 
 Built-in validation <small>in angular-validation</small>
