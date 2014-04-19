@@ -181,9 +181,11 @@
              */
             this.validate = function (form) {
 
+                var idx = 0;
+
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'submit');
+                        $scope.$broadcast(k + 'submit', idx++);
                     }
                 }
 

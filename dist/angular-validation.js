@@ -184,9 +184,11 @@
              */
             this.validate = function (form) {
 
+                var idx = 0;
+
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'submit');
+                        $scope.$broadcast(k + 'submit', idx++);
                     }
                 }
 
@@ -280,6 +282,8 @@
                 }
                 ctrl.$setValidity(ctrl.$name, true);
                 if (callback) callback();
+
+                return true;
             };
 
 
@@ -300,7 +304,17 @@
                 }
                 ctrl.$setValidity(ctrl.$name, false);
                 if (callback) callback();
+
+                return false;
             };
+
+
+            /**
+             * If var is true, focus element when validate end
+             * @type {boolean}
+             ***private variable
+             */
+            var isFocusElement = false;
 
 
             /**
@@ -319,10 +333,10 @@
                     expressionType = $validationProvider.getExpression(validation).constructor,
                     valid = {
                         success: function () {
-                            validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
+                            return validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
                         },
                         error: function () {
-                            invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                            return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
                         }
                     };
 
@@ -399,6 +413,7 @@
                          */
                         watch();
 
+                        isFocusElement = false;
                         ctrl.$setViewValue('');
                         ctrl.$setPristine();
                         ctrl.$setValidity(ctrl.$name, false);
@@ -414,10 +429,15 @@
                         /**
                          * Click submit form, check the validity when submit
                          */
-                        scope.$on(ctrl.$name + 'submit', function () {
-                            var value = element[0].value;
+                        scope.$on(ctrl.$name + 'submit', function (event, index) {
+                            var value = element[0].value,
+                                isValid = false;
 
-                            checkValidation(scope, element, attrs, ctrl, validation, value);
+                            if (index == 0) {
+                                isFocusElement = false;
+                            }
+
+                            isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
 
                             if (attrs.validMethod === 'submit') {
                                 watch(); // clear previous scope.$watch
@@ -435,11 +455,16 @@
                                         value = '';
                                     }
 
-                                    checkValidation(scope, element, attrs, ctrl, validation, value);
+                                    isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
                                 });
 
                             }
 
+                            // Focus first input element when submit error #11
+                            if (!isFocusElement && !isValid) {
+                                isFocusElement = true;
+                                element[0].focus();
+                            }
                         });
 
                         /**
@@ -448,9 +473,7 @@
                         if (attrs.validMethod === 'blur') {
                             element.bind('blur', function () {
                                 var value = element[0].value;
-                                scope.$apply(function () {
-                                    checkValidation(scope, element, attrs, ctrl, validation, value);
-                                });
+                                checkValidation(scope, element, attrs, ctrl, validation, value);
                             });
 
                             return;
