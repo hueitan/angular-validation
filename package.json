@@ -1,6 +1,6 @@
 {
     "name": "angular-validation",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Angular Validation",
     "repository": {
         "type": "git",
@@ -15,7 +15,7 @@
         "email": "huei90@gmail.com"
     },
     "license": "MIT",
-    "keywords": ["angular", "validation", "angular validation", "validator", "client-side"],
+    "keywords": ["angular", "angularjs", "validation", "angular validation", "validator", "client-side"],
     "bugs": "https://github.com/huei90/angular-validation/issues",
     "devDependencies": {
         "grunt": "~0.4.4",

@@ -1,4 +1,4 @@
-angular-validation 1.1.0
+angular-validation 1.1.1
 =========================
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
 [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
@@ -327,6 +327,10 @@ When you are done, test it on `http://localhost:8080`
        https://github.com/angular/angular.js/issues/583#issuecomment-31277556
 2. ngForm module ideas 
        https://docs.google.com/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit
+
+CHANGELOG
+=====
+see [release](https://github.com/huei90/angular-validation/releases)
 
 Q & A
 =====

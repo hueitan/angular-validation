@@ -1,13 +1,13 @@
 {
   "name": "angular-validation",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/huei90/angular-validation",
   "authors": [
     "huei90"
   ],
   "description": "Customizing Form Valid Message in AngularJS",
   "main": "dist/angular-validation.js",
-  "keywords": ["angular", "validation", "angular validation", "validator", "client-side"],
+  "keywords": ["angular", "angularjs", "validation", "angular validation", "validator", "client-side"],
   "license": "MIT",
   "ignore": [
     "**/.*",
