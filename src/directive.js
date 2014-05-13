@@ -74,10 +74,10 @@
                     expressionType = $validationProvider.getExpression(validation).constructor,
                     valid = {
                         success: function () {
-                            return validFunc(element, attrs[successMessage], validation, scope.validCallback(), ctrl);
+                            return validFunc(element, attrs[successMessage], validation, scope.validCallback, ctrl);
                         },
                         error: function () {
-                            return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback(), ctrl);
+                            return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback, ctrl);
                         }
                     };
 
