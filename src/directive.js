@@ -214,7 +214,9 @@
                         if (attrs.validMethod === 'blur') {
                             element.bind('blur', function () {
                                 var value = element[0].value;
-                                checkValidation(scope, element, attrs, ctrl, validation, value);
+                                scope.$apply(function() {
+                                    checkValidation(scope, element, attrs, ctrl, validation, value);
+                                });
                             });
 
                             return;
