@@ -52,6 +52,24 @@ module.exports = function (grunt) {
                 }
             }
         },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src: ['index.html', 'demo/**', 'dist/angular-validation.js']
+                },
+                options: {
+                    host: "localhost",
+                    ports: {
+                        min: 8000,
+                        max: 8100
+                    },
+                    server: {
+                        baseDir: '.'
+                    },
+                    watchTask: true
+                }
+            }
+        },
         watch: {
             files: ['src/*.js'],
             tasks: ['build'],
@@ -73,7 +91,7 @@ module.exports = function (grunt) {
     require( "load-grunt-tasks" )( grunt );
 
     // Register Task
-    grunt.registerTask('dev', ['connect', 'watch']);
+    grunt.registerTask('dev', ['browserSync', 'watch']);
     grunt.registerTask('build', ['clean', 'concat', 'uglify'])
 
 };
