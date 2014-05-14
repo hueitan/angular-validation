@@ -1,4 +1,4 @@
-angular-validation 1.1.1
+angular-validation 1.1.2
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
@@ -336,7 +336,7 @@ see [release](https://github.com/huei90/angular-validation/releases)
 
 Q & A
 =====
-Can I validate the form when init ? [#10](https://github.com/huei90/angular-validation/issues/10)
+###Can I validate the form when init ? [#10](https://github.com/huei90/angular-validation/issues/10)###
 
 ```html
 <form name="Form">
@@ -346,11 +346,11 @@ Can I validate the form when init ? [#10](https://github.com/huei90/angular-vali
 ```
 ```javascript
 $timeout(function () { // call $timeout to make sure the Form Constructor is generated
-    $validationProvider.validate($scope.Form); // $scope.Form is html form name `Form Constructor`
+$validationProvider.validate($scope.Form); // $scope.Form is html form name `Form Constructor`
 });
 ```
 
-What's the differentiate between validator-method `submit` and `submit-only`[#4](https://github.com/huei90/angular-validation/issues/4)
+###What's the differentiate between validator-method `submit` and `submit-only`[#4](https://github.com/huei90/angular-validation/issues/4)###
 
-`submit` : when user click submit, then start watching using `watch` to validate
+`submit` : when user click submit, then start watching using `watch` to validate<br/>
 `submit-only` : when user click `submit`, doesn't validate through `watch` until `submit` button is clicked.

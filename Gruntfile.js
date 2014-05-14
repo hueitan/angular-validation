@@ -42,16 +42,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        connect: {
-            server: {
-                options: {
-                    protocol: 'http',
-                    hostname: '*',
-                    port: 8080,
-                    base: ROOT_PATH
-                }
-            }
-        },
         browserSync: {
             dev: {
                 bsFiles: {
