@@ -329,6 +329,8 @@ When you are done, test it on `http://localhost:8080`
        https://github.com/angular/angular.js/issues/583#issuecomment-31277556
 2. ngForm module ideas 
        https://docs.google.com/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit
+3. form-angular
+       http://www.forms-angular.org/
 
 CHANGELOG
 =====
