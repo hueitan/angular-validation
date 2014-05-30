@@ -7,6 +7,7 @@
                 $scope,
                 $http,
                 $q,
+                $timeout,
                 _this = this;
 
 
@@ -19,6 +20,7 @@
                 $scope = $injector.get('$rootScope');
                 $http = $injector.get('$http');
                 $q = $injector.get('$q');
+                $timeout = $injector.get('$timeout');
             };
 
 
@@ -204,12 +206,14 @@
                     return deferred.promise;
                 };
 
-                if (_this.checkValid(form)) {
-                    deferred.resolve('success');
-                }
-                else {
-                    deferred.reject('error');
-                }
+                $timeout(function () {
+                    if (_this.checkValid(form)) {
+                        deferred.resolve('success');
+                    }
+                    else {
+                        deferred.reject('error');
+                    }
+                });
 
                 return deferred.promise;
             };
