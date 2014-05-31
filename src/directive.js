@@ -83,7 +83,7 @@
 
                 // Check with Function
                 if (expressionType === Function) {
-                    return $q.all([$validationProvider.getExpression(validation)(value)])
+                    return $q.all([$validationProvider.getExpression(validation)(value, scope, element, attrs)])
                         .then(function (data) {
                             if (data && data.length > 0 && data[0]) {
                                 return valid.success();

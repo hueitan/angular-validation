@@ -48,11 +48,7 @@
              * Additions validation
              */
             $validationProvider.setExpression({
-                /**
-                 * @param value , user input
-                 * @returns {boolean} true iff valid
-                 */
-                huei: function (value) {
+                huei: function (value, scope, element, attrs) {
                     return value === 'Huei Tan';
                 }
             });
@@ -61,6 +57,24 @@
                 huei: {
                     error: 'This should be Huei Tan',
                     success: 'Thanks!'
+                }
+            });
+
+            /**
+             * Range Validation
+             */
+            $validationProvider.setExpression({
+                range: function (value, scope, element, attrs) {
+                    if (value >= parseInt(attrs.min) && value <= parseInt(attrs.max)) {
+                        return value;
+                    }
+                }
+            });
+
+            $validationProvider.setDefaultMsg({
+                range: {
+                    error: 'Number should between 5 ~ 10',
+                    success: 'good'
                 }
             });
         }])

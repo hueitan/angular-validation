@@ -158,12 +158,7 @@ angular.module('yourApp', ['validation'])
 
         // Setup `huei` validation
         validationProvider.setExpression({
-
-            /**
-            * @param value , user input
-            * @returns {boolean} true iff valid
-            */
-            huei: function (value) {
+            huei: function (value, scope, element, attrs) {
                 return value === 'Huei Tan';
                 // or you can do
                 return $q.all([obj]).then(function () {
