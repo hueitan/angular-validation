@@ -33,8 +33,21 @@
                 required: /^.+$/,
                 url: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
                 email: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
-                number: /^\d+$/
+                text: /.*/,
+                number: /^[-]?\d+(\.\d+)?$/,
+                float: /[+-]?([0-9]+\.([0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?/,
+                int: /^$|^\d+$/,
+                range: function (value, attrs) {
+                    if (attrs.min && attrs.max) {
+                        if (value >= attrs.min && value <= attrs.max) {
+                            return true;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
             };
+
 
 
             /**
@@ -57,6 +70,22 @@
                 number: {
                     error: 'This should be Number',
                     success: 'It\'s Number'
+                },
+                float: {
+                    error: 'Please enter a valid float.',
+                    success: ''
+                },
+                text: {
+                    error: 'Please enter valid text.',
+                    success: ''
+                },
+                int: {
+                    error: 'Please enter a valid integer.',
+                    success: ''
+                },
+                range: {
+                    error: 'please enter number within range',
+                    success: 'verified'
                 }
             };
 
@@ -304,7 +333,7 @@
 
                 // Check with Function
                 if (expressionType === Function) {
-                    return $q.all([$validationProvider.getExpression(validation)(value)])
+                    return $q.all([$validationProvider.getExpression(validation)(value, attrs)])
                         .then(function (data) {
                             if (data && data.length > 0 && data[0]) {
                                 return valid.success();
