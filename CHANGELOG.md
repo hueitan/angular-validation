@@ -3,7 +3,7 @@
 **Fix**
 
 [964c577](https://github.com/huei90/angular-validation/commit/964c5779634f70aa1013c5c415beb9b6041678e6) Fix callback reference issue
-[ea4fc94](https://github.com/huei90/angular-validation/commit/ea4fc9413546442dfda73df1d76b1a8e6a9ccd98) Add scope apply in blur callback
+<br/>[ea4fc94](https://github.com/huei90/angular-validation/commit/ea4fc9413546442dfda73df1d76b1a8e6a9ccd98) Add scope apply in blur callback
 
 **Tools**
 
@@ -22,7 +22,7 @@
 **Fix**
 
 [a08264c](https://github.com/huei90/angular-validation/commit/a08264c91bfd2a6bde676d9cba0a4ce3c96a5099) Fix given value '' while reset phase
-[8e594cf](https://github.com/huei90/angular-validation/commit/8e594cf33d573898346a468cfcbf8f9bf7e8d5ea) Fix scope.$on('submit') order
+<br/>[8e594cf](https://github.com/huei90/angular-validation/commit/8e594cf33d573898346a468cfcbf8f9bf7e8d5ea) Fix scope.$on('submit') order
 
 **Documentation**
 
@@ -31,14 +31,14 @@
 **lib**
 
 upgrade angular.1.2.16
-upgrade angular.1.3.0-beta.5
+<br/>upgrade angular.1.3.0-beta.5
 
 13 Apr 2014 v1.1.0
 ===
 **New features**
 
 [09894d8](https://github.com/huei90/angular-validation/commit/09894d8bc6a3379cc2741e456d7809a040d1ca49) Allow disable showing success message [#6](https://github.com/huei90/angular-validation/issues/6)
-[ad0f55d](https://github.com/huei90/angular-validation/commit/ad0f55d69629fbec4e550277c9f5e911626c623b) Differentiate submit submit-only method [#4](https://github.com/huei90/angular-validation/issues/4)
+<br/>[ad0f55d](https://github.com/huei90/angular-validation/commit/ad0f55d69629fbec4e550277c9f5e911626c623b) Differentiate submit submit-only method [#4](https://github.com/huei90/angular-validation/issues/4)
 
 **Fix**
 
