@@ -15,9 +15,20 @@
              * @param ctrl
              * @returns {}
              */
-            var validFunc = function (element, validMessage, validation, callback, ctrl) {
+            var validFunc = function (element, validMessage, validation, callback, ctrl, attrs) {
+                var messageType;
+
                 if ($validationProvider.showSuccessMessage) {
-                    element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                    if (validMessage) {
+                        element.next().html($validationProvider.getSuccessHTML(validMessage));
+                    } else {
+                        messageType = $validationProvider.getDefaultMsg(validation).success.constructor;
+                        if (messageType === Function) {
+                            element.next().html($validationProvider.getSuccessHTML($validationProvider.getDefaultMsg(validation).success(attrs)));
+                        } else if (messageType === String) {
+                            element.next().html($validationProvider.getSuccessHTML($validationProvider.getDefaultMsg(validation).success));
+                        }
+                    }
                 } else {
                     element.next().html('');
                 }
@@ -37,9 +48,20 @@
              * @param ctrl
              * @returns {}
              */
-            var invalidFunc = function (element, validMessage, validation, callback, ctrl) {
+            var invalidFunc = function (element, validMessage, validation, callback, ctrl, attrs) {
+                var messageType;
+
                 if ($validationProvider.showErrorMessage) {
-                    element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                    if (validMessage) {
+                        element.next().html($validationProvider.getErrorHTML(validMessage));
+                    } else {
+                        messageType = $validationProvider.getDefaultMsg(validation).error.constructor;
+                        if (messageType === Function) {
+                            element.next().html($validationProvider.getErrorHTML($validationProvider.getDefaultMsg(validation).error(attrs)));
+                        } else if (messageType === String) {
+                            element.next().html($validationProvider.getErrorHTML($validationProvider.getDefaultMsg(validation).error));
+                        }
+                    }
                 } else {
                     element.next().html('');
                 }
@@ -74,10 +96,10 @@
                     expressionType = $validationProvider.getExpression(validation).constructor,
                     valid = {
                         success: function () {
-                            return validFunc(element, attrs[successMessage], validation, scope.validCallback, ctrl);
+                            return validFunc(element, attrs[successMessage], validation, scope.validCallback, ctrl, attrs);
                         },
                         error: function () {
-                            return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback, ctrl);
+                            return invalidFunc(element,  attrs[errorMessage], validation, scope.invalidCallback, ctrl, attrs);
                         }
                     };
 
@@ -137,11 +159,6 @@
                     element.after('<span></span>');
 
                     /**
-                     * Set Validity to false when Initial
-                     */
-                    ctrl.$setValidity(ctrl.$name, false);
-
-                    /**
                      * Reset the validation for specific form
                      */
                     scope.$on(ctrl.$name + 'reset', function () {
@@ -157,7 +174,6 @@
                         isFocusElement = false;
                         ctrl.$setViewValue('');
                         ctrl.$setPristine();
-                        ctrl.$setValidity(ctrl.$name, false);
                         ctrl.$render();
                         element.next().html('');
                     });
