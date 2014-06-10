@@ -73,7 +73,9 @@
 
             $validationProvider.setDefaultMsg({
                 range: {
-                    error: 'Number should between 5 ~ 10',
+                    error: function(attrs) {
+                      return 'Number should between ' + attrs.min + ' ~ ' + attrs.max;
+                    },
                     success: 'good'
                 }
             });
