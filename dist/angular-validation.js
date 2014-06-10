@@ -400,11 +400,6 @@
                     element.after('<span></span>');
 
                     /**
-                     * Set Validity to false when Initial
-                     */
-                    ctrl.$setValidity(ctrl.$name, false);
-
-                    /**
                      * Reset the validation for specific form
                      */
                     scope.$on(ctrl.$name + 'reset', function () {
@@ -420,7 +415,6 @@
                         isFocusElement = false;
                         ctrl.$setViewValue('');
                         ctrl.$setPristine();
-                        ctrl.$setValidity(ctrl.$name, false);
                         ctrl.$render();
                         element.next().html('');
                     });
