@@ -5,6 +5,10 @@ angular-validation 1.1.2
 [![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
 [![Gitter chat](https://badges.gitter.im/huei90/angular-validation.png)](https://gitter.im/huei90/angular-validation)
 
+<u>Client-side Validation</u> is easy. <br/>
+That's why **Angular Validation** is here!<br/>
+*Don't let Client-side Validation Crash your project.*<br/>
+
 Requirement
 -----
 [AngularJS](http://angularjs.org) > 1.2.0, 1.3.0-beta

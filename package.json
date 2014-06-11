@@ -1,7 +1,7 @@
 {
     "name": "angular-validation",
     "version": "1.1.2",
-    "description": "Angular Validation",
+    "description": "Client-side Validation for AngularJS",
     "repository": {
         "type": "git",
         "url": "https://github.com/huei90/angular-validation"
