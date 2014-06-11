@@ -92,11 +92,13 @@
             $scope.form = {
                 requiredCallback: 'required',
                 checkValid: $validationProvider.checkValid,
-                submit: function (form) {
-                    $validationProvider.validate(form);
+                submit: function () {
+                    // angular validation 1.2 can reduce this procedure, just focus on your action
+                    // $validationProvider.validate(form);
                 },
-                reset: function (form) {
-                    $validationProvider.reset(form);
+                reset: function () {
+                    // angular validation 1.2 can reduce this procedure, just focus on your action
+                    // $validationProvider.reset(form);
                 }
             };
 

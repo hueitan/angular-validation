@@ -123,6 +123,25 @@ Writing your Code
     };
     // ...
 </script>
+
+<!-- In angular validation 1.2.0
+     More easy, more clean in your js code -->
+
+<form name="Form">
+    <input type="text" name="number" ng-model="form.number" validator="number" valid-method="submit-only"/>
+    <button validation-submit="Form" ng-click="form.submit()"></button>
+</form>
+
+<script>
+    // Don't need include $validationProvider.validate() anymore
+    $scope.form = {
+        submit: function () {
+            // your ng-click success callback
+        }
+    };
+</script>
+
+<!-- Clean, right ? -->
 ```
 
 **Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
@@ -189,6 +208,8 @@ angular.module('yourApp', ['validation'])
     <button ng-disabled="form.checkValid(Form)"></button>
     <!-- Reset the specific Form -->
     <button ng-click="form.reset(Form)"></button>
+    <!-- Clean Reset (angular validation 1.2.0) -->
+    <button validation-reset="Form"></button>
 </form>
 ```
 
@@ -198,6 +219,11 @@ angular.module('yourApp', ['validation'])
     // ... reset
     $scope.form.reset = function (form) {
         validationProvider.reset(form);
+    };
+    // ... angular validation 1.2.0 reset
+    $scope.form.reset = function () {
+        // Don't need include validationProvider.reset();
+        // Focus on your ng-click action
     };
 ```
 

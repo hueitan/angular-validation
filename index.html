@@ -72,8 +72,8 @@
             </fieldset>
 
             <ul class="button-group">
-                <li><button class="button" ng-click="form.submit(Form)">Submit</button></li>
-                <li><button class="button alert" ng-click="form.reset(Form)">Reset</button></li>
+                <li><button class="button" validation-submit="Form" ng-click="form.submit()">Submit</button></li>
+                <li><button class="button alert" validation-reset="Form" ng-click="form.reset()">Reset</button></li>
                 <li><button class="button secondary" ng-disabled="!form.checkValid(Form)">checkValid = {{ form.checkValid(Form) }}</button></li>
             </ul>
             <!--<pre>{{ form | json }}</pre>-->
