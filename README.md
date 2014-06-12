@@ -356,6 +356,8 @@ When you are done, test it on `http://localhost:8080`
        https://docs.google.com/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit
 3. form-angular
        http://www.forms-angular.org/
+4. Html5 form-validation
+       http://www.sitepoint.com/client-side-form-validation-html5/
 
 CHANGELOG
 =====
