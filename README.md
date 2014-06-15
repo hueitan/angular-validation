@@ -383,3 +383,7 @@ $validationProvider.validate($scope.Form); // $scope.Form is html form name `For
 
 `submit` : when user click submit, then start watching using `watch` to validate<br/>
 `submit-only` : when user click `submit`, doesn't validate through `watch` until `submit` button is clicked.
+
+###When using checkValid() manually [#19](https://github.com/huei90/angular-validation/issues/19)###
+
+Before using `checkValid()`, you have to execute `submit` first to get the latest result.
