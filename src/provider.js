@@ -187,7 +187,7 @@
 
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'submit', idx++);
+                        $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
                     }
                 }
 
@@ -226,7 +226,7 @@
             this.reset = function (form) {
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'reset');
+                        $scope.$broadcast(k + 'reset-' + form[k].validationId);
                     }
                 }
             };

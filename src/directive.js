@@ -103,6 +103,17 @@
             };
 
 
+            /**
+             * generate unique guid
+             */
+            var s4 = function () {
+                return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+            };
+            var guid = function () {
+                return (s4() + s4() + s4() + s4());
+            };
+
+
             return {
                 restrict: 'A',
                 require: 'ngModel',
@@ -132,6 +143,11 @@
                     var validator = attrs.validator.split(',');
 
                     /**
+                     * guid use
+                     */
+                    var uid = ctrl.validationId = guid();
+
+                    /**
                      * Valid/Invalid Message
                      */
                     element.after('<span></span>');
@@ -144,7 +160,7 @@
                     /**
                      * Reset the validation for specific form
                      */
-                    scope.$on(ctrl.$name + 'reset', function () {
+                    scope.$on(ctrl.$name + 'reset-' + uid, function () {
 
                         /**
                          * clear scope.$watch here
@@ -170,7 +186,7 @@
                         /**
                          * Click submit form, check the validity when submit
                          */
-                        scope.$on(ctrl.$name + 'submit', function (event, index) {
+                        scope.$on(ctrl.$name + 'submit-' + uid, function (event, index) {
                             var value = element[0].value,
                                 isValid = false;
 
