@@ -107,7 +107,7 @@ describe('provider', function () {
 
     it('reset', inject(function () {
         var resetSpy = jasmine.createSpy('resetSpy');
-        $scope.$on('requiredreset', function () {
+        $scope.$on('requiredreset-' + $scope.Form.required.validationId, function () {
             resetSpy();
         });
         validationProvider.reset($scope.Form);
@@ -124,7 +124,7 @@ describe('provider', function () {
             errorSpy2 = jasmine.createSpy('errorSpy2');
 
         // test .success()
-        $scope.$on('requiredsubmit', function () {
+        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function () {
             submitSpy();
         });
         $scope.$apply(function () {
@@ -148,7 +148,7 @@ describe('provider', function () {
             $scope.required = '';
         });
 
-        $scope.$on('requiredsubmit', function () {
+        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function () {
             submitSpy2();
         });
 
