@@ -1,3 +1,19 @@
+15 Jun 2014 v1.2.0
+===
+**New features**
+
+[b1f875e](https://github.com/huei90/angular-validation/commit/b1f875e5afebae6a5f28804e6f7996fc2d1f268a) Do more in setExpression(...)
+<br/>[b1d4a54](https://github.com/huei90/angular-validation/commit/b1d4a54ef51f9a13a129787e8087f1610e18b28a) New Features validation-submit & validation-reset
+
+**Fix**
+
+[73ff4b0](https://github.com/huei90/angular-validation/commit/73ff4b05d598f38d6f26ed433807360cdb518777) checkValid using timeout inside submit
+<br/>[af5ea19](https://github.com/huei90/angular-validation/commit/af5ea19cce9d0dcd25d542e4103cb7b719f9e931) unique field event
+
+**Documentation**
+
+[9a6fd48](https://github.com/huei90/angular-validation/commit/9a6fd48483ecc813303ddd21fc60d5aaf76823d6) When using checkValid()
+
 14 May 2014 v1.1.2
 ===
 **Fix**
