@@ -37,46 +37,46 @@
                 }
             };
 
-            $validationProvider.setExpression(expression);
-            $validationProvider.setDefaultMsg(defaultMsg);
+            $validationProvider.setExpression(expression)
+                               .setDefaultMsg(defaultMsg);
 
             // or we can just setup directly
-            $validationProvider.setDefaultMsg({ ip: { error: 'This no ip', success: 'this ip'}});
-            $validationProvider.setExpression({ ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/ });
+            $validationProvider.setDefaultMsg({ ip: { error: 'This no ip', success: 'this ip'}})
+                               .setExpression({ ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/ });
 
             /**
              * Additions validation
              */
-            $validationProvider.setExpression({
-                huei: function (value, scope, element, attrs) {
-                    return value === 'Huei Tan';
-                }
-            });
-
-            $validationProvider.setDefaultMsg({
-                huei: {
-                    error: 'This should be Huei Tan',
-                    success: 'Thanks!'
-                }
-            });
+            $validationProvider
+                .setExpression({
+                    huei: function (value, scope, element, attrs) {
+                        return value === 'Huei Tan';
+                    }
+                })
+                .setDefaultMsg({
+                    huei: {
+                        error: 'This should be Huei Tan',
+                        success: 'Thanks!'
+                    }
+                });
 
             /**
              * Range Validation
              */
-            $validationProvider.setExpression({
-                range: function (value, scope, element, attrs) {
-                    if (value >= parseInt(attrs.min) && value <= parseInt(attrs.max)) {
-                        return value;
+            $validationProvider
+                .setExpression({
+                    range: function (value, scope, element, attrs) {
+                        if (value >= parseInt(attrs.min) && value <= parseInt(attrs.max)) {
+                            return value;
+                        }
                     }
-                }
-            });
-
-            $validationProvider.setDefaultMsg({
-                range: {
-                    error: 'Number should between 5 ~ 10',
-                    success: 'good'
-                }
-            });
+                })
+                .setDefaultMsg({
+                    range: {
+                        error: 'Number should between 5 ~ 10',
+                        success: 'good'
+                    }
+                });
         }])
 
         // -------------------

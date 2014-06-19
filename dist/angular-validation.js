@@ -69,6 +69,7 @@
              */
             this.setExpression = function (obj) {
                 angular.extend(expression, obj);
+                return _this;
             };
 
 
@@ -88,6 +89,7 @@
              */
             this.setDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
+                return _this;
             };
 
 
@@ -111,6 +113,8 @@
                 }
 
                 _this.getErrorHTML = func;
+
+                return _this;
             };
 
 
@@ -134,6 +138,8 @@
                 }
 
                 _this.getSuccessHTML = func;
+
+                return _this;
             };
 
 
