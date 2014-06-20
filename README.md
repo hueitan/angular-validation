@@ -176,27 +176,27 @@ angular.module('yourApp', ['validation'])
             }
         };
 
-        validationProvider.setExpression(expression); // set expression
-        validationProvider.setDefaultMsg(validMsg); // set valid message
+        validationProvider.setExpression(expression) // set expression
+                          .setDefaultMsg(validMsg); // set valid message
 
         // Setup `huei` validation
-        validationProvider.setExpression({
-            huei: function (value, scope, element, attrs) {
-                return value === 'Huei Tan';
-                // or you can do
-                return $q.all([obj]).then(function () {
-                // ...
-                    return true;
-                })
-            }
-        });
-
-        validationProvider.setDefaultMsg({
-            huei: {
-                error: 'This should be Huei Tan',
-                success: 'Thanks!'
-            }
-        });
+        validationProvider
+            .setExpression({
+                huei: function (value, scope, element, attrs) {
+                    return value === 'Huei Tan';
+                    // or you can do
+                    return $q.all([obj]).then(function () {
+                    // ...
+                        return true;
+                    })
+                }
+            })
+            .setDefaultMsg({
+                huei: {
+                    error: 'This should be Huei Tan',
+                    success: 'Thanks!'
+                }
+            });
     }]);
 ```
 
