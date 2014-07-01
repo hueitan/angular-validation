@@ -7,7 +7,7 @@
                 $timeout = $injector.get('$timeout');
 
             /**
-             * Do this function iff validation valid
+             * Do this function if validation valid
              * @param element
              * @param validMessage
              * @param validation
@@ -29,7 +29,7 @@
 
 
             /**
-             * Do this function iff validation invalid
+             * Do this function if validation invalid
              * @param element
              * @param validMessage
              * @param validation
