@@ -66,6 +66,7 @@
             /**
              * Allow user to set a custom Expression, do remember set the default message using setDefaultMsg
              * @param obj
+             * @returns {*}
              */
             this.setExpression = function (obj) {
                 angular.extend(expression, obj);
@@ -86,6 +87,7 @@
             /**
              * Allow user to set default message
              * @param obj
+             * @returns {*}
              */
             this.setDefaultMsg = function (obj) {
                 angular.extend(defaultMsg, obj);
@@ -106,6 +108,7 @@
             /**
              * Override the errorHTML function
              * @param func
+             * @returns {*}
              */
             this.setErrorHTML = function (func) {
                 if (func.constructor !== Function) {
@@ -131,6 +134,7 @@
             /**
              * Override the successHTML function
              * @param func
+             * @returns {*}
              */
             this.setSuccessHTML = function (func) {
                 if (func.constructor !== Function) {
@@ -276,7 +280,7 @@
                 $timeout = $injector.get('$timeout');
 
             /**
-             * Do this function iff validation valid
+             * Do this function if validation valid
              * @param element
              * @param validMessage
              * @param validation
@@ -298,7 +302,7 @@
 
 
             /**
-             * Do this function iff validation invalid
+             * Do this function if validation invalid
              * @param element
              * @param validMessage
              * @param validation
