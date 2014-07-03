@@ -1,0 +1,24 @@
+.validation-valid {
+    color: #0074D9;
+}
+
+.validation-invalid {
+    color: #FF4136;
+}
+
+#github-link {
+    position: fixed;
+    right: 1.5em;
+    bottom: 1.5em;
+    opacity: 0.6;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+
+#github-link:hover {
+    opacity: 1;
+}
+

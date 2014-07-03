@@ -1,0 +1,247 @@
+(function () {
+    angular.module('validation.provider', [])
+        .provider('$validation', function () {
+
+
+            var $injector,
+                $scope,
+                $http,
+                $q,
+                $timeout,
+                _this = this;
+
+
+            /**
+             * Setup the provider
+             * @param injector
+             */
+            var setup = function (injector) {
+                $injector = injector;
+                $scope = $injector.get('$rootScope');
+                $http = $injector.get('$http');
+                $q = $injector.get('$q');
+                $timeout = $injector.get('$timeout');
+            };
+
+
+            /**
+             * Define validation type RegExp
+             * @type {{}}
+             */
+            var expression = {};
+
+
+            /**
+             * default error, success message
+             * @type {{}}
+             */
+            var defaultMsg = {};
+
+
+            /**
+             * Allow user to set a custom Expression, do remember set the default message using setDefaultMsg
+             * @param obj
+             * @returns {*}
+             */
+            this.setExpression = function (obj) {
+                angular.extend(expression, obj);
+                return _this;
+            };
+
+
+            /**
+             * Get the Expression
+             * @param exprs
+             * @returns {*}
+             */
+            this.getExpression = function (exprs) {
+                return expression[exprs];
+            };
+
+
+            /**
+             * Allow user to set default message
+             * @param obj
+             * @returns {*}
+             */
+            this.setDefaultMsg = function (obj) {
+                angular.extend(defaultMsg, obj);
+                return _this;
+            };
+
+
+            /**
+             * Get the Default Message
+             * @param msg
+             * @returns {*}
+             */
+            this.getDefaultMsg = function (msg) {
+                return defaultMsg[msg];
+            };
+
+
+            /**
+             * Override the errorHTML function
+             * @param func
+             * @returns {*}
+             */
+            this.setErrorHTML = function (func) {
+                if (func.constructor !== Function) {
+                    return;
+                }
+
+                _this.getErrorHTML = func;
+
+                return _this;
+            };
+
+
+            /**
+             * Invalid message HTML, here's the default
+             * @param message
+             * @returns {string}
+             */
+            this.getErrorHTML = function (message) {
+                return '<p class="validation-invalid">' + message + '</p>';
+            };
+
+
+            /**
+             * Override the successHTML function
+             * @param func
+             * @returns {*}
+             */
+            this.setSuccessHTML = function (func) {
+                if (func.constructor !== Function) {
+                    return;
+                }
+
+                _this.getSuccessHTML = func;
+
+                return _this;
+            };
+
+
+            /**
+             * Valid message HTML, here's the default
+             * @param message
+             * @returns {string}
+             */
+            this.getSuccessHTML = function (message) {
+                return '<p class="validation-valid">' + message + '</p>';
+            };
+
+
+            /**
+             * Whether show the validation success message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showSuccessMessage = false;
+             * @type {boolean}
+             */
+            this.showSuccessMessage = true;
+
+
+            /**
+             * Whether show the validation error message
+             * You can easily change this to false in your config
+             * example: $validationProvider.showErrorMessage = false;
+             * @type {boolean}
+             */
+            this.showErrorMessage = true;
+
+
+            /**
+             * Check form valid, return true
+             * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
+             * @param form
+             * @returns {boolean}
+             */
+            this.checkValid = function (form) {
+                if (form.$valid === undefined) {
+                    return false;
+                }
+                return (form && form.$valid === true);
+            };
+
+
+            /**
+             * Validate the form when click submit, when `validMethod = submit`
+             * @param form
+             * @returns {promise|*}
+             */
+            this.validate = function (form) {
+
+                var idx = 0;
+
+                for (var k in form) {
+                    if (form[k].hasOwnProperty('$dirty')) {
+                        $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
+                    }
+                }
+
+                var deferred = $q.defer();
+                deferred.promise.success = function (fn) {
+                    deferred.promise.then(function (value) {
+                        fn(value);
+                    });
+                    return deferred.promise;
+                };
+
+                deferred.promise.error = function (fn) {
+                    deferred.promise.then(null, function (value) {
+                        fn(value);
+                    });
+                    return deferred.promise;
+                };
+
+                $timeout(function () {
+                    if (_this.checkValid(form)) {
+                        deferred.resolve('success');
+                    }
+                    else {
+                        deferred.reject('error');
+                    }
+                });
+
+                return deferred.promise;
+            };
+
+
+            /**
+             * reset the specific form
+             * @param form
+             */
+            this.reset = function (form) {
+                for (var k in form) {
+                    if (form[k].hasOwnProperty('$dirty')) {
+                        $scope.$broadcast(k + 'reset-' + form[k].validationId);
+                    }
+                }
+            };
+
+
+            /**
+             * $get
+             * @returns {{setErrorHTML: *, getErrorHTML: Function, setSuccessHTML: *, getSuccessHTML: Function, setExpression: *, getExpression: Function, setDefaultMsg: *, getDefaultMsg: Function, checkValid: Function, validate: Function, reset: Function}}
+             */
+            this.$get = ['$injector', function ($injector) {
+                setup($injector);
+                return {
+                    setErrorHTML: this.setErrorHTML,
+                    getErrorHTML: this.getErrorHTML,
+                    setSuccessHTML: this.setSuccessHTML,
+                    getSuccessHTML: this.getSuccessHTML,
+                    setExpression: this.setExpression,
+                    getExpression: this.getExpression,
+                    setDefaultMsg: this.setDefaultMsg,
+                    getDefaultMsg: this.getDefaultMsg,
+                    showSuccessMessage: this.showSuccessMessage,
+                    showErrorMessage: this.showErrorMessage,
+                    checkValid: this.checkValid,
+                    validate: this.validate,
+                    reset: this.reset
+                };
+            }];
+
+        });
+}).call(this);
