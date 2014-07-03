@@ -31,14 +31,16 @@ module.exports = function (grunt) {
         concat: {
             basic_and_extras: {
                 files: {
-                    'dist/angular-validation.js': ['src/module.js', 'src/provider.js', 'src/directive.js']
+                    'dist/angular-validation.js': ['src/module.js', 'src/provider.js', 'src/directive.js'],
+                    'dist/angular-validation-rule.js': ['src/rule.js']
                 }
             }
         },
         uglify: {
             my_target: {
                 files: {
-                    'dist/angular-validation.min.js': ['dist/angular-validation.js']
+                    'dist/angular-validation.min.js': ['dist/angular-validation.js'],
+                    'dist/angular-validation-rule.min.js': ['dist/angular-validation-rule.js']
                 }
             }
         },

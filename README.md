@@ -33,8 +33,15 @@ npm install angular-validation
 
 Using angular-validation
 ---
-```javascript
+```html
+<script src="dist/angular-validation.js"></script>
+<script src="dist/angular-validation-rule.js"></script>
+```
+```js
 angular.module('yourApp', ['validation']);
+
+// including your validation rule
+angular.module('yourApp', ['validation', 'validation.rule']);
 ```
 
 Writing your Code
@@ -278,7 +285,7 @@ Easily disable success/error message
 }]);
 ```
 
-Built-in validation <small>in angular-validation</small>
+Built-in validation <small>in angular-validation-rule</small>
 ===
 
 1. Required

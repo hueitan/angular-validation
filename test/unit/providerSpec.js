@@ -13,7 +13,7 @@ describe('provider', function () {
         myApp;
 
     beforeEach(function () {
-        myApp = angular.module('myApp', ['validation'])
+        myApp = angular.module('myApp', ['validation', 'validation.rule'])
             .config(function ($validationProvider) {
                 validationProvider = $validationProvider;
             });

@@ -10,6 +10,7 @@ module.exports = function(config) {
             'test/lib/angular.1.2.16.js',
             'test/lib/angular-mocks.1.2.16.js',
             'dist/angular-validation.js',
+            'dist/angular-validation-rule.js',
             'test/unit/*.js'
         ],
 

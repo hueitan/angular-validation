@@ -1,5 +1,5 @@
 (function () {
-    angular.module('myApp', ['validation'])
+    angular.module('myApp', ['validation', 'validation.rule'])
 
         // -------------------
         // config phase

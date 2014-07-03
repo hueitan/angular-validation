@@ -11,7 +11,8 @@ describe('directives', function () {
         element;
 
     beforeEach(module('validation.directive'));
-
+    beforeEach(module('validation.rule'));
+    
     describe('Example of Required', function () {
 
         beforeEach(inject(function ($injector) {

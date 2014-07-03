@@ -18,7 +18,7 @@ grunt dev
 
 **Start coding**
 ```
-open `provider.js`, looking for `var expression` and `var defaultMsg`
+open `rule.js`, looking for `var expression` and `var defaultMsg`
 Adding a new expression and defaultMsg to extend it
 ```
 
