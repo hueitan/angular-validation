@@ -180,10 +180,14 @@
                     return deferred.promise;
                 }
 
-                if (form.validationId) {
+                if (form.validationId) { // single
                     $scope.$broadcast(form.$name + 'submit-' + form.validationId, idx++);
-                } else {
+                } else if (form.constructor === Array) { // multiple
                     for (var k in form) {
+                        $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
+                    }
+                } else {
+                    for (var k in form) { // whole scope
                         if (form[k] && form[k].hasOwnProperty('$dirty')) {
                             $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
                         }
@@ -230,6 +234,10 @@
 
                 if (form.validationId) {
                     $scope.$broadcast(form.$name + 'reset-' + form.validationId);
+                } else if (form.constructor === Array) {
+                    for (var k in form) {
+                        $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
+                    }
                 } else {
                     for (var k in form) {
                         if (form[k].hasOwnProperty('$dirty')) {
