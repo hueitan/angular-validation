@@ -174,7 +174,14 @@
              */
             this.validate = function (form) {
 
-                var idx = 0;
+                var deferred = $q.defer(),
+                    idx = 0;
+
+                if (form === undefined) {
+                    console.error('This is not a regular Form name scope');
+                    deferred.reject('This is not a regular Form name scope');
+                    return deferred.promise;
+                }
 
                 for (var k in form) {
                     if (form[k].hasOwnProperty('$dirty')) {
@@ -182,7 +189,6 @@
                     }
                 }
 
-                var deferred = $q.defer();
                 deferred.promise.success = function (fn) {
                     deferred.promise.then(function (value) {
                         fn(value);
