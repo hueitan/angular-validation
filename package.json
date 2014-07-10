@@ -1,6 +1,6 @@
 {
     "name": "angular-validation",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Client-side Validation for AngularJS",
     "repository": {
         "type": "git",
