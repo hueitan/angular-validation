@@ -295,13 +295,13 @@
                 priority: 1, // execute before ng-click (0)
                 terminal: true,
                 link: function postLink(scope, element, attrs) {
-                    var form = attrs.validationSubmit;
+                    var form = $parse(attrs.validationSubmit)(scope);
 
                     $timeout(function () {
                         element.on('click', function (e) {
                             e.preventDefault();
 
-                            $validationProvider.validate(scope[form])
+                            $validationProvider.validate(form)
                                 .success(function () {
                                     $parse(attrs.ngClick)(scope);
                                 });
@@ -315,16 +315,17 @@
         .directive('validationReset', ['$injector', function ($injector) {
 
             var $validationProvider = $injector.get('$validation'),
-                $timeout = $injector.get('$timeout');
+                $timeout = $injector.get('$timeout'),
+                $parse = $injector.get('$parse');
 
             return {
                 link: function postLink(scope, element, attrs) {
-                    var form = attrs.validationReset;
+                    var form = $parse(attrs.validationReset)(scope);
 
                     $timeout(function () {
                         element.on('click', function (e) {
                             e.preventDefault();
-                            $validationProvider.reset(scope[form]);
+                            $validationProvider.reset(form);
                         });
                     });
 

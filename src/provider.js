@@ -180,9 +180,13 @@
                     return deferred.promise;
                 }
 
-                for (var k in form) {
-                    if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
+                if (form.validationId) {
+                    $scope.$broadcast(form.$name + 'submit-' + form.validationId, idx++);
+                } else {
+                    for (var k in form) {
+                        if (form[k] && form[k].hasOwnProperty('$dirty')) {
+                            $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
+                        }
                     }
                 }
 
@@ -218,9 +222,19 @@
              * @param form
              */
             this.reset = function (form) {
-                for (var k in form) {
-                    if (form[k].hasOwnProperty('$dirty')) {
-                        $scope.$broadcast(k + 'reset-' + form[k].validationId);
+
+                if (form === undefined) {
+                    console.error('This is not a regular Form name scope');
+                    return;
+                }
+
+                if (form.validationId) {
+                    $scope.$broadcast(form.$name + 'reset-' + form.validationId);
+                } else {
+                    for (var k in form) {
+                        if (form[k].hasOwnProperty('$dirty')) {
+                            $scope.$broadcast(k + 'reset-' + form[k].validationId);
+                        }
                     }
                 }
             };
