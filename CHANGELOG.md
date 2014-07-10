@@ -1,3 +1,16 @@
+10 July 2014 v1.2.1
+===
+**New features**
+
+[6a682b0](https://github.com/huei90/angular-validation/commit/6a682b0ac0928f8a426dc7ba0cf82de622c33cda) Add rule.js => angular-validation-rule.js
+[343f578](https://github.com/huei90/angular-validation/commit/343f578f7aab2a56ecf280635a5d668f4ebc1966) Show error message when the form is undefined
+[78e15a3](https://github.com/huei90/angular-validation/commit/78e15a34e0180a45bdd73dcb0677a4fbc796fd9f) Allow validate/reset multiple scope model
+[e16c592](https://github.com/huei90/angular-validation/commit/e16c592cd7d31f7537f4c960505fe52d060a13d3) Allow validate/reset only one scope model
+
+**Documentation**
+
+[172fd8c](https://github.com/huei90/angular-validation/commit/172fd8ccf9113fceac18e982af30fdf0da8592e2) Added bootstrap integration to readme. Moved contributing info to CON…
+
 15 Jun 2014 v1.2.0
 ===
 **New features**
