@@ -293,11 +293,13 @@
 
             return {
                 priority: 1, // execute before ng-click (0)
-                terminal: true,
+                require: '?ngClick',
                 link: function postLink(scope, element, attrs) {
                     var form = $parse(attrs.validationSubmit)(scope);
 
                     $timeout(function () {
+                        // Disable ng-click event propagation
+                        element.off('click');
                         element.on('click', function (e) {
                             e.preventDefault();
 
