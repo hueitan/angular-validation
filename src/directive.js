@@ -119,6 +119,7 @@
                 require: 'ngModel',
                 scope: {
                     model: '=ngModel',
+                    initialValidity: '=initialValidity',
                     validCallback: '&',
                     invalidCallback: '&'
                 },
@@ -153,9 +154,17 @@
                     element.after('<span></span>');
 
                     /**
-                     * Set Validity to false when Initial
+                     * Set initial validity to false if no boolean value is transmitted
                      */
-                    ctrl.$setValidity(ctrl.$name, false);
+                    if (typeof scope.initialValidity !== 'boolean') {
+                        scope.initialValidity = false;
+                    }
+
+                    /**
+                     * Set custom initial validity
+                     * Usage: <input initial-validity="true" ... >
+                     */
+                    ctrl.$setValidity(ctrl.$name, scope.initialValidity);
 
                     /**
                      * Reset the validation for specific form
