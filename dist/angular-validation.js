@@ -435,15 +435,16 @@
                     /**
                      * Set initial validity to false if no boolean value is transmitted
                      */
-                    if (typeof scope.initialValidity !== 'boolean') {
-                        scope.initialValidity = false;
+                    var initialValidity = false;
+                    if (typeof scope.initialValidity === 'boolean') {
+                        initialValidity = scope.initialValidity;
                     }
 
                     /**
                      * Set custom initial validity
                      * Usage: <input initial-validity="true" ... >
                      */
-                    ctrl.$setValidity(ctrl.$name, scope.initialValidity);
+                    ctrl.$setValidity(ctrl.$name, initialValidity);
 
                     /**
                      * Reset the validation for specific form
