@@ -64,7 +64,7 @@ Writing your First Code
 </div>
 ```
 
-[Documentation API](https://github.com/huei90/angular-validation/API.md)
+[Documentation API](https://github.com/huei90/angular-validation/blob/master/API.md)
 
 Built-in validation <small>in angular-validation-rule</small>
 ===
