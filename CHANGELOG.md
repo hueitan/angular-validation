@@ -1,3 +1,17 @@
+1 Aug 2014 v1.2.2
+===
+**Fix**
+
+[a96c499](https://github.com/huei90/angular-validation/commit/a96c499967e0c0512a536545ea102ebc6283e1c6) Fix validationSubmit directive to avoid non interpretation of others angular treatments
+<br/>[0474c8a](https://github.com/huei90/angular-validation/commit/0474c8aeb51dbb558fca88191cbba7e32423515b) Fixed customizable initial validation.
+
+**Demo**
+
+[5f06982](https://github.com/huei90/angular-validation/commit/5f069820d2520a2bfc4e52906d446dac5edf2d97) Fix rule required
+
+**Documentation**
+
+[]() Update readme file and add Q&A API page
 10 July 2014 v1.2.1
 ===
 **New features**
