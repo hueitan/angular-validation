@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.16
+ * @license AngularJS v1.2.22
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -462,8 +462,8 @@
                         iteration = 0,
                         skipApply = (angular.isDefined(invokeApply) && !invokeApply);
 
-                    count = (angular.isDefined(count)) ? count : 0,
-                        promise.then(null, null, fn);
+                    count = (angular.isDefined(count)) ? count : 0;
+                    promise.then(null, null, fn);
 
                     promise.$$intervalId = nextRepeatId;
 
@@ -888,7 +888,7 @@
      * development please see {@link ngMockE2E.$httpBackend e2e $httpBackend mock}.
      *
      * During unit testing, we want our unit tests to run quickly and have no external dependencies so
-     * we donâ€™t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
+     * we don’t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
      * [JSONP](http://en.wikipedia.org/wiki/JSONP) requests to a real server. All we really need is
      * to verify whether a certain request has been sent or not, or alternatively just let the
      * application make requests, respond with pre-trained responses and assert that the end result is
@@ -900,7 +900,7 @@
      * When an Angular application needs some data from a server, it calls the $http service, which
      * sends the request to a real server using $httpBackend service. With dependency injection, it is
      * easy to inject $httpBackend mock (which has the same API as $httpBackend) and use it to verify
-     * the requests and respond with some testing data without sending a request to real server.
+     * the requests and respond with some testing data without sending a request to a real server.
      *
      * There are two ways to specify what test data should be returned as http responses by the mock
      * backend when the code under test makes http requests:
@@ -1043,7 +1043,7 @@
          var controller = createController();
          $httpBackend.flush();
 
-         // now you donâ€™t care about the authentication, but
+         // now you don’t care about the authentication, but
          // the controller will still send the request and
          // $httpBackend will respond without you having to
          // specify the expectation and response for this request
@@ -1194,10 +1194,10 @@
          * @returns {requestHandler} Returns an object with `respond` method that controls how a matched
          *   request is handled.
          *
-         *  - respond â€“
+         *  - respond –
          *      `{function([status,] data[, headers, statusText])
    *      | function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    – The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
          *    headers (Object), and the text for the status (string).
          */
@@ -1312,10 +1312,10 @@
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
          *  request is handled.
          *
-         *  - respond â€“
+         *  - respond –
          *    `{function([status,] data[, headers, statusText])
    *    | function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    – The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
          *    headers (Object), and the text for the status (string).
          */
@@ -1722,11 +1722,12 @@
     /**
      * @ngdoc module
      * @name ngMock
+     * @packageName angular-mocks
      * @description
      *
      * # ngMock
      *
-     * The `ngMock` module providers support to inject and mock Angular services into unit tests.
+     * The `ngMock` module provides support to inject and mock Angular services into unit tests.
      * In addition, ngMock also extends various core ng services such that they can be
      * inspected and controlled in a synchronous manner within test code.
      *
@@ -1751,6 +1752,7 @@
      * @ngdoc module
      * @name ngMockE2E
      * @module ngMockE2E
+     * @packageName angular-mocks
      * @description
      *
      * The `ngMockE2E` is an angular module which contains mocks suitable for end-to-end testing.
@@ -1784,7 +1786,7 @@
      * use the `passThrough` request handler of `when` instead of `respond`.
      *
      * Additionally, we don't want to manually have to flush mocked out requests like we do during unit
-     * testing. For this reason the e2e $httpBackend automatically flushes mocked out requests
+     * testing. For this reason the e2e $httpBackend flushes mocked out requests
      * automatically, closely simulating the behavior of the XMLHttpRequest object.
      *
      * To setup the application to run with this http backend, you have to create a module that depends
@@ -1800,7 +1802,9 @@
  *
  *     // adds a new phone to the phones array
  *     $httpBackend.whenPOST('/phones').respond(function(method, url, data) {
- *       phones.push(angular.fromJson(data));
+ *       var phone = angular.fromJson(data);
+ *       phones.push(phone);
+ *       return [200, phone, {}];
  *     });
  *     $httpBackend.whenGET(/^\/templates\//).passThrough();
  *     //...
@@ -1825,13 +1829,13 @@
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
      *   control how a matched request is handled.
      *
-     *  - respond â€“
+     *  - respond –
      *    `{function([status,] data[, headers, statusText])
  *    | function(function(method, url, data, headers)}`
-     *    â€“ The respond method takes a set of static data to be returned or a function that can return
+     *    – The respond method takes a set of static data to be returned or a function that can return
      *    an array containing response status (number), response data (string), response headers
      *    (Object), and the text for the status (string).
-     *  - passThrough â€“ `{function()}` â€“ Any request matching a backend definition with
+     *  - passThrough – `{function()}` – Any request matching a backend definition with
      *    `passThrough` handler will be passed through to the real backend (an XHR request will be made
      *    to the server.)
      */
@@ -1956,12 +1960,18 @@
             };
 
 
-        beforeEach(function() {
+        (window.beforeEach || window.setup)(function() {
             currentSpec = this;
         });
 
-        afterEach(function() {
+        (window.afterEach || window.teardown)(function() {
             var injector = currentSpec.$injector;
+
+            angular.forEach(currentSpec.$modules, function(module) {
+                if (module && module.$$hashKey) {
+                    module.$$hashKey = undefined;
+                }
+            });
 
             currentSpec.$injector = null;
             currentSpec.$modules = null;
@@ -2002,7 +2012,7 @@
          * @param {...(string|Function|Object)} fns any number of modules which are represented as string
          *        aliases or as anonymous module initialization functions. The modules are used to
          *        configure the injector. The 'ng' and 'ngMock' modules are automatically loaded. If an
-         *        object literal is passed they will be register as values in the module, the key being
+         *        object literal is passed they will be registered as values in the module, the key being
          *        the module name and the value being what is returned.
          */
         window.module = angular.mock.module = function() {
