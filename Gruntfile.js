@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Variable
     var ROOT_PATH = '.';
@@ -10,14 +10,12 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         clean: {
             dist: {
-                files: [
-                    {
-                        dot: true,
-                        src: [
-                            'dist'
-                        ]
-                    }
-                ]
+                files: [{
+                    dot: true,
+                    src: [
+                        'dist'
+                    ]
+                }]
             }
         },
         copy: {
@@ -43,6 +41,13 @@ module.exports = function (grunt) {
                     'dist/angular-validation-rule.min.js': ['dist/angular-validation-rule.js']
                 }
             }
+        },
+        jsbeautifier: {
+            files: ['*.js', 'src/**/*.js'],
+            options: {}
+        },
+        jshint: {
+            all: ['*.js', 'src/**/*.js']
         },
         browserSync: {
             dev: {
@@ -80,10 +85,11 @@ module.exports = function (grunt) {
         }
     });
 
-    require( "load-grunt-tasks" )( grunt );
+    require("load-grunt-tasks")(grunt);
 
     // Register Task
     grunt.registerTask('dev', ['browserSync', 'watch']);
-    grunt.registerTask('build', ['clean', 'concat', 'uglify'])
+    grunt.registerTask('build', ['clean', 'concat', 'uglify']);
+    grunt.registerTask('check', ['jshint', 'jsbeautifier']); // use this before commit
 
 };

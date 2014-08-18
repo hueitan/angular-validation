@@ -1,6 +1,6 @@
-(function () {
+(function() {
     angular.module('validation.provider', [])
-        .provider('$validation', function () {
+        .provider('$validation', function() {
 
 
             var $injector,
@@ -15,7 +15,7 @@
              * Setup the provider
              * @param injector
              */
-            var setup = function (injector) {
+            var setup = function(injector) {
                 $injector = injector;
                 $scope = $injector.get('$rootScope');
                 $http = $injector.get('$http');
@@ -43,7 +43,7 @@
              * @param obj
              * @returns {*}
              */
-            this.setExpression = function (obj) {
+            this.setExpression = function(obj) {
                 angular.extend(expression, obj);
                 return _this;
             };
@@ -54,7 +54,7 @@
              * @param exprs
              * @returns {*}
              */
-            this.getExpression = function (exprs) {
+            this.getExpression = function(exprs) {
                 return expression[exprs];
             };
 
@@ -64,7 +64,7 @@
              * @param obj
              * @returns {*}
              */
-            this.setDefaultMsg = function (obj) {
+            this.setDefaultMsg = function(obj) {
                 angular.extend(defaultMsg, obj);
                 return _this;
             };
@@ -75,7 +75,7 @@
              * @param msg
              * @returns {*}
              */
-            this.getDefaultMsg = function (msg) {
+            this.getDefaultMsg = function(msg) {
                 return defaultMsg[msg];
             };
 
@@ -85,7 +85,7 @@
              * @param func
              * @returns {*}
              */
-            this.setErrorHTML = function (func) {
+            this.setErrorHTML = function(func) {
                 if (func.constructor !== Function) {
                     return;
                 }
@@ -101,7 +101,7 @@
              * @param message
              * @returns {string}
              */
-            this.getErrorHTML = function (message) {
+            this.getErrorHTML = function(message) {
                 return '<p class="validation-invalid">' + message + '</p>';
             };
 
@@ -111,7 +111,7 @@
              * @param func
              * @returns {*}
              */
-            this.setSuccessHTML = function (func) {
+            this.setSuccessHTML = function(func) {
                 if (func.constructor !== Function) {
                     return;
                 }
@@ -127,7 +127,7 @@
              * @param message
              * @returns {string}
              */
-            this.getSuccessHTML = function (message) {
+            this.getSuccessHTML = function(message) {
                 return '<p class="validation-valid">' + message + '</p>';
             };
 
@@ -156,7 +156,7 @@
              * @param form
              * @returns {boolean}
              */
-            this.checkValid = function (form) {
+            this.checkValid = function(form) {
                 if (form.$valid === undefined) {
                     return false;
                 }
@@ -169,7 +169,7 @@
              * @param form
              * @returns {promise|*}
              */
-            this.validate = function (form) {
+            this.validate = function(form) {
 
                 var deferred = $q.defer(),
                     idx = 0;
@@ -187,32 +187,31 @@
                         $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
                     }
                 } else {
-                    for (var k in form) { // whole scope
-                        if (form[k] && form[k].hasOwnProperty('$dirty')) {
-                            $scope.$broadcast(k + 'submit-' + form[k].validationId, idx++);
+                    for (var i in form) { // whole scope
+                        if (form[i] && form[i].hasOwnProperty('$dirty')) {
+                            $scope.$broadcast(i + 'submit-' + form[i].validationId, idx++);
                         }
                     }
                 }
 
-                deferred.promise.success = function (fn) {
-                    deferred.promise.then(function (value) {
+                deferred.promise.success = function(fn) {
+                    deferred.promise.then(function(value) {
                         fn(value);
                     });
                     return deferred.promise;
                 };
 
-                deferred.promise.error = function (fn) {
-                    deferred.promise.then(null, function (value) {
+                deferred.promise.error = function(fn) {
+                    deferred.promise.then(null, function(value) {
                         fn(value);
                     });
                     return deferred.promise;
                 };
 
-                $timeout(function () {
+                $timeout(function() {
                     if (_this.checkValid(form)) {
                         deferred.resolve('success');
-                    }
-                    else {
+                    } else {
                         deferred.reject('error');
                     }
                 });
@@ -225,7 +224,7 @@
              * reset the specific form
              * @param form
              */
-            this.reset = function (form) {
+            this.reset = function(form) {
 
                 if (form === undefined) {
                     console.error('This is not a regular Form name scope');
@@ -239,9 +238,9 @@
                         $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
                     }
                 } else {
-                    for (var k in form) {
-                        if (form[k].hasOwnProperty('$dirty')) {
-                            $scope.$broadcast(k + 'reset-' + form[k].validationId);
+                    for (var i in form) {
+                        if (form[i].hasOwnProperty('$dirty')) {
+                            $scope.$broadcast(i + 'reset-' + form[i].validationId);
                         }
                     }
                 }
@@ -252,24 +251,26 @@
              * $get
              * @returns {{setErrorHTML: *, getErrorHTML: Function, setSuccessHTML: *, getSuccessHTML: Function, setExpression: *, getExpression: Function, setDefaultMsg: *, getDefaultMsg: Function, checkValid: Function, validate: Function, reset: Function}}
              */
-            this.$get = ['$injector', function ($injector) {
-                setup($injector);
-                return {
-                    setErrorHTML: this.setErrorHTML,
-                    getErrorHTML: this.getErrorHTML,
-                    setSuccessHTML: this.setSuccessHTML,
-                    getSuccessHTML: this.getSuccessHTML,
-                    setExpression: this.setExpression,
-                    getExpression: this.getExpression,
-                    setDefaultMsg: this.setDefaultMsg,
-                    getDefaultMsg: this.getDefaultMsg,
-                    showSuccessMessage: this.showSuccessMessage,
-                    showErrorMessage: this.showErrorMessage,
-                    checkValid: this.checkValid,
-                    validate: this.validate,
-                    reset: this.reset
-                };
-            }];
+            this.$get = ['$injector',
+                function($injector) {
+                    setup($injector);
+                    return {
+                        setErrorHTML: this.setErrorHTML,
+                        getErrorHTML: this.getErrorHTML,
+                        setSuccessHTML: this.setSuccessHTML,
+                        getSuccessHTML: this.getSuccessHTML,
+                        setExpression: this.setExpression,
+                        getExpression: this.getExpression,
+                        setDefaultMsg: this.setDefaultMsg,
+                        getDefaultMsg: this.getDefaultMsg,
+                        showSuccessMessage: this.showSuccessMessage,
+                        showErrorMessage: this.showErrorMessage,
+                        checkValid: this.checkValid,
+                        validate: this.validate,
+                        reset: this.reset
+                    };
+                }
+            ];
 
         });
 }).call(this);
