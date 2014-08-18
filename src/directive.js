@@ -283,9 +283,9 @@
                              */
                             attrs.$observe('noValidationMessage', function(value) {
                                 var el = element.next();
-                                if (value == "true" || value === true) {
+                                if (value == 'true' || value === true) {
                                     el.css('display', 'none');
-                                } else if (value == "false" || value === false) {
+                                } else if (value == 'false' || value === false) {
                                     el.css('display', 'block');
                                 } else {}
                             });

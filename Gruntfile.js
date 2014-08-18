@@ -47,7 +47,10 @@ module.exports = function(grunt) {
             options: {}
         },
         jshint: {
-            all: ['*.js', 'src/**/*.js']
+            all: ['*.js', 'src/**/*.js'],
+            options: {
+                quotmark: 'single'
+            }
         },
         browserSync: {
             dev: {
@@ -55,7 +58,7 @@ module.exports = function(grunt) {
                     src: ['index.html', 'demo/**', 'dist/angular-validation.js']
                 },
                 options: {
-                    host: "localhost",
+                    host: 'localhost',
                     ports: {
                         min: 8000,
                         max: 8100
@@ -85,7 +88,7 @@ module.exports = function(grunt) {
         }
     });
 
-    require("load-grunt-tasks")(grunt);
+    require('load-grunt-tasks')(grunt);
 
     // Register Task
     grunt.registerTask('dev', ['browserSync', 'watch']);
