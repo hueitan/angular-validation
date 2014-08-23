@@ -1,3 +1,13 @@
+24 Aug 2014 v1.2.5
+===
+**New Features**
+
+[911b791](https://github.com/huei90/angular-validation/commit/911b7917a4b1b302982a0f3b42c54da3bd28ee28) Support for multiple validators on a single input
+
+**Tools**
+
+[c941b0b](https://github.com/huei90/angular-validation/commit/c941b0bd4c8c350cf1cfa910a1eabff184280031) Add jshint and jsbeautifier
+
 1 Aug 2014 v1.2.2
 ===
 **Fix**
@@ -11,7 +21,8 @@
 
 **Documentation**
 
-[]() Update readme file and add Q&A API page
+[17e906a](https://github.com/huei90/angular-validation/commit/17e906a6050bf8e62f6ad304eec65042dddfcced) Update readme file and add Q&A API page
+
 10 July 2014 v1.2.1
 ===
 **New features**
