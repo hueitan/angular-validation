@@ -351,21 +351,30 @@
                  * @returns {}
                  */
                 var checkValidation = function(scope, element, attrs, ctrl, validation, value) {
-                    var successMessage = validation + 'SuccessMessage',
+
+                    var validators = validation.slice(0),
+                        validator = validators[0].trim(),
+                        leftValidation = validators.slice(1),
+                        successMessage = validation + 'SuccessMessage',
                         errorMessage = validation + 'ErrorMessage',
-                        expressionType = $validationProvider.getExpression(validation).constructor,
+                        expressionType = $validationProvider.getExpression(validator).constructor,
                         valid = {
                             success: function() {
-                                return validFunc(element, attrs[successMessage], validation, scope.validCallback, ctrl);
+                                validFunc(element, attrs[successMessage], validator, scope.validCallback, ctrl);
+                                if (leftValidation.length) {
+                                    checkValidation(scope, element, attrs, ctrl, leftValidation, value);
+                                } else {
+                                    return true;
+                                }
                             },
                             error: function() {
-                                return invalidFunc(element, attrs[errorMessage], validation, scope.invalidCallback, ctrl);
+                                return invalidFunc(element, attrs[errorMessage], validator, scope.invalidCallback, ctrl);
                             }
                         };
 
                     // Check with Function
                     if (expressionType === Function) {
-                        return $q.all([$validationProvider.getExpression(validation)(value, scope, element, attrs)])
+                        return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs)])
                             .then(function(data) {
                                 if (data && data.length > 0 && data[0]) {
                                     return valid.success();
@@ -378,7 +387,7 @@
                     }
                     // Check with RegExp
                     else if (expressionType === RegExp) {
-                        return $validationProvider.getExpression(validation).test(value) ? valid.success() : valid.error();
+                        return $validationProvider.getExpression(validator).test(value) ? valid.success() : valid.error();
                     } else {
                         return valid.error();
                     }
@@ -419,11 +428,11 @@
 
                         /**
                          * validator
-                         * @type {*|Array}
+                         * @type {Array}
                          *
                          * Convert user input String to Array
                          */
-                        var validator = attrs.validator.split(',');
+                        var validation = attrs.validator.split(',');
 
                         /**
                          * guid use
@@ -471,10 +480,10 @@
                         });
 
                         /**
-                         * Check Every validator
+                         * Check validator
                          */
-                        validator.forEach(function(validation) {
 
+                        (function() {
                             /**
                              * Click submit form, check the validity when submit
                              */
@@ -556,7 +565,7 @@
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
                             });
 
-                        });
+                        })();
 
                         $timeout(function() {
                             /**

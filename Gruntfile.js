@@ -93,6 +93,6 @@ module.exports = function(grunt) {
     // Register Task
     grunt.registerTask('dev', ['browserSync', 'watch']);
     grunt.registerTask('build', ['clean', 'concat', 'uglify']);
-    grunt.registerTask('check', ['jshint', 'jsbeautifier']); // use this before commit
+    grunt.registerTask('check', ['jshint', 'jsbeautifier', 'build']); // use this before commit
 
 };

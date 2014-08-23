@@ -239,3 +239,11 @@ Easily disable success/error message
 }]);
 ```
 
+**multiple validators**<br/>
+use commar as splitter
+
+```html
+<input type="text" validator="required, url" name="url" ng-model="form.url"/>
+```
+
+
