@@ -61,7 +61,7 @@ Writing your First Code
         <button validation-submit="Form" ng-click="next()">Submit</button>
         <button validation-reset="Form">Reset</button>
     </div>
-</div>
+</form>
 ```
 
 [Documentation API](https://github.com/huei90/angular-validation/blob/master/API.md)
@@ -80,7 +80,7 @@ Anyone can give a `PR` for this angular-validation for more `built-in validation
 Integrating with Twitter Bootstrap
 =====
 
-To integrate this package with Bootstrap you should do the following. 
+To integrate this package with Bootstrap you should do the following.
 
 
 Add the following LESS to your project
