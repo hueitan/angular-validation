@@ -357,7 +357,7 @@
                         leftValidation = validators.slice(1),
                         successMessage = validation + 'SuccessMessage',
                         errorMessage = validation + 'ErrorMessage',
-                        expressionType = $validationProvider.getExpression(validator).constructor,
+                        expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
                                 validFunc(element, attrs[successMessage], validator, scope.validCallback, ctrl);
@@ -372,8 +372,16 @@
                             }
                         };
 
+                    if (expression === undefined) {
+                        console.error('You are using undefined validator "%s"', validator);
+                        if (leftValidation.length) {
+                            checkValidation(scope, element, attrs, ctrl, leftValidation, value);
+                        } else {
+                            return;
+                        }
+                    }
                     // Check with Function
-                    if (expressionType === Function) {
+                    if (expression.constructor === Function) {
                         return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs)])
                             .then(function(data) {
                                 if (data && data.length > 0 && data[0]) {
@@ -386,7 +394,7 @@
                             });
                     }
                     // Check with RegExp
-                    else if (expressionType === RegExp) {
+                    else if (expression.constructor === RegExp) {
                         return $validationProvider.getExpression(validator).test(value) ? valid.success() : valid.error();
                     } else {
                         return valid.error();
