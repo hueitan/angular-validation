@@ -56,7 +56,7 @@ Writing your First Code
         </div>
         <div>
             <label>Url</label>
-            <input type="text" name="required, url" ng-model="form.url" validator="url">
+            <input type="text" name="url" ng-model="form.url" validator="required, url">
         </div>
         <button validation-submit="Form" ng-click="next()">Submit</button>
         <button validation-reset="Form">Reset</button>
