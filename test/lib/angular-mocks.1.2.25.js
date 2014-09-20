@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.22
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -62,6 +62,8 @@
 
             return listener;
         };
+
+        self.$$checkUrlChange = angular.noop;
 
         self.cookieHash = {};
         self.lastCookieHash = {};
@@ -888,7 +890,7 @@
      * development please see {@link ngMockE2E.$httpBackend e2e $httpBackend mock}.
      *
      * During unit testing, we want our unit tests to run quickly and have no external dependencies so
-     * we don’t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
+     * we donâ€™t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
      * [JSONP](http://en.wikipedia.org/wiki/JSONP) requests to a real server. All we really need is
      * to verify whether a certain request has been sent or not, or alternatively just let the
      * application make requests, respond with pre-trained responses and assert that the end result is
@@ -1043,7 +1045,7 @@
          var controller = createController();
          $httpBackend.flush();
 
-         // now you don’t care about the authentication, but
+         // now you donâ€™t care about the authentication, but
          // the controller will still send the request and
          // $httpBackend will respond without you having to
          // specify the expectation and response for this request
@@ -1194,10 +1196,10 @@
          * @returns {requestHandler} Returns an object with `respond` method that controls how a matched
          *   request is handled.
          *
-         *  - respond –
+         *  - respond â€“
          *      `{function([status,] data[, headers, statusText])
    *      | function(function(method, url, data, headers)}`
-         *    – The respond method takes a set of static data to be returned or a function that can
+         *    â€“ The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
          *    headers (Object), and the text for the status (string).
          */
@@ -1312,10 +1314,10 @@
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
          *  request is handled.
          *
-         *  - respond –
+         *  - respond â€“
          *    `{function([status,] data[, headers, statusText])
    *    | function(function(method, url, data, headers)}`
-         *    – The respond method takes a set of static data to be returned or a function that can
+         *    â€“ The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
          *    headers (Object), and the text for the status (string).
          */
@@ -1829,13 +1831,13 @@
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
      *   control how a matched request is handled.
      *
-     *  - respond –
+     *  - respond â€“
      *    `{function([status,] data[, headers, statusText])
  *    | function(function(method, url, data, headers)}`
-     *    – The respond method takes a set of static data to be returned or a function that can return
+     *    â€“ The respond method takes a set of static data to be returned or a function that can return
      *    an array containing response status (number), response data (string), response headers
      *    (Object), and the text for the status (string).
-     *  - passThrough – `{function()}` – Any request matching a backend definition with
+     *  - passThrough â€“ `{function()}` â€“ Any request matching a backend definition with
      *    `passThrough` handler will be passed through to the real backend (an XHR request will be made
      *    to the server.)
      */
@@ -2003,6 +2005,7 @@
          * @description
          *
          * *NOTE*: This function is also published on window for easy access.<br>
+         * *NOTE*: This function is declared ONLY WHEN running tests with jasmine or mocha
          *
          * This function registers a module configuration code. It collects the configuration information
          * which will be used when the injector is created by {@link angular.mock.inject inject}.
@@ -2045,6 +2048,7 @@
          * @description
          *
          * *NOTE*: This function is also published on window for easy access.<br>
+         * *NOTE*: This function is declared ONLY WHEN running tests with jasmine or mocha
          *
          * The inject function wraps a function into an injectable function. The inject() creates new
          * instance of {@link auto.$injector $injector} per test, which is then used for
