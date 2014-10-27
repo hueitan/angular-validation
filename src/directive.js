@@ -74,8 +74,8 @@
                     var validators = validation.slice(0),
                         validator = validators[0].trim(),
                         leftValidation = validators.slice(1),
-                        successMessage = validation + 'SuccessMessage',
-                        errorMessage = validation + 'ErrorMessage',
+                        successMessage = validator + 'SuccessMessage',
+                        errorMessage = validator + 'ErrorMessage',
                         expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
