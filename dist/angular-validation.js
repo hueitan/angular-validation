@@ -192,7 +192,7 @@
                     }
                 } else {
                     for (var i in form) { // whole scope
-                        if (form[i] && form[i].hasOwnProperty('$dirty')) {
+                        if (i[0] !== '$' && form[i].hasOwnProperty('$dirty')) {
                             $scope.$broadcast(i + 'submit-' + form[i].validationId, idx++);
                         }
                     }
@@ -229,7 +229,6 @@
              * @param form
              */
             this.reset = function(form) {
-
                 if (form === undefined) {
                     console.error('This is not a regular Form name scope');
                     return;
@@ -243,7 +242,7 @@
                     }
                 } else {
                     for (var i in form) {
-                        if (form[i].hasOwnProperty('$dirty')) {
+                        if (i[0] !== '$' && form[i].hasOwnProperty('$dirty')) {
                             $scope.$broadcast(i + 'reset-' + form[i].validationId);
                         }
                     }

@@ -29,7 +29,7 @@ describe('provider', function () {
         $scope = $rootScope.$new();
         $timeout = $injector.get('$timeout');
 
-        element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
+        element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
     }));
 
     it('set/get Expression (RegExp or Function)', inject(function () {

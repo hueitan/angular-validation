@@ -21,7 +21,7 @@ describe('directives', function () {
             $timeout = $injector.get('$timeout');
             $scope = $rootScope.$new();
 
-            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></span></form>')($scope);
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
         }));
 
         it('Initial should be pristine and invalid', function () {
@@ -63,20 +63,20 @@ describe('directives', function () {
         it('no-validation-message', inject(function () {
             var display;
             // given no-validation-message="true"
-            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></span></form>')($scope);
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></form>')($scope);
             $timeout.flush();
             display = element.find('span').css('display');
             expect(display).toBe('none');
 
             // given no-validation-message="false"
-            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="false"></span></form>')($scope);
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="false"></form>')($scope);
             $timeout.flush();
             display = element.find('span').css('display');
             expect(display).toBe('block');
 
             // given no-validation-message="{{ noValidMessage }}" -> 'true'
             $scope.noValidMessage = 'true';
-            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="{{ noValidMessage }}"></span></form>')($scope);
+            element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="{{ noValidMessage }}"></form>')($scope);
             $timeout.flush();
             display = element.find('span').css('display');
             expect(display).toBe('none');

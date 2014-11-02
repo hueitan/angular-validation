@@ -12,7 +12,7 @@ Client-side Validation should be simple and clean.
 
 Requirement
 -----
-[AngularJS](http://angularjs.org) > 1.2.0, 1.3.0-beta
+[AngularJS](http://angularjs.org) > 1.2.0, > 1.3.0
 
 DEMO
 -----

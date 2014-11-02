@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.5
+ * @license AngularJS v1.3.1
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -53,15 +53,18 @@
         self.onUrlChange = function(listener) {
             self.pollFns.push(
                 function() {
-                    if (self.$$lastUrl != self.$$url) {
+                    if (self.$$lastUrl !== self.$$url || self.$$state !== self.$$lastState) {
                         self.$$lastUrl = self.$$url;
-                        listener(self.$$url);
+                        self.$$lastState = self.$$state;
+                        listener(self.$$url, self.$$state);
                     }
                 }
             );
 
             return listener;
         };
+
+        self.$$checkUrlChange = angular.noop;
 
         self.cookieHash = {};
         self.lastCookieHash = {};
@@ -71,7 +74,7 @@
         self.defer = function(fn, delay) {
             delay = delay || 0;
             self.deferredFns.push({time:(self.defer.now + delay), fn:fn, id: self.deferredNextId});
-            self.deferredFns.sort(function(a,b){ return a.time - b.time;});
+            self.deferredFns.sort(function(a, b) { return a.time - b.time;});
             return self.deferredNextId++;
         };
 
@@ -125,7 +128,7 @@
             }
         };
 
-        self.$$baseHref = '';
+        self.$$baseHref = '/';
         self.baseHref = function() {
             return this.$$baseHref;
         };
@@ -139,7 +142,7 @@
          * run all fns in pollFns
          */
         poll: function poll() {
-            angular.forEach(this.pollFns, function(pollFn){
+            angular.forEach(this.pollFns, function(pollFn) {
                 pollFn();
             });
         },
@@ -149,13 +152,22 @@
             return pollFn;
         },
 
-        url: function(url, replace) {
+        url: function(url, replace, state) {
+            if (angular.isUndefined(state)) {
+                state = null;
+            }
             if (url) {
                 this.$$url = url;
+                // Native pushState serializes & copies the object; simulate it.
+                this.$$state = angular.copy(state);
                 return this;
             }
 
             return this.$$url;
+        },
+
+        state: function() {
+            return this.$$state;
         },
 
         cookies:  function(name, value) {
@@ -189,7 +201,7 @@
      *
      * @description
      * Configures the mock implementation of {@link ng.$exceptionHandler} to rethrow or to log errors
-     * passed into the `$exceptionHandler`.
+     * passed to the `$exceptionHandler`.
      */
 
     /**
@@ -198,7 +210,7 @@
      *
      * @description
      * Mock implementation of {@link ng.$exceptionHandler} that rethrows or logs errors passed
-     * into it. See {@link ngMock.$exceptionHandlerProvider $exceptionHandlerProvider} for configuration
+     * to it. See {@link ngMock.$exceptionHandlerProvider $exceptionHandlerProvider} for configuration
      * information.
      *
      *
@@ -238,16 +250,15 @@
          *
          * @param {string} mode Mode of operation, defaults to `rethrow`.
          *
-         *   - `rethrow`: If any errors are passed into the handler in tests, it typically
-         *                means that there is a bug in the application or test, so this mock will
-         *                make these tests fail.
+         *   - `rethrow`: If any errors are passed to the handler in tests, it typically means that there
+         *                is a bug in the application or test, so this mock will make these tests fail.
          *   - `log`: Sometimes it is desirable to test that an error is thrown, for this case the `log`
          *            mode stores an array of errors in `$exceptionHandler.errors`, to allow later
          *            assertion of them. See {@link ngMock.$log#assertEmpty assertEmpty()} and
          *            {@link ngMock.$log#reset reset()}
          */
         this.mode = function(mode) {
-            switch(mode) {
+            switch (mode) {
                 case 'rethrow':
                     handler = function(e) {
                         throw e;
@@ -305,7 +316,7 @@
             }
         };
 
-        this.$get = function () {
+        this.$get = function() {
             var $log = {
                 log: function() { $log.log.logs.push(concat([], arguments, 0)); },
                 warn: function() { $log.warn.logs.push(concat([], arguments, 0)); },
@@ -325,13 +336,13 @@
              * @description
              * Reset all of the logging arrays to empty.
              */
-            $log.reset = function () {
+            $log.reset = function() {
                 /**
                  * @ngdoc property
                  * @name $log#log.logs
                  *
                  * @description
-                 * Array of messages logged using {@link ngMock.$log#log}.
+                 * Array of messages logged using {@link ng.$log#log `log()`}.
                  *
                  * @example
                  * ```js
@@ -345,7 +356,7 @@
                  * @name $log#info.logs
                  *
                  * @description
-                 * Array of messages logged using {@link ngMock.$log#info}.
+                 * Array of messages logged using {@link ng.$log#info `info()`}.
                  *
                  * @example
                  * ```js
@@ -359,7 +370,7 @@
                  * @name $log#warn.logs
                  *
                  * @description
-                 * Array of messages logged using {@link ngMock.$log#warn}.
+                 * Array of messages logged using {@link ng.$log#warn `warn()`}.
                  *
                  * @example
                  * ```js
@@ -373,7 +384,7 @@
                  * @name $log#error.logs
                  *
                  * @description
-                 * Array of messages logged using {@link ngMock.$log#error}.
+                 * Array of messages logged using {@link ng.$log#error `error()`}.
                  *
                  * @example
                  * ```js
@@ -387,7 +398,7 @@
                  * @name $log#debug.logs
                  *
                  * @description
-                 * Array of messages logged using {@link ngMock.$log#debug}.
+                 * Array of messages logged using {@link ng.$log#debug `debug()`}.
                  *
                  * @example
                  * ```js
@@ -403,22 +414,22 @@
              * @name $log#assertEmpty
              *
              * @description
-             * Assert that the all of the logging methods have no logged messages. If messages present, an
-             * exception is thrown.
+             * Assert that all of the logging methods have no logged messages. If any messages are present,
+             * an exception is thrown.
              */
             $log.assertEmpty = function() {
                 var errors = [];
                 angular.forEach(['error', 'warn', 'info', 'log', 'debug'], function(logLevel) {
                     angular.forEach($log[logLevel].logs, function(log) {
-                        angular.forEach(log, function (logItem) {
+                        angular.forEach(log, function(logItem) {
                             errors.push('MOCK $log (' + logLevel + '): ' + String(logItem) + '\n' +
-                                (logItem.stack || ''));
+                            (logItem.stack || ''));
                         });
                     });
                 });
                 if (errors.length) {
                     errors.unshift("Expected $log to be empty! Either a message was logged unexpectedly, or "+
-                        "an expected log message was not checked and removed:");
+                    "an expected log message was not checked and removed:");
                     errors.push('');
                     throw new Error(errors.join('\n---------\n'));
                 }
@@ -462,8 +473,8 @@
                         iteration = 0,
                         skipApply = (angular.isDefined(invokeApply) && !invokeApply);
 
-                    count = (angular.isDefined(count)) ? count : 0,
-                        promise.then(null, null, fn);
+                    count = (angular.isDefined(count)) ? count : 0;
+                    promise.then(null, null, fn);
 
                     promise.$$intervalId = nextRepeatId;
 
@@ -493,7 +504,7 @@
                         id: nextRepeatId,
                         deferred: deferred
                     });
-                    repeatFns.sort(function(a,b){ return a.nextTime - b.nextTime;});
+                    repeatFns.sort(function(a, b) { return a.nextTime - b.nextTime;});
 
                     nextRepeatId++;
                     return promise;
@@ -509,7 +520,7 @@
                  * @returns {boolean} Returns `true` if the task was successfully cancelled.
                  */
                 $interval.cancel = function(promise) {
-                    if(!promise) return false;
+                    if (!promise) return false;
                     var fnIndex;
 
                     angular.forEach(repeatFns, function(fn, index) {
@@ -542,7 +553,7 @@
                         var task = repeatFns[0];
                         task.fn();
                         task.nextTime += task.delay;
-                        repeatFns.sort(function(a,b){ return a.nextTime - b.nextTime;});
+                        repeatFns.sort(function(a, b) { return a.nextTime - b.nextTime;});
                     }
                     return millis;
                 };
@@ -590,7 +601,7 @@
             num = -num;
         }
         num = '' + num;
-        while(num.length < digits) num = '0' + num;
+        while (num.length < digits) num = '0' + num;
         if (trim)
             num = num.substr(num.length - digits);
         return neg + num;
@@ -634,7 +645,7 @@
      * ```
      *
      */
-    angular.mock.TzDate = function (offset, timestamp) {
+    angular.mock.TzDate = function(offset, timestamp) {
         var self = new Date(0);
         if (angular.isString(timestamp)) {
             var tsStr = timestamp;
@@ -774,35 +785,45 @@
                 };
             });
 
-            $provide.decorator('$animate', function($delegate, $$asyncCallback) {
-                var animate = {
-                    queue : [],
-                    enabled : $delegate.enabled,
-                    triggerCallbacks : function() {
-                        $$asyncCallback.flush();
-                    },
-                    triggerReflow : function() {
-                        angular.forEach(reflowQueue, function(fn) {
-                            fn();
-                        });
-                        reflowQueue = [];
-                    }
-                };
-
-                angular.forEach(
-                    ['enter','leave','move','addClass','removeClass','setClass'], function(method) {
-                        animate[method] = function() {
-                            animate.queue.push({
-                                event : method,
-                                element : arguments[0],
-                                args : arguments
+            $provide.decorator('$animate', ['$delegate', '$$asyncCallback', '$timeout', '$browser',
+                function($delegate,   $$asyncCallback,   $timeout,   $browser) {
+                    var animate = {
+                        queue: [],
+                        cancel: $delegate.cancel,
+                        enabled: $delegate.enabled,
+                        triggerCallbackEvents: function() {
+                            $$asyncCallback.flush();
+                        },
+                        triggerCallbackPromise: function() {
+                            $timeout.flush(0);
+                        },
+                        triggerCallbacks: function() {
+                            this.triggerCallbackEvents();
+                            this.triggerCallbackPromise();
+                        },
+                        triggerReflow: function() {
+                            angular.forEach(reflowQueue, function(fn) {
+                                fn();
                             });
-                            $delegate[method].apply($delegate, arguments);
-                        };
-                    });
+                            reflowQueue = [];
+                        }
+                    };
 
-                return animate;
-            });
+                    angular.forEach(
+                        ['animate','enter','leave','move','addClass','removeClass','setClass'], function(method) {
+                            animate[method] = function() {
+                                animate.queue.push({
+                                    event: method,
+                                    element: arguments[0],
+                                    options: arguments[arguments.length-1],
+                                    args: arguments
+                                });
+                                return $delegate[method].apply($delegate, arguments);
+                            };
+                        });
+
+                    return animate;
+                }]);
 
         }]);
 
@@ -862,13 +883,13 @@
         function serializeScope(scope, offset) {
             offset = offset ||  '  ';
             var log = [offset + 'Scope(' + scope.$id + '): {'];
-            for ( var key in scope ) {
+            for (var key in scope) {
                 if (Object.prototype.hasOwnProperty.call(scope, key) && !key.match(/^(\$|this)/)) {
                     log.push('  ' + key + ': ' + angular.toJson(scope[key]));
                 }
             }
             var child = scope.$$childHead;
-            while(child) {
+            while (child) {
                 log.push(serializeScope(child, offset + '  '));
                 child = child.$$nextSibling;
             }
@@ -888,7 +909,7 @@
      * development please see {@link ngMockE2E.$httpBackend e2e $httpBackend mock}.
      *
      * During unit testing, we want our unit tests to run quickly and have no external dependencies so
-     * we donâ€™t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
+     * we don’t want to send [XHR](https://developer.mozilla.org/en/xmlhttprequest) or
      * [JSONP](http://en.wikipedia.org/wiki/JSONP) requests to a real server. All we really need is
      * to verify whether a certain request has been sent or not, or alternatively just let the
      * application make requests, respond with pre-trained responses and assert that the end result is
@@ -900,7 +921,7 @@
      * When an Angular application needs some data from a server, it calls the $http service, which
      * sends the request to a real server using $httpBackend service. With dependency injection, it is
      * easy to inject $httpBackend mock (which has the same API as $httpBackend) and use it to verify
-     * the requests and respond with some testing data without sending a request to real server.
+     * the requests and respond with some testing data without sending a request to a real server.
      *
      * There are two ways to specify what test data should be returned as http responses by the mock
      * backend when the code under test makes http requests:
@@ -980,6 +1001,11 @@
      * First we create the controller under test:
      *
      ```js
+     // The module code
+     angular
+     .module('MyApp', [])
+     .controller('MyController', MyController);
+
      // The controller code
      function MyController($scope, $http) {
     var authToken;
@@ -1007,13 +1033,17 @@
      ```js
      // testing controller
      describe('MyController', function() {
-       var $httpBackend, $rootScope, createController;
+       var $httpBackend, $rootScope, createController, authRequestHandler;
+
+       // Set up the module
+       beforeEach(module('MyApp'));
 
        beforeEach(inject(function($injector) {
          // Set up the mock http service responses
          $httpBackend = $injector.get('$httpBackend');
          // backend definition common for all tests
-         $httpBackend.when('GET', '/auth.py').respond({userId: 'userX'}, {'A-Token': 'xxx'});
+         authRequestHandler = $httpBackend.when('GET', '/auth.py')
+                                .respond({userId: 'userX'}, {'A-Token': 'xxx'});
 
          // Get hold of a scope (i.e. the root scope)
          $rootScope = $injector.get('$rootScope');
@@ -1039,11 +1069,23 @@
        });
 
 
+       it('should fail authentication', function() {
+
+         // Notice how you can change the response even after it was set
+         authRequestHandler.respond(401, '');
+
+         $httpBackend.expectGET('/auth.py');
+         var controller = createController();
+         $httpBackend.flush();
+         expect($rootScope.status).toBe('Failed...');
+       });
+
+
        it('should send msg to server', function() {
          var controller = createController();
          $httpBackend.flush();
 
-         // now you donâ€™t care about the authentication, but
+         // now you don’t care about the authentication, but
          // the controller will still send the request and
          // $httpBackend will respond without you having to
          // specify the expectation and response for this request
@@ -1145,12 +1187,12 @@
             if (expectation && expectation.match(method, url)) {
                 if (!expectation.matchData(data))
                     throw new Error('Expected ' + expectation + ' with different data\n' +
-                        'EXPECTED: ' + prettyPrint(expectation.data) + '\nGOT:      ' + data);
+                    'EXPECTED: ' + prettyPrint(expectation.data) + '\nGOT:      ' + data);
 
                 if (!expectation.matchHeaders(headers))
                     throw new Error('Expected ' + expectation + ' with different headers\n' +
-                        'EXPECTED: ' + prettyPrint(expectation.headers) + '\nGOT:      ' +
-                        prettyPrint(headers));
+                    'EXPECTED: ' + prettyPrint(expectation.headers) + '\nGOT:      ' +
+                    prettyPrint(headers));
 
                 expectations.shift();
 
@@ -1176,7 +1218,7 @@
             throw wasExpected ?
                 new Error('No response defined !') :
                 new Error('Unexpected request: ' + method + ' ' + url + '\n' +
-                    (expectation ? 'Expected ' + expectation : 'No more request expected'));
+                (expectation ? 'Expected ' + expectation : 'No more request expected'));
         }
 
         /**
@@ -1193,26 +1235,32 @@
          * @param {(Object|function(Object))=} headers HTTP headers or function that receives http header
          *   object and returns true if the headers match the current definition.
          * @returns {requestHandler} Returns an object with `respond` method that controls how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          *
-         *  - respond â€“
+         *  - respond –
          *      `{function([status,] data[, headers, statusText])
    *      | function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    – The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
-         *    headers (Object), and the text for the status (string).
+         *    headers (Object), and the text for the status (string). The respond method returns the
+         *    `requestHandler` object for possible overrides.
          */
         $httpBackend.when = function(method, url, data, headers) {
             var definition = new MockHttpExpectation(method, url, data, headers),
                 chain = {
                     respond: function(status, data, headers, statusText) {
+                        definition.passThrough = undefined;
                         definition.response = createResponse(status, data, headers, statusText);
+                        return chain;
                     }
                 };
 
             if ($browser) {
                 chain.passThrough = function() {
+                    definition.response = undefined;
                     definition.passThrough = true;
+                    return chain;
                 };
             }
 
@@ -1230,7 +1278,8 @@
          *   and returns true if the url match the current definition.
          * @param {(Object|function(Object))=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
 
         /**
@@ -1243,7 +1292,8 @@
          *   and returns true if the url match the current definition.
          * @param {(Object|function(Object))=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
 
         /**
@@ -1256,7 +1306,8 @@
          *   and returns true if the url match the current definition.
          * @param {(Object|function(Object))=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
 
         /**
@@ -1271,7 +1322,8 @@
          *   data string and returns true if the data is as expected.
          * @param {(Object|function(Object))=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
 
         /**
@@ -1286,7 +1338,8 @@
          *   data string and returns true if the data is as expected.
          * @param {(Object|function(Object))=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
 
         /**
@@ -1298,7 +1351,8 @@
          * @param {string|RegExp|function(string)} url HTTP url or function that receives the url
          *   and returns true if the url match the current definition.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled.
          */
         createShortMethods('when');
 
@@ -1318,23 +1372,28 @@
          * @param {(Object|function(Object))=} headers HTTP headers or function that receives http header
          *   object and returns true if the headers match the current expectation.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *  request is handled.
+         *  request is handled. You can save this object for later use and invoke `respond` again in
+         *  order to change how a matched request is handled.
          *
-         *  - respond â€“
+         *  - respond –
          *    `{function([status,] data[, headers, statusText])
    *    | function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    – The respond method takes a set of static data to be returned or a function that can
          *    return an array containing response status (number), response data (string), response
-         *    headers (Object), and the text for the status (string).
+         *    headers (Object), and the text for the status (string). The respond method returns the
+         *    `requestHandler` object for possible overrides.
          */
         $httpBackend.expect = function(method, url, data, headers) {
-            var expectation = new MockHttpExpectation(method, url, data, headers);
+            var expectation = new MockHttpExpectation(method, url, data, headers),
+                chain = {
+                    respond: function(status, data, headers, statusText) {
+                        expectation.response = createResponse(status, data, headers, statusText);
+                        return chain;
+                    }
+                };
+
             expectations.push(expectation);
-            return {
-                respond: function (status, data, headers, statusText) {
-                    expectation.response = createResponse(status, data, headers, statusText);
-                }
-            };
+            return chain;
         };
 
 
@@ -1348,7 +1407,8 @@
          *   and returns true if the url match the current definition.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         * request is handled. See #expect for more info.
+         * request is handled. You can save this object for later use and invoke `respond` again in
+         * order to change how a matched request is handled. See #expect for more info.
          */
 
         /**
@@ -1361,7 +1421,8 @@
          *   and returns true if the url match the current definition.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
 
         /**
@@ -1374,7 +1435,8 @@
          *   and returns true if the url match the current definition.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
 
         /**
@@ -1390,7 +1452,8 @@
          *  is in JSON format.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
 
         /**
@@ -1406,7 +1469,8 @@
          *  is in JSON format.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
 
         /**
@@ -1422,7 +1486,8 @@
          *  is in JSON format.
          * @param {Object=} headers HTTP headers.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
 
         /**
@@ -1434,7 +1499,8 @@
          * @param {string|RegExp|function(string)} url HTTP url or function that receives the url
          *   and returns true if the url match the current definition.
          * @returns {requestHandler} Returns an object with `respond` method that control how a matched
-         *   request is handled.
+         *   request is handled. You can save this object for later use and invoke `respond` again in
+         *   order to change how a matched request is handled.
          */
         createShortMethods('expect');
 
@@ -1449,11 +1515,11 @@
          *   all pending requests will be flushed. If there are no pending requests when the flush method
          *   is called an exception is thrown (as this typically a sign of programming error).
          */
-        $httpBackend.flush = function(count) {
-            $rootScope.$digest();
+        $httpBackend.flush = function(count, digest) {
+            if (digest !== false) $rootScope.$digest();
             if (!responses.length) throw new Error('No pending request to flush !');
 
-            if (angular.isDefined(count)) {
+            if (angular.isDefined(count) && count !== null) {
                 while (count--) {
                     if (!responses.length) throw new Error('No more pending request to flush !');
                     responses.shift()();
@@ -1463,7 +1529,7 @@
                     responses.shift()();
                 }
             }
-            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingExpectation(digest);
         };
 
 
@@ -1481,8 +1547,8 @@
          *   afterEach($httpBackend.verifyNoOutstandingExpectation);
          * ```
          */
-        $httpBackend.verifyNoOutstandingExpectation = function() {
-            $rootScope.$digest();
+        $httpBackend.verifyNoOutstandingExpectation = function(digest) {
+            if (digest !== false) $rootScope.$digest();
             if (expectations.length) {
                 throw new Error('Unsatisfied requests: ' + expectations.join(', '));
             }
@@ -1526,7 +1592,7 @@
 
 
         function createShortMethods(prefix) {
-            angular.forEach(['GET', 'DELETE', 'JSONP'], function(method) {
+            angular.forEach(['GET', 'DELETE', 'JSONP', 'HEAD'], function(method) {
                 $httpBackend[prefix + method] = function(url, headers) {
                     return $httpBackend[prefix](method, url, undefined, headers);
                 };
@@ -1570,7 +1636,9 @@
             if (angular.isUndefined(data)) return true;
             if (data && angular.isFunction(data.test)) return data.test(d);
             if (data && angular.isFunction(data)) return data(d);
-            if (data && !angular.isString(data)) return angular.equals(data, angular.fromJson(d));
+            if (data && !angular.isString(data)) {
+                return angular.equals(angular.fromJson(angular.toJson(data)), angular.fromJson(d));
+            }
             return data == d;
         };
 
@@ -1643,7 +1711,7 @@
      * that adds a "flush" and "verifyNoPendingTasks" methods.
      */
 
-    angular.mock.$TimeoutDecorator = function($delegate, $browser) {
+    angular.mock.$TimeoutDecorator = ['$delegate', '$browser', function($delegate, $browser) {
 
         /**
          * @ngdoc method
@@ -1668,7 +1736,7 @@
         $delegate.verifyNoPendingTasks = function() {
             if ($browser.deferredFns.length) {
                 throw new Error('Deferred tasks to flush (' + $browser.deferredFns.length + '): ' +
-                    formatPendingTasksAsString($browser.deferredFns));
+                formatPendingTasksAsString($browser.deferredFns));
             }
         };
 
@@ -1682,9 +1750,9 @@
         }
 
         return $delegate;
-    };
+    }];
 
-    angular.mock.$RAFDecorator = function($delegate) {
+    angular.mock.$RAFDecorator = ['$delegate', function($delegate) {
         var queue = [];
         var rafFn = function(fn) {
             var index = queue.length;
@@ -1697,12 +1765,12 @@
         rafFn.supported = $delegate.supported;
 
         rafFn.flush = function() {
-            if(queue.length === 0) {
+            if (queue.length === 0) {
                 throw new Error('No rAF callbacks present');
             }
 
             var length = queue.length;
-            for(var i=0;i<length;i++) {
+            for (var i=0;i<length;i++) {
                 queue[i]();
             }
 
@@ -1710,9 +1778,9 @@
         };
 
         return rafFn;
-    };
+    }];
 
-    angular.mock.$AsyncCallbackDecorator = function($delegate) {
+    angular.mock.$AsyncCallbackDecorator = ['$delegate', function($delegate) {
         var callbacks = [];
         var addFn = function(fn) {
             callbacks.push(fn);
@@ -1724,7 +1792,7 @@
             callbacks = [];
         };
         return addFn;
-    };
+    }];
 
     /**
      *
@@ -1738,11 +1806,12 @@
     /**
      * @ngdoc module
      * @name ngMock
+     * @packageName angular-mocks
      * @description
      *
      * # ngMock
      *
-     * The `ngMock` module providers support to inject and mock Angular services into unit tests.
+     * The `ngMock` module provides support to inject and mock Angular services into unit tests.
      * In addition, ngMock also extends various core ng services such that they can be
      * inspected and controlled in a synchronous manner within test code.
      *
@@ -1758,15 +1827,16 @@
         $httpBackend: angular.mock.$HttpBackendProvider,
         $rootElement: angular.mock.$RootElementProvider
     }).config(['$provide', function($provide) {
-            $provide.decorator('$timeout', angular.mock.$TimeoutDecorator);
-            $provide.decorator('$$rAF', angular.mock.$RAFDecorator);
-            $provide.decorator('$$asyncCallback', angular.mock.$AsyncCallbackDecorator);
-        }]);
+        $provide.decorator('$timeout', angular.mock.$TimeoutDecorator);
+        $provide.decorator('$$rAF', angular.mock.$RAFDecorator);
+        $provide.decorator('$$asyncCallback', angular.mock.$AsyncCallbackDecorator);
+    }]);
 
     /**
      * @ngdoc module
      * @name ngMockE2E
      * @module ngMockE2E
+     * @packageName angular-mocks
      * @description
      *
      * The `ngMockE2E` is an angular module which contains mocks suitable for end-to-end testing.
@@ -1800,7 +1870,7 @@
      * use the `passThrough` request handler of `when` instead of `respond`.
      *
      * Additionally, we don't want to manually have to flush mocked out requests like we do during unit
-     * testing. For this reason the e2e $httpBackend automatically flushes mocked out requests
+     * testing. For this reason the e2e $httpBackend flushes mocked out requests
      * automatically, closely simulating the behavior of the XMLHttpRequest object.
      *
      * To setup the application to run with this http backend, you have to create a module that depends
@@ -1816,7 +1886,9 @@
  *
  *     // adds a new phone to the phones array
  *     $httpBackend.whenPOST('/phones').respond(function(method, url, data) {
- *       phones.push(angular.fromJson(data));
+ *       var phone = angular.fromJson(data);
+ *       phones.push(phone);
+ *       return [200, phone, {}];
  *     });
  *     $httpBackend.whenGET(/^\/templates\//).passThrough();
  *     //...
@@ -1840,17 +1912,19 @@
      * @param {(Object|function(Object))=} headers HTTP headers or function that receives http header
      *   object and returns true if the headers match the current definition.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      *
-     *  - respond â€“
+     *  - respond –
      *    `{function([status,] data[, headers, statusText])
  *    | function(function(method, url, data, headers)}`
-     *    â€“ The respond method takes a set of static data to be returned or a function that can return
+     *    – The respond method takes a set of static data to be returned or a function that can return
      *    an array containing response status (number), response data (string), response headers
      *    (Object), and the text for the status (string).
-     *  - passThrough â€“ `{function()}` â€“ Any request matching a backend definition with
+     *  - passThrough – `{function()}` – Any request matching a backend definition with
      *    `passThrough` handler will be passed through to the real backend (an XHR request will be made
      *    to the server.)
+     *  - Both methods return the `requestHandler` object for possible overrides.
      */
 
     /**
@@ -1864,7 +1938,8 @@
      *   and returns true if the url match the current definition.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1878,7 +1953,8 @@
      *   and returns true if the url match the current definition.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1892,7 +1968,8 @@
      *   and returns true if the url match the current definition.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1907,7 +1984,8 @@
      * @param {(string|RegExp)=} data HTTP request body.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1922,7 +2000,8 @@
      * @param {(string|RegExp)=} data HTTP request body.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1937,7 +2016,8 @@
      * @param {(string|RegExp)=} data HTTP request body.
      * @param {(Object|function(Object))=} headers HTTP headers.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
 
     /**
@@ -1950,29 +2030,15 @@
      * @param {string|RegExp|function(string)} url HTTP url or function that receives the url
      *   and returns true if the url match the current definition.
      * @returns {requestHandler} Returns an object with `respond` and `passThrough` methods that
-     *   control how a matched request is handled.
+     *   control how a matched request is handled. You can save this object for later use and invoke
+     *   `respond` or `passThrough` again in order to change how a matched request is handled.
      */
     angular.mock.e2e = {};
     angular.mock.e2e.$httpBackendDecorator =
         ['$rootScope', '$delegate', '$browser', createHttpBackendMock];
 
 
-    angular.mock.clearDataCache = function() {
-        var key,
-            cache = angular.element.cache;
-
-        for(key in cache) {
-            if (Object.prototype.hasOwnProperty.call(cache,key)) {
-                var handle = cache[key].handle;
-
-                handle && angular.element(handle.elem).off();
-                delete cache[key];
-            }
-        }
-    };
-
-
-    if(window.jasmine || window.mocha) {
+    if (window.jasmine || window.mocha) {
 
         var currentSpec = null,
             isSpecRunning = function() {
@@ -1980,12 +2046,18 @@
             };
 
 
-        beforeEach(function() {
+        (window.beforeEach || window.setup)(function() {
             currentSpec = this;
         });
 
-        afterEach(function() {
+        (window.afterEach || window.teardown)(function() {
             var injector = currentSpec.$injector;
+
+            angular.forEach(currentSpec.$modules, function(module) {
+                if (module && module.$$hashKey) {
+                    module.$$hashKey = undefined;
+                }
+            });
 
             currentSpec.$injector = null;
             currentSpec.$modules = null;
@@ -1995,8 +2067,6 @@
                 injector.get('$rootElement').off();
                 injector.get('$browser').pollFns.length = 0;
             }
-
-            angular.mock.clearDataCache();
 
             // clean up jquery's fragment cache
             angular.forEach(angular.element.fragments, function(val, key) {
@@ -2017,6 +2087,7 @@
          * @description
          *
          * *NOTE*: This function is also published on window for easy access.<br>
+         * *NOTE*: This function is declared ONLY WHEN running tests with jasmine or mocha
          *
          * This function registers a module configuration code. It collects the configuration information
          * which will be used when the injector is created by {@link angular.mock.inject inject}.
@@ -2026,7 +2097,7 @@
          * @param {...(string|Function|Object)} fns any number of modules which are represented as string
          *        aliases or as anonymous module initialization functions. The modules are used to
          *        configure the injector. The 'ng' and 'ngMock' modules are automatically loaded. If an
-         *        object literal is passed they will be register as values in the module, the key being
+         *        object literal is passed they will be registered as values in the module, the key being
          *        the module name and the value being what is returned.
          */
         window.module = angular.mock.module = function() {
@@ -2059,6 +2130,7 @@
          * @description
          *
          * *NOTE*: This function is also published on window for easy access.<br>
+         * *NOTE*: This function is declared ONLY WHEN running tests with jasmine or mocha
          *
          * The inject function wraps a function into an injectable function. The inject() creates new
          * instance of {@link auto.$injector $injector} per test, which is then used for
@@ -2158,14 +2230,28 @@
             /////////////////////
             function workFn() {
                 var modules = currentSpec.$modules || [];
-
+                var strictDi = !!currentSpec.$injectorStrict;
                 modules.unshift('ngMock');
                 modules.unshift('ng');
                 var injector = currentSpec.$injector;
                 if (!injector) {
-                    injector = currentSpec.$injector = angular.injector(modules);
+                    if (strictDi) {
+                        // If strictDi is enabled, annotate the providerInjector blocks
+                        angular.forEach(modules, function(moduleFn) {
+                            if (typeof moduleFn === "function") {
+                                angular.injector.$$annotate(moduleFn);
+                            }
+                        });
+                    }
+                    injector = currentSpec.$injector = angular.injector(modules, strictDi);
+                    currentSpec.$injectorStrict = strictDi;
                 }
-                for(var i = 0, ii = blockFns.length; i < ii; i++) {
+                for (var i = 0, ii = blockFns.length; i < ii; i++) {
+                    if (currentSpec.$injectorStrict) {
+                        // If the injector is strict / strictDi, and the spec wants to inject using automatic
+                        // annotation, then annotate the function here.
+                        injector.annotate(blockFns[i]);
+                    }
                     try {
                         /* jshint -W040 *//* Jasmine explicitly provides a `this` object when calling functions */
                         injector.invoke(blockFns[i] || angular.noop, this);
@@ -2177,6 +2263,22 @@
                         throw e;
                     } finally {
                         errorForStack = null;
+                    }
+                }
+            }
+        };
+
+
+        angular.mock.inject.strictDi = function(value) {
+            value = arguments.length ? !!value : true;
+            return isSpecRunning() ? workFn() : workFn;
+
+            function workFn() {
+                if (value !== currentSpec.$injectorStrict) {
+                    if (currentSpec.$injector) {
+                        throw new Error('Injector already created, can not modify strict annotations');
+                    } else {
+                        currentSpec.$injectorStrict = value;
                     }
                 }
             }
