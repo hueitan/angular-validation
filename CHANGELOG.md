@@ -1,3 +1,14 @@
+14 Nov 2014 v1.2.6
+===
+**Important**
+    
+This version support to angularjs version 1.2.x <br/>
+To support angularjs version 1.3.x, please use angular-validation 1.3.x
+    
+**Fix**
+
+[bcaab7e](https://github.com/huei90/angular-validation/commit/bcaab7e31f2e00e92e2d8e8397935c96c37d16b3) Custom message on html not displaying with multiple validator
+
 24 Aug 2014 v1.2.5
 ===
 **New Features**

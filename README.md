@@ -1,4 +1,4 @@
-angular-validation 1.2.5
+angular-validation 1.2.6
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
@@ -9,10 +9,14 @@ Client-side Validation should be simple and clean.
 <br/>Don't let Client-side Validation dirty your controller.
 <br/>Setup your Validation on config phase by using some rules [(example)](https://github.com/huei90/angular-validation/blob/master/dist/angular-validation-rule.js)
 <br/>And add Validation in your view only.
+    
+angularjs 1.2.0 support to version angular-validation 1.2.6 <br/>
+angularjs 1.3.0 support after version angular-validation 1.3.0
 
 Requirement
 -----
-[AngularJS](http://angularjs.org) > 1.2.0, > 1.3.0
+[AngularJS](http://angularjs.org) > 1.2.0 (for angular-validation < 1.2.6) <br/>
+[AngularJS](http://angularjs.org) > 1.3.0 (for angular-validation > 1.3)
 
 DEMO
 -----
