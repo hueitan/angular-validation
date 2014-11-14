@@ -215,7 +215,7 @@
                              * Click submit form, check the validity when submit
                              */
                             scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
-                                var value = element[0].value,
+                                var value = ctrl.$viewValue,
                                     isValid = false;
 
                                 if (index === 0) {
@@ -257,7 +257,7 @@
                              */
                             if (attrs.validMethod === 'blur') {
                                 element.bind('blur', function() {
-                                    var value = element[0].value;
+                                    var value = ctrl.$viewValue;
                                     scope.$apply(function() {
                                         checkValidation(scope, element, attrs, ctrl, validation, value);
                                     });
