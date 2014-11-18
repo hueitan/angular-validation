@@ -452,9 +452,9 @@
                         element.after('<span></span>');
 
                         /**
-                         * Set initial validity to false if no boolean value is transmitted
+                         * Set initial validity to undefined if no boolean value is transmitted
                          */
-                        var initialValidity = false;
+                        var initialValidity = undefined;
                         if (typeof scope.initialValidity === 'boolean') {
                             initialValidity = scope.initialValidity;
                         }
@@ -481,7 +481,7 @@
                             isFocusElement = false;
                             ctrl.$setViewValue('');
                             ctrl.$setPristine();
-                            ctrl.$setValidity(ctrl.$name, false);
+                            ctrl.$setValidity(ctrl.$name, undefined);
                             ctrl.$render();
                             element.next().html('');
                         });
