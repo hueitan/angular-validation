@@ -297,10 +297,14 @@
                  * @returns {}
                  */
                 var validFunc = function(element, validMessage, validation, callback, ctrl) {
-                    if ($validationProvider.showSuccessMessage) {
-                        element.next().html($validationProvider.getSuccessHTML(validMessage || $validationProvider.getDefaultMsg(validation).success));
+                    var messageElem = element.next(),
+                        messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
+
+                    if ($validationProvider.showSuccessMessage && messageToShow) {
+                        messageElem.html($validationProvider.getSuccessHTML(messageToShow));
+                        messageElem.css('display', '');
                     } else {
-                        element.next().html('');
+                        messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, true);
                     if (callback) callback();
@@ -319,10 +323,12 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
+                    var messageElem = element.next();
+                    messageElem.css('display', '');
                     if ($validationProvider.showErrorMessage) {
-                        element.next().html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                        messageElem.html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
                     } else {
-                        element.next().html('');
+                        messageElem.html('');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
                     if (callback) callback();
@@ -454,7 +460,7 @@
                         /**
                          * Set initial validity to undefined if no boolean value is transmitted
                          */
-                        var initialValidity = undefined;
+                        var initialValidity;
                         if (typeof scope.initialValidity === 'boolean') {
                             initialValidity = scope.initialValidity;
                         }
