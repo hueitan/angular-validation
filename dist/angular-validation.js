@@ -323,12 +323,14 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = element.next();
-                    messageElem.css('display', '');
-                    if ($validationProvider.showErrorMessage) {
-                        messageElem.html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
+                    var messageElem = element.next(),
+                        messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
+
+                    if ($validationProvider.showErrorMessage && messageToShow) {
+                        messageElem.html($validationProvider.getErrorHTML(messageToShow));
+                        messageElem.css('display', '');
                     } else {
-                        messageElem.html('');
+                        messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
                     if (callback) callback();
