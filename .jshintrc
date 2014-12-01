@@ -1,0 +1,16 @@
+{
+    "maxlen": 120,
+    "browser": true,
+    "devel": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "evil": true,
+    "globals": {
+        "angular": true,
+        "require": true,
+        "module": true
+    }
+}
