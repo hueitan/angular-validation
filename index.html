@@ -96,6 +96,15 @@
 
                 <label>Number</label>
                 <input type="text" name="numberBlur" ng-model="form2.number" validator="number" valid-method="blur"/>
+
+                <label>Lucky Number</label>
+                <select class="form-control" name="selectBlur" ng-model="form2.select" validator="required">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
             </fieldset>
 
             <ul class="button-group">
@@ -203,7 +212,7 @@
             <ul class="button-group">
                 <li><button class="button" ng-click="form5.submit(Form5)">Submit</button></li>
                 <li><button class="button alert" ng-click="form5.reset(Form5)">Reset</button></li>
-                <li><button class="button secondary" ng-disabled="!form5.checkValid(Form5)">checkValid = {{ form2.checkValid(Form2) }}</button></li>
+                <li><button class="button secondary" ng-disabled="!form5.checkValid(Form5)">checkValid = {{ form5.checkValid(Form5) }}</button></li>
             </ul>
             <!-- <pre>{{ form | json }}</pre> -->
         </form>
