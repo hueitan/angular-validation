@@ -1,8 +1,10 @@
 (function() {
+    'use strict';
     angular.module('validation', ['validation.provider', 'validation.directive']);
 }).call(this);
 
 (function() {
+    'use strict';
     angular.module('validation.provider', [])
         .provider('$validation', function() {
 
@@ -188,7 +190,9 @@
                     $scope.$broadcast(form.$name + 'submit-' + form.validationId, idx++);
                 } else if (form.constructor === Array) { // multiple
                     for (var k in form) {
-                        $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
+                        if (form.hasOwnProperty(k)) {
+                            $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
+                        }
                     }
                 } else {
                     for (var i in form) { // whole scope
@@ -238,7 +242,9 @@
                     $scope.$broadcast(form.$name + 'reset-' + form.validationId);
                 } else if (form.constructor === Array) {
                     for (var k in form) {
-                        $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
+                        if (form.hasOwnProperty(k)) {
+                            $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
+                        }
                     }
                 } else {
                     for (var i in form) {
@@ -279,6 +285,7 @@
 }).call(this);
 
 (function() {
+    'use strict';
     angular.module('validation.directive', ['validation.provider'])
         .directive('validator', ['$injector',
             function($injector) {
@@ -325,11 +332,22 @@
                 var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
                     var messageElem = element.next();
                     messageElem.css('display', '');
+
+                    var html = '';
                     if ($validationProvider.showErrorMessage) {
-                        messageElem.html($validationProvider.getErrorHTML(validMessage || $validationProvider.getDefaultMsg(validation).error));
-                    } else {
-                        messageElem.html('');
+                        var message;
+
+                        if (validMessage) {
+                            message = validMessage;
+                        } else {
+                            message = $validationProvider.getDefaultMsg(validation).error;
+                            if (message.constructor === Function) {
+                                message = message(element);
+                            }
+                        }
+                        html = $validationProvider.getErrorHTML(message);
                     }
+                    messageElem.html(html);
                     ctrl.$setValidity(ctrl.$name, false);
                     if (callback) callback();
 

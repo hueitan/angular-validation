@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
-
-    // Variable
-    var ROOT_PATH = '.';
+    'use strict';
 
     require('time-grunt')(grunt);
 

@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     angular.module('validation.provider', [])
         .provider('$validation', function() {
 
@@ -184,7 +185,9 @@
                     $scope.$broadcast(form.$name + 'submit-' + form.validationId, idx++);
                 } else if (form.constructor === Array) { // multiple
                     for (var k in form) {
-                        $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
+                        if (form.hasOwnProperty(k)) {
+                            $scope.$broadcast(form[k].$name + 'submit-' + form[k].validationId, idx++);
+                        }
                     }
                 } else {
                     for (var i in form) { // whole scope
@@ -234,7 +237,9 @@
                     $scope.$broadcast(form.$name + 'reset-' + form.validationId);
                 } else if (form.constructor === Array) {
                     for (var k in form) {
-                        $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
+                        if (form.hasOwnProperty(k)) {
+                            $scope.$broadcast(form[k].$name + 'reset-' + form[k].validationId);
+                        }
                     }
                 } else {
                     for (var i in form) {
