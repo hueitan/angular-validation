@@ -18,8 +18,9 @@
                  * @returns {}
                  */
                 var validFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = element.next(),
-                        messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
+                    var messageElem = angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'));
+                    messageElem = messageElem || element.next();
+                    var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
                         messageElem.html($validationProvider.getSuccessHTML(messageToShow));
@@ -44,8 +45,8 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = element.next();
-                    messageElem.css('display', '');
+                    var messageElem = angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'));
+                    messageElem = messageElem || element.next();
 
                     var html = '';
                     if ($validationProvider.showErrorMessage) {
@@ -187,7 +188,9 @@
                         /**
                          * Valid/Invalid Message
                          */
-                        element.after('<span></span>');
+                        if (!angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'))) {
+                            element.after('<span></span>');
+                        }
 
                         /**
                          * Set initial validity to undefined if no boolean value is transmitted
