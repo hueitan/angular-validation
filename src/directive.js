@@ -18,8 +18,10 @@
                  * @returns {}
                  */
                 var validFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'));
-                    messageElem = messageElem || element.next();
+                    var messageElem, node = document.querySelector('[validator-msg-for="' + ctrl.$name + '"]');
+                    if ((messageElem = angular.element(node)).length === 0) {
+                      messageElem = element.next();
+                    }
                     var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
@@ -45,8 +47,12 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'));
-                    messageElem = messageElem || element.next();
+                    var messageElem, node = document.querySelector('[validator-msg-for="' + ctrl.$name + '"]');
+
+                    if ((messageElem = angular.element(node)).length === 0) {
+                      messageElem = element.next();
+                    }
+                    messageElem.css('display', '');
 
                     var html = '';
                     if ($validationProvider.showErrorMessage) {
@@ -188,7 +194,7 @@
                         /**
                          * Valid/Invalid Message
                          */
-                        if (!angular.element(document.querySelector('[validator-msg-for="' + ctrl.$name + '"]'))) {
+                        if (!document.querySelector('[validator-msg-for="' + ctrl.$name + '"]')) {
                             element.after('<span></span>');
                         }
 
