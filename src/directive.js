@@ -17,7 +17,7 @@
                  * @returns {}
                  */
                 var validFunc = function(element, validMessage, validation, scope, ctrl) {
-                    var messageElem = angular.element('#'+ scope.messageId),
+                    var messageElem = angular.element('#' + scope.messageId),
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
@@ -43,7 +43,7 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, scope, ctrl) {
-                    var messageElem = angular.element('#'+ scope.messageId),
+                    var messageElem = angular.element('#' + scope.messageId),
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
 
                     if ($validationProvider.showErrorMessage && messageToShow) {
@@ -208,7 +208,7 @@
                             ctrl.$setPristine();
                             ctrl.$setValidity(ctrl.$name, undefined);
                             ctrl.$render();
-                            angular.element('#'+ scope.messageId).html('');
+                            angular.element('#' + scope.messageId).html('');
                         });
 
                         /**
@@ -291,7 +291,7 @@
                                     ctrl.$setViewValue(ctrl.$viewValue);
                                 } else if (ctrl.$pristine) {
                                     // Don't validate form when the input is clean(pristine)
-                                    angular.element('#'+ scope.messageId).html('');
+                                    angular.element('#' + scope.messageId).html('');
                                     return;
                                 }
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
@@ -304,7 +304,7 @@
                              * Don't showup the validation Message
                              */
                             attrs.$observe('noValidationMessage', function(value) {
-                                var el = angular.element('#'+ scope.messageId);
+                                var el = angular.element('#' + scope.messageId);
                                 if (value == 'true' || value === true) {
                                     el.css('display', 'none');
                                 } else if (value == 'false' || value === false) {
