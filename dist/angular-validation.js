@@ -153,6 +153,14 @@
              */
             this.showErrorMessage = true;
 
+            /**
+             * Define a selector that will be used to show up
+             * the error message
+             * example: $validationProvider.selector = '.help-block'
+             * @type {string}
+             */
+            this.selector = '.help-block';
+
 
             /**
              * Check form valid, return true
@@ -270,7 +278,8 @@
                         showErrorMessage: this.showErrorMessage,
                         checkValid: this.checkValid,
                         validate: this.validate,
-                        reset: this.reset
+                        reset: this.reset,
+                        selector: this.selector
                     };
                 }
             ];
@@ -296,8 +305,8 @@
                  * @param ctrl
                  * @returns {}
                  */
-                var validFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = element.next(),
+                var validFunc = function(element, validMessage, validation, scope, ctrl) {
+                    var messageElem = angular.element('#'+ scope.messageId),
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
@@ -307,7 +316,7 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, true);
-                    if (callback) callback();
+                    if (scope.validCallback) scope.validCallback();
 
                     return true;
                 };
@@ -322,8 +331,8 @@
                  * @param ctrl
                  * @returns {}
                  */
-                var invalidFunc = function(element, validMessage, validation, callback, ctrl) {
-                    var messageElem = element.next(),
+                var invalidFunc = function(element, validMessage, validation, scope, ctrl) {
+                    var messageElem = angular.element('#'+ scope.messageId),
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
 
                     if ($validationProvider.showErrorMessage && messageToShow) {
@@ -333,7 +342,7 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
-                    if (callback) callback();
+                    if (scope.inValidCallback) scope.inValidCallback();
 
                     return false;
                 };
@@ -367,7 +376,7 @@
                         expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
-                                validFunc(element, attrs[successMessage], validator, scope.validCallback, ctrl);
+                                validFunc(element, attrs[successMessage], validator, scope, ctrl);
                                 if (leftValidation.length) {
                                     checkValidation(scope, element, attrs, ctrl, leftValidation, value);
                                 } else {
@@ -375,7 +384,7 @@
                                 }
                             },
                             error: function() {
-                                return invalidFunc(element, attrs[errorMessage], validator, scope.invalidCallback, ctrl);
+                                return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
                             }
                         };
 
@@ -427,7 +436,8 @@
                         model: '=ngModel',
                         initialValidity: '=initialValidity',
                         validCallback: '&',
-                        invalidCallback: '&'
+                        invalidCallback: '&',
+                        messageId: '@'
                     },
                     link: function(scope, element, attrs, ctrl) {
 
@@ -454,10 +464,6 @@
                          */
                         var uid = ctrl.validationId = guid();
 
-                        /**
-                         * Valid/Invalid Message
-                         */
-                        element.after('<span></span>');
 
                         /**
                          * Set initial validity to undefined if no boolean value is transmitted
@@ -491,7 +497,7 @@
                             ctrl.$setPristine();
                             ctrl.$setValidity(ctrl.$name, undefined);
                             ctrl.$render();
-                            element.next().html('');
+                            angular.element('#'+ scope.messageId).html('');
                         });
 
                         /**
@@ -574,7 +580,7 @@
                                     ctrl.$setViewValue(ctrl.$viewValue);
                                 } else if (ctrl.$pristine) {
                                     // Don't validate form when the input is clean(pristine)
-                                    element.next().html('');
+                                    angular.element('#'+ scope.messageId).html('');
                                     return;
                                 }
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
@@ -587,7 +593,7 @@
                              * Don't showup the validation Message
                              */
                             attrs.$observe('noValidationMessage', function(value) {
-                                var el = element.next();
+                                var el = angular.element('#'+ scope.messageId);
                                 if (value == 'true' || value === true) {
                                     el.css('display', 'none');
                                 } else if (value == 'false' || value === false) {

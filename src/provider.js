@@ -149,6 +149,14 @@
              */
             this.showErrorMessage = true;
 
+            /**
+             * Define a selector that will be used to show up
+             * the error message
+             * example: $validationProvider.selector = '.help-block'
+             * @type {string}
+             */
+            this.selector = '.help-block';
+
 
             /**
              * Check form valid, return true
@@ -266,7 +274,8 @@
                         showErrorMessage: this.showErrorMessage,
                         checkValid: this.checkValid,
                         validate: this.validate,
-                        reset: this.reset
+                        reset: this.reset,
+                        selector: this.selector
                     };
                 }
             ];
