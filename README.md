@@ -36,11 +36,23 @@ Install with npm
 npm install angular-validation
 ```
 
+or with bower
+
+```
+bower install angular-validation
+```
+
 Using angular-validation
 ---
 ```html
 <script src="dist/angular-validation.js"></script>
 <script src="dist/angular-validation-rule.js"></script>
+```
+Using angular-validation with bower
+---
+```html
+<script src="lib/angular-validation/dist/angular-validation.js"></script>
+<script src="lib/angular-validation/dist/angular-validation-rule.js"></script>
 ```
 ```js
 angular.module('yourApp', ['validation']);
