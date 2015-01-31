@@ -122,7 +122,11 @@
                     }
                     // Check with RegExp
                     else if (expression.constructor === RegExp) {
-                        return $validationProvider.getExpression(validator).test(value) ? valid.success() : valid.error();
+                        // Only apply the test if the value is neither undefined or null
+                        if (value !== undefined && value !== null)
+                            return $validationProvider.getExpression(validator).test(value) ? valid.success() : valid.error();
+                        else
+                            return valid.error();
                     } else {
                         return valid.error();
                     }
