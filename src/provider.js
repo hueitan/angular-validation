@@ -149,7 +149,6 @@
              */
             this.showErrorMessage = true;
 
-
             /**
              * Check form valid, return true
              * checkValid(Form): Check the specific form(Form) valid from angular `$valid`

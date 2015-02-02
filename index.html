@@ -39,6 +39,7 @@
                        validator="required"
                        required-error-message="Required"
                        required-success-message="Good Required" autofocus="autofocus"/>
+                <span id="requireWatch"></span>
 
                 <label>Url</label>
                 <input type="text"
@@ -46,7 +47,9 @@
                        ng-model="form.url"
                        validator="url"
                        url-error-message="Error Url"
-                       url-success-message="Good Url"/>
+                       url-success-message="Good Url"
+                       message-id="urlWatch"/>
+                <span id="urlWatch"></span>
 
                 <label>Email</label>
                 <input type="text"
@@ -54,7 +57,9 @@
                        ng-model="form.email"
                        validator="email"
                        email-error-message="Error Email"
-                       email-success-message="Good Email"/>
+                       email-success-message="Good Email"
+                       message-id="emailWatch"/>
+                <span id="emailWatch"></span>
 
                 <label>Number</label>
                 <input type="text"
@@ -62,7 +67,9 @@
                        ng-model="form.number"
                        validator="number"
                        email-error-message="Error Number"
-                       email-success-message="Good Number"/>
+                       email-success-message="Good Number",
+                       message-id="numberWatch"/>
+                <span id="numberWatch"></span>
 
                 <label>Required (Invalid Callback alert)</label>
                 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
@@ -86,25 +93,30 @@
                 <legend>Form ($blur)</legend>
 
                 <label>Required</label>
-                <input type="text" name="requireBlur" ng-model="form2.required" validator="required" valid-method="blur"/>
+                <input type="text" name="requireBlur" ng-model="form2.required" validator="required" valid-method="blur", message-id="requireBlur"/>
+                <span id="requireBlur"></span>
 
                 <label>Url</label>
-                <input type="text" name="urlBlur" ng-model="form2.url" validator="url" valid-method="blur"/>
+                <input type="text" name="urlBlur" ng-model="form2.url" validator="url" valid-method="blur", message-id="urlBlur"/>
+                <span id="urlBlur"></span>
 
                 <label>Email</label>
-                <input type="text" name="emailBlur" ng-model="form2.email" validator="email" valid-method="blur"/>
+                <input type="text" name="emailBlur" ng-model="form2.email" validator="email" valid-method="blur", message-id="emailBlur"/>
+                <span id="emailBlur"></span>
 
                 <label>Number</label>
-                <input type="text" name="numberBlur" ng-model="form2.number" validator="number" valid-method="blur"/>
+                <input type="text" name="numberBlur" ng-model="form2.number" validator="number" valid-method="blur", message-id="numberBlur"/>
+                <span id="numberBlur"></span>
 
                 <label>Lucky Number</label>
-                <select class="form-control" name="selectBlur" ng-model="form2.select" validator="required">
+                <select class="form-control" name="selectBlur" ng-model="form2.select" validator="required", message-id="selectBlur">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
                 </select>
+                <span id="selectBlur"></span>
             </fieldset>
 
             <ul class="button-group">
@@ -124,16 +136,20 @@
                 <legend>Form ($submit with callback)</legend>
 
                 <label>Required</label>
-                <input type="text" name="requireSubmit" ng-model="form3.required" validator="required" valid-method="submit"/>
+                <input type="text" name="requireSubmit" ng-model="form3.required" validator="required" valid-method="submit", message-id="requireSubmit"/>
+                <span id="requireSubmit"></span>
 
                 <label>Url</label>
-                <input type="text" name="urlSubmit" ng-model="form3.url" validator="url" valid-method="submit"/>
+                <input type="text" name="urlSubmit" ng-model="form3.url" validator="url" valid-method="submit", message-id="urlSubmit"/>
+                <span id="urlSubmit"></span>
 
                 <label>Email</label>
-                <input type="text" name="emailSubmit" ng-model="form3.email" validator="email" valid-method="submit"/>
+                <input type="text" name="emailSubmit" ng-model="form3.email" validator="email" valid-method="submit", message-id="emailSubmit"/>
+                <span id="emailSubmit"></span>
 
                 <label>Number</label>
-                <input type="text" name="numberSubmit" ng-model="form3.number" validator="number" valid-method="submit"/>
+                <input type="text" name="numberSubmit" ng-model="form3.number" validator="number" valid-method="submit", message-id="numberSubmit"/>
+                <span id="numberSubmit"></span>
             </fieldset>
 
             <ul class="button-group">
@@ -151,7 +167,8 @@
 
                 <div class="row collapse">
                     <div class="small-9 columns">
-                        <input type="text" validator="huei" name="huei" ng-model="form4.huei" placeholder="It's must be 'Huei Tan'">
+                        <input type="text" validator="huei" name="huei" ng-model="form4.huei" placeholder="It's must be 'Huei Tan'", message-id="huei">
+                        <span id="huei"></span>
                     </div>
                     <div class="small-3 columns">
                         <span class="postfix radius">With <a href="https://github.com/huei90/angular-validation#custom-function-huei" target="_blank">Function</a> </span>
@@ -160,7 +177,8 @@
 
                 <div class="row collapse">
                     <div class="small-7 columns">
-                        <input type="text" validator="huei" name="noMsg" ng-model="form4.noMsg" no-validation-message="true" placeholder="It's must be 'Huei Tan'">
+                        <input type="text" validator="huei" name="noMsg" ng-model="form4.noMsg" no-validation-message="true" placeholder="It's must be 'Huei Tan'", message-id="noMsg">
+                        <span id="noMsg"></span>
                     </div>
                     <div class="small-5 columns">
                         <span class="postfix radius">
@@ -172,7 +190,8 @@
 
                 <div class="row collapse">
                     <div class="small-7 columns">
-                        <input type="text" validator="huei" name="canChange" huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange" placeholder="Type Wrong !!">
+                        <input type="text" validator="huei" name="canChange" huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange" placeholder="Type Wrong !!", message-id="canChange">
+                        <span id="canChange"></span>
                     </div>
                     <div class="small-5 columns">
                         <span class="postfix radius">
@@ -184,13 +203,15 @@
 
                 <div class="row collapse">
                     <div class="small-12 columns">
-                        <input type="text" validator="range" name="range" ng-model="form4.range" placeholder="number 5~10" min="5" max="10">
+                        <input type="text" validator="range" name="range" ng-model="form4.range" placeholder="number 5~10" min="5" max="10", message-id="range">
+                        <span id="range"></span>
                     </div>
                 </div>
 
                 <div class="row collapse">
                     <div class="small-12 columns">
-                        <input type="text" validator="required, range" name="multiple" ng-model="form4.multiple" placeholder='number 5~10 with required (validator="required, range")'  min="5" max="10">
+                        <input type="text" validator="required, range" name="multiple" ng-model="form4.multiple" placeholder='number 5~10 with required (validator="required, range")'  min="5" max="10", message-id="multiple">
+                        <span id="multiple"></span>
                     </div>
                 </div>
             </fieldset>
@@ -204,9 +225,11 @@
             <fieldset>
                 <legend>Form ($submit-only)</legend>
                 <label>Required</label>
-                <input type="text" name="emailRequiredOnly" ng-model="form5.required" validator="required" valid-method="submit-only"/>
+                <input type="text" name="emailRequiredOnly" ng-model="form5.required" validator="required" valid-method="submit-only", message-id="emailRequiredOnly"/>
+                <span id="emailRequiredOnly"></span>
                 <label>Email</label>
-                <input type="text" name="emailSubmitOnly" ng-model="form5.email" validator="email" valid-method="submit-only"/>
+                <input type="text" name="emailSubmitOnly" ng-model="form5.email" validator="email" valid-method="submit-only", message-id="emailSubmitOnly"/>
+                <span id="emailSubmitOnly"></span>
             </fieldset>
 
             <ul class="button-group">
@@ -223,7 +246,10 @@
             <fieldset>
                 <legend>Form (ng-repeat)</legend>
                 <label>Required</label>
-                <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required" ng-repeat="a in form6.required"/>
+                <div ng-repeat="a in form6.required">
+                    <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required", message-id="emailRequiredOnly{{$index}}"/>
+                    <span id="emailRequiredOnly{{$index}}"></span>
+                </div>
             </fieldset>
 
             <ul class="button-group">

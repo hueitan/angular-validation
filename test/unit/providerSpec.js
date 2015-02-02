@@ -95,13 +95,9 @@ describe('provider', function () {
 
     it('checkValid', inject(function () {
         expect(validationProvider.checkValid($scope.Form)).toBe(false);
-        $scope.$apply(function () {
-            $scope.required = 'required';
-        });
+        $scope.Form.required.$setViewValue('required');
         expect(validationProvider.checkValid($scope.Form)).toBe(true);
-        $scope.$apply(function () {
-            $scope.required = '';
-        });
+        $scope.Form.required.$setViewValue('');
         expect(validationProvider.checkValid($scope.Form)).toBe(false);
     }));
 
