@@ -17,8 +17,13 @@
                  * @returns {}
                  */
                 var validFunc = function(element, validMessage, validation, scope, ctrl) {
-                    var messageElem = angular.element('#' + scope.messageId),
+                    var messageElem,
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
+
+                    if (scope.messageId)
+                        messageElem = angular.element(document.querySelector('#' + scope.messageId));
+                    else
+                        messageElem = element.next();
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
                         messageElem.html($validationProvider.getSuccessHTML(messageToShow));
@@ -43,8 +48,13 @@
                  * @returns {}
                  */
                 var invalidFunc = function(element, validMessage, validation, scope, ctrl) {
-                    var messageElem = angular.element('#' + scope.messageId),
+                    var messageElem,
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
+
+                    if (scope.messageId)
+                        messageElem = angular.element(document.querySelector('#' + scope.messageId));
+                    else
+                        messageElem = element.next();
 
                     if ($validationProvider.showErrorMessage && messageToShow) {
                         messageElem.html($validationProvider.getErrorHTML(messageToShow));
@@ -189,6 +199,12 @@
                         }
 
                         /**
+                         * Default Valid/Invalid Message
+                         */
+                        if (!scope.messageId)
+                            element.after('<span></span>');
+
+                        /**
                          * Set custom initial validity
                          * Usage: <input initial-validity="true" ... >
                          */
@@ -212,7 +228,10 @@
                             ctrl.$setPristine();
                             ctrl.$setValidity(ctrl.$name, undefined);
                             ctrl.$render();
-                            angular.element('#' + scope.messageId).html('');
+                            if (scope.messageId)
+                                angular.element(document.querySelector('#' + scope.messageId)).html('');
+                            else
+                                element.next().html('');
                         });
 
                         /**
@@ -295,7 +314,10 @@
                                     ctrl.$setViewValue(ctrl.$viewValue);
                                 } else if (ctrl.$pristine) {
                                     // Don't validate form when the input is clean(pristine)
-                                    angular.element('#' + scope.messageId).html('');
+                                    if (scope.messageId)
+                                        angular.element(document.querySelector('#' + scope.messageId)).html('');
+                                    else
+                                        element.next().html('');
                                     return;
                                 }
                                 checkValidation(scope, element, attrs, ctrl, validation, value);
@@ -308,7 +330,11 @@
                              * Don't showup the validation Message
                              */
                             attrs.$observe('noValidationMessage', function(value) {
-                                var el = angular.element('#' + scope.messageId);
+                                var el;
+                                if (scope.messageId)
+                                    el = angular.element(document.querySelector('#' + scope.messageId));
+                                else
+                                    el = element.next();
                                 if (value == 'true' || value === true) {
                                     el.css('display', 'none');
                                 } else if (value == 'false' || value === false) {
