@@ -1,6 +1,6 @@
 API
 ===
-**Add Valid Message (error, success) for validation `required`** <br/>
+### **Add Valid Message (error, success) for validation `required`** <br/>
 `required-error-message` and `required-success-message`
 
 ```html
@@ -16,7 +16,7 @@ API
        -->
 ```
 
-**Add Valid Message (error, success) for validation `email`** <br/>
+### **Add Valid Message (error, success) for validation `email`** <br/>
 `email-error-message` and `email-success-message`
 
 ```html
@@ -29,7 +29,7 @@ API
        email-success-message="Good Email"/>
 ```
 
-**Use Default Valid Message** <br/>
+### **Use Default Valid Message** <br/>
 *you don't need to give valid message*
 
 ```html
@@ -38,7 +38,7 @@ API
 ```
 
 <a name="no-validation-message"></a>
-**Don't show the Valid Message `no-validation-message="true"`**
+### **Don't show the Valid Message `no-validation-message="true"`**
 
 ```html
 <label>Number</label>
@@ -47,14 +47,14 @@ API
 <input type="text" name="number" ng-model="form.number" validator="number" no-validation-message="{{ noValidationMessage }}"/>
 ```
 
-**Add Valid Callback Function, `invalid-callback` & `valid-callback`**
+### **Add Valid Callback Function, `invalid-callback` & `valid-callback`**
 
 ```html
 <label>Required (Invalid Callback alert)</label>
 <input type="text" name="requiredCallback" ng-model="form.requiredCallback" validator="required" invalid-callback='error("Must be Required");'/>
 ```
 
-**Select the validation method `watch` `blur` `submit` `submit-only`, default as `watch`** <br/>
+### **Select the validation method `watch` `blur` `submit` `submit-only`, default as `watch`** <br/>
 `validationProvider.validate(form).success(callback).error(callback)` use callback to continue your submit
 
 ```html
@@ -109,7 +109,7 @@ API
 <!-- Clean, right ? -->
 ```
 
-**Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
+### **Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
 <a name="custom-function-huei"></a>
 
 ```html
@@ -161,8 +161,8 @@ angular.module('yourApp', ['validation'])
     }]);
 ```
 
-**Check form whether valid, return `true` if valid. `checkValid()`** <br/>
-**Reset the specific Form. `reset()`**
+### **Check form whether valid, return `true` if valid. `checkValid()`** <br/>
+### **Reset the specific Form. `reset()`**
 
 ```html
 <form name="Form">
@@ -192,7 +192,7 @@ angular.module('yourApp', ['validation'])
     };
 ```
 
-**Set the valid/invalid message style CSS**
+### **Set the valid/invalid message style CSS**
 
 ```html
 <span><p class="validation-valid">Your valid message here<p></span>
@@ -209,7 +209,7 @@ angular.module('yourApp', ['validation'])
 }
 ```
 
-**Custom the valid/invalid message style HTML in `.config()`,** <br/>
+### **Custom the valid/invalid message style HTML in `.config()`,** <br/>
 `setErrorHTML(func)` `setSuccessHTML(func)`, input should be a `function` and given `parameter` which is the valid/invalid message declared
 in `getDefaultMsg()`,and finally return the HTML code
 
@@ -227,7 +227,7 @@ in `getDefaultMsg()`,and finally return the HTML code
 }]);
 ```
 
-**disable/enable show success/error message**<br/>
+### **disable/enable show success/error message**<br/>
 `default: true`<br/>
 Easily disable success/error message
 
@@ -239,7 +239,7 @@ Easily disable success/error message
 }]);
 ```
 
-**multiple validators**<br/>
+### **multiple validators**<br/>
 use commar as splitter
 
 ```html
