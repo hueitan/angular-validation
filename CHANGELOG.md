@@ -1,3 +1,32 @@
+02 Feb 2015 v1.3.0
+===
+**Important**
+
+This version support angularjs 1.3
+
+**Improvement**
+
+[b6a70b2](https://github.com/huei90/angular-validation/commit/a6ac1400a8a637bc2296a1910c3456797b6a70b2) Use ctrl.$viewValue instead of element[0].value 
+<br/>[0e1925e](https://github.com/huei90/angular-validation/commit/a30e6edaffe15c64cac711a7290236b550e1925e) Default initial Validity is undefined
+<br/>[8c7bfb1](https://github.com/huei90/angular-validation/commit/d505d45a93984e07f0a466d3e385e15ac8c7bfb1) Prevents span from being displayed for valid input without messages
+<br/>[509e2a0](https://github.com/huei90/angular-validation/commit/8b1b46f8e37e5eb435de4a0842cb036e5509e2a0) Allows global disabling of error messages in case someone wants that
+
+**New Features**
+
+[717c98b](https://github.com/huei90/angular-validation/commit/8a86b03ed8a792d91a6c1c3a50a9f1a64717c98b) Add a MessageId atrribute for customizing valid/invalid message position
+
+**Documentation**
+
+[b638dc6](https://github.com/huei90/angular-validation/commit/744edde0326edc3ba4e2308062912e342b638dc6) Update readme with bower installation steps
+<br/>[10318f8](https://github.com/huei90/angular-validation/commit/63d484979d157f3b8a0389f8220d6c91c10318f8) Update API.md for anchor link
+
+**Demo**
+
+[97c1e14](https://github.com/huei90/angular-validation/commit/ff1aee1d4874fb247b2562a7913a9f14497c1e14) Add demo for select form
+<br/>[71f6e0b](https://github.com/huei90/angular-validation/commit/64b8eee0e98600ab1d3945dbe78dd651e71f6e0b) Add ng-repeat input box example
+
+Thanks @lvarayut @eyupatis @U-US\katerbm @dmitry-dedukhin for the contributions
+
 14 Nov 2014 v1.2.6
 ===
 **Important**

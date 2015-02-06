@@ -1,4 +1,4 @@
-angular-validation 1.3.x - prepare for it
+angular-validation 1.3.0
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
@@ -16,7 +16,7 @@ angularjs 1.3.x support after version angular-validation 1.3.x
 Requirement
 -----
 [AngularJS](http://angularjs.org) 1.2.x (for [angular-validation 1.2.x](https://github.com/huei90/angular-validation/tree/v1.2.x)) <br/>
-[AngularJS](http://angularjs.org) 1.3.x (for angular-validation 1.3.x)
+[AngularJS](http://angularjs.org) 1.3.x (for [angular-validation 1.3.x](https://github.com/huei90/angular-validation/tree/master))
 
 DEMO
 -----
