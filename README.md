@@ -122,6 +122,18 @@ $validationProvider.setErrorHTML(function (msg) {
 
 You can add the bootstrap class `.has-success` in a similar fashion.
 
+To toggle `.has-error` class on bootstrap `.form-group` wrapper for labels and controls, add:
+
+```javascript
+angular.extend($validationProvider, {
+    validCallback: function (element){
+        $(element).parents('.form-group:first').removeClass('has-error');
+    },
+    invalidCallback: function (element) {
+        $(element).parents('.form-group:first').addClass('has-error');
+    }
+});
+```
 
 CHANGELOG
 =====

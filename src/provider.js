@@ -265,6 +265,8 @@
                         showErrorMessage: this.showErrorMessage,
                         checkValid: this.checkValid,
                         validate: this.validate,
+                        validCallback: this.validCallback,
+                        invalidCallback: this.invalidCallback,
                         reset: this.reset
                     };
                 }
