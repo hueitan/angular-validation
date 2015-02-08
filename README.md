@@ -122,6 +122,13 @@ $validationProvider.setErrorHTML(function (msg) {
 
 You can add the bootstrap class `.has-success` in a similar fashion.
 
+Using Schema
+=====
+
+If you prefer schema over html attributes , try [angular-validation-schema
+](https://github.com/thetutlage/angular-validation-schema).
+
+[Demo](http://plnkr.co/edit/X56HEsDYgYoY8gbSj7cu?p=preview)
 
 CHANGELOG
 =====
