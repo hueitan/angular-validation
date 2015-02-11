@@ -30,11 +30,20 @@ API
 ```
 
 ### **Use Default Valid Message** <br/>
-*you don't need to give valid message*
+*You don't need to give valid message* - the valid/invalid message will be automatically placed next to your input element.
 
 ```html
 <label>Number</label>
 <input type="text" name="number" ng-model="form.number" validator="number"/>
+```
+
+### **Use a custom Valid Message** <br/>
+You can also add a custom validation message by using `message-id` attribute. It allows you to place a valid/invalid message wherever you want, a target element must specify an `id` attribute that matches with a value of the `message-id`.
+
+```html
+<label>Number</label>
+<input type="text" name="number" ng-model="form.number" validator="number" message-id="message"/>
+<span id="message"></span>
 ```
 
 <a name="no-validation-message"></a>
