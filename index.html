@@ -117,6 +117,13 @@
                     <option>5</option>
                 </select>
                 <span id="selectBlur"></span>
+
+                <label>Checkbox</label>
+                <div class="large-12 columns">
+                     <input id="checkbox1" type="checkbox" name="checkBlur" ng-model="form2.check" validator="required" message-id="checkBlur"/><label for="checkbox1">Checkbox 1</label>
+                     <span id="checkBlur"></span>
+                </div>
+
             </fieldset>
 
             <ul class="button-group">
@@ -250,6 +257,10 @@
                     <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required", message-id="emailRequiredOnly{{$index}}"/>
                     <span id="emailRequiredOnly{{$index}}"></span>
                 </div>
+                <blockquote ng-non-bindable>
+                    In name attribute we have to use {{$index}}
+                    <cite>eg. emailRequiredOnly{{$index}}</cite>
+                </blockquote>
             </fieldset>
 
             <ul class="button-group">
