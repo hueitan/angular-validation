@@ -218,6 +218,17 @@
                 return deferred.promise;
             };
 
+            /**
+             * Do this function if validation valid
+             * @param element
+             */
+            this.validCallback = null;
+
+            /**
+             * Do this function if validation invalid
+             * @param element
+             */
+            this.invalidCallback = null;
 
             /**
              * reset the specific form
