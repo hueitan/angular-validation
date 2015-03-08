@@ -7,7 +7,10 @@ angular-validation 1.3.0
 
 Client-side Validation should be simple and clean.
 <br/>Don't let Client-side Validation dirty your controller.
-<br/>Setup your Validation on config phase by using some rules [(example)](https://github.com/huei90/angular-validation/blob/master/dist/angular-validation-rule.js)
+
+Setup your Validation on config phase by using some rules [(example)](https://github.com/huei90/angular-validation/blob/master/dist/angular-validation-rule.js)
+<br/>If you prefer schema over html attributes , try [angular-validation-schema
+](https://github.com/thetutlage/angular-validation-schema) [(Demo)](http://plnkr.co/edit/X56HEsDYgYoY8gbSj7cu?p=preview)
 <br/>And add Validation in your view only.
     
 angularjs 1.2.x support to version [angular-validation 1.2.x](https://github.com/huei90/angular-validation/tree/v1.2.x) <br/>
