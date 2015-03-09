@@ -222,6 +222,17 @@
                 return deferred.promise;
             };
 
+            /**
+             * Do this function if validation valid
+             * @param element
+             */
+            this.validCallback = null;
+
+            /**
+             * Do this function if validation invalid
+             * @param element
+             */
+            this.invalidCallback = null;
 
             /**
              * reset the specific form
@@ -269,6 +280,8 @@
                         showErrorMessage: this.showErrorMessage,
                         checkValid: this.checkValid,
                         validate: this.validate,
+                        validCallback: this.validCallback,
+                        invalidCallback: this.invalidCallback,
                         reset: this.reset
                     };
                 }
@@ -312,6 +325,7 @@
                     }
                     ctrl.$setValidity(ctrl.$name, true);
                     if (scope.validCallback) scope.validCallback();
+                    if ($validationProvider.validCallback) $validationProvider.validCallback(element);
 
                     return true;
                 };
@@ -343,6 +357,7 @@
                     }
                     ctrl.$setValidity(ctrl.$name, false);
                     if (scope.inValidCallback) scope.inValidCallback();
+                    if ($validationProvider.invalidCallback) $validationProvider.invalidCallback(element);
 
                     return false;
                 };
