@@ -27,7 +27,7 @@
 
                     if ($validationProvider.showSuccessMessage && messageToShow && !noValidationMessage) {
                         messageElem.html($validationProvider.getSuccessHTML(messageToShow));
-                        messageElem.css('display', '');
+                        messageElem.css('display', 'block');
                     } else {
                         messageElem.css('display', 'none');
                     }
@@ -59,7 +59,7 @@
 
                     if ($validationProvider.showErrorMessage && messageToShow && !noValidationMessage) {
                         messageElem.html($validationProvider.getErrorHTML(messageToShow));
-                        messageElem.css('display', '');
+                        messageElem.css('display', 'block');
                     } else {
                         messageElem.css('display', 'none');
                     }
@@ -96,7 +96,7 @@
                         leftValidation = validators.slice(1),
                         successMessage = validator + 'SuccessMessage',
                         errorMessage = validator + 'ErrorMessage',
-                        noValidationMessage = attrs.noValidationMessage !== undefined && attrs.noValidationMessage === 'true',
+                        noValidationMessage = attrs.noValidationMessage !== undefined && attrs.noValidationMessage !== 'false',
                         expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
