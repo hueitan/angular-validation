@@ -16,7 +16,7 @@
                  * @param ctrl
                  * @returns {}
                  */
-                var validFunc = function(element, validMessage, validation, scope, ctrl) {
+                var validFunc = function(element, validMessage, validation, scope, ctrl, noValidationMessage) {
                     var messageElem,
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
 
@@ -25,7 +25,7 @@
                     else
                         messageElem = element.next();
 
-                    if ($validationProvider.showSuccessMessage && messageToShow) {
+                    if ($validationProvider.showSuccessMessage && messageToShow && !noValidationMessage) {
                         messageElem.html($validationProvider.getSuccessHTML(messageToShow));
                         messageElem.css('display', '');
                     } else {
@@ -48,7 +48,7 @@
                  * @param ctrl
                  * @returns {}
                  */
-                var invalidFunc = function(element, validMessage, validation, scope, ctrl) {
+                var invalidFunc = function(element, validMessage, validation, scope, ctrl, noValidationMessage) {
                     var messageElem,
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
 
@@ -57,14 +57,14 @@
                     else
                         messageElem = element.next();
 
-                    if ($validationProvider.showErrorMessage && messageToShow) {
+                    if ($validationProvider.showErrorMessage && messageToShow && !noValidationMessage) {
                         messageElem.html($validationProvider.getErrorHTML(messageToShow));
                         messageElem.css('display', '');
                     } else {
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
-                    if (scope.inValidCallback) scope.inValidCallback();
+                    if (scope.invalidCallback) scope.invalidCallback();
                     if ($validationProvider.invalidCallback) $validationProvider.invalidCallback(element);
 
                     return false;
@@ -96,10 +96,11 @@
                         leftValidation = validators.slice(1),
                         successMessage = validator + 'SuccessMessage',
                         errorMessage = validator + 'ErrorMessage',
+                        noValidationMessage = attrs.noValidationMessage !== undefined,
                         expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
-                                validFunc(element, attrs[successMessage], validator, scope, ctrl);
+                                validFunc(element, attrs[successMessage], validator, scope, ctrl, noValidationMessage);
                                 if (leftValidation.length) {
                                     checkValidation(scope, element, attrs, ctrl, leftValidation, value);
                                 } else {
@@ -107,7 +108,7 @@
                                 }
                             },
                             error: function() {
-                                return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
+                                return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl, noValidationMessage);
                             }
                         };
 
@@ -162,8 +163,8 @@
                     scope: {
                         model: '=ngModel',
                         initialValidity: '=initialValidity',
-                        validCallback: '&',
-                        invalidCallback: '&',
+                        validCallback: '=',
+                        invalidCallback: '=',
                         messageId: '@'
                     },
                     link: function(scope, element, attrs, ctrl) {
@@ -327,23 +328,23 @@
 
                         })();
 
-                        $timeout(function() {
-                            /**
-                             * Don't showup the validation Message
-                             */
-                            attrs.$observe('noValidationMessage', function(value) {
-                                var el;
-                                if (scope.messageId)
-                                    el = angular.element(document.querySelector('#' + scope.messageId));
-                                else
-                                    el = element.next();
-                                if (value == 'true' || value === true) {
-                                    el.css('display', 'none');
-                                } else if (value == 'false' || value === false) {
-                                    el.css('display', 'block');
-                                } else {}
-                            });
-                        });
+                        // $timeout(function() {
+                        //     /**
+                        //      * Don't showup the validation Message
+                        //      */
+                        //     attrs.$observe('noValidationMessage', function(value) {
+                        //         var el;
+                        //         if (scope.messageId)
+                        //             el = angular.element(document.querySelector('#' + scope.messageId));
+                        //         else
+                        //             el = element.next();
+                        //         if (value == 'true' || value === true) {
+                        //             el.css('display', 'none');
+                        //         } else if (value == 'false' || value === false) {
+                        //             el.css('display', 'block');
+                        //         } else {}
+                        //     });
+                        // });
 
                     }
                 };
