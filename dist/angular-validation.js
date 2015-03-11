@@ -388,7 +388,7 @@
                         leftValidation = validators.slice(1),
                         successMessage = validator + 'SuccessMessage',
                         errorMessage = validator + 'ErrorMessage',
-                        noValidationMessage = attrs.noValidationMessage !== undefined,
+                        noValidationMessage = attrs.noValidationMessage !== undefined && attrs.noValidationMessage === 'true',
                         expression = $validationProvider.getExpression(validator),
                         valid = {
                             success: function() {
