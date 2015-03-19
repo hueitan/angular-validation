@@ -297,7 +297,8 @@
 
                 var $validationProvider = $injector.get('$validation'),
                     $q = $injector.get('$q'),
-                    $timeout = $injector.get('$timeout');
+                    $timeout = $injector.get('$timeout'),
+                    $compile = $injector.get('$compile');
 
                 /**
                  * Do this function if validation valid
@@ -318,7 +319,7 @@
                         messageElem = element.next();
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
-                        messageElem.html($validationProvider.getSuccessHTML(messageToShow));
+                        messageElem.html($compile($validationProvider.getSuccessHTML(messageToShow))(scope));
                         messageElem.css('display', '');
                     } else {
                         messageElem.css('display', 'none');
@@ -350,7 +351,7 @@
                         messageElem = element.next();
 
                     if ($validationProvider.showErrorMessage && messageToShow) {
-                        messageElem.html($validationProvider.getErrorHTML(messageToShow));
+                        messageElem.html($compile($validationProvider.getErrorHTML(messageToShow))(scope));
                         messageElem.css('display', '');
                     } else {
                         messageElem.css('display', 'none');
