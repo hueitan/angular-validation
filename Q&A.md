@@ -22,3 +22,7 @@ $timeout(function () { // call $timeout to make sure the Form Constructor is gen
 ###Use checkValid() manually [#19](https://github.com/huei90/angular-validation/issues/19)###
 
 Before using `checkValid()`, you have to execute `submit` first to get the latest result.
+
+###How do we do tooltips for error messages upon focusing? [#68](https://github.com/huei90/angular-validation/issues/68#issuecomment-86445467)
+
+Using `validCallback` and `invalidCallback` to implement
