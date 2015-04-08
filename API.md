@@ -248,11 +248,44 @@ Easily disable success/error message
 }]);
 ```
 
-### **multiple validators**<br/>
-use commar as splitter
+### **Multiple validators**<br/>
+Use commas to separate multiple validators.
 
 ```html
 <input type="text" validator="required, url" name="url" ng-model="form.url"/>
 ```
 
+### **Validator parameters**<br/>
+The built in `maxlength` and `minlength` validators use parameters to configure the limits. For example:
+
+```html
+<input type="text" name="username" ng-model="form.username" validator="maxlength=6"/>
+```
+
+You can use parameters in your custom validators in the same way. 
+You can access this parameter in the validation expression like so:
+
+```html
+<input type="text" name="code" ng-model="form.code" validator="isstring=test"/>
+```
+
+```javascript
+// your module
+angular.module('yourApp', ['validation'])
+    .config(['$validationProvider', function ($validationProvider) {
+        // Setup `isstring` validation
+        validationProvider
+            .setExpression({
+                isstring: function (value, scope, element, attrs, param) {
+                    return value === param;
+                }
+            })
+            .setDefaultMsg({
+                isstring: {
+                    error: 'This is not what we wanted!',
+                    success: 'Thanks!'
+                }
+            });
+    }]);
+```
 

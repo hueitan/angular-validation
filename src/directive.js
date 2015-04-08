@@ -92,7 +92,10 @@
                 var checkValidation = function(scope, element, attrs, ctrl, validation, value) {
 
                     var validators = validation.slice(0),
-                        validator = validators[0].trim(),
+                        validatorExpr = validators[0].trim(),
+                        paramIndex = validatorExpr.indexOf('='),
+                        validator = paramIndex === -1 ? validatorExpr : validatorExpr.substr(0, paramIndex),
+                        validatorParam = paramIndex === -1 ? null : validatorExpr.substr(paramIndex + 1),
                         leftValidation = validators.slice(1),
                         successMessage = validator + 'SuccessMessage',
                         errorMessage = validator + 'ErrorMessage',
@@ -121,7 +124,7 @@
                     }
                     // Check with Function
                     if (expression.constructor === Function) {
-                        return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs)])
+                        return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs, validatorParam)])
                             .then(function(data) {
                                 if (data && data.length > 0 && data[0]) {
                                     return valid.success();

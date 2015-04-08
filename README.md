@@ -92,6 +92,10 @@ Built-in validation <small>in angular-validation-rule</small>
 2. Url
 3. Email
 4. Number
+5. Min length
+6. Max length
+
+5 and 6 require you to pass an inline parameter to set the length limit. Eg, `maxlength=6`.
 
 Anyone can give a `PR` for this angular-validation for more `built-in validation`
 
