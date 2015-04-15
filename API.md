@@ -146,11 +146,11 @@ angular.module('yourApp', ['validation'])
             }
         };
 
-        validationProvider.setExpression(expression) // set expression
+        $validationProvider.setExpression(expression) // set expression
                           .setDefaultMsg(validMsg); // set valid message
 
         // Setup `huei` validation
-        validationProvider
+        $validationProvider
             .setExpression({
                 huei: function (value, scope, element, attrs) {
                     return value === 'Huei Tan';
@@ -274,7 +274,7 @@ You can access this parameter in the validation expression like so:
 angular.module('yourApp', ['validation'])
     .config(['$validationProvider', function ($validationProvider) {
         // Setup `isstring` validation
-        validationProvider
+        $validationProvider
             .setExpression({
                 isstring: function (value, scope, element, attrs, param) {
                     return value === param;
