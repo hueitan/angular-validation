@@ -117,7 +117,7 @@
                     if (expression === undefined) {
                         console.error('You are using undefined validator "%s"', validator);
                         if (leftValidation.length) {
-                            checkValidation(scope, element, attrs, ctrl, leftValidation, value);
+                            return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
                         } else {
                             return;
                         }
