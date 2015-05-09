@@ -6,7 +6,7 @@
     "huei90"
   ],
   "description": "Client-side Validation for AngularJS",
-  "main": "dist/angular-validation.js",
+  "main": "dist/angular-validation-mutual.js",
   "keywords": ["angular", "angularjs", "validation", "angular validation", "validator", "client-side"],
   "license": "MIT",
   "ignore": [

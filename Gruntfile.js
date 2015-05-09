@@ -30,7 +30,8 @@ module.exports = function(grunt) {
             basic_and_extras: {
                 files: {
                     'dist/angular-validation.js': ['src/module.js', 'src/provider.js', 'src/directive.js'],
-                    'dist/angular-validation-rule.js': ['src/rule.js']
+                    'dist/angular-validation-rule.js': ['src/rule.js'],
+					'dist/angular-validation-mutual.js': ['src/module.js', 'src/provider.js', 'src/directive.js', 'src/rule.js']
                 }
             }
         },
@@ -38,7 +39,8 @@ module.exports = function(grunt) {
             my_target: {
                 files: {
                     'dist/angular-validation.min.js': ['dist/angular-validation.js'],
-                    'dist/angular-validation-rule.min.js': ['dist/angular-validation-rule.js']
+                    'dist/angular-validation-rule.min.js': ['dist/angular-validation-rule.js'],
+					'dist/angular-validation-mutual.min.js': ['dist/angular-validation-mutual.js']
                 }
             }
         },
