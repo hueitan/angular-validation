@@ -1,3 +1,22 @@
+11 May 2015 v1.3.1
+===
+
+Welcome [angular-validation-schema](https://github.com/thetutlage/angular-validation-schema)
+<br/>Add GA for the demo page
+
+**Improvement**
+
+[6b22fe2](https://github.com/huei90/angular-validation/commit/6b22fe2065e91cd051ecae973facadd115504c52) Documentation for bootstrap form group
+<br/>[dffdc32](https://github.com/huei90/angular-validation/commit/dffdc3262e8631bc586bf7c9c030864d8b77fbf0) Allow passing of a parameter to validation rule and added min and max length rules
+
+**Fix**
+
+[09f9731](https://github.com/huei90/angular-validation/commit/09f9731170a63704d0befdbbdd635e700af35433) second validator fires but does not wait
+
+**New Featuers**
+
+[1b9d527](https://github.com/huei90/angular-validation/commit/1b9d52713c32d1b73c90174258ea9b0cc781489a) toggle has-error on parent form-group with $validationProvider valid/invalid callbacks
+
 02 Feb 2015 v1.3.0
 ===
 **Important**
@@ -6,7 +25,7 @@ This version support angularjs 1.3
 
 **Improvement**
 
-[b6a70b2](https://github.com/huei90/angular-validation/commit/a6ac1400a8a637bc2296a1910c3456797b6a70b2) Use ctrl.$viewValue instead of element[0].value 
+[b6a70b2](https://github.com/huei90/angular-validation/commit/a6ac1400a8a637bc2296a1910c3456797b6a70b2) Use ctrl.$viewValue instead of element[0].value
 <br/>[0e1925e](https://github.com/huei90/angular-validation/commit/a30e6edaffe15c64cac711a7290236b550e1925e) Default initial Validity is undefined
 <br/>[8c7bfb1](https://github.com/huei90/angular-validation/commit/d505d45a93984e07f0a466d3e385e15ac8c7bfb1) Prevents span from being displayed for valid input without messages
 <br/>[509e2a0](https://github.com/huei90/angular-validation/commit/8b1b46f8e37e5eb435de4a0842cb036e5509e2a0) Allows global disabling of error messages in case someone wants that
@@ -30,10 +49,10 @@ Thanks @lvarayut @eyupatis @U-US\katerbm @dmitry-dedukhin for the contributions
 14 Nov 2014 v1.2.6
 ===
 **Important**
-    
+
 This version support to angularjs version 1.2.x <br/>
 To support angularjs version 1.3.x, please use angular-validation 1.3.x
-    
+
 **Fix**
 
 [bcaab7e](https://github.com/huei90/angular-validation/commit/bcaab7e31f2e00e92e2d8e8397935c96c37d16b3) Custom message on html not displaying with multiple validator

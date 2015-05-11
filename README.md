@@ -1,4 +1,4 @@
-angular-validation 1.3.0
+angular-validation 1.3.1
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
 [![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
@@ -12,7 +12,7 @@ Setup your Validation on config phase by using some rules [(example)](https://gi
 <br/>If you prefer schema over html attributes , try [angular-validation-schema
 ](https://github.com/thetutlage/angular-validation-schema) [(Demo)](http://plnkr.co/edit/X56HEsDYgYoY8gbSj7cu?p=preview)
 <br/>And add Validation in your view only.
-    
+
 angularjs 1.2.x support to version [angular-validation 1.2.x](https://github.com/huei90/angular-validation/tree/v1.2.x) <br/>
 angularjs 1.3.x support after version angular-validation 1.3.x
 
@@ -149,4 +149,3 @@ See [release](https://github.com/huei90/angular-validation/releases)
 CONTRIBUTORS
 =====
 Thanks for all [contributors](https://github.com/huei90/angular-validation/graphs/contributors)
-
