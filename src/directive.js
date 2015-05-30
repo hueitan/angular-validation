@@ -72,11 +72,11 @@
 
 
                 /**
-                 * If var is true, focus element when validate end
-                 * @type {boolean}
+                 * collect elements for focus
+                 * @type {Object}
                  ***private variable
                  */
-                var isFocusElement = false;
+                var focusElements = {};
 
 
                 /**
@@ -228,7 +228,6 @@
                              */
                             watch();
 
-                            isFocusElement = false;
                             ctrl.$setViewValue('');
                             ctrl.$setPristine();
                             ctrl.$setValidity(ctrl.$name, undefined);
@@ -250,10 +249,6 @@
                             scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
                                 var value = ctrl.$viewValue,
                                     isValid = false;
-
-                                if (index === 0) {
-                                    isFocusElement = false;
-                                }
 
                                 isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
 
@@ -278,11 +273,19 @@
 
                                 }
 
-                                // Focus first input element when submit error #11
-                                if (!isFocusElement && !isValid) {
-                                    isFocusElement = true;
-                                    element[0].focus();
-                                }
+                                var setFocus = function(isValid) {
+                                    if(isValid) {
+                                        delete focusElements[index];
+                                    } else {
+                                        focusElements[index] = element[0];
+
+                                        $timeout(function() {
+                                            focusElements[Math.min.apply(null, Object.keys(focusElements))].focus();
+                                        }, 0);
+                                    }
+                                };
+
+                                isValid.constructor === Object ? isValid.then(setFocus) : setFocus(isValid);
                             });
 
                             /**
