@@ -274,7 +274,7 @@
                                 }
 
                                 var setFocus = function(isValid) {
-                                    if(isValid) {
+                                    if (isValid) {
                                         delete focusElements[index];
                                     } else {
                                         focusElements[index] = element[0];
@@ -285,7 +285,8 @@
                                     }
                                 };
 
-                                isValid.constructor === Object ? isValid.then(setFocus) : setFocus(isValid);
+                                if (isValid.constructor === Object) isValid.then(setFocus);
+                                else setFocus(isValid);
                             });
 
                             /**
