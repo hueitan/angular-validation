@@ -324,7 +324,7 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, true);
-                    if (scope.validCallback) scope.validCallback();
+                    if (scope.validCallback) scope.validCallback({message: messageToShow});
                     if ($validationProvider.validCallback) $validationProvider.validCallback(element);
 
                     return true;
@@ -356,7 +356,7 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
-                    if (scope.inValidCallback) scope.inValidCallback();
+                    if (scope.invalidCallback) scope.invalidCallback({message: messageToShow});
                     if ($validationProvider.invalidCallback) $validationProvider.invalidCallback(element);
 
                     return false;
