@@ -32,7 +32,9 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, true);
-                    if (scope.validCallback) scope.validCallback({message: messageToShow});
+                    if (scope.validCallback) scope.validCallback({
+                        message: messageToShow
+                    });
                     if ($validationProvider.validCallback) $validationProvider.validCallback(element);
 
                     return true;
@@ -64,7 +66,9 @@
                         messageElem.css('display', 'none');
                     }
                     ctrl.$setValidity(ctrl.$name, false);
-                    if (scope.invalidCallback) scope.invalidCallback({message: messageToShow});
+                    if (scope.invalidCallback) scope.invalidCallback({
+                        message: messageToShow
+                    });
                     if ($validationProvider.invalidCallback) $validationProvider.invalidCallback(element);
 
                     return false;
