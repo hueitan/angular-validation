@@ -301,12 +301,12 @@ Intial Validation for the input false. You can make it to true!
 ```
 
 ### Custom Error/Success Message Function
-**html**
+#### html
 Declare your valid and invalid callback functions. Make sure to pass the `message` param.
 ``` html
 <input type="text" ng-model="name" name="inputName" validator="required" valid-callback="validationValidHandler(message)" invalid-callback="validationInvalidHandler(message)">
 ```
-**Javascript**
+#### Javascript
 Now you can call your own function and have access to the message.
 ``` javascript
 scope.validationValidHandler = function(message){
