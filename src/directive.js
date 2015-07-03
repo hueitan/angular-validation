@@ -239,6 +239,25 @@
                         });
 
                         /**
+                         * Set the error message for this specific element
+                         */
+                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(error) {
+
+                            /**
+                             * clear scope.$watch here
+                             * when set error
+                             * clear the $watch method to prevent
+                             * $watch again while reset the form
+                             */
+                            watch();
+                            ctrl.$setValidity(ctrl.$name, false);
+                            if (scope.messageId)
+                                angular.element(document.querySelector('#' + scope.messageId)).html(error);
+                            else
+                                element.next().html(error);
+                        });
+
+                        /**
                          * Check validator
                          */
 
