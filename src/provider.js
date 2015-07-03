@@ -255,12 +255,12 @@
                 }
             };
 
-            this.showErrors = function(form, errors){
+            this.showErrors = function(form, errors) {
                 if (form === undefined) {
                     console.error('This is not a regular Form name scope');
                     return;
                 }
-                if(!errors){
+                if (!errors) {
                     console.error('errors is null or undefined');
                     return;
                 }
@@ -269,7 +269,7 @@
                     $scope.$broadcast(form.$name + 'show-errors-' + form.validationId, errors);
                 } else if (form.constructor === Array) {
                     for (var k in form) {
-                        if(errors[form[k].$name]) {
+                        if (errors[form[k].$name]) {
                             $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[form[k].$name]);
                         }
                     }

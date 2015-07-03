@@ -259,6 +259,33 @@
                 }
             };
 
+            this.showErrors = function(form, errors) {
+                if (form === undefined) {
+                    console.error('This is not a regular Form name scope');
+                    return;
+                }
+                if (!errors) {
+                    console.error('errors is null or undefined');
+                    return;
+                }
+
+                if (form.validationId) {
+                    $scope.$broadcast(form.$name + 'show-errors-' + form.validationId, errors);
+                } else if (form.constructor === Array) {
+                    for (var k in form) {
+                        if (errors[form[k].$name]) {
+                            $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[form[k].$name]);
+                        }
+                    }
+                } else {
+                    for (var i in form) {
+                        if (i[0] !== '$' && form[i].hasOwnProperty('$dirty') && errors[i]) {
+                            $scope.$broadcast(i + 'show-errors-' + form[i].validationId, errors[i]);
+                        }
+                    }
+                }
+            };
+
 
             /**
              * $get
@@ -282,7 +309,8 @@
                         validate: this.validate,
                         validCallback: this.validCallback,
                         invalidCallback: this.invalidCallback,
-                        reset: this.reset
+                        reset: this.reset,
+                        showErrors: this.showErrors
                     };
                 }
             ];
@@ -528,6 +556,25 @@
                                 angular.element(document.querySelector('#' + scope.messageId)).html('');
                             else
                                 element.next().html('');
+                        });
+
+                        /**
+                         * Set the error message for this specific element
+                         */
+                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(error) {
+
+                            /**
+                             * clear scope.$watch here
+                             * when set error
+                             * clear the $watch method to prevent
+                             * $watch again while reset the form
+                             */
+                            watch();
+                            ctrl.$setValidity(ctrl.$name, false);
+                            if (scope.messageId)
+                                angular.element(document.querySelector('#' + scope.messageId)).html(error);
+                            else
+                                element.next().html(error);
                         });
 
                         /**
