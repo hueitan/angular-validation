@@ -239,6 +239,19 @@
                         });
 
                         /**
+                         * Set the error message for this specific element
+                         */
+                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(event, error) {
+
+                            /**
+                             * invoke the invalid function to show the error message
+                             */
+                            if (error) {
+                                invalidFunc(element, error, null, scope, ctrl);
+                            }
+                        });
+
+                        /**
                          * Check validator
                          */
 
