@@ -269,8 +269,8 @@
                     $scope.$broadcast(form.$name + 'show-errors-' + form.validationId, errors);
                 } else if (form.constructor === Array) {
                     for (var k in form) {
-                        if (errors[form[k].$name]) {
-                            $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[form[k].$name]);
+                        if (errors[k]) {
+                            $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[k]);
                         }
                     }
                 } else {

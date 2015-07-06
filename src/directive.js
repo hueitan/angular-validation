@@ -241,20 +241,14 @@
                         /**
                          * Set the error message for this specific element
                          */
-                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(error) {
+                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(event, error) {
 
                             /**
-                             * clear scope.$watch here
-                             * when set error
-                             * clear the $watch method to prevent
-                             * $watch again while reset the form
+                             * invoke the invalid function to show the error message
                              */
-                            watch();
-                            ctrl.$setValidity(ctrl.$name, false);
-                            if (scope.messageId)
-                                angular.element(document.querySelector('#' + scope.messageId)).html(error);
-                            else
-                                element.next().html(error);
+                            if (error) {
+                                invalidFunc(element, error, null, scope, ctrl);
+                            }
                         });
 
                         /**

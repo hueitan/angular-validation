@@ -273,8 +273,8 @@
                     $scope.$broadcast(form.$name + 'show-errors-' + form.validationId, errors);
                 } else if (form.constructor === Array) {
                     for (var k in form) {
-                        if (errors[form[k].$name]) {
-                            $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[form[k].$name]);
+                        if (errors[k]) {
+                            $scope.$broadcast(form[k].$name + 'show-errors-' + form[k].validationId, errors[k]);
                         }
                     }
                 } else {
@@ -561,20 +561,14 @@
                         /**
                          * Set the error message for this specific element
                          */
-                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(error) {
+                        scope.$on(ctrl.$name + 'show-errors-' + uid, function(event, error) {
 
                             /**
-                             * clear scope.$watch here
-                             * when set error
-                             * clear the $watch method to prevent
-                             * $watch again while reset the form
+                             * invoke the invalid function to show the error message
                              */
-                            watch();
-                            ctrl.$setValidity(ctrl.$name, false);
-                            if (scope.messageId)
-                                angular.element(document.querySelector('#' + scope.messageId)).html(error);
-                            else
-                                element.next().html(error);
+                            if (error) {
+                                invalidFunc(element, error, null, scope, ctrl);
+                            }
                         });
 
                         /**
