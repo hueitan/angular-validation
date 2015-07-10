@@ -299,3 +299,23 @@ Intial Validation for the input false. You can make it to true!
 <!-- set to true -->
 <input type="text" name="firstName" ng-model="firstName" validator="required" initial-validity="true"/>
 ```
+
+### Custom Error/Success Message Function
+#### html
+Declare your valid and invalid callback functions. Make sure to pass the `message` param.
+``` html
+<input type="text" ng-model="name" name="inputName" validator="required" valid-callback="validationValidHandler(message)" invalid-callback="validationInvalidHandler(message)">
+```
+#### Javascript
+Now you can call your own function and have access to the message.
+``` javascript
+scope.validationValidHandler = function(message){
+  // you now have access to the error message
+  displayMessage(message, 'success');
+};
+
+scope.validationInvalidHandler = function(message){
+  // you now have access to the error message
+  displayMessage(message, 'error');
+};
+```
