@@ -406,7 +406,7 @@
                                 }
                             },
                             error: function() {
-                                return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
+                                return attrs.noValidationMessage ? false : invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
                             }
                         };
 
