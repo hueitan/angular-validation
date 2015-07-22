@@ -114,7 +114,8 @@
                                 }
                             },
                             error: function() {
-                                return attrs.noValidationMessage ? false : invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
+                                return attrs.noValidationMessage === true || attrs.noValidationMessage == 'true' ?
+                                    false : invalidFunc(element, attrs[errorMessage], validator, scope, ctrl);
                             }
                         };
 
