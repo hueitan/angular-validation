@@ -347,6 +347,10 @@
                     var messageElem,
                         messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
 
+                    if(!ctrl.$error[ctrl.$name] && ctrl.$dirty && ctrl.$invalid){
+                        return true;
+                    }
+
                     if (scope.messageId)
                         messageElem = angular.element(document.querySelector('#' + scope.messageId));
                     else
