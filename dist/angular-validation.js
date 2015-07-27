@@ -298,6 +298,7 @@
                 var $validationProvider = $injector.get('$validation'),
                     $q = $injector.get('$q'),
                     $timeout = $injector.get('$timeout');
+                    $rootScope = $injector.get('$rootScope');
 
                 /**
                  * Do this function if validation valid
@@ -443,6 +444,18 @@
                     }
                 };
 
+
+                /**
+                * It is emitted inside $asyncValidators´ directives to force the validation execution
+                */
+                $rootScope.$on('execute-validation', function(event, args) { 
+                    var ctrl = args.ngModel;
+                    
+                    var validation = args.attrs.validator.split(',');
+                    var value = ctrl.$viewValue;
+
+                    checkValidation(args.$scope, args.element, args.attrs, ctrl, validation, value);
+                });
 
                 /**
                  * generate unique guid
