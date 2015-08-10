@@ -1,3 +1,16 @@
+10 Aug 2015 v1.3.2
+===
+
+**Fix**
+
+[fca3399](https://github.com/huei90/angular-validation/pull/117) Trouble focusing on first invalid element on submit
+<br/>
+[ef425a9](https://github.com/huei90/angular-validation/pull/122) Adding message to invalid and valid callback functions.
+
+**Known Issue**
+
+`$observe` https://github.com/huei90/angular-validation/pull/132
+
 11 May 2015 v1.3.1
 ===
 
