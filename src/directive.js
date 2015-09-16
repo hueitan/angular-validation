@@ -232,14 +232,17 @@
                              */
                             watch();
 
-                            ctrl.$setViewValue('');
-                            ctrl.$setPristine();
-                            ctrl.$setValidity(ctrl.$name, undefined);
-                            ctrl.$render();
-                            if (scope.messageId)
-                                angular.element(document.querySelector('#' + scope.messageId)).html('');
-                            else
-                                element.next().html('');
+                            $timeout(function() {
+                                ctrl.$setViewValue('');
+                                ctrl.$setPristine();
+                                ctrl.$setValidity(ctrl.$name, undefined);
+                                ctrl.$render();
+                                if (scope.messageId)
+                                    angular.element(document.querySelector('#' + scope.messageId)).html('');
+                                else
+                                    element.next().html('');
+                            });
+
                         });
 
                         /**
