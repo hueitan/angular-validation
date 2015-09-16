@@ -319,10 +319,8 @@
 
                     if ($validationProvider.showSuccessMessage && messageToShow) {
                         messageElem.html($validationProvider.getSuccessHTML(messageToShow));
-                        messageElem.css('display', '');
-                    } else {
-                        messageElem.css('display', 'none');
                     }
+
                     ctrl.$setValidity(ctrl.$name, true);
                     if (scope.validCallback) scope.validCallback({
                         message: messageToShow
@@ -353,10 +351,8 @@
 
                     if ($validationProvider.showErrorMessage && messageToShow) {
                         messageElem.html($validationProvider.getErrorHTML(messageToShow));
-                        messageElem.css('display', '');
-                    } else {
-                        messageElem.css('display', 'none');
                     }
+
                     ctrl.$setValidity(ctrl.$name, false);
                     if (scope.invalidCallback) scope.invalidCallback({
                         message: messageToShow
