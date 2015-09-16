@@ -73,6 +73,8 @@ You can also add a custom validation message by using `message-id` attribute. It
 
 <label>Blur method</label>
 <input type="text" name="number" ng-model="form.number" validator="number" valid-method="blur"/>
+<!-- or try ng-model-options="{ updateOn: 'blur' }" -->
+<input type="text" name="number" ng-model="form.number" validator="number" ng-model-options="{ updateOn: 'blur' }"/>
 
 <label>Submit method</label>
 <form name="Form">
