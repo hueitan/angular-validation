@@ -141,6 +141,11 @@
                 }
             };
 
+            $scope.form6 = {
+                required: [{}, {}, {}], // ng-repeat
+                checkValid: $validationProvider.checkValid
+            };
+            
             // Callback method
             $scope.success = function (message) {
                 alert('Success ' + message);

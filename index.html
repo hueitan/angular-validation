@@ -208,6 +208,28 @@
             <!-- <pre>{{ form | json }}</pre> -->
         </form>
     </div>
+    <div class="small-12 medium-12 large-6 columns">
+    <form name="Form6" id="form6">
+        <fieldset>
+            <legend>Form (ng-repeat)</legend>
+            <label>Required</label>
+            <div ng-repeat="a in form6.required">
+                <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required" message-id="emailRequiredOnly{{$index}}"/>
+                <span id="emailRequiredOnly{{$index}}"></span>
+            </div>
+            <blockquote ng-non-bindable>
+                In name attribute we have to use {{$index}}
+                <cite>eg. emailRequiredOnly{{$index}}</cite>
+            </blockquote>
+
+            <ul class="button-group">
+                <li><button class="button" validation-submit="Form6">Submit</button></li>
+                <li><button class="button alert" validation-reset="Form6">Reset</button></li>
+                <li><button class="button secondary" ng-disabled="!form6.checkValid(Form6)">checkValid = {{ form6.checkValid(Form6) }}</button></li>
+            </ul>
+            <!-- <pre>{{ form | json }}</pre> -->
+        </fieldset>
+    </form>
 </div>
 
 <a href="https://github.com/huei90/angular-validation"><img src="demo/iconmonstr-github-10-icon-128.png" id="github-link" alt="Fork me on Github"/></a>
