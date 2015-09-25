@@ -63,6 +63,35 @@ describe('provider', function() {
 
     }));
 
+    it('set value to 1234567', inject(function() {
+
+        var submitSpy = jasmine.createSpy('submitSpy'),
+            successSpy = jasmine.createSpy('successSpy'),
+            errorSpy = jasmine.createSpy('errorSpy');
+
+        $scope.$apply(function() {
+            $scope.number = 1234567;
+        });
+
+        $scope.$on('numberWatchsubmit-' + $scope.Form.numberWatch.validationId, function() {
+            submitSpy();
+        });
+
+        validationProvider.validate($scope.Form)
+            .success(function() {
+                successSpy();
+            })
+            .error(function() {
+                errorSpy();
+            });
+
+        $timeout.flush();
+        expect(submitSpy).toHaveBeenCalled();
+        expect(successSpy).not.toHaveBeenCalled();
+        expect(errorSpy).toHaveBeenCalled();
+
+    }));
+
     it('set value to "ABC"', inject(function() {
 
         var submitSpy = jasmine.createSpy('submitSpy'),
