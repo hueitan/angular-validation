@@ -2,7 +2,7 @@
 
 /* jasmine specs for provider go here */
 
-describe('provider', function () {
+describe('provider', function() {
 
     var $rootScope,
         $compile,
@@ -12,9 +12,9 @@ describe('provider', function () {
         validationProvider,
         myApp;
 
-    beforeEach(function () {
+    beforeEach(function() {
         myApp = angular.module('myApp', ['validation', 'validation.rule'])
-            .config(function ($validationProvider) {
+            .config(function($validationProvider) {
                 validationProvider = $validationProvider;
             });
 
@@ -23,7 +23,7 @@ describe('provider', function () {
 
     beforeEach(module('myApp'));
 
-    beforeEach(inject(function ($injector) {
+    beforeEach(inject(function($injector) {
         $rootScope = $injector.get('$rootScope');
         $compile = $injector.get('$compile');
         $scope = $rootScope.$new();
@@ -32,7 +32,7 @@ describe('provider', function () {
         element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
     }));
 
-    it('set/get Expression (RegExp or Function)', inject(function () {
+    it('set/get Expression (RegExp or Function)', inject(function() {
         var model = {
             huei: /^huei$/
         };
@@ -41,7 +41,7 @@ describe('provider', function () {
         expect(validationProvider.getExpression('huei')).toEqual(model.huei);
 
         model = {
-            huei: function () {
+            huei: function() {
                 return true;
             }
         };
@@ -50,7 +50,7 @@ describe('provider', function () {
         expect(validationProvider.getExpression('huei')).toBe(model.huei);
     }));
 
-    it('set/get DefaultMsg (String)', inject(function () {
+    it('set/get DefaultMsg (String)', inject(function() {
         var obj = {
             huei: {
                 error: 'It\'s should be huei',
@@ -67,12 +67,12 @@ describe('provider', function () {
         }
     }));
 
-    it('set/get successHTML', inject(function () {
+    it('set/get successHTML', inject(function() {
         validationProvider.setSuccessHTML('sethtml');
         expect(validationProvider.getSuccessHTML('true')).not.toEqual('sethtml');
         expect(validationProvider.getSuccessHTML('true')).toEqual('<p class="validation-valid">true</p>');
 
-        validationProvider.setSuccessHTML(function (msg) {
+        validationProvider.setSuccessHTML(function(msg) {
             return '<p class="success">' + msg + '</p>';
         });
 
@@ -81,19 +81,19 @@ describe('provider', function () {
 
     }));
 
-    it('set/get errorHTML', inject(function () {
+    it('set/get errorHTML', inject(function() {
         validationProvider.setErrorHTML('sethtml');
         expect(validationProvider.getErrorHTML('false')).not.toEqual('sethtml');
         expect(validationProvider.getErrorHTML('false')).toEqual('<p class="validation-invalid">false</p>');
 
-        validationProvider.setErrorHTML(function (msg) {
+        validationProvider.setErrorHTML(function(msg) {
             return '<p class="error">' + msg + '</p>';
         });
 
         expect(validationProvider.getErrorHTML('error')).toEqual('<p class="error">error</p>');
     }));
 
-    it('checkValid', inject(function () {
+    it('checkValid', inject(function() {
         expect(validationProvider.checkValid($scope.Form)).toBe(false);
         $scope.Form.required.$setViewValue('required');
         expect(validationProvider.checkValid($scope.Form)).toBe(true);
@@ -101,9 +101,9 @@ describe('provider', function () {
         expect(validationProvider.checkValid($scope.Form)).toBe(false);
     }));
 
-    it('reset', inject(function () {
+    it('reset', inject(function() {
         var resetSpy = jasmine.createSpy('resetSpy');
-        $scope.$on('requiredreset-' + $scope.Form.required.validationId, function () {
+        $scope.$on('requiredreset-' + $scope.Form.required.validationId, function() {
             resetSpy();
         });
         validationProvider.reset($scope.Form);
@@ -111,7 +111,7 @@ describe('provider', function () {
         expect(resetSpy).toHaveBeenCalled();
     }));
 
-    it('validate - submit', inject(function () {
+    it('validate - submit', inject(function() {
         var submitSpy = jasmine.createSpy('submitSpy'),
             successSpy = jasmine.createSpy('successSpy'),
             errorSpy = jasmine.createSpy('errorSpy'),
@@ -120,17 +120,17 @@ describe('provider', function () {
             errorSpy2 = jasmine.createSpy('errorSpy2');
 
         // test .success()
-        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function () {
+        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function() {
             submitSpy();
         });
-        $scope.$apply(function () {
+        $scope.$apply(function() {
             $scope.required = 'Required';
         });
         validationProvider.validate($scope.Form)
-            .success(function () {
+            .success(function() {
                 successSpy();
             })
-            .error(function () {
+            .error(function() {
                 errorSpy();
             });
 
@@ -140,19 +140,19 @@ describe('provider', function () {
         expect(errorSpy).not.toHaveBeenCalled();
 
         // test .error()
-        $scope.$apply(function () {
+        $scope.$apply(function() {
             $scope.required = '';
         });
 
-        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function () {
+        $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function() {
             submitSpy2();
         });
 
         validationProvider.validate($scope.Form)
-            .success(function () {
+            .success(function() {
                 successSpy2();
             })
-            .error(function () {
+            .error(function() {
                 errorSpy2();
             });
 
