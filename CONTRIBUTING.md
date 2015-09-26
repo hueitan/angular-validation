@@ -1,20 +1,21 @@
 Adding a new validation
 =====
 **Clone the repo to your computer**
-```
+```sh
 git clone https://github.com/huei90/angular-validation.git
 ```
 
 **Install Grunt and Download dependencies**
-```
+```sh
 npm install -g grunt-cli
 npm install
 ```
 
 **Before coding** <small>Boot the  Environment</small>
-```
+```sh
 grunt dev
-grunt check // check the code quality
+grunt check # check the code quality
+grunt build # build files
 ```
 
 **Start coding**
@@ -45,10 +46,13 @@ var defaultMsg = {
 };
 ```
 **Test**
+```sh
+# Test it locally
+npm test
 ```
-Karma Test done by Travis-ci,
+
+Karma Test done by Travis-ci, <br/>
 When you are done, test it on `http://localhost:8080`
-```
 
 **Give me a PR** <small> Thanks for it </small>
 
