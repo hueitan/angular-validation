@@ -550,6 +550,7 @@
                                 if (attrs.validMethod === 'submit') {
                                     watch(); // clear previous scope.$watch
                                     watch = scope.$watch('model', function(value, oldValue) {
+                                        value = ctrl.$viewValue;
 
                                         // don't watch when init
                                         if (value === oldValue) {
@@ -610,6 +611,7 @@
                              * This is the default method
                              */
                             scope.$watch('model', function(value) {
+                                value = ctrl.$viewValue;
                                 /**
                                  * dirty, pristine, viewValue control here
                                  */

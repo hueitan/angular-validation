@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             }
         },
         jsbeautifier: {
-            files: ['*.js', 'src/**/*.js'],
+            files: ['*.js', 'src/**/*.js', 'test/unit/*.js'],
             options: {}
         },
         jshint: {
