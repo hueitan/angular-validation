@@ -160,10 +160,7 @@
              * @returns {boolean}
              */
             this.checkValid = function(form) {
-                if (form.$valid === undefined) {
-                    return false;
-                }
-                return (form && form.$valid === true);
+                return !!(form && form.$valid);
             };
 
 
