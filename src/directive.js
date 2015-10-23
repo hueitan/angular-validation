@@ -245,99 +245,96 @@
                          * Check validator
                          */
 
-                        (function() {
-                            /**
-                             * Click submit form, check the validity when submit
-                             */
-                            scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
-                                var value = ctrl.$viewValue,
-                                    isValid = false;
+                        /**
+                         * Click submit form, check the validity when submit
+                         */
+                        scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
+                          var value = ctrl.$viewValue,
+                            isValid = false;
+
+                            isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
+
+                            if (attrs.validMethod === 'submit') {
+                              watch(); // clear previous scope.$watch
+                              watch = scope.$watch('model', function(value, oldValue) {
+                                value = ctrl.$viewValue;
+
+                                // don't watch when init
+                                if (value === oldValue) {
+                                  return;
+                                }
+
+                                // scope.$watch will translate '' to undefined
+                                // undefined/null will pass the required submit /^.+/
+                                // cause some error in this validation
+                                if (value === undefined || value === null) {
+                                  value = '';
+                                }
 
                                 isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
+                              });
 
-                                if (attrs.validMethod === 'submit') {
-                                    watch(); // clear previous scope.$watch
-                                    watch = scope.$watch('model', function(value, oldValue) {
-                                        value = ctrl.$viewValue;
-
-                                        // don't watch when init
-                                        if (value === oldValue) {
-                                            return;
-                                        }
-
-                                        // scope.$watch will translate '' to undefined
-                                        // undefined/null will pass the required submit /^.+/
-                                        // cause some error in this validation
-                                        if (value === undefined || value === null) {
-                                            value = '';
-                                        }
-
-                                        isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
-                                    });
-
-                                }
-
-                                var setFocus = function(isValid) {
-                                    if (isValid) {
-                                        delete focusElements[index];
-                                    } else {
-                                        focusElements[index] = element[0];
-
-                                        $timeout(function() {
-                                            focusElements[Math.min.apply(null, Object.keys(focusElements))].focus();
-                                        }, 0);
-                                    }
-                                };
-
-                                if (isValid.constructor === Object) isValid.then(setFocus);
-                                else setFocus(isValid);
-                            });
-
-                            /**
-                             * Validate blur method
-                             */
-                            if (attrs.validMethod === 'blur') {
-                                element.bind('blur', function() {
-                                    var value = ctrl.$viewValue;
-                                    scope.$apply(function() {
-                                        checkValidation(scope, element, attrs, ctrl, validation, value);
-                                    });
-                                });
-
-                                return;
                             }
 
-                            /**
-                             * Validate submit & submit-only method
-                             */
-                            if (attrs.validMethod === 'submit' || attrs.validMethod === 'submit-only') {
-                                return;
-                            }
+                            var setFocus = function(isValid) {
+                              if (isValid) {
+                                delete focusElements[index];
+                              } else {
+                                focusElements[index] = element[0];
 
-                            /**
-                             * Validate watch method
-                             * This is the default method
-                             */
-                            scope.$watch('model', function(value) {
-                                value = ctrl.$viewValue;
-                                /**
-                                 * dirty, pristine, viewValue control here
-                                 */
-                                if (ctrl.$pristine && ctrl.$viewValue) {
-                                    // has value when initial
-                                    ctrl.$setViewValue(ctrl.$viewValue);
-                                } else if (ctrl.$pristine) {
-                                    // Don't validate form when the input is clean(pristine)
-                                    if (scope.messageId)
-                                        angular.element(document.querySelector('#' + scope.messageId)).html('');
-                                    else
-                                        element.next().html('');
-                                    return;
-                                }
-                                checkValidation(scope, element, attrs, ctrl, validation, value);
+                                $timeout(function() {
+                                  focusElements[Math.min.apply(null, Object.keys(focusElements))].focus();
+                                }, 0);
+                              }
+                            };
+
+                            if (isValid.constructor === Object) isValid.then(setFocus);
+                            else setFocus(isValid);
+                        });
+
+                        /**
+                         * Validate blur method
+                         */
+                        if (attrs.validMethod === 'blur') {
+                          element.bind('blur', function() {
+                            var value = ctrl.$viewValue;
+                            scope.$apply(function() {
+                              checkValidation(scope, element, attrs, ctrl, validation, value);
                             });
+                          });
 
-                        })();
+                          return;
+                        }
+
+                        /**
+                         * Validate submit & submit-only method
+                         */
+                        if (attrs.validMethod === 'submit' || attrs.validMethod === 'submit-only') {
+                          return;
+                        }
+
+                        /**
+                         * Validate watch method
+                         * This is the default method
+                         */
+                        scope.$watch('model', function(value) {
+                          value = ctrl.$viewValue;
+                          /**
+                           * dirty, pristine, viewValue control here
+                           */
+                          if (ctrl.$pristine && ctrl.$viewValue) {
+                            // has value when initial
+                            ctrl.$setViewValue(ctrl.$viewValue);
+                          } else if (ctrl.$pristine) {
+                            // Don't validate form when the input is clean(pristine)
+                            if (scope.messageId)
+                              angular.element(document.querySelector('#' + scope.messageId)).html('');
+                            else
+                              element.next().html('');
+                            return;
+                          }
+                          checkValidation(scope, element, attrs, ctrl, validation, value);
+                        });
 
                         $timeout(function() {
                             /**
