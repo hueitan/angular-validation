@@ -14,7 +14,6 @@ npm install
 **Before coding** <small>Boot the  Environment</small>
 ```sh
 grunt dev
-grunt check # check the code quality
 grunt build # build files
 ```
 
