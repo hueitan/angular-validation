@@ -1,7 +1,7 @@
 var options = {
-  "version": "1.3.2",
-  "where": "client",
-  "packageName": "huei90:angular-validation"
+  version: '1.3.2',
+  where: 'client',
+  packageName: 'huei90:angular-validation'
 };
 
 // meta data

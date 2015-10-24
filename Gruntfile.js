@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     concat: {
       basic_and_extras: {
         files: {
-          'dist/angular-validation.js': ['src/module.js', 'src/provider.js', 'src/directive.js'],
+          'dist/angular-validation.js': ['src/module.js', 'src/provider.js', 'src/*.directive.js'],
           'dist/angular-validation-rule.js': ['src/rule.js']
         }
       }
