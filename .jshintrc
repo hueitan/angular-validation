@@ -1,0 +1,17 @@
+{
+  "quotmark": "single",
+  "node": true,
+  "globals": {
+    "angular": false,
+    "document": false,
+    "jasmine": false,
+    "module": false,
+    "describe": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "it": false,
+    "inject": false,
+    "expect": false,
+    "spyOn": false
+  }
+}

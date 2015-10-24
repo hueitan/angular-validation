@@ -47,9 +47,9 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      all: ['*.js', 'src/**/*.js'],
+      all: ['*.js', 'src/**/*.js', 'test/unit/*.js', 'demo/*.js'],
       options: {
-        quotmark: 'single'
+        jshintrc: true
       }
     },
     browserSync: {
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['src/*.js'],
-      tasks: ['jshint', 'build'],
+      tasks: ['build'],
       options: {
         spawn: false,
         interrupt: true
@@ -93,6 +93,7 @@ module.exports = function(grunt) {
 
   // Register Task
   grunt.registerTask('dev', ['browserSync', 'watch']);
-  grunt.registerTask('build', ['jshint', 'jsbeautifier', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('check', ['jshint', 'jsbeautifier']); // use this before commit
+  grunt.registerTask('build', ['check', 'clean', 'concat', 'uglify']);
   grunt.registerTask('test', ['build', 'karma']);
 };
