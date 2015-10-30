@@ -1,5 +1,5 @@
 var options = {
-  version: '1.3.2',
+  version: '1.3.3',
   where: 'client',
   packageName: 'huei90:angular-validation'
 };

@@ -1,3 +1,25 @@
+31 Oct 2015 v1.3.3
+===
+
+**Improvement**
+
+[00ce51c](https://github.com/huei90/angular-validation/commit/00ce51cb85c21a7699c7faecc4a173e0834daadb) Updated `travis.yml` 
+<br/>[6f9403d](https://github.com/huei90/angular-validation/pull/143) Added the `package.js` in order to support Meteor package
+<br/>[a872d4c](https://github.com/huei90/angular-validation/pull/147) Did refactoring the project 
+
+**Fix**
+
+[331d2eb](https://github.com/huei90/angular-validation/commit/331d2eb2fd68d11532fe612453861c263577fb58) Wrapped `validation-reset` within $timeout
+<br/>[e53469c](https://github.com/huei90/angular-validation/commit/e53469c08a7e6e4ef7c8a60c0e67683bd7dd68ad) Fixed `no-validation-message` condition
+<br/>[4dcdb68](https://github.com/huei90/angular-validation/pull/140) Set an actual value from the control's view (ctrl.$viewValue instead of watch value) 
+<br/>[09aed2e](https://github.com/huei90/angular-validation/pull/145) Fixed an error in the checkValid function
+
+
+**Documentation**
+
+[eeac2f0](https://github.com/huei90/angular-validation/commit/eeac2f02552621f743899dc2d1bd61194f1977d4) Updated API.md to include an `ng-model-options` example
+
+
 10 Aug 2015 v1.3.2
 ===
 
