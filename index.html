@@ -14,7 +14,6 @@
     <meta name="robots" content="all"/>
     <meta name="spiders" content="all"/>
     <meta name="webcrawlers" content="all"/>
-
     <meta name="company" content="angular-validation"/>
     <meta name="abstract" content="Client-side Validation for AngularJS"/>
     <!-- <link rel="SHORTCUT ICON" type="image/x-icon" href="/images/favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" />
@@ -22,8 +21,7 @@
 
     <meta name="subject" content="angular-validation"/>
     <meta name="description" content="Client-side Validation for AngularJS"/>
-    <meta name="keywords" content="angular" ,
-    "angularjs","validation","angular validation","validator","client-side" />
+    <meta name="keywords" content="angular ,angularjs,validation,angular validation ,validator,client-side"/>
 
     <meta property="og:title" content="angular-validation"/>
     <meta property="og:url" content="http://huei90.github.io/angular-validation/"/>
@@ -68,18 +66,12 @@
                     <label>Url</label>
                     <input type="text" name="url" ng-model="form.url" validator="required, url">
                 </div>
-              <!--
-                <div>
-                    <label>type</label>
-                    <input type="checkbox" name="type" ng-model="form.type" value="http" vali dator="required" mess age-id="invalidtype"/>Http
-                    <input type="checkbox" name="type" ng-model="form.type" value="https" vali dator="required" mess age-id="invalidtype"/>Https
-                    <div id="invalidtype"></div>
-                </div>
-                -->
                 <div>
                     <label>Type:</label>
-                    <input type="radio" name="active" ng-model="form.active" value="yes" validator="required" message-id="invalidActive" />Active
-                    <input type="radio" name="active" ng-model="form.active" value="no" validator="required"  message-id="invalidActive" />Not Active
+                    <input type="radio" name="active" ng-model="form.active" value="yes" validator="required"
+                           message-id="invalidActive"/>Active
+                    <input type="radio" name="active" ng-model="form.active" value="no" validator="required"
+                           message-id="invalidActive"/>Not Active
                     <div id="invalidActive"></div>
                 </div>
                 <button validation-submit="Form" ng-click="next()">Submit</button>
@@ -101,6 +93,14 @@
       &lt;label>Url&lt;/label>
       &lt;input type="text" name="url" ng-model="form.url" <span data-tooltip aria-haspopup="true" class="has-tip"
                                                                  title="Multiple types of validator">validator="required, url"</span>>
+      &lt;/div>
+      &lt;div>
+          &lt;label>Type:&lt;/label>
+          &lt;input type="radio" name="active" ng-model="form.active" value="yes" validator="required"
+                 message-id="invalidActive"/>Active
+          &lt;input type="radio" name="active" ng-model="form.active" value="no" validator="required"
+                 message-id="invalidActive"/>Not Active
+          &lt;div id="invalidActive">&lt;/div>
       &lt;/div>
       &lt;button <span data-tooltip aria-haspopup="true" class="has-tip"
                        title="Submit Form">validation-submit="Form"</span> <span data-tooltip aria-haspopup="true"
