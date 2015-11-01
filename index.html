@@ -2,32 +2,33 @@
 <html ng-app="myApp">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width" />
-    <meta name="distribution" content="global" />
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="distribution" content="global"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="author" content="Huei Tan" />
-    <meta name="publisher" content="Huei Tan" />
-    <meta name="rating" content="general" />
-    <meta name="robots" content="all" />
-    <meta name="spiders" content="all" />
-    <meta name="webcrawlers" content="all" />
+    <meta name="author" content="Huei Tan"/>
+    <meta name="publisher" content="Huei Tan"/>
+    <meta name="rating" content="general"/>
+    <meta name="robots" content="all"/>
+    <meta name="spiders" content="all"/>
+    <meta name="webcrawlers" content="all"/>
 
-    <meta name="company" content="angular-validation" />
-    <meta name="abstract" content="Client-side Validation for AngularJS" />
+    <meta name="company" content="angular-validation"/>
+    <meta name="abstract" content="Client-side Validation for AngularJS"/>
     <!-- <link rel="SHORTCUT ICON" type="image/x-icon" href="/images/favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" />
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" /> -->
 
-    <meta name="subject" content="angular-validation" />
-    <meta name="description" content="Client-side Validation for AngularJS" />
-    <meta name="keywords" content="angular","angularjs","validation","angular validation","validator","client-side" />
+    <meta name="subject" content="angular-validation"/>
+    <meta name="description" content="Client-side Validation for AngularJS"/>
+    <meta name="keywords" content="angular" ,
+    "angularjs","validation","angular validation","validator","client-side" />
 
-    <meta property="og:title" content="angular-validation" />
-    <meta property="og:url" content="http://huei90.github.io/angular-validation/" />
-    <meta property="og:description" content="Client-side Validation for AngularJS" />
-    <meta property="og:image" content="//avatars0.githubusercontent.com/u/2560096?v=3&s=460" />
+    <meta property="og:title" content="angular-validation"/>
+    <meta property="og:url" content="http://huei90.github.io/angular-validation/"/>
+    <meta property="og:description" content="Client-side Validation for AngularJS"/>
+    <meta property="og:image" content="//avatars0.githubusercontent.com/u/2560096?v=3&s=460"/>
 
     <title>Angular Validation</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/css/foundation.min.css"/>
@@ -55,41 +56,63 @@
 </div>
 
 <div class="row">
-  <div class="small-12 medium-12 large-12 columns">
-    <form name="Form">
-      <fieldset>
-        <legend>Getting Started</legend>
-    <div>
-        <label>Required</label>
-        <input type="text" name="required" ng-model="form.required" validator="required">
-    </div>
-    <div>
-        <label>Url</label>
-        <input type="text" name="url" ng-model="form.url" validator="required, url">
-    </div>
-    <button validation-submit="Form" ng-click="next()">Submit</button>
-    <button validation-reset="Form">Reset</button>
-    <button ng-click="showcode1 = !showcode1" class="button success">
-      <span ng-hide="showcode1">Show Code</span>
-      <span ng-show="showcode1">Hide Code</span>
-    </button>
+    <div class="small-12 medium-12 large-12 columns">
+        <form name="Form">
+            <fieldset>
+                <legend>Getting Started</legend>
+                <div>
+                    <label>Required</label>
+                    <input type="text" name="required" ng-model="form.required" validator="required">
+                </div>
+                <div>
+                    <label>Url</label>
+                    <input type="text" name="url" ng-model="form.url" validator="required, url">
+                </div>
+              <!--
+                <div>
+                    <label>type</label>
+                    <input type="checkbox" name="type" ng-model="form.type" value="http" vali dator="required" mess age-id="invalidtype"/>Http
+                    <input type="checkbox" name="type" ng-model="form.type" value="https" vali dator="required" mess age-id="invalidtype"/>Https
+                    <div id="invalidtype"></div>
+                </div>
+                -->
+                <div>
+                    <label>Type:</label>
+                    <input type="radio" name="active" ng-model="form.active" value="yes" validator="required" message-id="invalidActive" />Active
+                    <input type="radio" name="active" ng-model="form.active" value="no" validator="required"  message-id="invalidActive" />Not Active
+                    <div id="invalidActive"></div>
+                </div>
+                <button validation-submit="Form" ng-click="next()">Submit</button>
+                <button validation-reset="Form">Reset</button>
+                <button ng-click="showcode1 = !showcode1" class="button success">
+                    <span ng-hide="showcode1">Show Code</span>
+                    <span ng-show="showcode1">Hide Code</span>
+                </button>
 
-  <pre ng-show="showcode1"><code class="html">&lt;form <span data-tooltip aria-haspopup="true" class="has-tip" title="define form name">name="Form"</span>>
-  &lt;div>
+  <pre ng-show="showcode1"><code class="html">&lt;form <span data-tooltip aria-haspopup="true" class="has-tip"
+                                                             title="define form name">name="Form"</span>>
+      &lt;div>
       &lt;label>Required&lt;/label>
-      &lt;input type="text" name="required" ng-model="form.required" <span data-tooltip aria-haspopup="true" class="has-tip" title="Choose validator type">validator="required"</span>>
-  &lt;/div>
-  &lt;div>
+      &lt;input type="text" name="required" ng-model="form.required" <span data-tooltip aria-haspopup="true"
+                                                                           class="has-tip"
+                                                                           title="Choose validator type">validator="required"</span>>
+      &lt;/div>
+      &lt;div>
       &lt;label>Url&lt;/label>
-      &lt;input type="text" name="url" ng-model="form.url" <span data-tooltip aria-haspopup="true" class="has-tip" title="Multiple types of validator">validator="required, url"</span>>
-  &lt;/div>
-  &lt;button <span data-tooltip aria-haspopup="true" class="has-tip" title="Submit Form">validation-submit="Form"</span> <span data-tooltip aria-haspopup="true" class="has-tip" title="execute next() if form submitted success">ng-click="next()"</span>>Submit&lt;/button>
-  &lt;button <span data-tooltip aria-haspopup="true" class="has-tip" title="Reset Form">validation-reset="Form"</span>>Reset&lt;/button>
-&lt;/form>
+      &lt;input type="text" name="url" ng-model="form.url" <span data-tooltip aria-haspopup="true" class="has-tip"
+                                                                 title="Multiple types of validator">validator="required, url"</span>>
+      &lt;/div>
+      &lt;button <span data-tooltip aria-haspopup="true" class="has-tip"
+                       title="Submit Form">validation-submit="Form"</span> <span data-tooltip aria-haspopup="true"
+                                                                                 class="has-tip"
+                                                                                 title="execute next() if form submitted success">ng-click="next()"</span>>Submit&lt;/button>
+      &lt;button <span data-tooltip aria-haspopup="true" class="has-tip"
+                       title="Reset Form">validation-reset="Form"</span>>Reset&lt;/button>
+      &lt;/form>
   </code></pre>
-</fieldset>
-</form>
-</div>
+            </fieldset>
+        </form>
+    </div>
 
     <div class="small-12 medium-12 large-12 columns">
         <form name="Form" id="form1">
@@ -112,7 +135,7 @@
                        ng-model="form.number"
                        validator="number"
                        email-error-message="Error Number"
-                       email-success-message="Good Number",
+                       email-success-message="Good Number" ,
                        message-id="numberWatch"/>
                 <span id="numberWatch"></span>
 
@@ -123,12 +146,12 @@
                 <input type="text" name="ipWatch" ng-model="form.ip" validator="ip"/> -->
 
                 <button style="" ng-click="showcodewatch = !showcodewatch" class="button success">
-                  <span ng-hide="showcodewatch">Show Code</span>
-                  <span ng-show="showcodewatch">Hide Code</span>
+                    <span ng-hide="showcodewatch">Show Code</span>
+                    <span ng-show="showcodewatch">Hide Code</span>
                 </button>
 
                 <pre ng-show="showcodewatch"><code class="html">&lt;!-- default valid-method is watch -->
-&lt;input type="text" name="emailBlur" ng-model="form.email" validator="email"/></code></pre>
+                    &lt;input type="text" name="emailBlur" ng-model="form.email" validator="email"/></code></pre>
             </fieldset>
         </form>
     </div>
@@ -139,17 +162,20 @@
                 <legend>Form ($blur)</legend>
 
                 <label>Name</label>
-                <input type="text" name="requireBlur" ng-model="form2.required" validator="required" valid-method="blur"/>
+                <input type="text" name="requireBlur" ng-model="form2.required" validator="required"
+                       valid-method="blur"/>
 
                 <label>Email</label>
                 <input type="text" name="emailBlur" ng-model="form2.email" validator="email" valid-method="blur"/>
 
                 <button style="" ng-click="showcodeblur = !showcodeblur" class="button success">
-                  <span ng-hide="showcodeblur">Show Code</span>
-                  <span ng-show="showcodeblur">Hide Code</span>
+                    <span ng-hide="showcodeblur">Show Code</span>
+                    <span ng-show="showcodeblur">Hide Code</span>
                 </button>
 
-                <pre ng-show="showcodeblur"><code class="html">&lt;input type="text" name="emailBlur" ng-model="form.email" validator="email" <span data-tooltip aria-haspopup="true" class="has-tip" title="valid method type set to blur">valid-method="blur"</span>/></code></pre>
+                <pre ng-show="showcodeblur"><code class="html">&lt;input type="text" name="emailBlur"
+                    ng-model="form.email" validator="email" <span data-tooltip aria-haspopup="true" class="has-tip"
+                                                                  title="valid method type set to blur">valid-method="blur"</span>/></code></pre>
             </fieldset>
         </form>
     </div>
@@ -162,25 +188,37 @@
                 <legend>Form ($submit with callback)</legend>
 
                 <label>Required</label>
-                <input type="text" name="requireSubmit" ng-model="form3.required" validator="required" valid-method="submit" message-id="requireSubmit"/>
+                <input type="text" name="requireSubmit" ng-model="form3.required" validator="required"
+                       valid-method="submit" message-id="requireSubmit"/>
                 <span id="requireSubmit"></span>
 
                 <label>Url</label>
-                <input type="text" name="urlSubmit" ng-model="form3.url" validator="url" valid-method="submit" message-id="urlSubmit"/>
+                <input type="text" name="urlSubmit" ng-model="form3.url" validator="url" valid-method="submit"
+                       message-id="urlSubmit"/>
                 <span id="urlSubmit"></span>
 
                 <label>Email</label>
-                <input type="text" name="emailSubmit" ng-model="form3.email" validator="email" valid-method="submit" message-id="emailSubmit"/>
+                <input type="text" name="emailSubmit" ng-model="form3.email" validator="email" valid-method="submit"
+                       message-id="emailSubmit"/>
                 <span id="emailSubmit"></span>
 
                 <label>Number</label>
-                <input type="text" name="numberSubmit" ng-model="form3.number" validator="number" valid-method="submit" message-id="numberSubmit"/>
+                <input type="text" name="numberSubmit" ng-model="form3.number" validator="number" valid-method="submit"
+                       message-id="numberSubmit"/>
                 <span id="numberSubmit"></span>
 
                 <ul class="button-group">
-                    <li><button class="button" ng-click="form3.submit(Form3)">Submit</button></li>
-                    <li><button class="button alert" ng-click="form3.reset(Form3)">Reset</button></li>
-                    <li><button class="button secondary" ng-disabled="!form3.checkValid(Form3)">checkValid = {{ form3.checkValid(Form3) }}</button></li>
+                    <li>
+                        <button class="button" ng-click="form3.submit(Form3)">Submit</button>
+                    </li>
+                    <li>
+                        <button class="button alert" ng-click="form3.reset(Form3)">Reset</button>
+                    </li>
+                    <li>
+                        <button class="button secondary" ng-disabled="!form3.checkValid(Form3)">checkValid = {{
+                            form3.checkValid(Form3) }}
+                        </button>
+                    </li>
                 </ul>
             </fieldset>
             <!-- <pre>{{ form | json }}</pre> -->
@@ -193,50 +231,65 @@
 
                 <div class="row collapse">
                     <div class="small-9 columns">
-                        <input type="text" validator="huei" name="huei" ng-model="form4.huei" placeholder="It's must be 'Huei Tan'" message-id="huei">
+                        <input type="text" validator="huei" name="huei" ng-model="form4.huei"
+                               placeholder="It's must be 'Huei Tan'" message-id="huei">
                         <span id="huei"></span>
                     </div>
                     <div class="small-3 columns">
-                        <span class="postfix radius">With <a href="https://github.com/huei90/angular-validation#custom-function-huei" target="_blank">Function</a> </span>
+                        <span class="postfix radius">With <a
+                                href="https://github.com/huei90/angular-validation#custom-function-huei"
+                                target="_blank">Function</a> </span>
                     </div>
                 </div>
 
                 <div class="row collapse">
                     <div class="small-7 columns">
-                        <input type="text" validator="huei" name="noMsg" ng-model="form4.noMsg" no-validation-message="true" placeholder="It's must be 'Huei Tan'" message-id="noMsg">
+                        <input type="text" validator="huei" name="noMsg" ng-model="form4.noMsg"
+                               no-validation-message="true" placeholder="It's must be 'Huei Tan'" message-id="noMsg">
                         <span id="noMsg"></span>
                     </div>
                     <div class="small-5 columns">
                         <span class="postfix radius">
                             <span ng-if="!Form4.noMsg.$valid">type: Huei Tan</span>
-                            <span ng-if="Form4.noMsg.$valid"><a href="https://github.com/huei90/angular-validation#no-validation-message" target="_blank">no-validation-message</a></span>
+                            <span ng-if="Form4.noMsg.$valid"><a
+                                    href="https://github.com/huei90/angular-validation#no-validation-message"
+                                    target="_blank">no-validation-message</a></span>
                         </span>
                     </div>
                 </div>
 
                 <div class="row collapse">
                     <div class="small-7 columns">
-                        <input type="text" validator="huei" name="canChange" huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange" placeholder="Type Wrong !!" message-id="canChange">
+                        <input type="text" validator="huei" name="canChange"
+                               huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange"
+                               placeholder="Type Wrong !!" message-id="canChange">
                         <span id="canChange"></span>
                     </div>
                     <div class="small-5 columns">
                         <span class="postfix radius">
-                            <span ng-if="!form4.show"><a href="javascript:void(0);" ng-click="form4.changeMsg();form4.show = true;">Change Error Msg</a></span>
-                            <span ng-if="form4.show">Type Again <a href="https://github.com/huei90/angular-validation/blob/master/demo/demo.js#L45" target="_blank">#</a></span>
+                            <span ng-if="!form4.show"><a href="javascript:void(0);"
+                                                         ng-click="form4.changeMsg();form4.show = true;">Change Error
+                                Msg</a></span>
+                            <span ng-if="form4.show">Type Again <a
+                                    href="https://github.com/huei90/angular-validation/blob/master/demo/demo.js#L45"
+                                    target="_blank">#</a></span>
                         </span>
                     </div>
                 </div>
 
                 <div class="row collapse">
                     <div class="small-12 columns">
-                        <input type="text" validator="range" name="range" ng-model="form4.range" placeholder="number 5~10" min="5" max="10" message-id="range">
+                        <input type="text" validator="range" name="range" ng-model="form4.range"
+                               placeholder="number 5~10" min="5" max="10" message-id="range">
                         <span id="range"></span>
                     </div>
                 </div>
 
                 <div class="row collapse">
                     <div class="small-12 columns">
-                        <input type="text" validator="required, range" name="multiple" ng-model="form4.multiple" placeholder='number 5~10 with required (validator="required, range")'  min="5" max="10" message-id="multiple">
+                        <input type="text" validator="required, range" name="multiple" ng-model="form4.multiple"
+                               placeholder='number 5~10 with required (validator="required, range")' min="5" max="10"
+                               message-id="multiple">
                         <span id="multiple"></span>
                     </div>
                 </div>
@@ -251,14 +304,17 @@
             <fieldset>
                 <legend>Form ($submit-only)</legend>
                 <label>Required</label>
-                <input type="text" name="emailRequiredOnly" ng-model="form5.required" validator="required" valid-method="submit-only" message-id="emailRequiredOnly"/>
+                <input type="text" name="emailRequiredOnly" ng-model="form5.required" validator="required"
+                       valid-method="submit-only" message-id="emailRequiredOnly"/>
                 <span id="emailRequiredOnly"></span>
                 <label>Email</label>
-                <input type="text" name="emailSubmitOnly" ng-model="form5.email" validator="email" valid-method="submit-only" message-id="emailSubmitOnly"/>
+                <input type="text" name="emailSubmitOnly" ng-model="form5.email" validator="email"
+                       valid-method="submit-only" message-id="emailSubmitOnly"/>
                 <span id="emailSubmitOnly"></span>
 
                 <label>Lucky Number</label>
-                <select class="form-control" name="selectBlur" ng-model="form5.select" validator="required" message-id="selectBlur">
+                <select class="form-control" name="selectBlur" ng-model="form5.select" validator="required"
+                        message-id="selectBlur">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -268,15 +324,25 @@
                 <span id="selectBlur"></span>
 
                 <label>Checkbox</label>
+
                 <div class="large-12 columns">
-                     <input id="checkbox1" type="checkbox" name="checkBlur" ng-model="form5.check" validator="required" message-id="checkBlur"/><label for="checkbox1">Checkbox 1</label>
-                     <span id="checkBlur"></span>
+                    <input id="checkbox1" type="checkbox" name="checkBlur" ng-model="form5.check" validator="required"
+                           message-id="checkBlur"/><label for="checkbox1">Checkbox 1</label>
+                    <span id="checkBlur"></span>
                 </div>
 
                 <ul class="button-group">
-                    <li><button class="button" ng-click="form5.submit(Form5)">Submit</button></li>
-                    <li><button class="button alert" ng-click="form5.reset(Form5)">Reset</button></li>
-                    <li><button class="button secondary" ng-disabled="!form5.checkValid(Form5)">checkValid = {{ form5.checkValid(Form5) }}</button></li>
+                    <li>
+                        <button class="button" ng-click="form5.submit(Form5)">Submit</button>
+                    </li>
+                    <li>
+                        <button class="button alert" ng-click="form5.reset(Form5)">Reset</button>
+                    </li>
+                    <li>
+                        <button class="button secondary" ng-disabled="!form5.checkValid(Form5)">checkValid = {{
+                            form5.checkValid(Form5) }}
+                        </button>
+                    </li>
                 </ul>
                 <!-- <pre>{{ form | json }}</pre> -->
 
@@ -289,8 +355,10 @@
             <fieldset>
                 <legend>Form (ng-repeat)</legend>
                 <label>Required</label>
+
                 <div ng-repeat="a in form6.required">
-                    <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required" message-id="emailRequiredOnly{{$index}}"/>
+                    <input type="text" name="emailRequiredOnly{{$index}}" ng-model="a.required" validator="required"
+                           message-id="emailRequiredOnly{{$index}}"/>
                     <span id="emailRequiredOnly{{$index}}"></span>
                 </div>
                 <blockquote ng-non-bindable>
@@ -299,9 +367,17 @@
                 </blockquote>
 
                 <ul class="button-group">
-                    <li><button class="button" validation-submit="Form6">Submit</button></li>
-                    <li><button class="button alert" validation-reset="Form6">Reset</button></li>
-                    <li><button class="button secondary" ng-disabled="!form6.checkValid(Form6)">checkValid = {{ form6.checkValid(Form6) }}</button></li>
+                    <li>
+                        <button class="button" validation-submit="Form6">Submit</button>
+                    </li>
+                    <li>
+                        <button class="button alert" validation-reset="Form6">Reset</button>
+                    </li>
+                    <li>
+                        <button class="button secondary" ng-disabled="!form6.checkValid(Form6)">checkValid = {{
+                            form6.checkValid(Form6) }}
+                        </button>
+                    </li>
                 </ul>
                 <!-- <pre>{{ form | json }}</pre> -->
             </fieldset>
@@ -310,26 +386,28 @@
 
     <div class="small-12 medium-12 large-12 columns">
         <form style="text-align: center;">
-          <a href="//github.com/huei90/angular-validation/blob/master/API.md" target="_blank">
-            <fieldset>
-                More API Documentation
-            </fieldset>
-          </a>
-          <a href="//github.com/huei90/angular-validation/issues" target="_blank">
-            <fieldset>
-                Found a bug/issue?
-            </fieldset>
-          </a>
-          <a href="//github.com/huei90/angular-validation" target="_blank">
-            <fieldset>
-                Buy me a Star!
-            </fieldset>
-          </a>
+            <a href="//github.com/huei90/angular-validation/blob/master/API.md" target="_blank">
+                <fieldset>
+                    More API Documentation
+                </fieldset>
+            </a>
+            <a href="//github.com/huei90/angular-validation/issues" target="_blank">
+                <fieldset>
+                    Found a bug/issue?
+                </fieldset>
+            </a>
+            <a href="//github.com/huei90/angular-validation" target="_blank">
+                <fieldset>
+                    Buy me a Star!
+                </fieldset>
+            </a>
         </form>
     </div>
 </div>
 
-<a href="https://github.com/huei90/angular-validation" target="_blank"><img src="demo/iconmonstr-github-10-icon-128.png" id="github-link" alt="Fork me on Github"/></a>
+<a href="https://github.com/huei90/angular-validation" target="_blank"><img src="demo/iconmonstr-github-10-icon-128.png"
+                                                                            id="github-link"
+                                                                            alt="Fork me on Github"/></a>
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -340,17 +418,24 @@
 <script src="dist/angular-validation-rule.js"></script>
 <script src="demo/demo.js"></script>
 <script>
-  hljs.initHighlightingOnLoad();
-  $(document).foundation();
+    hljs.initHighlightingOnLoad();
+    $(document).foundation();
 </script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-62825613-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-62825613-1', 'auto');
+    ga('send', 'pageview');
 </script>
 </body>
 </html>
