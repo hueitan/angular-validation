@@ -67,6 +67,14 @@
         <label>Url</label>
         <input type="text" name="url" ng-model="form.url" validator="required, url">
     </div>
+          <div>
+              <label>Type:</label>
+              <input type="radio" name="active" ng-model="form.active" value="yes" validator="required"
+                     message-id="invalidActive"/>Http
+              <input type="radio" name="active" ng-model="form.active" value="no" validator="required"
+                     message-id="invalidActive"/>Https
+              <div id="invalidActive"></div>
+          </div>
     <button validation-submit="Form" ng-click="next()">Submit</button>
     <button validation-reset="Form">Reset</button>
     <button ng-click="showcode1 = !showcode1" class="button success">
@@ -83,6 +91,12 @@
       &lt;label>Url&lt;/label>
       &lt;input type="text" name="url" ng-model="form.url" <span data-tooltip aria-haspopup="true" class="has-tip" title="Multiple types of validator">validator="required, url"</span>>
   &lt;/div>
+      &lt;label>Type:</label>
+      &lt;input type="radio" name="active" ng-model="form.active" value="yes" validator="required"
+             message-id="invalidActive"/>Http
+      &lt;input type="radio" name="active" ng-model="form.active" value="no" validator="required"
+             message-id="invalidActive"/>Https
+      &lt;div id="invalidActive">&lt;/div>
   &lt;button <span data-tooltip aria-haspopup="true" class="has-tip" title="Submit Form">validation-submit="Form"</span> <span data-tooltip aria-haspopup="true" class="has-tip" title="execute next() if form submitted success">ng-click="next()"</span>>Submit&lt;/button>
   &lt;button <span data-tooltip aria-haspopup="true" class="has-tip" title="Reset Form">validation-reset="Form"</span>>Reset&lt;/button>
 &lt;/form>
@@ -272,7 +286,14 @@
                      <input id="checkbox1" type="checkbox" name="checkBlur" ng-model="form5.check" validator="required" message-id="checkBlur"/><label for="checkbox1">Checkbox 1</label>
                      <span id="checkBlur"></span>
                 </div>
-
+                <div>
+                    <label>Radio:</label>
+                    <input type="radio" name="active" ng-model="form.active" value="yes" validator="required"
+                           message-id="invalidActive-radio"/>Yes
+                    <input type="radio" name="active" ng-model="form.active" value="no" validator="required"
+                           message-id="invalidActive-radio"/>No
+                    <div id="invalidActive-radio"></div>
+                </div>
                 <ul class="button-group">
                     <li><button class="button" ng-click="form5.submit(Form5)">Submit</button></li>
                     <li><button class="button alert" ng-click="form5.reset(Form5)">Reset</button></li>
