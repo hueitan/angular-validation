@@ -55,7 +55,7 @@ module.exports = function(grunt) {
     browserSync: {
       dev: {
         bsFiles: {
-          src: ['index.html', 'demo/**', 'dist/angular-validation.js']
+          src: ['index.html','harel.html', 'demo/**', 'dist/angular-validation.js']
         },
         options: {
           host: 'localhost',
