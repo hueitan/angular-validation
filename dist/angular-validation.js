@@ -348,7 +348,14 @@
       if (scope.messageId) messageElem = angular.element(document.querySelector('#' + scope.messageId));
       else messageElem = element.next();
 
-      if ($validationProvider.showSuccessMessage && messageToShow) messageElem.html($validationProvider.getSuccessHTML(messageToShow));
+      if (element.attr('no-validation-message')) {
+        messageElem.css('display', 'none');
+      } else if ($validationProvider.showSuccessMessage && messageToShow) {
+        messageElem.html($validationProvider.getSuccessHTML(messageToShow));
+        messageElem.css('display', '');
+      } else {
+        messageElem.css('display', 'none');
+      }
 
       ctrl.$setValidity(ctrl.$name, true);
       if (scope.validCallback) scope.validCallback({
@@ -376,8 +383,13 @@
       if (scope.messageId) messageElem = angular.element(document.querySelector('#' + scope.messageId));
       else messageElem = element.next();
 
-      if ($validationProvider.showErrorMessage && messageToShow) {
+      if (element.attr('no-validation-message')) {
+        messageElem.css('display', 'none');
+      } else if ($validationProvider.showErrorMessage && messageToShow) {
         messageElem.html($validationProvider.getErrorHTML(messageToShow));
+        messageElem.css('display', '');
+      } else {
+        messageElem.css('display', 'none');
       }
 
       ctrl.$setValidity(ctrl.$name, false);
