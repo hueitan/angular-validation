@@ -112,17 +112,17 @@ describe('provider.showErrorMessage=false with no-validation-message', function(
     $scope = $rootScope.$new();
     $timeout = $injector.get('$timeout');
 
-    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message></form>')($scope);
+    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" no-validation-message="true"></form>')($scope);
   }));
 
   it('showErrorMessage', inject(function() {
     $scope.Form.required.$setViewValue('Required');
     var display = element.find('span').css('display');
-    expect(display).toBe('');
+    expect(display).toBe('none');
 
     $scope.Form.required.$setViewValue('');
     display = element.find('span').css('display');
-    expect(display).toBe('');
+    expect(display).toBe('none');
   }));
 
 });
