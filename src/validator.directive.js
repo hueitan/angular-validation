@@ -7,6 +7,7 @@
     var $validationProvider = $injector.get('$validation');
     var $q = $injector.get('$q');
     var $timeout = $injector.get('$timeout');
+    var $parse = $injector.get('$parse');
 
     /**
      * Do this function if validation valid
@@ -159,14 +160,14 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      scope: {
-        model: '=ngModel',
-        initialValidity: '=initialValidity',
-        validCallback: '&',
-        invalidCallback: '&',
-        messageId: '@'
-      },
+      scope: true,
       link: function(scope, element, attrs, ctrl) {
+        var getValidCallBack = $parse('success');
+        var getInvalidCallBack = $parse('error');
+        scope.messageId = attrs.messageId;
+        scope.validCallback = getValidCallBack(scope.$parent);
+        scope.invalidCallback = getInvalidCallBack(scope.$parent);
+
         /**
          * watch
          * @type {watch}
@@ -248,9 +249,9 @@
           if (attrs.validMethod === 'submit') {
             // clear previous scope.$watch
             watch();
-            watch = scope.$watch('model', function(value, oldValue) {
-              value = ctrl.$viewValue;
-
+            watch = scope.$watch(function() {
+              return scope.$eval(attrs.ngModel);
+            }, function(value, oldValue) {
               // don't watch when init
               if (value === oldValue) {
                 return;
@@ -288,7 +289,7 @@
          */
         if (attrs.validMethod === 'blur') {
           element.bind('blur', function() {
-            var value = ctrl.$viewValue;
+            var value = scope.$eval(attrs.ngModel);
             scope.$apply(function() {
               checkValidation(scope, element, attrs, ctrl, validation, value);
             });
@@ -308,8 +309,9 @@
          * Validate watch method
          * This is the default method
          */
-        scope.$watch('model', function(value) {
-          value = ctrl.$viewValue;
+        scope.$watch(function() {
+          return scope.$eval(attrs.ngModel);
+        }, function(value) {
           /**
            * dirty, pristine, viewValue control here
            */
