@@ -295,7 +295,7 @@ angular.module('yourApp', ['validation'])
 Intial Validation for the input false. You can make it to true!
 
 ```html
-<!-- default fase -->
+<!-- default false -->
 <input type="text" name="firstName" ng-model="firstName" validator="required"/>
 
 <!-- set to true -->
