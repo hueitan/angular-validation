@@ -1,5 +1,5 @@
 (function() {
-  angular.module('myApp', ['validation', 'validation.rule'])
+  angular.module('myApp', ['validation', 'validation.rule', 'ui.bootstrap', 'ui.bootstrap.tpls'])
 
   // -------------------
   // config phase
@@ -148,6 +148,20 @@
     $scope.form6 = {
       required: [{}, {}, {}], // ng-repeat
       checkValid: $validationProvider.checkValid
+    };
+
+    $scope.form7 = {
+      dt: new Date(),
+      open: function($event) {
+        $scope.form7.status.opened = true;
+      },
+      dateOptions: {
+        formatYear: 'yy',
+        startingDay: 1
+      },
+      status: {
+        opened: false
+      }
     };
 
     // Callback method
