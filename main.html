@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bsDemo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="distribution" content="global" />
+    <meta name="author" content="Huei Tan" />
+    <meta name="publisher" content="Huei Tan" />
+    <meta name="rating" content="general" />
+    <meta name="robots" content="all" />
+    <meta name="spiders" content="all" />
+    <meta name="webcrawlers" content="all" />
+
+    <meta name="company" content="angular-validation" />
+    <meta name="abstract" content="Client-side Validation for AngularJS" />
+    <meta name="subject" content="angular-validation" />
+    <meta name="description" content="Client-side Validation for AngularJS" />
+    <meta name="keywords" content="angular","angularjs","validation","angular validation","validator","client-side" />
+
+    <meta property="og:title" content="angular-validation" />
+    <meta property="og:url" content="http://huei90.github.io/angular-validation/" />
+    <meta property="og:description" content="Client-side Validation for AngularJS" />
+    <meta property="og:image" content="//avatars0.githubusercontent.com/u/2560096?v=3&s=460" />
+
+    <title>Angular Validation</title>
+     <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap theme -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="demo/main.css"/>
+     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script src="dist/angular-validation.js"></script>
+    <script src="dist/angular-validation-rule.js"></script>
+    <script src="demo/bsDemo.js"></script>
+  </head>
+
+  <body role="document" ng-controller="bsDemoCtrl">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Angular Validation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#getting_started">Getting started</a></li>
+            <li><a href="#contact">Report an issue</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+     <header class="bs-docs-header" tabindex="-1">
+          <div class="container">
+            <h1>Angular Validation</h1>
+            <div class="bs-docs-decs">
+                <p> Client-side Validation should be simple and clean. </p>
+                <p>Don't let Client-side Validation dirty your controller. </p>
+
+                <p>Setup your Validation on config phase by using some rules (example) <p>
+                <p>If you prefer schema over html attributes , try angular-validation-schema (Demo)
+                    And add Validation in your view only.
+                </p>
+             </div>
+        </div>
+      </header>
+    <div class="container theme-showcase" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+      <section id="getting_started">
+        <div class="hidden-xs" style="height: 40px;"></div>
+        <div class="page-header">
+            <h1>Getting Started</h1>
+        </div>
+        <h3>Requirements</h3>
+        <br/>
+        <p><strong> AngularJS 1.2.x </strong>(for angular-validation 1.2.x)</p>
+        <p><strong> AngularJS 1.3.x </strong>(for angular-validation 1.3.x)</p>
+
+        <h3>Installation</h3>
+        <br/>
+        <p>Install with npm</p>
+        <pre>
+            <code>
+                npm install angular-validation
+            </code>
+        </pre>
+        <p>Or with Bower</p>
+        <pre>
+            <code>
+                bower install angular-validation
+            </code>
+        </pre>
+        <br/>
+        <h3>Files to download</h3>
+        <br/>
+        <p>Add the files to your html</p>
+        <pre>
+            <code>
+                &lt;script src="dist/angular-validation.js"&gt;&lt;/script&gt;
+
+                &lt;script src="dist/angular-validation-rule.js"&gt;&lt;/script&gt;
+            </code>
+        </pre>
+        <p>If you are using Bower: </p>
+        <pre>
+            <code>
+                &lt;script src="lib/angular-validation/dist/angular-validation.js"&gt;&lt;/script&gt;
+
+                &lt;script src="lib/angular-validation/dist/angular-validation-rule.js"&gt;&lt;/script&gt;
+            </code>
+        </pre>
+        <pre>
+            <code>
+                angular.module('yourApp', ['validation']);
+            </code>
+         </pre>
+         <p>Including your validation rule</p>
+         <pre>
+            <code>
+                angular.module('yourApp', ['validation', 'validation.rule']);
+            </code>
+         </pre>
+         <br/>
+         <h3>Writing your first code</h3>
+         <pre>
+            <code>
+               &lt;form name="Form"&gt;
+
+                    &lt;div class="row"&gt;
+
+                        &lt;div&gt;
+
+                            &lt;label&gt;Required&lt;/label&gt;
+
+                            &lt;input type="text" name="required" ng-model="form.required" validator="required"&gt;
+
+                        &lt;/div&gt;
+
+                        &lt;div&gt;
+
+                            &lt;label&gt;Url&lt;/label&gt;
+
+                            &lt;input type="text" name="url" ng-model="form.url" validator="required, url"&gt;
+
+                        &lt;/div&gt;
+
+                        &lt;button validation-submit="Form" ng-click="next()"&gt;Submit&lt;/button&gt;
+
+                        &lt;button validation-reset="Form"&gt;Reset&lt;/button&gt;
+
+                    &lt;/div&gt;
+
+               &lt;/form&gt;
+            </code>
+         </pre>
+      </section>
+
+      <div class="page-header">
+        <h1>UI Bootstrap Examples</h1>
+      </div>
+      <h4>Date picker</h4>
+      <div>
+          <form name="Form">
+            <fieldset>
+                <legend>Getting Started</legend>
+                <div>
+                    <label>Required</label>
+                    <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt" is-open="status.opened"  datepicker-options="dateOptions" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </p>
+                </div>
+                <button validation-submit="Form" ng-click="next()">Submit</button>
+                <button validation-reset="Form">Reset</button>
+            </fieldset>
+        </form>
+        </div>
+
+        <div class="page-header">
+
+      </div>
+
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  </body>
+</html>
