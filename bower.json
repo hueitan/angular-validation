@@ -25,6 +25,8 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.6",
-    "ui-bootstrap": "~0.14.3"
+    "ui-bootstrap": "~0.14.3",
+    "ui-select": "angular-ui-select#~0.13.2",
+    "ngSanitize": "~0.0.2"
   }
 }
