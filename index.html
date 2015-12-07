@@ -96,55 +96,40 @@
         <h3>Installation</h3>
         <br/>
         <p>Install with npm</p>
-        <pre>
-            <code>npm install angular-validation </code>
-        </pre>
+        <pre><code>npm install angular-validation </code></pre>
         <p>Or with Bower</p>
-        <pre>
-            <code>bower install angular-validation </code>
-        </pre>
+        <pre><code>bower install angular-validation </code></pre>
         <br/>
         <h3>Files to download</h3>
         <br/>
         <p>Add the files to your html</p>
-        <pre>
-            <code>
-&lt;script src="dist/angular-validation.js"&gt;&lt;/script&gt;
-&lt;script src="dist/angular-validation-rule.js"&gt;&lt;/script&gt;
-            </code>
-        </pre>
+        <pre><code>&lt;script src="dist/angular-validation.js"&gt;&lt;/script&gt;
+&lt;script src="dist/angular-validation-rule.js"&gt;&lt;/script&gt;</code></pre>
         <p>If you are using Bower: </p>
-        <pre>
-            <code>
-&lt;script src="lib/angular-validation/dist/angular-validation.js"&gt;&lt;/script&gt;
-&lt;script src="lib/angular-validation/dist/angular-validation-rule.js"&gt;&lt;/script&gt;
-            </code>
-        </pre>
-        <pre>
-            <code>angular.module('yourApp', ['validation']);</code>
-         </pre>
+        <pre><code>&lt;script src="lib/angular-validation/dist/angular-validation.js"&gt;&lt;/script&gt;
+&lt;script src="lib/angular-validation/dist/angular-validation-rule.js"&gt;&lt;/script&gt;</code></pre>
+        <pre><code>angular.module('yourApp', ['validation']);</code></pre>
          <p>Including your validation rule</p>
-         <pre>
-            <code>angular.module('yourApp', ['validation', 'validation.rule']);</code>
-         </pre>
+         <figure class="highlight">
+            <pre class="javascript"><code>angular.module('yourApp', ['validation', 'validation.rule']);</code></pre>
+         </figure>
          <br/>
          <h3>Writing your first code</h3>
-         <pre>
-            <code class="html">&lt;form name="Form"&gt;
-    &lt;div class="row"&gt;
-        &lt;div&gt;
-            &lt;label&gt;Required&lt;/label&gt;
-            &lt;input type="text" name="required" ng-model="form.required" validator="required"&gt;&lt;/div&gt;
+         <figure class="highlight">
+            <pre><code class="html">&lt;form name="Form"&gt;
+        &lt;div class="row"&gt;
             &lt;div&gt;
-                &lt;label&gt;Url&lt;/label&gt;
-                &lt;input type="text" name="url" ng-model="form.url" validator="required, url"&gt;
-            &lt;/div&gt;
-            &lt;button validation-submit="Form" ng-click="next()"&gt;Submit&lt;/button&gt;
-            &lt;button validation-reset="Form"&gt;Reset&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-            </code>
-         </pre>
+                &lt;label&gt;Required&lt;/label&gt;
+                &lt;input type="text" name="required" ng-model="form.required" validator="required"&gt;&lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label&gt;Url&lt;/label&gt;
+                    &lt;input type="text" name="url" ng-model="form.url" validator="required, url"&gt;
+                &lt;/div&gt;
+                &lt;button validation-submit="Form" ng-click="next()"&gt;Submit&lt;/button&gt;
+                &lt;button validation-reset="Form"&gt;Reset&lt;/button&gt;
+        &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+         </figure>
       </section>
     <section id="examples">
       <div class="hidden-xs" style="height: 40px;"></div>
