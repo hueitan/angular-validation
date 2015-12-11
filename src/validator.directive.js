@@ -232,6 +232,9 @@
          * Check validator
          */
 
+
+        var validMethod = (angular.isUndefined(attrs.validMethod)) ? $validationProvider.getValidMethod() : attrs.validMethod;
+
         /**
          * Click submit form, check the validity when submit
          */
@@ -241,7 +244,7 @@
 
           isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
 
-          if (attrs.validMethod === 'submit') {
+          if (validMethod === 'submit') {
             // clear previous scope.$watch
             watch();
             watch = scope.$watch(function() {
@@ -282,7 +285,7 @@
         /**
          * Validate blur method
          */
-        if (attrs.validMethod === 'blur') {
+        if (validMethod === 'blur') {
           element.bind('blur', function() {
             var value = scope.$eval(attrs.ngModel);
             scope.$apply(function() {
@@ -296,7 +299,7 @@
         /**
          * Validate submit & submit-only method
          */
-        if (attrs.validMethod === 'submit' || attrs.validMethod === 'submit-only') {
+        if (validMethod === 'submit' || validMethod === 'submit-only') {
           return;
         }
 
