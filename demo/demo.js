@@ -150,6 +150,7 @@
       checkValid: $validationProvider.checkValid
     };
 
+    // Bootstrap Datepicker
     $scope.form7 = {
       dt: new Date(),
       open: function($event) {

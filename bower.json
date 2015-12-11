@@ -22,9 +22,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "~3.3.6",
-    "ui-bootstrap": "~0.14.3"
-  }
+  ]
 }
