@@ -90,6 +90,7 @@
   // -------------------
   .controller('index', ['$scope', '$injector', function($scope, $injector) {
     // Injector
+
     var $validationProvider = $injector.get('$validation');
 
     // Initial Value
