@@ -120,6 +120,10 @@ You can also add a custom validation message by using `message-id` attribute. It
 <!-- Clean, right ? -->
 ```
 
+### **Select a global validation method** `watch blur submit submit-only`**
+
+`validationProvider.setValidMethod('submit')`
+
 ### **Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
 <a name="custom-function-huei"></a>
 
