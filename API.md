@@ -325,3 +325,24 @@ scope.validationInvalidHandler = function(message){
   displayMessage(message, 'error');
 };
 ```
+
+
+### **Setup a global valid/invalid/reset callback in config phase**
+
+```javascript
+// your module
+angular.module('yourApp', ['validation'])
+    .config(['$validationProvider', function ($validationProvider) {        
+		validationProvider.validCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-error').addClass('has-success-tick');
+		};
+		validationProvider.invalidCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-success-tick').addClass('has-error');
+		};
+		validationProvider.resetCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-error');
+		};
+    }]);
+```
+
+
