@@ -33,6 +33,7 @@
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
+        messageElem.html('');
       }
 
       ctrl.$setValidity(ctrl.$name, true);
@@ -225,6 +226,7 @@
             ctrl.$render();
             if (attrs.messageId) angular.element(document.querySelector('#' + attrs.messageId)).html('');
             else element.next().html('');
+            if ($validationProvider.validCallback) $validationProvider.validCallback(element);
           });
         });
 
