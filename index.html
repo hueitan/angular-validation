@@ -48,22 +48,17 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#">Angular Validation</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#getting_started">Getting started</a></li>
+             <li><a href="#style_guide">Style guide</a></li>
             <li><a href="#examples">Examples</a></li>
             <li><a href="https://github.com/huei90/angular-validation/issues">Report an issue</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
      <header class="bs-docs-header" tabindex="-1" id="#">
@@ -129,10 +124,47 @@
         &lt;/div&gt;
 &lt;/form&gt;</code></pre>
          </figure>
-      </section>
+    </section>
+
+    <!-- ********Style guide******* -->
+
+    <section id="style_guide">
+        <div class="hidden-xs" style="height: 40px;"></div>
+        <div class="page-header">
+            <h1>Style Guide</h1>
+        </div>
+        <p>You can style different states of your form elements using the following selectors</p>
+        <span class="label label-danger" style="margin-left: 2px;">Invalid Selectors</span>
+        <figure class="highlight">
+                <pre><code class="css">.ng-invalid.ng-dirty { /* Your style here */ }</code></pre>
+        </figure>
+        <span class="label label-success" style="margin-left: 2px;">Valid Selectors</span>
+        <figure class="highlight">
+                <pre><code class="css">.ng-valid.ng-dirty { /* Your style here */ }</code></pre>
+        </figure>
+        <br/>
+        <p>
+            You can also include your vendor libraries classes in you are using CSS preprocessors such as
+            <a href="http://lesscss.org/">LESS</a> or
+            <a href="http://sass-lang.com/">SASS</a>.
+        </p>
+         <span class="label label-info" style="margin-left: 2px;">Using Bootstrap classes</span>
+        <figure class="highlight">
+                <pre><code class="css">.ng-valid.ng-dirty { .has-error .form-control; }</code></pre>
+        </figure>
+
+        <br/>
+
+        <p> For more on AngularJS validation classes check at their
+            <a href="https://docs.angularjs.org/guide/forms">documentation</a>.
+    </section>
+
+    <!-- ********Examples******* -->
     <section id="examples">
       <div class="hidden-xs" style="height: 40px;"></div>
-       <h1>Examples</h1>
+       <div class="page-header">
+            <h1>Examples</h1>
+        </div>
        <!--- Form1 -->
       <div class="page-header">
            <form name="Form" id="form1">
@@ -334,9 +366,9 @@
                     </blockquote>
                 </div>
                 <div class="btn-group" role="group">
-                    <button class="btn btn-success" validation-submit="Form6">Submit</button></li>
-                    <button class="btn btn-danger" validation-reset="Form6">Reset</button></li>
-                    <button class="btn btn-info" ng-disabled="!form6.checkValid(Form6)">checkValid = {{ form6.checkValid(Form6) }}</button></li>
+                    <button class="btn btn-success" validation-submit="Form6">Submit</button>
+                    <button class="btn btn-danger" validation-reset="Form6">Reset</button>
+                    <button class="btn btn-info" ng-disabled="!form6.checkValid(Form6)">checkValid = {{ form6.checkValid(Form6) }}</button>
                 </div>
             </fieldset>
         </form>
@@ -401,15 +433,16 @@
             </fieldset>
         </form>
       </div>
-      </div>
+
     </section>
+ </div>
 
 <a href="https://github.com/huei90/angular-validation" target="_blank"><img src="demo/iconmonstr-github-10-icon-128.png" id="github-link" alt="Fork me on Github"/></a>
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.18/angular.min.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.18/angular-sanitize.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -420,7 +453,6 @@
 <script src="demo/demo.js"></script>
 <script>
   hljs.initHighlightingOnLoad();
-  $(document).foundation();
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -430,6 +462,12 @@
 
   ga('create', 'UA-62825613-1', 'auto');
   ga('send', 'pageview');
+</script>
+<script>
+   $(".nav a").on("click", function(){
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
 </script>
   </body>
 </html>
