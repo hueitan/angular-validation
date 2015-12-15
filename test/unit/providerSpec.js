@@ -160,12 +160,12 @@ describe('provider', function() {
     expect(successSpy2).not.toHaveBeenCalled();
     expect(errorSpy2).toHaveBeenCalled();
   }));
-  
-  it('set/get validMethod', inject(function() {        
+
+  it('set/get validMethod', inject(function() {
     expect(validationProvider.getValidMethod()).toEqual(null);
-    
+
     validationProvider.setValidMethod('submit');
-    
-    expect(validationProvider.getValidMethod()).toEqual('submit');        
+
+    expect(validationProvider.getValidMethod()).toEqual('submit');
   }));
 });

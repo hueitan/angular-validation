@@ -89,7 +89,7 @@
     };
 
     /**
-     * Get the valid method     
+     * Get the valid method
      * @returns {*}
      */
     this.getValidMethod = function() {
