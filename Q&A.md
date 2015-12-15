@@ -26,3 +26,7 @@ Before using `checkValid()`, you have to execute `submit` first to get the lates
 ###How do we do tooltips for error messages upon focusing? [#68](https://github.com/huei90/angular-validation/issues/68#issuecomment-86445467)
 
 Using `validCallback` and `invalidCallback` to implement
+
+###Can this works correctly with AngularUI, ui-select, others ... ?###
+
+Yes, `angular-validation` works perfectly with other directive. (isolation scope). Find out more from the demo page.

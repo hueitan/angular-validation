@@ -30,6 +30,12 @@
     var expression = {};
 
     /**
+     * default valid method
+     * @type {{}}
+     */
+    var validMethod = null;
+
+    /**
      * default error, success message
      * @type {{}}
      */
@@ -71,6 +77,23 @@
      */
     this.getDefaultMsg = function(msg) {
       return defaultMsg[msg];
+    };
+
+    /**
+     * allow user to set the global valid method
+     * @param v
+     * @returns {*}
+     */
+    this.setValidMethod = function(v) {
+      validMethod = v;
+    };
+
+    /**
+     * Get the valid method     
+     * @returns {*}
+     */
+    this.getValidMethod = function() {
+      return validMethod;
     };
 
     /**
@@ -241,6 +264,8 @@
     this.$get = ['$injector', function($injector) {
       setup($injector);
       return {
+        setValidMethod: this.setValidMethod,
+        getValidMethod: this.getValidMethod,
         setErrorHTML: this.setErrorHTML,
         getErrorHTML: this.getErrorHTML,
         setSuccessHTML: this.setSuccessHTML,

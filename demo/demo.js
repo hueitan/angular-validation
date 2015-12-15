@@ -90,6 +90,7 @@
   // -------------------
   .controller('index', ['$scope', '$injector', function($scope, $injector) {
     // Injector
+
     var $validationProvider = $injector.get('$validation');
 
     // Initial Value
@@ -150,6 +151,7 @@
       checkValid: $validationProvider.checkValid
     };
 
+    // Bootstrap Datepicker
     $scope.form7 = {
       dt: new Date(),
       open: function($event) {
