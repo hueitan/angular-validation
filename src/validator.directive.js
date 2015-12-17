@@ -225,6 +225,8 @@
             ctrl.$render();
             if (attrs.messageId) angular.element(document.querySelector('#' + attrs.messageId)).html('');
             else element.next().html('');
+
+            if ($validationProvider.resetCallback) $validationProvider.resetCallback(element);
           });
         });
 
