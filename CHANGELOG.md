@@ -1,3 +1,8 @@
+17 Dec 2015 v1.4.0 (Support AngularJS 1.4)
+===
+
+:celebration: :party:
+
 17 Dec 2015 v1.3.4 (Moving to v1.4)
 ===
 
