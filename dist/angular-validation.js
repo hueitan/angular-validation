@@ -239,6 +239,12 @@
     this.invalidCallback = null;
 
     /**
+     * Do this function when reset is performed
+     * @param element
+     */
+    this.resetCallback = null;
+
+    /**
      * reset the specific form
      * @param form
      */
@@ -286,6 +292,7 @@
         validate: this.validate,
         validCallback: this.validCallback,
         invalidCallback: this.invalidCallback,
+        resetCallback: this.resetCallback,
         reset: this.reset
       };
     }];
@@ -574,6 +581,8 @@
             ctrl.$render();
             if (attrs.messageId) angular.element(document.querySelector('#' + attrs.messageId)).html('');
             else element.next().html('');
+
+            if ($validationProvider.resetCallback) $validationProvider.resetCallback(element);
           });
         });
 
