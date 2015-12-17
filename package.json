@@ -26,6 +26,7 @@
     "validator",
     "client-side"
   ],
+  "main": "./dist/angular-validation.js",
   "bugs": "https://github.com/huei90/angular-validation/issues",
   "devDependencies": {
     "grunt": "~0.4.4",
