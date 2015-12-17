@@ -85,6 +85,9 @@ module.exports = function(grunt) {
       // }
       angular1_3: {
         configFile: 'config/karma.conf.angular.1.3.js'
+      },
+      angular1_4: {
+        configFile: 'config/karma.conf.angular.1.4.js'
       }
     }
   });
