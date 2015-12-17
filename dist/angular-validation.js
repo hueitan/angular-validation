@@ -379,7 +379,7 @@
       var validCallback = $parse('success');
       var messageElem;
 
-      if (attrs.messageId) messageElem = angular.element(document.querySelector('#' + attrs.messageId));
+      if (attrs.messageId || attrs.validationGroup) messageElem = angular.element(document.querySelector('#' + (attrs.messageId || attrs.validationGroup)));
       else messageElem = element.next();
 
       if (element.attr('no-validation-message')) {
@@ -415,7 +415,7 @@
       var invalidCallback = $parse('error');
       var messageElem;
 
-      if (attrs.messageId) messageElem = angular.element(document.querySelector('#' + attrs.messageId));
+      if (attrs.messageId || attrs.validationGroup) messageElem = angular.element(document.querySelector('#' + (attrs.messageId || attrs.validationGroup)));
       else messageElem = element.next();
 
       if (element.attr('no-validation-message')) {
@@ -436,6 +436,18 @@
       return false;
     };
 
+    var checkValidationGroup = function(scope, element, attrs, ctrl) {
+      var validationGroupElems = document.querySelectorAll('*[validation-group=' + attrs.validationGroup + ']');
+      var validationGroupElem;
+
+      ctrl.$setValidity(ctrl.$name, false);
+
+      for (var i = 0, len = validationGroupElems.length; i < len; i++) {
+        validationGroupElem = angular.element(validationGroupElems[i]);
+        if (validationGroupElem.hasClass('ng-valid') && validationGroupElem[0] !== element[0]) return true;
+      }
+      return false;
+    };
 
     /**
      * collect elements for focus
@@ -489,7 +501,9 @@
         return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs, validatorParam)])
           .then(function(data) {
             if (data && data.length > 0 && data[0]) return valid.success();
-            else return valid.error();
+            else if (attrs.validationGroup) {
+              if (!checkValidationGroup(scope, element, attrs, ctrl)) valid.error();
+            } else return valid.error();
           }, function() {
             return valid.error();
           });
@@ -499,10 +513,11 @@
       else if (expression.constructor === RegExp) {
         // Only apply the test if the value is neither undefined or null
         if (value !== undefined && value !== null) return $validationProvider.getExpression(validator).test(value) ? valid.success() : valid.error();
-        else return valid.error();
+        else if (attrs.validationGroup) {
+          if (!checkValidationGroup(scope, element, attrs, ctrl)) valid.error();
+        } else return valid.error();
       } else return valid.error();
     };
-
 
     /**
      * generate unique guid
@@ -554,7 +569,7 @@
         /**
          * Default Valid/Invalid Message
          */
-        if (!attrs.messageId) element.after('<span></span>');
+        if (!(attrs.messageId || attrs.validationGroup)) element.after('<span></span>');
 
         /**
          * Set custom initial validity
@@ -579,7 +594,7 @@
             ctrl.$setPristine();
             ctrl.$setValidity(ctrl.$name, undefined);
             ctrl.$render();
-            if (attrs.messageId) angular.element(document.querySelector('#' + attrs.messageId)).html('');
+            if (attrs.messageId || attrs.validationGroup) angular.element(document.querySelector('#' + (attrs.messageId || attrs.validationGroup))).html('');
             else element.next().html('');
 
             if ($validationProvider.resetCallback) $validationProvider.resetCallback(element);
@@ -676,7 +691,7 @@
             ctrl.$setViewValue(ctrl.$viewValue);
           } else if (ctrl.$pristine) {
             // Don't validate form when the input is clean(pristine)
-            if (attrs.messageId) angular.element(document.querySelector('#' + attrs.messageId)).html('');
+            if (attrs.messageId || attrs.validationGroup) angular.element(document.querySelector('#' + (attrs.messageId || attrs.validationGroup))).html('');
             else element.next().html('');
             return;
           }
@@ -689,7 +704,7 @@
            */
           attrs.$observe('noValidationMessage', function(value) {
             var el;
-            if (attrs.messageId) el = angular.element(document.querySelector('#' + attrs.messageId));
+            if (attrs.messageId || attrs.validationGroup) el = angular.element(document.querySelector('#' + (attrs.messageId || attrs.validationGroup)));
             else el = element.next();
             if (value === 'true' || value === true) el.css('display', 'none');
             else if (value === 'false' || value === false) el.css('display', 'block');

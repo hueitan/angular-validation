@@ -329,9 +329,19 @@
                     </select>
                     <span id="selectBlur"></span>
 
-                    <div class="checkbox">
-                            <input id="checkbox1" type="checkbox" name="checkBlur" ng-model="form5.check" validator="required" message-id="checkBlur"/>
-                            <label for="checkbox1">Checkbox 1</label>
+                    <div class="row">
+                        <div class="checkbox">
+                            <label for="checkbox1">
+                                <input id="checkbox1" type="checkbox" name="checkBlur1" ng-model="form5.check1" validator="required" validation-group="checkBlur"/>
+                                Checkbox 1
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="checkbox1">
+                                <input id="checkbox2" type="checkbox" name="checkBlur2" ng-model="form5.check2" validator="required" validation-group="checkBlur"/>
+                                Checkbox 2
+                            </label>
+                        </div>
                     </div>
                     <span id="checkBlur"></span>
 
