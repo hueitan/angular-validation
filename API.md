@@ -46,6 +46,18 @@ You can also add a custom validation message by using `message-id` attribute. It
 <span id="message"></span>
 ```
 
+### **Use a validation group** <br/>
+You can also add a `validation-group` directive to group many elements into a group. The group will be considered as valid if and only if one of them is valid. Otherwise, the group will be marked as invalid. A valid/invalid message will be placed inside an element that contains an id attribute with the same name as provided to the directive `validation-group`.
+
+```html
+<label>Validation group</label>
+<!-- Group both of these elements inside the contact group -->
+<input type="text" name="email" ng-model="email" validator="required" validation-group="contact"> 
+<input type="number" name="telephone" ng-model="telephone" validator="number" validation-group="contact">
+<!-- The message will be placed in side the span element -->
+<span id="contact"></span>
+```
+
 <a name="no-validation-message"></a>
 ### **Don't show the Valid Message `no-validation-message="true"`**
 
