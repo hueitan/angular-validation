@@ -1,10 +1,38 @@
 (function() {
-  angular.module('myApp', ['validation', 'validation.rule', 'ui.bootstrap', 'ui.bootstrap.tpls', 'ui.select', 'ngSanitize'])
+  angular.module('myApp', ['validation',
+    'validation.rule',
+    'ui.bootstrap',
+    'ui.bootstrap.tpls',
+    'ui.select',
+    'ngSanitize',
+    'ngCookies',
+    'pascalprecht.translate',
+    'tmh.dynamicLocale'
+  ])
+
+  .constant('LOCALES', {
+    'locales': {
+      'zh_CN': '汉语',
+      'en_US': 'English'
+    },
+    'preferredLocale': 'en_US'
+  })
 
   // -------------------
   // config phase
   // -------------------
-  .config(['$validationProvider', function($validationProvider) {
+  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', '$translateStaticFilesLoader', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider, $translateStaticFilesLoader) {
+
+    $translateProvider.useMissingTranslationHandlerLog();
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'resources/locale-', // path to translations files
+      suffix: '.json' // suffix, currently- extension of the translations
+    });
+    $translateProvider.preferredLanguage('en_US'); // is applied on first load
+    $translateProvider.useLocalStorage(); // saves selected language to localStorage
+
+    tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
+
     var defaultMsg;
     var expression;
 
