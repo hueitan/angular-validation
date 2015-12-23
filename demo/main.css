@@ -118,3 +118,14 @@ pre {
 blockquote > label {
     font-size: 13px;
 }
+
+.language-select-container {
+    float: right;
+}
+
+.language-select {
+    width: 100px;
+    float: right;
+    top: 10px;
+    right: 10px;
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app="angularValidation">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -47,34 +47,33 @@
 
      <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
+      <div ng-translate-language-select></div>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Angular Validation</a>
+          <a class="navbar-brand" href="#">{{"demo.title.angularValidation" | translate}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">{{"demo.header.home" | translate}}</a></li>
-            <li><a href="#getting_started">Getting started</a></li>
-            <li><a href="#style_guide">Style guide</a></li>
-            <li><a href="#examples">Examples</a></li>
-            <li><a href="https://github.com/huei90/angular-validation/blob/master/API.md" target="_blank">API</a></li>
-            <li><a href="https://github.com/huei90/angular-validation/issues" target="_blank">Report an issue</a></li>
+            <li><a href="#getting_started">{{"demo.header.gettingStarted" | translate}}</a></li>
+            <li><a href="#style_guide">{{"demo.header.styleGuide" | translate}}</a></li>
+            <li><a href="#examples">{{"demo.header.examples" | translate}}</a></li>
+            <li><a href="https://github.com/huei90/angular-validation/blob/master/API.md" target="_blank">{{demo.header.api | translate}}</a></li>
+            <li><a href="https://github.com/huei90/angular-validation/issues" target="_blank">{{demo.header.reportAnIssue | translate}}</a></li>
           </ul>
         </div>
       </div>
+
     </nav>
      <header class="bs-docs-header" tabindex="-1" id="#">
          <div class="hidden-xs" style="height: 40px;"></div>
           <div class="container">
-            <h1>Angular Validation</h1>
+            <h1>{{"demo.title.angularValidation" | translate}}</h1>
             <div class="bs-docs-decs">
-                <p> Client-side Validation should be simple and clean. </p>
-                <p>Don't let Client-side Validation dirty your controller. </p>
-
-                <p>Setup your Validation on config phase by using some rules (example) <p>
-                <p>If you prefer schema over html attributes , try angular-validation-schema (Demo)
-                    And add Validation in your view only.
-                </p>
+                <p>{{"demo.title.description.p1" | translate}}</p>
+                <p>{{"demo.title.description.p2" | translate}}</p>
+                <p>{{"demo.title.description.p3" | translate}}<p>
+                <p>{{"demo.title.description.p4" | translate}}</p>
              </div>
         </div>
       </header>
@@ -82,35 +81,35 @@
       <section id="getting_started">
         <div class="hidden-xs" style="height: 40px;"></div>
         <div class="page-header">
-            <h1>Getting Started</h1>
+            <h1>{{"demo.header.gettingStarted" | translate}}</h1>
         </div>
-        <h3>Requirements</h3>
+        <h3>{{"demo.gettingStarted.requirements" | translate}}</h3>
         <br/>
         <p><strong> AngularJS 1.2.x </strong>(for angular-validation 1.2.x)</p>
         <p><strong> AngularJS 1.3.x </strong>(for angular-validation 1.3.x)</p>
 
-        <h3>Installation</h3>
+        <h3>{{"demo.gettingStarted.installation" | translate}}</h3>
         <br/>
-        <p>Install with npm</p>
+        <p>{{"demo.gettingStarted.installUsingNpm" | translate}}</p>
         <pre><code>npm install angular-validation </code></pre>
-        <p>Or with Bower</p>
+        <p>{{"demo.gettingStarted.installUsingBower" | translate}}</p>
         <pre><code>bower install angular-validation </code></pre>
         <br/>
-        <h3>Files to download</h3>
+        <h3>{{"demo.gettingStarted.filesToDownload" | translate}}</h3>
         <br/>
-        <p>Add the files to your html</p>
+        <p>{{"demo.gettingStarted.addFiles" | translate}}</p>
         <pre><code>&lt;script src="dist/angular-validation.js"&gt;&lt;/script&gt;
 &lt;script src="dist/angular-validation-rule.js"&gt;&lt;/script&gt;</code></pre>
-        <p>If you are using Bower: </p>
+        <p>{{"demo.gettingStarted.inCaseOfUsingBower" | translate}}</p>
         <pre><code>&lt;script src="lib/angular-validation/dist/angular-validation.js"&gt;&lt;/script&gt;
 &lt;script src="lib/angular-validation/dist/angular-validation-rule.js"&gt;&lt;/script&gt;</code></pre>
         <pre><code>angular.module('yourApp', ['validation']);</code></pre>
-         <p>Including your validation rule</p>
+         <p>{{"demo.gettingStarted.includeYourValidationRule" | translate}}</p>
          <figure class="highlight">
             <pre class="javascript"><code>angular.module('yourApp', ['validation', 'validation.rule']);</code></pre>
          </figure>
          <br/>
-         <h3>Writing your first code</h3>
+         <h3>{{"demo.gettingStarted.writeYourFirstValidationCode" | translate}}</h3>
          <figure class="highlight">
             <pre><code class="html">&lt;form name="Form"&gt;
         &lt;div class="row"&gt;
@@ -133,39 +132,39 @@
     <section id="style_guide">
         <div class="hidden-xs" style="height: 40px;"></div>
         <div class="page-header">
-            <h1>Style Guide</h1>
+            <h1>{{"demo.header.styleGuide" | translate}}</h1>
         </div>
-        <p>You can style different states of your form elements using the following selectors</p>
-        <span class="label label-danger" style="margin-left: 2px;">Invalid Selectors</span>
+        <p>{{"demo.styleGuide.p1" | translate}}</p>
+        <span class="label label-danger" style="margin-left: 2px;">{{"demo.styleGuide.invalidSelectors" | translate}}</span>
         <figure class="highlight">
-                <pre><code class="css">.ng-invalid.ng-dirty { /* Your style here */ }</code></pre>
+                <pre><code class="css">.ng-invalid.ng-dirty { /* {{"demo.styleGuide.youtStyleHere" | translate}} */ }</code></pre>
         </figure>
-        <span class="label label-success" style="margin-left: 2px;">Valid Selectors</span>
+        <span class="label label-success" style="margin-left: 2px;">{{"demo.styleGuide.invalidSelectors" | translate}}</span>
         <figure class="highlight">
-                <pre><code class="css">.ng-valid.ng-dirty { /* Your style here */ }</code></pre>
+                <pre><code class="css">.ng-valid.ng-dirty { /* {{"demo.styleGuide.youtStyleHere" | translate}} */ }</code></pre>
         </figure>
         <br/>
         <p>
-            You can also include your vendor libraries classes in you are using CSS preprocessors such as
-            <a href="http://lesscss.org/">LESS</a> or
+            {{"demo.styleGuide.p2" | translate}}
+            <a href="http://lesscss.org/">LESS</a>  {{"demo.styleGuide.or" | translate}}
             <a href="http://sass-lang.com/">SASS</a>.
         </p>
-         <span class="label label-info" style="margin-left: 2px;">Using Bootstrap classes</span>
+         <span class="label label-info" style="margin-left: 2px;">{{"demo.styleGuide.usingBootstrapClasses" | translate}}</span>
         <figure class="highlight">
                 <pre><code class="css">.ng-valid.ng-dirty { .has-error .form-control; }</code></pre>
         </figure>
 
         <br/>
 
-        <p> For more on AngularJS validation classes check at their
-            <a href="https://docs.angularjs.org/guide/forms">documentation</a>.
+        <p> {{"demo.styleGuide.p3" | translate}}
+            <a href="https://docs.angularjs.org/guide/forms">{{"demo.styleGuide.documentation" | translate}}</a>.
     </section>
 
     <!-- ********Examples******* -->
     <section id="examples">
       <div class="hidden-xs" style="height: 40px;"></div>
        <div class="page-header">
-            <h1>Examples</h1>
+            <h1>{{"demo.header.examples" | translate}}</h1>
         </div>
        <!--- Form1 -->
       <div class="page-header">
@@ -444,7 +443,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-cookies.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate-handler-log/2.8.1/angular-translate-handler-log.min.js"></script>
-<scrpit src="//cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.8.1/angular-translate-loader-static-files.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.8.1/angular-translate-loader-static-files.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/2.8.1/angular-translate-storage-cookie.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-local/2.8.1/angular-translate-storage-local.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-dynamic-locale/0.1.29/tmhDynamicLocale.min.js"></script>
@@ -457,6 +456,8 @@
 <script src="dist/angular-validation.js"></script>
 <script src="dist/angular-validation-rule.js"></script>
 <script src="demo/demo.js"></script>
+<script src="demo/localeService.js"></script>
+<script src="demo/languageSelect.directive.js"></script>
 
 <script>
   hljs.initHighlightingOnLoad();

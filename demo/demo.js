@@ -1,5 +1,5 @@
 (function() {
-  angular.module('myApp', ['validation',
+  angular.module('angularValidation', ['validation',
     'validation.rule',
     'ui.bootstrap',
     'ui.bootstrap.tpls',
@@ -21,11 +21,11 @@
   // -------------------
   // config phase
   // -------------------
-  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', '$translateStaticFilesLoader', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider, $translateStaticFilesLoader) {
+  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider) {
 
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.useStaticFilesLoader({
-      prefix: 'resources/locale-', // path to translations files
+      prefix: 'demo/resources/locale-', // path to translations files
       suffix: '.json' // suffix, currently- extension of the translations
     });
     $translateProvider.preferredLanguage('en_US'); // is applied on first load
