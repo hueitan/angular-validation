@@ -12,8 +12,8 @@
 
   .constant('LOCALES', {
     'locales': {
-      'zh_CN': '汉语',
-      'en_US': 'English'
+      'en_US': 'English',
+      'zh_CN': '汉语'
     },
     'preferredLocale': 'en_US'
   })
