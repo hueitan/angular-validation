@@ -1,5 +1,6 @@
-Adding a new validation
+CONTRIBUTING
 =====
+
 **Clone the repo to your computer**
 ```sh
 git clone https://github.com/huei90/angular-validation.git
@@ -13,10 +14,21 @@ npm install
 
 **Before coding** <small>Boot the  Environment</small>
 ```sh
-grunt dev
+grunt dev # developing environment
 grunt check # check the code quality
 grunt build # build files
 ```
+
+**Test**
+```sh
+# Test it locally
+npm test
+```
+
+Karma Test done by Travis-ci
+
+Adding a new validation
+=====
 
 **Start coding**
 ```
@@ -45,14 +57,10 @@ var defaultMsg = {
     }
 };
 ```
-**Test**
-```sh
-# Test it locally
-npm test
-```
 
-Karma Test done by Travis-ci, <br/>
 When you are done, test it on `http://localhost:8080`
+
+<hr/>
 
 **Give me a PR** <small> Thanks for it </small>
 
@@ -61,7 +69,6 @@ When you are done, test it on `http://localhost:8080`
 1. https://github.com/kelp404/angular-validator
 2. https://github.com/nelsonomuto/angular-ui-form-validation
 3. (Waiting list..)
-
 
 **Note**
 
