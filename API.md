@@ -58,6 +58,8 @@ You can also add a `validation-group` directive to group many elements into a gr
 <span id="contact"></span>
 ```
 
+> Note that the `validation-group` directive can only be used to group elements placed in the same form. In other words, you can't group elements across different `<form>` tags.
+
 <a name="no-validation-message"></a>
 ### **Don't show the Valid Message `no-validation-message="true"`**
 
