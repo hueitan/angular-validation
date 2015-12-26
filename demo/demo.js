@@ -21,7 +21,7 @@
   // -------------------
   // config phase
   // -------------------
-  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider) {
+  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider, $translate) {
 
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.useStaticFilesLoader({
@@ -36,13 +36,23 @@
     var defaultMsg;
     var expression;
 
+    var successHTML = function(msg) {
+      return '<p class="validation-valid">' + this.$injector.get('$translate').instant(msg) + '</p>';
+    };
+
+    var errorHTML = function(msg) {
+      return '<p class="validation-invalid">' + this.$injector.get('$translate').instant(msg) + '</p>';
+    };
+
+    $validationProvider.setSuccessHTML(successHTML).setErrorHTML(errorHTML);
+
     /**
      * Setup a default message for Url
      */
     defaultMsg = {
       url: {
-        error: 'This is a error url given by user',
-        success: 'It\'s Url'
+        error: 'demo.message.url.error',
+        success: 'demo.message.url.success'
       }
     };
 

@@ -125,6 +125,36 @@
         &lt;/div&gt;
 &lt;/form&gt;</code></pre>
          </figure>
+
+         <br/>
+         <h3>{{"demo.gettingStarted.usingAngularTranslationService"  | translate }}</h3>
+         <p>{{"demo.gettingStarted.usingAngularTranslationService.p1" | translate }}</p>
+         <figure class="highlight">
+             <pre><code class="javascript">angular.module('yourApp').config(['$validationProvider', function($validationProvider) {
+    var successHTML = function(msg) {
+        // inject your translation service to $validationProvider then call relative translate function on the message
+        return '&lt;p class="validation-valid"&gt;' + this.$injector.get('$translate').instant(msg) + '&lt;/p&gt;';
+    };
+    var errorHTML = function(msg) {
+        return '&lt;p class="validation-invalid"&gt;' + this.$injector.get('$translate').instant(msg) + '&lt;/p&gt;';
+    };
+
+    //set success and error HTML
+    $validationProvider.setSuccessHTML(successHTML).setErrorHTML(errorHTML);
+
+    //Setup a default message for Url
+    defaultMsg = {
+      url: {
+        // use translation keys for the message
+        error: 'demo.message.url.error',
+        success: 'demo.message.url.success'
+      }
+    };
+
+    $validationProvider.setDefaultMsg(defaultMsg);
+
+}]);</code></pre>
+         </figure>
     </section>
 
     <!-- ********Style guide******* -->

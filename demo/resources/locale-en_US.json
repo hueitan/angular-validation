@@ -21,6 +21,8 @@
 	"demo.gettingStarted.inCaseOfUsingBower": "In case of using Bower:",
 	"demo.gettingStarted.includeYourValidationRule": "Include your validation rule",
 	"demo.gettingStarted.writeYourFirstValidationCode": "Write your first validation code",
+	"demo.gettingStarted.usingAngularTranslationService": "Using locale services for messages",
+	"demo.gettingStarted.usingAngularTranslationService.p1": "If you are using angular-translate or any other translation libraries in your code you can integrate it with validation messages as following:",
 
 	"demo.styleGuide.p1": "You can style different states of your form elements using the following selectors",
 	"demo.styleGuide.invalidSelectors": "Invalid Selectors",
@@ -30,5 +32,8 @@
 	"demo.styleGuide.or": "or",
 	"demo.styleGuide.usingBootstrapClasses": "Using Bootstrap classes",
 	"demo.styleGuide.p3": "For more on AngularJS validation classes check official AngularJS",
-	"demo.styleGuide.documentation": "documentation"
+	"demo.styleGuide.documentation": "documentation",
+
+	"demo.message.url.error": "Invalid URL!",
+	"demo.message.url.success": "Valid URL"
 }

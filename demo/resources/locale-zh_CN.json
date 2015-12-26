@@ -21,6 +21,8 @@
 	"demo.gettingStarted.inCaseOfUsingBower": "如果使用鲍尔：",
 	"demo.gettingStarted.includeYourValidationRule": "包括您的验证规则",
 	"demo.gettingStarted.writeYourFirstValidationCode": "写下您的第一个验证码",
+	"demo.gettingStarted.usingAngularTranslationService": "采用了棱角分明，翻译消息",
+	"demo.gettingStarted.usingAngularTranslationService.p1": "如果您使用的是角翻译或任何其他翻译库中的代码，您可以将其与验证消息如下集成",
 
 	"demo.styleGuide.p1": "您可以风格你的表单元素的不同状态使用下面的选择",
 	"demo.styleGuide.invalidSelectors": "无效的选择器",
@@ -30,5 +32,8 @@
 	"demo.styleGuide.or": "要么",
 	"demo.styleGuide.usingBootstrapClasses": "使用自举类",
 	"demo.styleGuide.p3": "欲了解更多有关AngularJS验证类检查官员AngularJS",
-	"demo.styleGuide.documentation": "文件"
+	"demo.styleGuide.documentation": "文件",
+
+	"demo.message.url.error": "无效的URL!",
+	"demo.message.url.success": "有效的URL"
 }
