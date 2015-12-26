@@ -89,7 +89,7 @@
     };
 
     /**
-     * Get the valid method     
+     * Get the valid method
      * @returns {*}
      */
     this.getValidMethod = function() {
@@ -270,6 +270,7 @@
     this.$get = ['$injector', function($injector) {
       setup($injector);
       return {
+        $injector: $injector,
         setValidMethod: this.setValidMethod,
         getValidMethod: this.getValidMethod,
         setErrorHTML: this.setErrorHTML,

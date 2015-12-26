@@ -1,20 +1,58 @@
 (function() {
-  angular.module('myApp', ['validation', 'validation.rule', 'ui.bootstrap', 'ui.bootstrap.tpls', 'ui.select', 'ngSanitize'])
+  angular.module('angularValidation', ['validation',
+    'validation.rule',
+    'ui.bootstrap',
+    'ui.bootstrap.tpls',
+    'ui.select',
+    'ngSanitize',
+    'ngCookies',
+    'pascalprecht.translate',
+    'tmh.dynamicLocale'
+  ])
+
+  .constant('LOCALES', {
+    'locales': {
+      'en_US': 'English',
+      'zh_CN': '汉语'
+    },
+    'preferredLocale': 'en_US'
+  })
 
   // -------------------
   // config phase
   // -------------------
-  .config(['$validationProvider', function($validationProvider) {
+  .config(['$validationProvider', '$translateProvider', 'tmhDynamicLocaleProvider', function($validationProvider, $translateProvider, tmhDynamicLocaleProvider, $translate) {
+
+    $translateProvider.useMissingTranslationHandlerLog();
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'demo/resources/locale-', // path to translations files
+      suffix: '.json' // suffix, currently- extension of the translations
+    });
+    $translateProvider.preferredLanguage('en_US'); // is applied on first load
+    $translateProvider.useLocalStorage(); // saves selected language to localStorage
+
+    tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
+
     var defaultMsg;
     var expression;
+
+    var successHTML = function(msg) {
+      return '<p class="validation-valid">' + this.$injector.get('$translate').instant(msg) + '</p>';
+    };
+
+    var errorHTML = function(msg) {
+      return '<p class="validation-invalid">' + this.$injector.get('$translate').instant(msg) + '</p>';
+    };
+
+    $validationProvider.setSuccessHTML(successHTML).setErrorHTML(errorHTML);
 
     /**
      * Setup a default message for Url
      */
     defaultMsg = {
       url: {
-        error: 'This is a error url given by user',
-        success: 'It\'s Url'
+        error: 'demo.message.url.error',
+        success: 'demo.message.url.success'
       }
     };
 
