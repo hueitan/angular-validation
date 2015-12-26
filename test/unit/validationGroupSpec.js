@@ -4,6 +4,8 @@ describe('validation-group directive', function() {
   var $scope;
   var $rootScope;
   var $compile;
+  var $timeout;
+  var validationProvider;
   var element;
 
   beforeEach(module('validation.directive'));
@@ -98,6 +100,7 @@ describe('validation-group directive', function() {
       expect(messageElem.hasClass('validation-invalid')).toBe(true);
     });
   });
+
   describe('validation-group attribute for any elements', function() {
     var messageElem;
 
@@ -185,6 +188,82 @@ describe('validation-group directive', function() {
 
       messageElem = angular.element(element[0].querySelector('#contact > p'));
       expect(messageElem.hasClass('validation-invalid')).toBe(true);
+    });
+  });
+
+  describe('validation-group attribute validated by using the provider', function() {
+    var successSpy;
+    var errorSpy;
+    beforeEach(inject(function($injector) {
+      $rootScope = $injector.get('$rootScope');
+      $compile = $injector.get('$compile');
+      validationProvider = $injector.get('$validation');
+      $timeout = $injector.get('$timeout');
+      $scope = $rootScope.$new();
+
+      element = $compile('<form name="Form"><input type="checkbox" name="checkbox1" ng-model="checkbox1" validator="required" validation-group="checkbox"><input type="checkbox" name="checkbox2" ng-model="checkbox2" validator="required" validation-group="checkbox"><span id="checkbox"></span></form>')($scope);
+      angular.element(document.body).append(element);
+      $scope.$digest();
+    }));
+
+    afterEach(function() {
+      element.remove();
+      element = null;
+    });
+
+    it('should validate a form and call a success callback', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.checkbox1.$setViewValue(true);
+      $scope.Form.checkbox2.$setViewValue(true);
+
+      validationProvider.validate($scope.Form)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      expect(successSpy).toHaveBeenCalled();
+      expect(errorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should validate a form element and call a success callback', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.checkbox1.$setViewValue(true);
+
+      validationProvider.validate($scope.Form.checkbox1)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      expect(successSpy).toHaveBeenCalled();
+      expect(errorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should validate a form element and call an error callback', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.checkbox1.$setViewValue(true);
+
+      validationProvider.validate($scope.Form)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      expect(successSpy).not.toHaveBeenCalled();
+      expect(errorSpy).toHaveBeenCalled();
     });
   });
 });
