@@ -50,16 +50,10 @@ Using angular-validation
 <script src="dist/angular-validation.js"></script>
 <script src="dist/angular-validation-rule.js"></script>
 ```
-Using angular-validation with bower
----
-```html
-<script src="lib/angular-validation/dist/angular-validation.js"></script>
-<script src="lib/angular-validation/dist/angular-validation-rule.js"></script>
-```
 ```js
 angular.module('yourApp', ['validation']);
 
-// including your validation rule
+// OR including your validation rule
 angular.module('yourApp', ['validation', 'validation.rule']);
 ```
 
