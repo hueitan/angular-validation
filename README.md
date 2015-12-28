@@ -30,10 +30,6 @@ http://huei90.github.io/angular-validation/
 
 http://plnkr.co/edit/rjIIkX (Bootstrap framework)
 
-License
------
-MIT
-
 Install
 -----
 Install with npm
@@ -144,6 +140,10 @@ angular.extend($validationProvider, {
     }
 });
 ```
+
+License
+-----
+MIT
 
 CHANGELOG
 =====
