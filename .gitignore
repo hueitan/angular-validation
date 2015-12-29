@@ -22,3 +22,8 @@ bower_components/
 .idea/
 *.swp
 *.vim
+
+# --------------------
+# coverage
+# --------------------
+coverage
