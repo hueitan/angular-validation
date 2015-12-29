@@ -1,17 +1,38 @@
+17 Dec 2015 v1.4.0 (Support AngularJS 1.4)
+===
+
+:celebration: :party:
+
+17 Dec 2015 v1.3.4 (Moving to v1.4)
+===
+
+**Improvement**
+
+[#113](https://github.com/huei90/angular-validation/pull/162) removing directive scope dependency
+<br/>[#168](https://github.com/huei90/angular-validation/pull/168) Added a global valid method
+
+**Fix**
+
+[0946ed4](https://github.com/huei90/angular-validation/commit/0946ed4ab22611aaf68b625ac9028a9767f012f7) FIX provider.setSuccess/ErrorMessage & no-validation-message
+
+**Documentation**
+
+[#164](https://github.com/huei90/angular-validation/issues/164) Improve the HTML documentation
+
 31 Oct 2015 v1.3.3
 ===
 
 **Improvement**
 
-[00ce51c](https://github.com/huei90/angular-validation/commit/00ce51cb85c21a7699c7faecc4a173e0834daadb) Updated `travis.yml` 
+[00ce51c](https://github.com/huei90/angular-validation/commit/00ce51cb85c21a7699c7faecc4a173e0834daadb) Updated `travis.yml`
 <br/>[6f9403d](https://github.com/huei90/angular-validation/pull/143) Added the `package.js` in order to support Meteor package
-<br/>[a872d4c](https://github.com/huei90/angular-validation/pull/147) Did refactoring the project 
+<br/>[a872d4c](https://github.com/huei90/angular-validation/pull/147) Did refactoring the project
 
 **Fix**
 
 [331d2eb](https://github.com/huei90/angular-validation/commit/331d2eb2fd68d11532fe612453861c263577fb58) Wrapped `validation-reset` within $timeout
 <br/>[e53469c](https://github.com/huei90/angular-validation/commit/e53469c08a7e6e4ef7c8a60c0e67683bd7dd68ad) Fixed `no-validation-message` condition
-<br/>[4dcdb68](https://github.com/huei90/angular-validation/pull/140) Set an actual value from the control's view (ctrl.$viewValue instead of watch value) 
+<br/>[4dcdb68](https://github.com/huei90/angular-validation/pull/140) Set an actual value from the control's view (ctrl.$viewValue instead of watch value)
 <br/>[09aed2e](https://github.com/huei90/angular-validation/pull/145) Fixed an error in the checkValid function
 
 

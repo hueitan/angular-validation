@@ -7,8 +7,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/lib/angular.1.3.18.js',
-      'test/lib/angular-mocks.1.3.18.js',
+      'test/lib/angular.1.4.7.js',
+      'test/lib/angular-mocks.1.4.7.js',
       'dist/angular-validation.js',
       'dist/angular-validation-rule.js',
       'test/unit/*.js'
@@ -18,7 +18,7 @@ module.exports = function(config) {
     exclude: [],
 
     preprocessors: {
-      'dist/angular-validation.js': ['coverage']
+      'dist/angular-validation.js': ['coverage'],
     },
 
     // use dots reporter, as travis terminal does not support escaping sequences

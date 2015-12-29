@@ -22,3 +22,99 @@
 #github-link:hover {
     opacity: 1;
 }
+
+pre, pre code {
+    font-size: 13px;
+}
+
+pre code {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    font-family: Courier, 'New Courier', monospace;
+}
+
+pre {
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.hljs {
+    background: none;
+}
+
+.navbar-default .navbar-brand {
+    color: #0A7C71;
+}
+
+.bs-header {
+    padding: 30px 15px 40px;
+    font-size: 16px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,.15);
+    color: #0A7C71;
+    background-color: #0DAD9E;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .bs-docs-header {
+        padding-top: 60px;
+        padding-bottom: 60px;
+        font-size: 24px;
+        text-align: left;
+    }
+}
+
+.bs-docs-header {
+    position: relative;
+    text-align: left;
+    padding: 60px 15px 40px;
+    color: #fff;
+    text-align: center;
+    background-color: #0A7C71;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#0A7C71),to(#10CFBD));
+    background-image: -webkit-linear-gradient(top,#0A7C71
+ 0,#10CFBD 100%);
+    background-image: -o-linear-gradient(top,#0A7C71
+ 0,#10CFBD 100%);
+    background-image: linear-gradient(to bottom,#0A7C71
+ 0,#10CFBD 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0A7C71', endColorstr='#10CFBD', GradientType=0);
+    background-repeat: repeat-x;
+}
+
+.bs-docs-header .container {
+    text-align: left;
+}
+
+.bs-docs-decs {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.m-b-20 {
+   margin-bottom: 20px;
+}
+
+.checkbox {
+   padding-left: 20px;
+}
+
+.radio {
+   padding-left: 20px;
+}
+
+blockquote > label {
+    font-size: 13px;
+}

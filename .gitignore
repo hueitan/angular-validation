@@ -14,6 +14,7 @@ Icon
 # --------------------
 npm-debug.log
 node_modules/
+bower_components/
 
 # --------------------
 # Editor Files
@@ -21,3 +22,8 @@ node_modules/
 .idea/
 *.swp
 *.vim
+
+# --------------------
+# coverage
+# --------------------
+coverage

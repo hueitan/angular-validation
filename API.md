@@ -46,6 +46,20 @@ You can also add a custom validation message by using `message-id` attribute. It
 <span id="message"></span>
 ```
 
+### **Use a validation group** <br/>
+You can also add a `validation-group` directive to group many elements into a group. The group will be considered as valid if and only if one of them is valid. Otherwise, the group will be marked as invalid. A valid/invalid message will be placed inside an element that contains an id attribute with the same name as provided to the directive `validation-group`.
+
+```html
+<label>Validation group</label>
+<!-- Group both of these elements inside the contact group -->
+<input type="text" name="email" ng-model="email" validator="required" validation-group="contact"> 
+<input type="number" name="telephone" ng-model="telephone" validator="number" validation-group="contact">
+<!-- The message will be placed in side the span element -->
+<span id="contact"></span>
+```
+
+> Note that the `validation-group` directive can only be used to group elements placed in the same form. In other words, you can't group elements across different `<form>` tags.
+
 <a name="no-validation-message"></a>
 ### **Don't show the Valid Message `no-validation-message="true"`**
 
@@ -119,6 +133,10 @@ You can also add a custom validation message by using `message-id` attribute. It
 
 <!-- Clean, right ? -->
 ```
+
+### **Select a global validation method** `watch blur submit submit-only`**
+
+`validationProvider.setValidMethod('submit')`
 
 ### **Setup a new Validation `setExpression()` `setDefaultMsg()` with `RegExp` or `Function` in config phase**
 <a name="custom-function-huei"></a>
@@ -295,7 +313,7 @@ angular.module('yourApp', ['validation'])
 Intial Validation for the input false. You can make it to true!
 
 ```html
-<!-- default fase -->
+<!-- default false -->
 <input type="text" name="firstName" ng-model="firstName" validator="required"/>
 
 <!-- set to true -->
@@ -321,3 +339,24 @@ scope.validationInvalidHandler = function(message){
   displayMessage(message, 'error');
 };
 ```
+
+
+### **Setup a global valid/invalid/reset callback in config phase**
+
+```javascript
+// your module
+angular.module('yourApp', ['validation'])
+    .config(['$validationProvider', function ($validationProvider) {        
+		validationProvider.validCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-error').addClass('has-success-tick');
+		};
+		validationProvider.invalidCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-success-tick').addClass('has-error');
+		};
+		validationProvider.resetCallback = function(element) {
+			$(element).parents('.validator-container:first').removeClass('has-error');
+		};
+    }]);
+```
+
+
