@@ -16,4 +16,4 @@ matrix:
   fast_finish: true
 #  allow_failures:
 after_success:
-  - coveralls
+  - grunt cov

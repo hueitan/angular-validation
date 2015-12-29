@@ -89,6 +89,15 @@ module.exports = function(grunt) {
       angular1_4: {
         configFile: 'config/karma.conf.angular.1.4.js'
       }
+    },
+    coveralls: {
+      options: {
+        debug: true,
+        coverageDir: 'coverage',
+        dryRun: true,
+        force: true,
+        recursive: true
+      }
     }
   });
 
@@ -99,4 +108,5 @@ module.exports = function(grunt) {
   grunt.registerTask('check', ['jshint', 'jsbeautifier']); // use this before commit
   grunt.registerTask('build', ['check', 'clean', 'concat', 'uglify']);
   grunt.registerTask('test', ['build', 'karma']);
+  grunt.registerTask('cov', ['coveralls']);
 };
