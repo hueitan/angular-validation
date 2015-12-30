@@ -10,7 +10,7 @@
     width: 50px;
     position: fixed;
     right: 1.5em;
-    bottom: 1.5em;
+    bottom: 3.5em;
     opacity: 0.6;
     -o-transition:.5s;
     -ms-transition:.5s;
@@ -117,4 +117,9 @@ pre {
 
 blockquote > label {
     font-size: 13px;
+}
+
+/* gitter */
+.gitter-chat-embed {
+  z-index: 99999;
 }
