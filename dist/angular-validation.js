@@ -388,7 +388,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showSuccessMessage && messageToShow) {
-        messageElem.html($compile($validationProvider.getSuccessHTML(messageToShow))(scope));
+        messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
@@ -426,7 +426,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showErrorMessage && messageToShow) {
-        messageElem.html($compile($validationProvider.getErrorHTML(messageToShow))(scope));
+        messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
