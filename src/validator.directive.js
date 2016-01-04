@@ -7,6 +7,7 @@
     var $validationProvider = $injector.get('$validation');
     var $q = $injector.get('$q');
     var $timeout = $injector.get('$timeout');
+    var $compile = $injector.get('$compile');
     var $parse = $injector.get('$parse');
 
     /**
@@ -31,7 +32,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showSuccessMessage && messageToShow) {
-        messageElem.html($validationProvider.getSuccessHTML(messageToShow));
+        messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
@@ -69,7 +70,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showErrorMessage && messageToShow) {
-        messageElem.html($validationProvider.getErrorHTML(messageToShow));
+        messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');

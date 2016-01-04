@@ -52,7 +52,7 @@ You can also add a `validation-group` directive to group many elements into a gr
 ```html
 <label>Validation group</label>
 <!-- Group both of these elements inside the contact group -->
-<input type="text" name="email" ng-model="email" validator="required" validation-group="contact"> 
+<input type="text" name="email" ng-model="email" validator="required" validation-group="contact">
 <input type="number" name="telephone" ng-model="telephone" validator="number" validation-group="contact">
 <!-- The message will be placed in side the span element -->
 <span id="contact"></span>
@@ -248,10 +248,14 @@ in `getDefaultMsg()`,and finally return the HTML code
     $validationProvider.setErrorHTML(function (msg) {
         // remember to return your HTML
         // eg: return '<p class="invalid">' + msg + '</p>';
+        // or using filter
+        // eg: return '<p class="invalid">{{"' + msg + '"| lowercase}}</p>';
     });
 
     $validationProvider.setSuccessHTML(function (msg) {
         // eg: return '<p class="valid">' + msg + '</p>';
+        // or using filter
+        // eg: return '<p class="valid">{{"' + msg + '"| lowercase}}</p>';
     });
 }]);
 ```
@@ -282,7 +286,7 @@ The built in `maxlength` and `minlength` validators use parameters to configure 
 <input type="text" name="username" ng-model="form.username" validator="maxlength=6"/>
 ```
 
-You can use parameters in your custom validators in the same way. 
+You can use parameters in your custom validators in the same way.
 You can access this parameter in the validation expression like so:
 
 ```html
@@ -358,5 +362,3 @@ angular.module('yourApp', ['validation'])
 		};
     }]);
 ```
-
-
