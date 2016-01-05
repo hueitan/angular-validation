@@ -161,6 +161,18 @@ describe('provider', function() {
     expect(errorSpy2).toHaveBeenCalled();
   }));
 
+  it('validate invalid form', inject(function() {
+    console.error = function(msg) {
+      expect(msg).toBe('This is not a regular Form name scope');
+    };
+
+    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+    $timeout.flush();
+
+    validationProvider.validate($scope.Form2);
+
+  }));
+
   it('set/get validMethod', inject(function() {
     expect(validationProvider.getValidMethod()).toEqual(null);
 

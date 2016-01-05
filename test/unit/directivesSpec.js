@@ -95,6 +95,20 @@ describe('directives', function() {
       display = element.find('span').css('display');
       expect(display).toBe('block');
     }));
+
+    it('given invalid validator', inject(function() {
+      console.error = function(msg) {
+        expect(msg).toBe('You are using undefined validator "%s"');
+      };
+
+      element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="haha"></form>')($scope);
+      $timeout.flush();
+
+      $scope.$apply(function() {
+        $scope.required = 'true';
+      });
+
+    }));
   });
 
   describe('Message-id attribute', function() {
