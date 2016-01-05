@@ -27,12 +27,12 @@
       var messageElem;
 
       if (messageId || validationGroup) messageElem = angular.element(document.querySelector('#' + (messageId || validationGroup)));
-      else messageElem = element.next();
+      else messageElem = $validationProvider.getMsgElement(element);
 
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showSuccessMessage && messageToShow) {
-        messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow))(scope));
+        messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
@@ -65,12 +65,12 @@
       var messageElem;
 
       if (messageId || validationGroup) messageElem = angular.element(document.querySelector('#' + (messageId || validationGroup)));
-      else messageElem = element.next();
+      else messageElem = $validationProvider.getMsgElement(element);
 
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showErrorMessage && messageToShow) {
-        messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow))(scope));
+        messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
       } else {
         messageElem.css('display', 'none');
@@ -247,7 +247,7 @@
         /**
          * Default Valid/Invalid Message
          */
-        if (!(messageId || validationGroup)) element.after('<span></span>');
+        if (!(messageId || validationGroup)) $validationProvider.addMsgElement(element);
 
         /**
          * Set custom initial validity
@@ -273,7 +273,7 @@
             ctrl.$setValidity(ctrl.$name, undefined);
             ctrl.$render();
             if (messageId || validationGroup) angular.element(document.querySelector('#' + (messageId || validationGroup))).html('');
-            else element.next().html('');
+            else $validationProvider.getMsgElement(element).html('');
 
             if ($validationProvider.resetCallback) $validationProvider.resetCallback(element);
           });
@@ -368,7 +368,7 @@
           } else if (ctrl.$pristine) {
             // Don't validate form when the input is clean(pristine)
             if (messageId || validationGroup) angular.element(document.querySelector('#' + (messageId || validationGroup))).html('');
-            else element.next().html('');
+            else $validationProvider.getMsgElement(element).html('');
             return;
           }
           checkValidation(scope, element, attrs, ctrl, validation, value);
@@ -381,7 +381,7 @@
           attrs.$observe('noValidationMessage', function(value) {
             var el;
             if (messageId || validationGroup) el = angular.element(document.querySelector('#' + (messageId || validationGroup)));
-            else el = element.next();
+            else el = $validationProvider.getMsgElement(element);
             if (value === 'true' || value === true) el.css('display', 'none');
             else if (value === 'false' || value === false) el.css('display', 'block');
           });
