@@ -161,6 +161,42 @@ describe('provider', function() {
     expect(errorSpy2).toHaveBeenCalled();
   }));
 
+  it('validate - single input', inject(function() {
+    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"/><input type="text" name="required2" ng-model="required2" validator="required"/></form>')($scope);
+
+    var submitSpy = jasmine.createSpy('submitSpy');
+    var submitSpy2 = jasmine.createSpy('submitSpy2');
+    var successSpy = jasmine.createSpy('successSpy');
+    var errorSpy = jasmine.createSpy('errorSpy');
+
+    $scope.$on('requiredsubmit-' + $scope.Form.required.validationId, function() {
+      submitSpy();
+    });
+    $scope.$on('required2submit-' + $scope.Form.required2.validationId, function() {
+      submitSpy2();
+    });
+    $scope.$apply(function() {
+      $scope.required = 'Required';
+      $scope.required2 = 'Required';
+    });
+    validationProvider.validate($scope.Form.required)
+      .success(function() {
+        successSpy();
+      })
+      .error(function() {
+        errorSpy();
+      });
+
+    $timeout.flush();
+    expect(submitSpy).toHaveBeenCalled();
+    expect(submitSpy2).not.toHaveBeenCalled();
+    expect(successSpy).toHaveBeenCalled();
+    expect(errorSpy).not.toHaveBeenCalled();
+
+  }));
+
+  // TODO - Missing multiple input []
+
   it('validate invalid form', inject(function() {
     console.error = function(msg) {
       expect(msg).toBe('This is not a regular Form name scope');
@@ -170,6 +206,18 @@ describe('provider', function() {
     $timeout.flush();
 
     validationProvider.validate($scope.Form2);
+
+  }));
+
+  it('reset invalid form', inject(function() {
+    console.error = function(msg) {
+      expect(msg).toBe('This is not a regular Form name scope');
+    };
+
+    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+    $timeout.flush();
+
+    validationProvider.reset($scope.Form2);
 
   }));
 
