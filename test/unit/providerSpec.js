@@ -228,4 +228,168 @@ describe('provider', function() {
 
     expect(validationProvider.getValidMethod()).toEqual('submit');
   }));
+
+
+
+  describe('validationProvider.addMsgElement', function() {
+    /**
+     * TEST CASE:Check if Default $validationProvider.addMsgElement is defined as a Function
+     * TEST TYPE: UNIT
+     *   [STEP 1] SET defaultAddMsg =  $validationProvider.addMsgElement
+     *   Expected: defaultAddMsg is defined AND (defaultAddMsg instanceof Function) === true
+     */
+    it('default value is defined as a Function', inject(function($validation) {
+      expect($validation.addMsgElement instanceof Function).toBe(true);
+    })); //END it
+
+
+    /**
+     * TEST CASE:Check if Default $validationProvider.addMsgElement is right after input element
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up <input type="text" />
+     *   Expected: Msg-Element is right after Input element & Total Msg-Element = 1
+     */
+    it('default element is right after input element', inject(function($validation) {
+      var msgElement = element.find('span');
+      expect(msgElement.length).toEqual(1);
+
+      var elementAfterInput = element.find('input').next();
+      expect(msgElement[0].isSameNode(elementAfterInput[0])).toBe(true);
+    })); //END it
+
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.addMsgElement is consistent (do not be modified/injected)
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom addMsgElement method
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: custom method is not be modified
+     */
+    it('custom element is consistent', inject(function($validation) {
+      var customMsgElement = function(elm) {};
+      $validation.addMsgElement = customMsgElement;
+      $compile('<form name="CustomMsgElmForm"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+      expect($validation.addMsgElement).toEqual(customMsgElement);
+    })); //END it
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.addMsgElement is placed correctly
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom addMsgElement method to push MsgElement as the first child of "Form" element
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: MsgElement is placed as the first child element
+     */
+    it('custom element is placed correctly', inject(function($validation) {
+      $validation.addMsgElement = function(elm) {
+        elm.parent().prepend('<div></div>');
+      };
+      var formElementForCustomMsgElm = $compile('<form name="CustomMsgElmForm"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+
+      var elementFirstChild = formElementForCustomMsgElm.children()[0];
+      var elementFromSetting = formElementForCustomMsgElm.find('div')[0];
+
+      expect(elementFromSetting.isSameNode(elementFirstChild)).toBe(true);
+    })); //END it
+
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.addMsgElement received correct parameters
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom addMsgElement 
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: addMsgElement has 01 parameter, parameter data type = DOMElement
+     */
+    it('received correct parameters', inject(function($validation) {
+      $validation.addMsgElement = function() {
+        expect(arguments.length).toEqual(1);
+        expect(angular.isElement(arguments[0])).toBe(true);
+      };
+      $compile('<form name="CustomMsgElmForm"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+
+    })); //END it
+
+
+  }); //END describe
+
+  describe('validationProvider.getMsgElement', function() {
+    /**
+     * TEST CASE:Check if $validationProvider.getMsgElement is defined as a Function
+     * TEST TYPE: UNIT
+     *   [STEP 1] SET defaultgetMsg =  $validationProvider.getMsgElement
+     *   Expected: (getMsgElement instanceof Function) === true
+     */
+    it('default value is defined as a Function', inject(function($validation) {
+      expect($validation.getMsgElement instanceof Function).toBe(true);
+    })); //END it
+
+    /**
+     * TEST CASE:Check if default $validationProvider.getMsgElement is right after input element
+     * TEST TYPE: E2E
+     *   [STEP 1] SET Up Input A:  <input type="text" />
+     *   [STEP 2] Get Element B right after Input A
+     *   Expected: (Element B) is (element returned from $validationProvider.getMsgElement() );
+     */
+    it('default element is right after input element', inject(function($validation) {
+      var inputElement = element.find('input');
+      var elementAfterInput = inputElement.next();
+      var elementFromSetting = $validation.getMsgElement(inputElement);
+
+      expect(elementFromSetting[0].isSameNode(elementAfterInput[0])).toBe(true);
+    })); //END it
+
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.getMsgElement is consistent (do not be modified/injected)
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom getMsgElement method
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: custom method is not be modified
+     */
+    it('custom element is consistent', inject(function($validation) {
+      var customMsgElement = function(elm) {};
+      $validation.getMsgElement = customMsgElement;
+      $compile('<form name="CustomMsgElmForm"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+      expect($validation.getMsgElement).toEqual(customMsgElement);
+    })); //END it
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.getMsgElement is gotten correctly
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom getMsgElement method to get first child of "Form" element.
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: MsgElement is placed as the first child element
+     */
+    it('custom element is placed correctly', inject(function($validation) {
+      $validation.getMsgElement = function(elm) {
+        return formElementForCustomMsgElm.children()[0];
+      };
+      var formElementForCustomMsgElm = $compile('<form name="CustomMsgElmForm"><div></div><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+      var inputElement = formElementForCustomMsgElm.find('input');
+
+      var elementFirstChild = formElementForCustomMsgElm.children()[0];
+
+      var elementFromSetting = $validation.getMsgElement(inputElement);
+
+      expect(elementFromSetting.isSameNode(elementFirstChild)).toBe(true);
+    })); //END it
+
+    /**
+     * TEST CASE:Check if custom $validationProvider.getMsgElement received correct parameters
+     * Test TYPE: E2E
+     *   [STEP 1] SET Up custom getMsgElement 
+     *   [STEP 2] Place validator directive in the UI
+     *   Expected: getMsgElement has 01 parameter, parameter data type = DOMElement
+     */
+    it('received correct parameters', inject(function($validation) {
+      $validation.getMsgElement = function() {
+        expect(arguments.length).toEqual(1);
+        expect(angular.isElement(arguments[0])).toBe(true);
+      };
+      $compile('<form name="CustomMsgElmForm"><input type="text" name="required" ng-model="required" validator="required"></form>')($scope);
+
+    })); //END it
+
+  }); //END describe
+
+
 });

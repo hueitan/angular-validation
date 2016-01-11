@@ -264,6 +264,28 @@
     };
 
     /**
+     * Add Message Element in config phase
+     * When you need custom your messageElement 
+     * NODE: this funtion & and `message-id` attribute, have similar purpose.
+     * This function will help you add your `messageElement` automatically instead of pre-defined.
+     * @param element
+     */
+    this.addMsgElement = function(element) {
+      return element.after('<span></span>');
+    };
+
+    /**
+     * Add Message Element in config phase
+     * When you need custom your messageElement 
+     * NODE: this funtion & and `message-id` attribute, have similar purpose.
+     * This function will help you add your `messageElement` automatically instead of pre-defined.
+     * @param element
+     */
+    this.getMsgElement = function(element) {
+      return element.next();
+    };
+
+    /**
      * $get
      * @returns {{setErrorHTML: *, getErrorHTML: Function, setSuccessHTML: *, getSuccessHTML: Function, setExpression: *, getExpression: Function, setDefaultMsg: *, getDefaultMsg: Function, checkValid: Function, validate: Function, reset: Function}}
      */
@@ -287,7 +309,9 @@
         validCallback: this.validCallback,
         invalidCallback: this.invalidCallback,
         resetCallback: this.resetCallback,
-        reset: this.reset
+        reset: this.reset,
+        addMsgElement: this.addMsgElement,
+        getMsgElement: this.getMsgElement
       };
     }];
   }

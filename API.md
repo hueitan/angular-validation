@@ -52,7 +52,7 @@ You can also add a `validation-group` directive to group many elements into a gr
 ```html
 <label>Validation group</label>
 <!-- Group both of these elements inside the contact group -->
-<input type="text" name="email" ng-model="email" validator="required" validation-group="contact">
+<input type="text" name="email" ng-model="email" validator="required" validation-group="contact"> 
 <input type="number" name="telephone" ng-model="telephone" validator="number" validation-group="contact">
 <!-- The message will be placed in side the span element -->
 <span id="contact"></span>
@@ -245,14 +245,14 @@ in `getDefaultMsg()`,and finally return the HTML code
 ```javascript
 // your angular
 .config(['$validationProvider', function ($validationProvider) {
-    $validationProvider.setErrorHTML(function (msg) {
+    $validationProvider.setErrorHTML(function (msg, element, attrs) {
         // remember to return your HTML
         // eg: return '<p class="invalid">' + msg + '</p>';
         // or using filter
         // eg: return '<p class="invalid">{{"' + msg + '"| lowercase}}</p>';
     });
 
-    $validationProvider.setSuccessHTML(function (msg) {
+    $validationProvider.setSuccessHTML(function (msg, element, attrs) {
         // eg: return '<p class="valid">' + msg + '</p>';
         // or using filter
         // eg: return '<p class="valid">{{"' + msg + '"| lowercase}}</p>';
@@ -286,7 +286,7 @@ The built in `maxlength` and `minlength` validators use parameters to configure 
 <input type="text" name="username" ng-model="form.username" validator="maxlength=6"/>
 ```
 
-You can use parameters in your custom validators in the same way.
+You can use parameters in your custom validators in the same way. 
 You can access this parameter in the validation expression like so:
 
 ```html
@@ -360,5 +360,50 @@ angular.module('yourApp', ['validation'])
 		validationProvider.resetCallback = function(element) {
 			$(element).parents('.validator-container:first').removeClass('has-error');
 		};
+    }]);
+```
+
+
+### **Setup Message Element in config phase**
+`WHY`
+````html
+<div>
+    <label>
+        <input type="text" name="fullName" validator="required" />
+    </label>
+    <!-- I WANT MY MESSAGE ELEMENT HERE INSTEAD AFTER input -->
+</div>
+````
+
+`HOW`
+
+In this case, I can use `message-id` attribute as a "get a job done" solution.
+Because, If you choose this solution It will increase your effort of manually putting `message-id` and define your own Message Element.
+
+You can use `addMsgElement` as a better solution to centralize & automate your configurations.
+
+```javascript
+// your module
+angular.module('yourApp', ['validation'])
+    .config(['$validationProvider', function ($validationProvider) {
+        /**
+        * Add your Msg Element
+        * @param {DOMElement} element - Your input element
+        * @return void
+        */
+        $validationProvider.addMsgElement = function(element) {
+            // Insert my own Msg Element
+            $(element).parent().append('<span></span>');
+        };
+        
+        /**
+        * Function to help validator get your Msg Element
+        * @param {DOMElement} element - Your input element
+        * @return {DOMElement}
+        */
+        $validationProvider.getMsgElement = function(element) {
+            return $(element).parent().children().last();
+        };
+
     }]);
 ```
