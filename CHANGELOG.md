@@ -1,3 +1,16 @@
+27 Jan 2016 v1.4.1 
+===
+
+**Improvement**
+
+[#137](https://github.com/huei90/angular-validation/commit/3b18df1cda799d4135947ba05169c149d128b28f)  Support Angular 1.4.x version
+<br/>[#180](https://github.com/huei90/angular-validation/pull/180) Add code coverage using coveralls and write more tests
+<br/>[#184](https://github.com/huei90/angular-validation/pull/184) Support compiling validation output message
+
+**New Featuers**
+<br/>[#175](https://github.com/huei90/angular-validation/pull/175) Add `validation-group` directive to support group validation, checkboxes, radios, text fields, and etc
+<br/>[#183](https://github.com/huei90/angular-validation/pull/183) Support custom message element and update parameter for setErrorHTML() and setSuccessHTML()
+
 17 Dec 2015 v1.4.0 (Support AngularJS 1.4)
 ===
 
