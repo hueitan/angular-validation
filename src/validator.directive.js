@@ -19,7 +19,7 @@
      * @param ctrl
      * @returns {}
      */
-    var validFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
+    var validFunc = function(element, validMessage, validation, scope, ctrl, validations, hasValidation) {
       var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
       var validCallback = $parse('success');
       var messageId = attrs.messageId;
@@ -38,7 +38,26 @@
         messageElem.css('display', 'none');
       }
 
-      ctrl.$setValidity(ctrl.$name, true);
+      // For async issues
+      scope['valid-rule-' + validation] = true;
+
+      if (!hasValidation) {
+        var validStatuses = [];
+        angular.forEach(validations, function(value) {
+          var validator = value.split('=')[0];
+          validator = validator.replace('!', '');
+          validStatuses.push(scope['valid-rule-' + validator]);
+        });
+
+        var isEveryFieldOk = validStatuses.every(function(item) {
+          return !!item;
+        });
+
+        if (isEveryFieldOk) {
+          ctrl.$setValidity(ctrl.$name, true);
+        }
+      }
+
       if (validCallback) validCallback({
         message: messageToShow
       });
@@ -75,6 +94,9 @@
       } else {
         messageElem.css('display', 'none');
       }
+
+      // For muti conditions
+      scope['valid-rule-' + validation] = false;
 
       ctrl.$setValidity(ctrl.$name, false);
       if (invalidCallback) invalidCallback({
@@ -136,6 +158,14 @@
       var validatorExpr = validators[0].trim();
       var paramIndex = validatorExpr.indexOf('=');
       var validator = paramIndex === -1 ? validatorExpr : validatorExpr.substr(0, paramIndex);
+
+      // Case: Field when filled must validate, or do nothing.
+      var isUnRequired = validator.indexOf('!') > -1 ? true : false;
+
+      if (isUnRequired) {
+        validator = validator.replace('!', '');
+      }
+
       var validatorParam = paramIndex === -1 ? null : validatorExpr.substr(paramIndex + 1);
       var leftValidation = validators.slice(1);
       var successMessage = validator + 'SuccessMessage';
@@ -144,7 +174,7 @@
       var validationGroup = attrs.validationGroup;
       var valid = {
         success: function() {
-          validFunc(element, attrs[successMessage], validator, scope, ctrl, attrs);
+          validFunc(element, attrs[successMessage], validator, scope, ctrl, validators, leftValidation.length);
           if (leftValidation.length) {
             return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
           } else {
@@ -161,6 +191,36 @@
         if (leftValidation.length) return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
         else return;
       }
+
+      // if user not input return true, else validate
+      if (isUnRequired && !value) {
+        return valid.success();
+      }
+
+      // When form edit, compared with old value
+      // Case 1: used controllerAs
+      // Case 2: used $scope
+
+      if (scope.originalData) {
+        var ngModel = attrs.ngModel,
+            originalData = scope.originalData,
+            keys = ngModel.split('.'),
+            oldValue;
+
+        if (typeof originalData[keys[0]] === 'undefined' &&
+            typeof originalData[keys[1]] !== 'undefined') {
+          keys = keys.slice(1);
+        }
+
+        for(var i = 0, len = keys.length; i < len; i++) {
+          oldValue = oldValue[ keys[i] ];
+        }
+
+        if (oldValue && oldValue == value) {
+          return valid.success();
+        }
+      }
+
       // Check with Function
       if (expression.constructor === Function) {
         return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs, validatorParam)])
@@ -202,6 +262,15 @@
     return {
       restrict: 'A',
       require: 'ngModel',
+      scope: {
+        model: '=ngModel',
+        initialValidity: '=initialValidity',
+        validCallback: '&',
+        invalidCallback: '&',
+        messageId: '@',
+        editReadonly: '=editReadonly',
+        originalData: '=originalData'
+      },
       link: function(scope, element, attrs, ctrl) {
         /**
          * All attributes
@@ -254,6 +323,15 @@
          * Usage: <input initial-validity="true" ... >
          */
         ctrl.$setValidity(ctrl.$name, initialValidity);
+
+        /**
+         * Readonly doesn't validate
+         */
+        if (scope.editReadonly) {
+          element.attr('readonly', true);
+          ctrl.$setValidity(ctrl.$name, true);
+          return;
+        }
 
         /**
          * Reset the validation for specific form
