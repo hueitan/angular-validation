@@ -399,7 +399,7 @@
      * @param ctrl
      * @returns {}
      */
-    var validFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
+    var validFunc = function(element, validMessage, validation, scope, ctrl, attrs, param) {
       var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
       var validCallback = $parse('success');
       var messageId = attrs.messageId;
@@ -412,6 +412,10 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showSuccessMessage && messageToShow) {
+        messageToShow = angular.isFunction(messageToShow) ?
+          messageToShow(element, attrs, param) :
+          messageToShow;
+
         messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
       } else {
@@ -437,7 +441,7 @@
      * @param ctrl
      * @returns {}
      */
-    var invalidFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
+    var invalidFunc = function(element, validMessage, validation, scope, ctrl, attrs, param) {
       var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
       var invalidCallback = $parse('error');
       var messageId = attrs.messageId;
@@ -450,6 +454,10 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showErrorMessage && messageToShow) {
+        messageToShow = angular.isFunction(messageToShow) ?
+          messageToShow(element, attrs, param) :
+          messageToShow;
+
         messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
       } else {
@@ -524,7 +532,7 @@
       var validationGroup = attrs.validationGroup;
       var valid = {
         success: function() {
-          validFunc(element, attrs[successMessage], validator, scope, ctrl, attrs);
+          validFunc(element, attrs[successMessage], validator, scope, ctrl, attrs, validatorParam);
           if (leftValidation.length) {
             return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
           } else {
@@ -532,7 +540,7 @@
           }
         },
         error: function() {
-          return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl, attrs);
+          return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl, attrs, validatorParam);
         }
       };
 
