@@ -351,13 +351,13 @@ scope.validationInvalidHandler = function(message){
 // your module
 angular.module('yourApp', ['validation'])
     .config(['$validationProvider', function ($validationProvider) {        
-		validationProvider.validCallback = function(element) {
+		$validationProvider.validCallback = function(element) {
 			$(element).parents('.validator-container:first').removeClass('has-error').addClass('has-success-tick');
 		};
-		validationProvider.invalidCallback = function(element) {
+		$validationProvider.invalidCallback = function(element) {
 			$(element).parents('.validator-container:first').removeClass('has-success-tick').addClass('has-error');
 		};
-		validationProvider.resetCallback = function(element) {
+		$validationProvider.resetCallback = function(element) {
 			$(element).parents('.validator-container:first').removeClass('has-error');
 		};
     }]);
