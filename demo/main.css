@@ -1,3 +1,10 @@
+body {
+    color: #626262;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+}
 .validation-valid {
     color: #0074D9;
 }
@@ -21,6 +28,10 @@
 
 #github-link:hover {
     opacity: 1;
+}
+
+.m-l-10 {
+    margin-left: 10px;
 }
 
 pre, pre code {
@@ -53,6 +64,10 @@ pre {
     background: none;
 }
 
+.container > nav {
+    margin: 0px 40px;
+}
+
 .navbar-default .navbar-brand {
     color: #0A7C71;
 }
@@ -83,19 +98,16 @@ pre {
     color: #fff;
     text-align: center;
     background-color: #0A7C71;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#0A7C71),to(#10CFBD));
-    background-image: -webkit-linear-gradient(top,#0A7C71
- 0,#10CFBD 100%);
-    background-image: -o-linear-gradient(top,#0A7C71
- 0,#10CFBD 100%);
-    background-image: linear-gradient(to bottom,#0A7C71
- 0,#10CFBD 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0A7C71', endColorstr='#10CFBD', GradientType=0);
+    background-image: linear-gradient(to bottom,#0A7C78 0,#0A7C75 100%);
     background-repeat: repeat-x;
 }
 
 .bs-docs-header .container {
     text-align: left;
+}
+
+.bs-docs-header .container > p {
+    color: #ccc;
 }
 
 .bs-docs-decs {
