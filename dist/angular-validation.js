@@ -1,8 +1,6 @@
-(function() {
-  angular.module('validation', ['validation.provider', 'validation.directive']);
-  angular.module('validation.provider', []);
-  angular.module('validation.directive', ['validation.provider']);
-}).call(this);
+angular.module('validation', ['validation.provider', 'validation.directive']);
+angular.module('validation.provider', []);
+angular.module('validation.directive', ['validation.provider']);
 
 (function() {
   angular
@@ -401,7 +399,7 @@
      */
     var validFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
       var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
-      var validCallback = $parse('success');
+      var validCallback = $parse(attrs.validCallback);
       var messageId = attrs.messageId;
       var validationGroup = attrs.validationGroup;
       var messageElem;
@@ -419,7 +417,7 @@
       }
 
       ctrl.$setValidity(ctrl.$name, true);
-      if (validCallback) validCallback({
+      validCallback(scope, {
         message: messageToShow
       });
       if ($validationProvider.validCallback) $validationProvider.validCallback(element);
@@ -439,7 +437,7 @@
      */
     var invalidFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
       var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).error;
-      var invalidCallback = $parse('error');
+      var invalidCallback = $parse(attrs.invalidCallback);
       var messageId = attrs.messageId;
       var validationGroup = attrs.validationGroup;
       var messageElem;
@@ -457,7 +455,7 @@
       }
 
       ctrl.$setValidity(ctrl.$name, false);
-      if (invalidCallback) invalidCallback({
+      invalidCallback(scope, {
         message: messageToShow
       });
       if ($validationProvider.invalidCallback) $validationProvider.invalidCallback(element);
