@@ -1,3 +1,8 @@
+html, body {
+     max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     color: #626262;
     font-family: "Segoe UI",Arial,sans-serif;
@@ -60,12 +65,8 @@ pre {
     border-radius: 4px;
 }
 
-.hljs {
-    background: none;
-}
-
 .container > nav {
-    margin: 0px 40px;
+    margin: 0px 70px;
 }
 
 .navbar-default .navbar-brand {
@@ -97,8 +98,8 @@ pre {
     padding: 60px 15px 40px;
     color: #fff;
     text-align: center;
-    background-color: #0A7C71;
-    background-image: linear-gradient(to bottom,#0A7C78 0,#0A7C75 100%);
+    background-color: #36bc98;
+    background-image: linear-gradient(to bottom,rgba(6, 99, 179, 0.81) 0,#36bc98 100%);
     background-repeat: repeat-x;
 }
 
@@ -108,6 +109,7 @@ pre {
 
 .bs-docs-header .container > p {
     color: #ccc;
+    letter-spacing: 1.5px;
 }
 
 .bs-docs-decs {
@@ -129,6 +131,14 @@ pre {
 
 blockquote > label {
     font-size: 13px;
+}
+
+.form-control {
+    width: 50%;
+}
+
+form > fieldset > legend {
+    border: none;
 }
 
 /* gitter */
