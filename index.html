@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.13.2/select.min.css"/>
 
     <!-- Highlight CSS-->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/color-brewer.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/monokai-sublime.min.css">
 
     <link rel="stylesheet" href="demo/main.css"/>
 
@@ -271,14 +271,14 @@
             <fieldset>
                 <div class="m-b-20">
                     <legend>Form (Additions validation)</legend>
-                    <div class="input-group m-b-20">
+                    <div class="input-group m-b-20" style="width: 50%;">
                         <input type="text" class="form-control" validator="huei" name="huei" ng-model="form4.huei" placeholder="It's must be 'Huei Tan'" message-id="huei">
                         <span class="input-group-addon">With <a href="https://github.com/huei90/angular-validation#custom-function-huei" target="_blank">Function</a> </span>
 
                     </div>
                     <span id="huei"></span>
 
-                    <div class="input-group m-b-20">
+                    <div class="input-group m-b-20" style="width: 50%;">
                         <input type="text" class="form-control" validator="huei" name="noMsg" ng-model="form4.noMsg" no-validation-message="true" placeholder="It's must be 'Huei Tan'" message-id="noMsg">
                         <span class="input-group-addon">
                             <span ng-if="!Form4.noMsg.$valid">type: Huei Tan</span>
@@ -286,7 +286,7 @@
                         </span>
                     </div>
 
-                    <div class="input-group m-b-20">
+                    <div class="input-group m-b-20" style="width: 50%;">
                         <input type="text" class="form-control" validator="huei" name="canChange" huei-error-message="{{ form4.changeErrorMsg }}" ng-model="form4.canChange" placeholder="Type Wrong !!" message-id="canChange">
                         <span class="input-group-addon">
                             <span ng-if="!form4.show"><a href="javascript:void(0);" ng-click="form4.changeMsg();form4.show = true;">Change Error Msg</a></span>
@@ -394,7 +394,7 @@
                     <legend>Bootstrap DatePicker</legend>
                     <label>Required</label>
                     <div>
-                        <p class="input-group">
+                        <p class="input-group" style="width: 40%;">
                         <input type="text" class="form-control m-b-20" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="form7.dt" is-open="form7.status.opened"  datepicker-options="form7.dateOptions" close-text="Close" validator="required" message-id="bootstrap"/>
 
                         <span class="input-group-btn">
@@ -414,30 +414,36 @@
             <fieldset>
                 <div class="m-b-20">
                     <legend>AngularJs ui-select</legend>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label>Required, Selected: {{form8.country.selected}}</label>
-                        </div>
 
-                    <div class="col-xs-12">
-                        <ui-select ng-model="form8.country.selected" theme="bootstrap"
-                                ng-disabled="form8.disabled"
-                                style="width: 300px;"
-                                validator="required"
-                                message-id="ui-select">
-                                <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.name}}</ui-select-match>
-                                <ui-select-choices repeat="country in form8.countries" refresh-delay="0">
-                                <span ng-bind-html="country.name"></span>
-                                <small ng-bind-html="country.code"></small>
-                                </ui-select-choices>
-                        </ui-select>
-                        <span id="ui-select"></span>
-                    </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Required, Selected: {{form8.country.selected}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <ui-select ng-model="form8.country.selected" theme="bootstrap"
+                                        ng-disabled="form8.disabled"
+                                        style="width: 100%;"
+                                        validator="required"
+                                        message-id="ui-select">
+                                        <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.name}}</ui-select-match>
+                                        <ui-select-choices repeat="country in form8.countries" refresh-delay="0">
+                                        <span ng-bind-html="country.name"></span>
+                                        <small ng-bind-html="country.code"></small>
+                                        </ui-select-choices>
+                                </ui-select>
+                                <br/>
+                                 <span id="ui-select"></span>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-primary" ng-click="form8.clear()">Clear ng-model</button>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                 <div class="btn-group" role="group">
-                     <button class="btn btn-primary" ng-click="form8.clear()">Clear ng-model</button>
-                </div>
+
             </fieldset>
         </form>
       </div>
