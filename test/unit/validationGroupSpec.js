@@ -58,6 +58,21 @@ describe('validation-group directive', function() {
       expect(element.hasClass('ng-invalid')).toBe(true);
     });
 
+    it('should be valid when at least one of elements is valid', function() {
+      $scope.Form.checkbox1.$setViewValue(true);
+
+      expect($scope.Form.$valid).toBe(true);
+      expect(element.hasClass('ng-valid')).toBe(true);
+
+      $scope.Form.checkbox1.$setViewValue(false);
+      expect($scope.Form.$valid).toBe(false);
+      expect(element.hasClass('ng-invalid')).toBe(true);
+
+      $scope.Form.checkbox2.$setViewValue(true);
+      expect($scope.Form.$valid).toBe(true);
+      expect(element.hasClass('ng-valid')).toBe(true);
+    });
+
     it('should have a success message inside the #checkbox element when an element is valid', function() {
       $scope.Form.checkbox1.$setViewValue(true);
 
@@ -148,6 +163,22 @@ describe('validation-group directive', function() {
       expect(element.hasClass('ng-invalid')).toBe(true);
     });
 
+    it('should be valid when at least one of elements is valid', function() {
+      $scope.Form.email.$setViewValue('foo@bar.com');
+      expect($scope.Form.$valid).toBe(true);
+      expect(element.hasClass('ng-valid')).toBe(true);
+
+      $scope.Form.telephone.$setViewValue('065839481');
+      $scope.Form.email.$setViewValue('');
+      expect($scope.Form.$valid).toBe(true);
+      expect(element.hasClass('ng-valid')).toBe(true);
+
+      $scope.Form.telephone.$setViewValue('');
+      expect($scope.Form.$valid).toBe(false);
+      expect(element.hasClass('ng-invalid')).toBe(true);
+    });
+
+
     it('should have a success message inside the #contact element when an element is valid', function() {
       $scope.Form.email.$setViewValue('foo@bar.com');
 
@@ -228,6 +259,45 @@ describe('validation-group directive', function() {
       $timeout.flush();
       expect(successSpy).toHaveBeenCalled();
       expect(errorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should validate a form and call a success callback when at least one of elements in the form is valid', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.checkbox1.$setViewValue(true);
+
+      validationProvider.validate($scope.Form)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      expect(successSpy).toHaveBeenCalled();
+      expect(errorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should validate a form and call an error callback when all elements are invalid', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.checkbox1.$setViewValue(true);
+      $scope.Form.checkbox2.$setViewValue(true);
+      $scope.Form.checkbox1.$setViewValue(false);
+      $scope.Form.checkbox2.$setViewValue(false);
+
+      validationProvider.validate($scope.Form)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      expect(successSpy).not.toHaveBeenCalled();
+      expect(errorSpy).toHaveBeenCalled();
     });
 
     it('should validate a form element and call a success callback', function() {
