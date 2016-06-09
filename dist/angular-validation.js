@@ -486,7 +486,7 @@ angular.module('validation.directive', ['validation.provider']);
      * @param groupName
      * @param validity
      */
-    function setValiationGroup(scope, validationGroup, validity) {
+    function setValidationGroup(scope, validationGroup, validity) {
       var validationGroupElems = document.querySelectorAll('*[validation-group=' + validationGroup + ']');
 
       // Loop through all elements inside the group
@@ -553,7 +553,7 @@ angular.module('validation.directive', ['validation.provider']);
             if (data && data.length > 0 && data[0]) {
               if (validationGroup) {
                 groups[validationGroup][ctrl.$name] = true;
-                setValiationGroup(scope, validationGroup, true);
+                setValidationGroup(scope, validationGroup, true);
               }
               return valid.success();
             } else if (validationGroup) {
@@ -562,9 +562,9 @@ angular.module('validation.directive', ['validation.provider']);
               // Whenever the element is invalid, we'll check whether one of the elements inside the its group valid or not.
               // If there is a valid element, its invalid message won't be shown, Otherwise, shows its invalid message.
               if (checkValidationGroup(validationGroup)) {
-                setValiationGroup(scope, validationGroup, true);
+                setValidationGroup(scope, validationGroup, true);
               } else {
-                setValiationGroup(scope, validationGroup, false);
+                setValidationGroup(scope, validationGroup, false);
                 return valid.error();
               }
             } else return valid.error();
@@ -580,7 +580,7 @@ angular.module('validation.directive', ['validation.provider']);
           if ($validationProvider.getExpression(validator).test(value)) {
             if (validationGroup) {
               groups[validationGroup][ctrl.$name] = true;
-              setValiationGroup(scope, validationGroup, true);
+              setValidationGroup(scope, validationGroup, true);
             }
             return valid.success();
           } else if (validationGroup) {
@@ -589,9 +589,9 @@ angular.module('validation.directive', ['validation.provider']);
             // Whenever the element is invalid, we'll check whether one of the elements inside the its group valid or not.
             // If there is a valid element, its invalid message won't be shown, Otherwise, shows its invalid message.
             if (checkValidationGroup(validationGroup)) {
-              setValiationGroup(scope, validationGroup, true);
+              setValidationGroup(scope, validationGroup, true);
             } else {
-              setValiationGroup(scope, validationGroup, false);
+              setValidationGroup(scope, validationGroup, false);
               return valid.error();
             }
           } else return valid.error();
