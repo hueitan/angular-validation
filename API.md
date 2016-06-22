@@ -197,9 +197,9 @@ angular.module('yourApp', ['validation'])
 <form name="Form">
     ...
     <!-- Check the entire form valid from angular-validation `valid` -->
-    <button ng-disabled="form.checkValid()"></button>
+    <button ng-disabled="!form.checkValid()"></button>
     <!-- or Check the specific form(Form) valid from angular `$valid` -->
-    <button ng-disabled="form.checkValid(Form)"></button>
+    <button ng-disabled="!form.checkValid(Form)"></button>
     <!-- Reset the specific Form -->
     <button ng-click="form.reset(Form)"></button>
     <!-- Clean Reset (angular validation 1.2.0) -->
