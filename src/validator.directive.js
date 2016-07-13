@@ -268,6 +268,10 @@
          */
         var uid = ctrl.validationId = guid();
 
+        /**
+         * to have avalue to rollback to
+         */
+        var originalViewValue = null;
 
         /**
          * Set initial validity to undefined if no boolean value is transmitted
@@ -309,7 +313,7 @@
           watch();
 
           $timeout(function() {
-            ctrl.$setViewValue('');
+            ctrl.$setViewValue(originalViewValue);
             ctrl.$setPristine();
             ctrl.$setValidity(ctrl.$name, undefined);
             ctrl.$render();
@@ -405,6 +409,7 @@
            */
           if (ctrl.$pristine && ctrl.$viewValue) {
             // has value when initial
+            originalViewValue = ctrl.$viewValue || '';
             ctrl.$setViewValue(ctrl.$viewValue);
           } else if (ctrl.$pristine) {
             // Don't validate form when the input is clean(pristine)
