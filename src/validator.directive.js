@@ -269,7 +269,7 @@
         var uid = ctrl.validationId = guid();
 
         /**
-         * to have avalue to rollback to
+         * to have a value to rollback to
          */
         var originalViewValue = null;
 

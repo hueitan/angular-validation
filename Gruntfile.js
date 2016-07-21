@@ -112,5 +112,4 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['check', 'clean', 'concat', 'uglify', 'copy']);
   grunt.registerTask('test', ['build', 'karma']);
   grunt.registerTask('cov', ['coveralls']);
-  grunt.registerTask('default', ['build', 'test']);
 };
