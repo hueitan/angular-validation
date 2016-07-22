@@ -1,4 +1,20 @@
-27 Jan 2016 v1.4.1 
+22 Jul 2016 v1.4.2
+===
+
+**Fix**
+
+[#206](https://github.com/huei90/angular-validation/pull/206) Fixed calls for validCallback/invalidCallback
+[#215](https://github.com/huei90/angular-validation/pull/215) Fix validation-group not working properly
+
+**Improvement**
+
+[#223](https://github.com/huei90/angular-validation/pull/223) Track originalViewValue
+
+**Documentation**
+
+[#204](https://github.com/huei90/angular-validation/pull/204) Webpack integration + design improvements
+
+27 Jan 2016 v1.4.1
 ===
 
 **Improvement**
