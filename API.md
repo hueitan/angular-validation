@@ -148,6 +148,9 @@ You can also add a `validation-group` directive to group many elements into a gr
 
 <label>Huei (Custom setup the new validator - Function)</label>
 <input type="text" name="huei" ng-model="form.huei" validator="huei"/>
+
+<label>Kuaisheng (Custom setup the new validator - Function)</label>
+<input type="text" name="kuaisheng" ng-model="form.kuaisheng" validator="kuaisheng"/>
 ```
 
 ```javascript
@@ -187,6 +190,37 @@ angular.module('yourApp', ['validation'])
                     success: 'Thanks!'
                 }
             });
+
+        // Setup `kuaisheng` validation
+        $validationProvider
+            .setExpression({
+                kuaisheng: function(value, scope, element, attrs, param) {
+                  var errorStr = [
+                    'errorStr1',
+                    'errorStr2'
+                  ];
+                  var len = errorStr.length;
+                  for (var i = len - 1; i >= 0; i--) {
+                    if (value.indexOf(errorStr[i]) > -1) {
+                      return {
+                        result: false,
+                        message: 'input should not include ' + errorStr[i]
+                      };
+                    }
+                  }
+                  return {
+                    result: true,
+                    message: ''
+                  };
+                }
+            })
+            .setDefaultMsg({
+                kuaisheng: {
+                  error: 'valid is error',
+                  success: 'Thanks!'
+                }
+            });
+
     }]);
 ```
 
