@@ -514,7 +514,7 @@ angular.module('validation.directive', ['validation.provider']);
      * }
      */
     function getResultObj(data) {
-      var res = null;
+      var res = {};
       if (data && data.length > 0) {
         res = data[0];
         if (!angular.isObject(res)) {

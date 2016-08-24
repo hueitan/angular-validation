@@ -149,7 +149,7 @@ You can also add a `validation-group` directive to group many elements into a gr
 <label>Huei (Custom setup the new validator - Function)</label>
 <input type="text" name="huei" ng-model="form.huei" validator="huei"/>
 
-<label>Huei (Custom setup the new validator - Function)</label>
+<label>Kuaisheng (Custom setup the new validator - Function)</label>
 <input type="text" name="kuaisheng" ng-model="form.kuaisheng" validator="kuaisheng"/>
 ```
 
