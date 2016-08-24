@@ -161,6 +161,18 @@ angular.module('validation.directive', ['validation.provider']);
     this.showErrorMessage = true;
 
     /**
+     * Whether to allow for empty values to pass validation.
+     * When true, empty values will pass regex validations such as 'number' (vacuous truth).
+     * This will comply with the w3 specs for number validation.
+     * Otherwise, empty values will fail the regex validation (default).
+     * You can easily change this to true in your config
+     * example: $validationProvider.allowEmptyValues = true;
+     *
+     * @type {boolean}
+     */
+    this.allowEmptyValues = false;
+
+    /**
      * Check form valid, return true
      * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
      * @param form
@@ -308,6 +320,7 @@ angular.module('validation.directive', ['validation.provider']);
         getDefaultMsg: this.getDefaultMsg,
         showSuccessMessage: this.showSuccessMessage,
         showErrorMessage: this.showErrorMessage,
+        allowEmptyValues: this.allowEmptyValues,
         checkValid: this.checkValid,
         validate: this.validate,
         validCallback: this.validCallback,
@@ -505,6 +518,32 @@ angular.module('validation.directive', ['validation.provider']);
      */
     var focusElements = {};
 
+    /**
+     * Get Validation Result Object
+     * @param data
+     * @returns {
+     *    result: Boolean, // is success or error
+     *    message: String  // tips
+     * }
+     */
+    function getResultObj(data) {
+      var res = {};
+      if (data && data.length > 0) {
+        res = data[0];
+        if (!angular.isObject(res)) {
+          res = {
+            result: res,
+            message: ''
+          };
+        }
+      } else {
+        res = {
+          result: false,
+          message: ''
+        };
+      }
+      return res;
+    }
 
     /**
      * Check Validation with Function or RegExp
@@ -528,16 +567,16 @@ angular.module('validation.directive', ['validation.provider']);
       var expression = $validationProvider.getExpression(validator);
       var validationGroup = attrs.validationGroup;
       var valid = {
-        success: function() {
-          validFunc(element, attrs[successMessage], validator, scope, ctrl, attrs);
+        success: function(message) {
+          validFunc(element, message || attrs[successMessage], validator, scope, ctrl, attrs);
           if (leftValidation.length) {
             return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
           } else {
             return true;
           }
         },
-        error: function() {
-          return invalidFunc(element, attrs[errorMessage], validator, scope, ctrl, attrs);
+        error: function(message) {
+          return invalidFunc(element, message || attrs[errorMessage], validator, scope, ctrl, attrs);
         }
       };
 
@@ -550,12 +589,14 @@ angular.module('validation.directive', ['validation.provider']);
       if (expression.constructor === Function) {
         return $q.all([$validationProvider.getExpression(validator)(value, scope, element, attrs, validatorParam)])
           .then(function(data) {
-            if (data && data.length > 0 && data[0]) {
+            var resultObj = getResultObj(data);
+            var message = resultObj.message;
+            if (resultObj.result) {
               if (validationGroup) {
                 groups[validationGroup][ctrl.$name] = true;
                 setValidationGroup(scope, validationGroup, true);
               }
-              return valid.success();
+              return valid.success(message);
             } else if (validationGroup) {
               groups[validationGroup][ctrl.$name] = false;
 
@@ -565,9 +606,9 @@ angular.module('validation.directive', ['validation.provider']);
                 setValidationGroup(scope, validationGroup, true);
               } else {
                 setValidationGroup(scope, validationGroup, false);
-                return valid.error();
+                return valid.error(message);
               }
-            } else return valid.error();
+            } else return valid.error(message);
           }, function() {
             return valid.error();
           });
@@ -575,8 +616,8 @@ angular.module('validation.directive', ['validation.provider']);
 
       // Check with RegExp
       else if (expression.constructor === RegExp) {
-        // Only apply the test if the value is neither undefined or null
-        if (value !== undefined && value !== null) {
+        // Only apply the test if the value is defined
+        if (value) {
           if ($validationProvider.getExpression(validator).test(value)) {
             if (validationGroup) {
               groups[validationGroup][ctrl.$name] = true;
@@ -595,7 +636,8 @@ angular.module('validation.directive', ['validation.provider']);
               return valid.error();
             }
           } else return valid.error();
-        }
+          // if the value is empty or undefined, regex pass as vacuous truth
+        } else return $validationProvider.allowEmptyValues ? valid.success() : valid.error();
       } else return valid.error();
     };
 
@@ -647,7 +689,7 @@ angular.module('validation.directive', ['validation.provider']);
         var uid = ctrl.validationId = guid();
 
         /**
-         * to have avalue to rollback to
+         * to have a value to rollback to
          */
         var originalViewValue = null;
 
