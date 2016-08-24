@@ -136,22 +136,22 @@
      * }
      */
     function getResultObj(data) {
-        var result = null;
-        if (data && data.length > 0) {
-            result = data[0];
-            if (!angular.isObject(result)) {
-                return {
-                    result: result,
-                    message: ''
-                };
-            }
-        } else {
-            result = {
-                result: false,
-                message: ''
-            }
+      var res = null;
+      if (data && data.length > 0) {
+        res = data[0];
+        if (!angular.isObject(res)) {
+          res = {
+            result: res,
+            message: ''
+          };
         }
-        return result;
+      } else {
+        res = {
+          result: false,
+          message: ''
+        };
+      }
+      return res;
     }
 
     /**

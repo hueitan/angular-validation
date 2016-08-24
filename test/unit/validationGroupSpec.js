@@ -337,4 +337,74 @@ describe('validation-group directive', function() {
       expect(errorSpy).toHaveBeenCalled();
     });
   });
+
+  describe('validation-group attribute validated by using the provider with expression dynamic return messages using functions. ', function() {
+    var successSpy;
+    var errorSpy;
+    beforeEach(inject(function($injector) {
+      $rootScope = $injector.get('$rootScope');
+      $compile = $injector.get('$compile');
+      validationProvider = $injector.get('$validation');
+      var expression = {
+        kuaisheng: function(value, scope, element, attrs, param) {
+          var errorStr = [
+            'errorStr1',
+            'errorStr2'
+          ];
+          var len = errorStr.length;
+          for (var i = len - 1; i >= 0; i--) {
+            if (value.indexOf(errorStr[i]) > -1) {
+              return {
+                result: false,
+                message: 'input should not include ' + errorStr[i]
+              };
+            }
+          }
+
+          return {
+            result: true,
+            message: ''
+          };
+        }
+      };
+      var defaultMsg = {
+        kuaisheng: {
+          error: 'valid is error'
+        }
+      };
+      validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
+
+      $timeout = $injector.get('$timeout');
+      $scope = $rootScope.$new();
+
+      element = $compile('<form name="Form"><input type="text" name="kuaisheng" ng-model="kuaisheng" validator="kuaisheng"></form>')($scope);
+      angular.element(document.body).append(element);
+      $scope.$digest();
+    }));
+
+    afterEach(function() {
+      element.remove();
+      element = null;
+    });
+
+    it('should validate a form and error message be dynamic', function() {
+      successSpy = jasmine.createSpy('successSpy');
+      errorSpy = jasmine.createSpy('errorSpy');
+
+      $scope.Form.kuaisheng.$setViewValue('asberrorStr1dd');
+
+
+      validationProvider.validate($scope.Form)
+        .success(function() {
+          successSpy();
+        })
+        .error(function() {
+          errorSpy();
+        });
+      $timeout.flush();
+      var messageElem = angular.element(element[0].querySelector('p'));
+      expect(messageElem.html()).toEqual('input should not include errorStr1');
+
+    });
+  });
 });
