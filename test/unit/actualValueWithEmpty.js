@@ -30,7 +30,7 @@ describe('provider with empty values allowed', function() {
     $scope = $rootScope.$new();
     $timeout = $injector.get('$timeout');
 
-    element = $compile('<form name="Form"><input type="number" name="numberWatch" ng-model="number" validator="number,maxlength=4" email-error-message="Error Number" email-success-message="Good Number"/></form>')($scope);
+    element = $compile('<form name="Form"><input type="number" name="numberWatch" ng-model="number" validator="number" email-error-message="Error Number" email-success-message="Good Number"/></form>')($scope);
     angular.element(document.body).append(element);
     $scope.$digest();
   }));
