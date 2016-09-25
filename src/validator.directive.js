@@ -225,8 +225,8 @@
 
       // Check with RegExp
       else if (expression.constructor === RegExp) {
-        // Only apply the test if the value is neither undefined or null
-        if (value !== undefined && value !== null) {
+        // Only apply the test if the value is neither undefined, null or empty
+        if (value !== undefined && value !== null && value !== '') {
           if ($validationProvider.getExpression(validator).test(value)) {
             if (validationGroup) {
               groups[validationGroup][ctrl.$name] = true;
