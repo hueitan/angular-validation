@@ -245,7 +245,7 @@
               return valid.error();
             }
           } else return valid.error();
-        }
+        } else return valid.success(); // if the value is empty, regex pass as vacuous truth
       } else return valid.error();
     };
 
