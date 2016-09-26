@@ -154,8 +154,8 @@ describe('validation-group directive', function() {
     it('should be dirty and invalid', function() {
       $scope.Form.email.$setViewValue('foo@bar.com');
       $scope.Form.telephone.$setViewValue('065839481');
-      $scope.Form.email.$setViewValue('');
-      $scope.Form.telephone.$setViewValue('');
+      $scope.Form.email.$setViewValue('aa');
+      $scope.Form.telephone.$setViewValue('aa');
 
       expect($scope.Form.$dirty).toBe(true);
       expect(element.hasClass('ng-dirty')).toBe(true);
@@ -169,11 +169,11 @@ describe('validation-group directive', function() {
       expect(element.hasClass('ng-valid')).toBe(true);
 
       $scope.Form.telephone.$setViewValue('065839481');
-      $scope.Form.email.$setViewValue('');
+      $scope.Form.email.$setViewValue('a');
       expect($scope.Form.$valid).toBe(true);
       expect(element.hasClass('ng-valid')).toBe(true);
 
-      $scope.Form.telephone.$setViewValue('');
+      $scope.Form.telephone.$setViewValue('aa');
       expect($scope.Form.$valid).toBe(false);
       expect(element.hasClass('ng-invalid')).toBe(true);
     });
@@ -188,7 +188,7 @@ describe('validation-group directive', function() {
 
     it('should have an error message inside the #contact element when no element is valid', function() {
       $scope.Form.email.$setViewValue('foo@bar.com');
-      $scope.Form.email.$setViewValue('');
+      $scope.Form.email.$setViewValue('a');
 
       messageElem = angular.element(element[0].querySelector('#contact > p'));
       expect(messageElem.hasClass('validation-invalid')).toBe(true);
@@ -205,7 +205,7 @@ describe('validation-group directive', function() {
     it('should have a success message inside the #contact element when one of element is valid', function() {
       $scope.Form.email.$setViewValue('foo@bar.com');
       $scope.Form.telephone.$setViewValue('065839481');
-      $scope.Form.email.$setViewValue('');
+      $scope.Form.email.$setViewValue('a');
 
       messageElem = angular.element(element[0].querySelector('#contact > p'));
       expect(messageElem.hasClass('validation-valid')).toBe(true);
@@ -214,8 +214,8 @@ describe('validation-group directive', function() {
     it('should have an error message inside the #contact element when both of elements are invalid', function() {
       $scope.Form.email.$setViewValue('foo@bar.com');
       $scope.Form.telephone.$setViewValue('065839481');
-      $scope.Form.email.$setViewValue('');
-      $scope.Form.telephone.$setViewValue('');
+      $scope.Form.email.$setViewValue('a');
+      $scope.Form.telephone.$setViewValue('a');
 
       messageElem = angular.element(element[0].querySelector('#contact > p'));
       expect(messageElem.hasClass('validation-invalid')).toBe(true);

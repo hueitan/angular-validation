@@ -2,7 +2,7 @@
 
 /* jasmine specs for provider go here */
 
-describe('provider', function() {
+describe('provider with empty values disallowed', function() {
   var $rootScope;
   var $compile;
   var $scope;
@@ -106,6 +106,52 @@ describe('provider', function() {
     });
 
     expect(submitSpy).not.toHaveBeenCalled();
+    expect(successSpy).not.toHaveBeenCalled();
+    expect(errorSpy).toHaveBeenCalled();
+  }));
+
+  it('set value to undefined', inject(function() {
+    var submitSpy = jasmine.createSpy('submitSpy');
+    var successSpy = jasmine.createSpy('successSpy');
+    var errorSpy = jasmine.createSpy('errorSpy');
+
+    $scope.$apply(function() {
+      $scope.number = undefined;
+    });
+
+    // expect fail as a empty values are disallowed
+    validationProvider.validate($scope.Form)
+      .success(function() {
+        successSpy();
+      })
+      .error(function() {
+        errorSpy();
+      });
+
+    $timeout.flush();
+    expect(successSpy).not.toHaveBeenCalled();
+    expect(errorSpy).toHaveBeenCalled();
+  }));
+
+  it('set value to empty', inject(function() {
+    var submitSpy = jasmine.createSpy('submitSpy');
+    var successSpy = jasmine.createSpy('successSpy');
+    var errorSpy = jasmine.createSpy('errorSpy');
+
+    $scope.$apply(function() {
+      $scope.number = '';
+    });
+
+    // expect fail as a empty values are disallowed
+    validationProvider.validate($scope.Form)
+      .success(function() {
+        successSpy();
+      })
+      .error(function() {
+        errorSpy();
+      });
+
+    $timeout.flush();
     expect(successSpy).not.toHaveBeenCalled();
     expect(errorSpy).toHaveBeenCalled();
   }));

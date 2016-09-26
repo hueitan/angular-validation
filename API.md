@@ -306,6 +306,17 @@ Easily disable success/error message
 }]);
 ```
 
+### **Allow empty values to pass regex validation**<br/>
+`default: false`<br/>
+To allow empty values to pass regex validation (such as: number) set allowEmptyValues to true.
+This way (unlike the default behaviour), an empty input would pass a "number" validation. (same as HTML5 number input)
+
+```javascript
+.config(['$validationProvider', function ($validationProvider) {
+    $validationProvider.allowEmptyValues = true; // or false(default)
+}]);
+```
+
 ### **Multiple validators**<br/>
 Use commas to separate multiple validators.
 
