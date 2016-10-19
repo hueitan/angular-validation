@@ -21,7 +21,8 @@
      * @returns {}
      */
     var validFunc = function(element, validMessage, validation, scope, ctrl, attrs) {
-      var messageToShow = validMessage || $validationProvider.getDefaultMsg(validation).success;
+       var successMessage = validation + 'SuccessMessage';
+            var messageToShow = (attrs[successMessage] !== null && attrs[successMessage] !== undefined) ? (validMessage || $validationProvider.getDefaultMsg(validation).success) : "";
       var validCallback = $parse(attrs.validCallback);
       var messageId = attrs.messageId;
       var validationGroup = attrs.validationGroup;
