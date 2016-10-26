@@ -60,7 +60,7 @@ As per plnkr - https://plnkr.co/edit/nwTEuxuTMmpEc4hrFwGp?p=preview
 Add checkValid and submit into both ng-click and ng-submit
 
 ```
-<form name="formName" ng-submit="form.checkValid(formName) && form.submit(formName)" role="form">
+<form name="formName" ng-submit="form.submit(formName)" role="form">
 ...
 <button type="button" validation-submit="formName" ng-click="form.checkValid(formName) && form.submit(formName)">Submit</button>
 </form>
