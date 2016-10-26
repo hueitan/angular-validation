@@ -52,3 +52,20 @@ Using `validCallback` and `invalidCallback` to implement
 ###Can this works correctly with AngularUI, ui-select, others ... ?###
 
 Yes, `angular-validation` works perfectly with other directive. (isolation scope). Find out more from the demo page.
+
+###Working with `ng-submit` and submitting with enter, not click [#247](https://github.com/huei90/angular-validation/issues/247)###
+
+As per plnkr - https://plnkr.co/edit/nwTEuxuTMmpEc4hrFwGp?p=preview
+
+Add checkValid and submit into both ng-click and ng-submit
+
+```
+<form name="formName" ng-submit="form.checkValid(formName) && form.submit(formName)" role="form">
+...
+<button type="button" validation-submit="formName" ng-click="form.checkValid(formName) && form.submit(formName)">Submit</button>
+</form>
+```
+
+
+
+
