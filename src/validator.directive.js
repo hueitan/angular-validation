@@ -304,9 +304,9 @@
         /**
          * Set initial validity to undefined if no boolean value is transmitted
          */
-        var initialValidity;
-        if (typeof scope.initialValidity === 'boolean') {
-          initialValidity = scope.initialValidity;
+        var initialValidity = void 0;
+        if (typeof attrs.initialValidity === 'boolean') {
+          initialValidity = attrs.initialValidity;
         }
 
         /**
