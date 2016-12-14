@@ -161,6 +161,18 @@ angular.module('validation.directive', ['validation.provider']);
     this.showErrorMessage = true;
 
     /**
+     * Whether to allow for empty values to pass validation.
+     * When true, empty values will pass regex validations such as 'number' (vacuous truth).
+     * This will comply with the w3 specs for number validation.
+     * Otherwise, empty values will fail the regex validation (default).
+     * You can easily change this to true in your config
+     * example: $validationProvider.allowEmptyValues = true;
+     *
+     * @type {boolean}
+     */
+    this.allowEmptyValues = false;
+
+    /**
      * Check form valid, return true
      * checkValid(Form): Check the specific form(Form) valid from angular `$valid`
      * @param form
@@ -308,6 +320,7 @@ angular.module('validation.directive', ['validation.provider']);
         getDefaultMsg: this.getDefaultMsg,
         showSuccessMessage: this.showSuccessMessage,
         showErrorMessage: this.showErrorMessage,
+        allowEmptyValues: this.allowEmptyValues,
         checkValid: this.checkValid,
         validate: this.validate,
         validCallback: this.validCallback,
@@ -603,8 +616,8 @@ angular.module('validation.directive', ['validation.provider']);
 
       // Check with RegExp
       else if (expression.constructor === RegExp) {
-        // Only apply the test if the value is neither undefined or null
-        if (value !== undefined && value !== null) {
+        // Only apply the test if the value is defined
+        if (value) {
           if ($validationProvider.getExpression(validator).test(value)) {
             if (validationGroup) {
               groups[validationGroup][ctrl.$name] = true;
@@ -623,7 +636,8 @@ angular.module('validation.directive', ['validation.provider']);
               return valid.error();
             }
           } else return valid.error();
-        }
+          // if the value is empty or undefined, regex pass as vacuous truth
+        } else return $validationProvider.allowEmptyValues ? valid.success() : valid.error();
       } else return valid.error();
     };
 
