@@ -109,4 +109,32 @@ describe('provider', function() {
     expect(successSpy).not.toHaveBeenCalled();
     expect(errorSpy).toHaveBeenCalled();
   }));
+
+  it('set value to undefined', inject(function() {
+    var submitSpy = jasmine.createSpy('submitSpy');
+    var successSpy = jasmine.createSpy('successSpy');
+    var errorSpy = jasmine.createSpy('errorSpy');
+
+    $scope.$apply(function() {
+      $scope.number = undefined;
+    });
+
+    $scope.$on('numberWatchsubmit-' + $scope.Form.numberWatch.validationId, function() {
+      submitSpy();
+    });
+
+    // expect success as a vacous truth (value is empty and should therefore pass both number and maxlength tests)
+    validationProvider.validate($scope.Form)
+      .success(function() {
+        successSpy();
+      })
+      .error(function() {
+        errorSpy();
+      });
+
+    $timeout.flush();
+    expect(submitSpy).toHaveBeenCalled();
+    expect(successSpy).toHaveBeenCalled();
+    expect(errorSpy).not.toHaveBeenCalled();
+  }));
 });

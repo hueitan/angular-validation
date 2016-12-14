@@ -623,7 +623,7 @@ angular.module('validation.directive', ['validation.provider']);
               return valid.error();
             }
           } else return valid.error();
-        }
+        } else return valid.success();
       } else return valid.error();
     };
 
