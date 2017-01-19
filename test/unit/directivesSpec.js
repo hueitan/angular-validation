@@ -171,4 +171,46 @@ describe('directives', function() {
       expect(messageElem.hasClass('validation-invalid')).toBe(true);
     });
   });
+
+  describe('Observing validator changes', function() {
+    beforeEach(inject(function($injector) {
+      $rootScope = $injector.get('$rootScope');
+      $compile = $injector.get('$compile');
+      $scope = $rootScope.$new();
+
+      $scope.validator = 'required';
+
+      element = $compile('<form name="Form"><input type="text" name="inputField" ng-model="inputField" validator="{{validator}}"></form>')($scope);
+      $scope.$digest();
+    }));
+
+    it('Initial should be pristine and invalid', function() {
+      expect($scope.Form.$pristine).toBe(true);
+      expect(element.hasClass('ng-pristine')).toBe(true);
+      expect($scope.Form.$valid).toBeUndefined(true);
+      expect($scope.Form.$invalid).toBeUndefined(true);
+    });
+
+    it('After input should be dirty and valid', function() {
+      $scope.Form.inputField.$setViewValue('Some text');
+
+      expect($scope.Form.$dirty).toBe(true);
+      expect(element.hasClass('ng-dirty')).toBe(true);
+      expect($scope.Form.$valid).toBe(true);
+      expect(element.hasClass('ng-valid')).toBe(true);
+    });
+
+    it('When validator changes should be invalid', function() {
+      $scope.$apply(function() {
+        $scope.validator = 'required, number';
+      });
+
+      $scope.Form.inputField.$setViewValue('Some text');
+
+      expect($scope.Form.$valid).toBe(false);
+      expect(element.hasClass('ng-valid')).toBe(false);
+      expect($scope.Form.$invalid).toBe(true);
+      expect(element.hasClass('ng-invalid')).toBe(true);
+    });
+  });
 });
