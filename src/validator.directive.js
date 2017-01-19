@@ -310,6 +310,13 @@
         }
 
         /**
+         * Observe validator changes in order to allow dynamically change it
+         */
+        attrs.$observe('validator', function(value) {
+          validation = value.split(',');
+        });
+
+        /**
          * Set up groups object in order to keep track validation of elements
          */
         if (validationGroup) {

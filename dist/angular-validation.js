@@ -682,10 +682,17 @@ angular.module('validation.directive', ['validation.provider']);
         /**
          * Set initial validity to undefined if no boolean value is transmitted
          */
-        var initialValidity;
-        if (typeof scope.initialValidity === 'boolean') {
-          initialValidity = scope.initialValidity;
+        var initialValidity = void 0;
+        if (typeof attrs.initialValidity === 'boolean') {
+          initialValidity = attrs.initialValidity;
         }
+
+        /**
+         * Observe validator changes in order to allow dynamically change it
+         */
+        attrs.$observe('validator', function(value) {
+          validation = value.split(',');
+        });
 
         /**
          * Set up groups object in order to keep track validation of elements
