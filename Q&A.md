@@ -66,6 +66,21 @@ Add checkValid and submit into both ng-click and ng-submit
 </form>
 ```
 
+###Can I validate $modelValue instead of a $viewValue?###
 
+Yes, adding `use-view-value="false"` attribute forces to use $modelValue instead of a $viewValue for evaluation when form is submitted. By default $viewValue is used. This need raises from a need of localized number inputs, which have to be stored in a $viewValue as a string (e.g. "2 000,0"), however in a $modelValue they are stored as a properly formatted number (2000). This can be done e.g. by using a custom directive with properly specified $formatters and $parsers.
 
+```html
+<div class="checkbox">
+    <label for="my-localized-input">
+            <input id="my-localized-input"
+                    type="text"
+                    name="myLocalizedInput"
+                    ng-model="model.num"
+                    my-localization-directive
+                    validator="required"
+                    use-view-value="false"/>
+    </label>
+</div>
+```
 
