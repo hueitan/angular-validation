@@ -645,6 +645,7 @@ angular.module('validation.directive', ['validation.provider']);
         /**
          * All attributes
          */
+        var useViewValue = attrs.useViewValue !== 'false';
         var validator = attrs.validator;
         var messageId = attrs.messageId;
         var validationGroup = attrs.validationGroup;
@@ -746,7 +747,7 @@ angular.module('validation.directive', ['validation.provider']);
          * Click submit form, check the validity when submit
          */
         scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
-          var value = ctrl.$viewValue;
+          var value = useViewValue ? ctrl.$viewValue : ctrl.$modelValue;
           var isValid = false;
 
           isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
