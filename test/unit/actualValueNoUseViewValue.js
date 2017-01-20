@@ -2,7 +2,7 @@
 
 /* jasmine specs for provider go here */
 
-describe('provider', function() {
+describe('provider without use-view-value', function() {
   var $rootScope;
   var $compile;
   var $scope;
