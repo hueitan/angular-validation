@@ -8,8 +8,8 @@
 **Improvement**
 
 [#231](https://github.com/huei90/angular-validation/pull/231) improve valid result, you can set success or error message when valid
-[#266](https://github.com/huei90/angular-validation/pull/266) Observe validator changes
-[#271](https://github.com/huei90/angular-validation/pull/271) Using model value
+<br/>[#266](https://github.com/huei90/angular-validation/pull/266) Observe validator changes
+<br/>[#271](https://github.com/huei90/angular-validation/pull/271) Using model value
 
 22 Jul 2016 v1.4.2
 ===
@@ -17,7 +17,7 @@
 **Fix**
 
 [#206](https://github.com/huei90/angular-validation/pull/206) Fixed calls for validCallback/invalidCallback
-[#215](https://github.com/huei90/angular-validation/pull/215) Fix validation-group not working properly
+<br/>[#215](https://github.com/huei90/angular-validation/pull/215) Fix validation-group not working properly
 
 **Improvement**
 
