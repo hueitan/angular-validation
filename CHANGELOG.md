@@ -1,3 +1,16 @@
+24 Jan 2017 v1.4.3
+===
+
+**Fix**
+
+[#257](https://github.com/huei90/angular-validation/commit/0640de71ab045037b0fba86fd0a278e748d67786) Fix for initialValidity set up
+
+**Improvement**
+
+[#231](https://github.com/huei90/angular-validation/pull/231) improve valid result, you can set success or error message when valid
+[#266](https://github.com/huei90/angular-validation/pull/266) Observe validator changes
+[#271](https://github.com/huei90/angular-validation/pull/271) Using model value
+
 22 Jul 2016 v1.4.2
 ===
 
