@@ -146,4 +146,5 @@ See [release](https://github.com/huei90/angular-validation/releases)
 
 CONTRIBUTORS
 =====
+Thank you for your contribution [@lvarayut](https://github.com/lvarayut) and [@Nazanin1369](https://github.com/Nazanin1369) :heart: <br/>
 Thanks for all [contributors](https://github.com/huei90/angular-validation/graphs/contributors)
