@@ -796,9 +796,14 @@ angular.module('validation.directive', ['validation.provider']);
         if (validMethod === 'blur') {
           element.bind('blur', function() {
             var value = scope.$eval(ngModel);
-            scope.$apply(function() {
+
+            if (scope.$root.$$phase !== '$apply') {
+              scope.$apply(function() {
+                checkValidation(scope, element, attrs, ctrl, validation, value);
+              });
+            } else {
               checkValidation(scope, element, attrs, ctrl, validation, value);
-            });
+            }
           });
 
           return;
