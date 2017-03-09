@@ -37,6 +37,29 @@ API
 <input type="text" name="number" ng-model="form.number" validator="number"/>
 ```
 
+### **Use Custom Default Valid/Invalid Message** <br/>
+You can customize the default valid/invalid message that will be automatically placed next to your input element.
+
+```html
+<script>
+    $validationProvider.setDefaultMsg({
+        minlength: {
+            error: function (element, attrs, param) {
+                return 'A minimum of ' + param + ' characters is required.';
+            }
+        }
+        , maxlength: {
+            error: function (element, attrs, param) {
+                return 'A maximum of ' + param + ' characters is required.';
+            }
+        }
+    });
+</script>
+
+<label>Username</label>
+<input type="text" name="username" ng-model="form.username" validator="minlength=5"/>
+```
+
 ### **Use a custom Valid Message** <br/>
 You can also add a custom validation message by using `message-id` attribute. It allows you to place a valid/invalid message wherever you want, a target element must specify an `id` attribute that matches with a value of the `message-id`.
 
