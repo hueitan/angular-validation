@@ -65,6 +65,71 @@ describe('provider', function() {
     }
   }));
 
+  it('set/get DefaultMsg (function)', inject(function() {
+    var defaultMessages = {
+      field: {
+        error: function(element, attrs, param) {
+          return 'error';
+        },
+        success: function(element, attrs, param) {
+          return 'success';
+        }
+      }
+    };
+
+    validationProvider.setDefaultMsg(defaultMessages);
+
+    expect(validationProvider.getDefaultMsg('field')).toEqual(defaultMessages.field);
+    for (var key in validationProvider.getDefaultMsg('field')) {
+      expect(key).toMatch(/^error$|^success$/);
+      expect(validationProvider.getDefaultMsg('field')[key]).toEqual(defaultMessages.field[key]);
+    }
+  }));
+
+  it('defaultMessage (function) error displays expected message', inject(function() {
+    var messageSpy = jasmine.createSpy('messageSpy');
+
+    validationProvider.setDefaultMsg({
+      minlength: {
+        error: function(element, attrs, param) {
+          messageSpy();
+          return element.attr('name') + ' ' + attrs.class + ' ' + param;
+        }
+      }
+    });
+
+    var messageElement = $compile('<form name="Form"><input type="text" name="messagefield" class="messagefieldclass" ng-model="messagefield" validator="minlength=5"></form>')($scope);
+    $scope.Form.messagefield.$setViewValue('xxx');
+    validationProvider.validate($scope.Form);
+
+    var messageSpan = messageElement.find('span');
+    expect(messageSpan.css('display')).toBe('');
+    expect(messageSpan.find('p').text()).toBe('messagefield messagefieldclass 5');
+    expect(messageSpy).toHaveBeenCalled();
+  }));
+
+  it('defaultMessage (function) success displays expected message', inject(function() {
+    var messageSpy = jasmine.createSpy('messageSpy');
+
+    validationProvider.setDefaultMsg({
+      minlength: {
+        success: function(element, attrs, param) {
+          messageSpy();
+          return element.attr('name') + ' ' + attrs.class + ' ' + param;
+        }
+      }
+    });
+
+    var messageElement = $compile('<form name="Form"><input type="text" name="messagefield" class="messagefieldclass" ng-model="messagefield" validator="minlength=5"></form>')($scope);
+    $scope.Form.messagefield.$setViewValue('xxxxxx');
+    validationProvider.validate($scope.Form);
+
+    var messageSpan = messageElement.find('span');
+    expect(messageSpan.css('display')).toBe('');
+    expect(messageSpan.find('p').text()).toBe('messagefield messagefieldclass 5');
+    expect(messageSpy).toHaveBeenCalled();
+  }));
+
   it('set/get successHTML', inject(function() {
     validationProvider.setSuccessHTML('sethtml');
     expect(validationProvider.getSuccessHTML('true')).not.toEqual('sethtml');
