@@ -1,33 +1,33 @@
-angular-validation 1.4.1
+angular-validation 1.4.3
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
-[![Build Status](https://travis-ci.org/huei90/angular-validation.png?branch=master)](https://travis-ci.org/huei90/angular-validation)
-[![Code Climate](https://codeclimate.com/github/huei90/angular-validation/badges/gpa.svg)](https://codeclimate.com/github/huei90/angular-validation)
-[![Coverage Status](https://coveralls.io/repos/huei90/angular-validation/badge.svg?branch=master&service=github)](https://coveralls.io/github/huei90/angular-validation?branch=master)
-[![devDependency Status](https://david-dm.org/huei90/angular-validation/dev-status.png)](https://david-dm.org/huei90/angular-validation#info=devDependencies)
-[![Gitter chat](https://badges.gitter.im/huei90/angular-validation.png)](https://gitter.im/huei90/angular-validation)
+[![Build Status](https://travis-ci.org/hueitan/angular-validation.png?branch=master)](https://travis-ci.org/hueitan/angular-validation)
+[![Code Climate](https://codeclimate.com/github/hueitan/angular-validation/badges/gpa.svg)](https://codeclimate.com/github/hueitan/angular-validation)
+[![Coverage Status](https://coveralls.io/repos/hueitan/angular-validation/badge.svg?branch=master&service=github)](https://coveralls.io/github/hueitan/angular-validation?branch=master)
+[![devDependency Status](https://david-dm.org/hueitan/angular-validation/dev-status.png)](https://david-dm.org/hueitan/angular-validation#info=devDependencies)
+[![Gitter chat](https://badges.gitter.im/hueitan/angular-validation.png)](https://gitter.im/hueitan/angular-validation)
 
 Client-side Validation should be simple and clean.
 <br/>Don't let Client-side Validation dirty your controller.
 
-Setup your Validation on config phase by using some rules [(example)](https://github.com/huei90/angular-validation/blob/master/dist/angular-validation-rule.js)
+Setup your Validation on config phase by using some rules [(example)](https://github.com/hueitan/angular-validation/blob/master/dist/angular-validation-rule.js)
 <br/>If you prefer schema over html attributes , try [angular-validation-schema
 ](https://github.com/thetutlage/angular-validation-schema) [(Demo)](http://plnkr.co/edit/X56HEsDYgYoY8gbSj7cu?p=preview)
 <br/>And add Validation in your view only.
 
-angularjs 1.2.x support to version [angular-validation 1.2.x](https://github.com/huei90/angular-validation/tree/v1.2.x) <br/>
-angularjs 1.3.x support after version [angular-validation 1.3.x](https://github.com/huei90/angular-validation/tree/v1.3.x) <br/>
+angularjs 1.2.x support to version [angular-validation 1.2.x](https://github.com/hueitan/angular-validation/tree/v1.2.x) <br/>
+angularjs 1.3.x support after version [angular-validation 1.3.x](https://github.com/hueitan/angular-validation/tree/v1.3.x) <br/>
 angularjs 1.4.x support after version angular-validation 1.4.x
 
 Requirement
 -----
-[AngularJS](http://angularjs.org) 1.2.x (for [angular-validation 1.2.x](https://github.com/huei90/angular-validation/tree/v1.2.x)) <br/>
-[AngularJS](http://angularjs.org) 1.3.x (for [angular-validation 1.3.x](https://github.com/huei90/angular-validation/tree/v1.3.x)) <br/>
-[AngularJS](http://angularjs.org) 1.4.x (for [angular-validation 1.4.x](https://github.com/huei90/angular-validation/tree/master))
+[AngularJS](http://angularjs.org) 1.2.x (for [angular-validation 1.2.x](https://github.com/hueitan/angular-validation/tree/v1.2.x)) <br/>
+[AngularJS](http://angularjs.org) 1.3.x (for [angular-validation 1.3.x](https://github.com/hueitan/angular-validation/tree/v1.3.x)) <br/>
+[AngularJS](http://angularjs.org) 1.4.x (for [angular-validation 1.4.x](https://github.com/hueitan/angular-validation/tree/master))
 
 DEMO
 -----
-http://huei90.github.io/angular-validation/
+http://hueitan.github.io/angular-validation/
 
 http://plnkr.co/edit/rjIIkX (Bootstrap framework)
 
@@ -77,7 +77,7 @@ Writing your First Code
 </form>
 ```
 
-[Documentation API](https://github.com/huei90/angular-validation/blob/master/API.md)
+[Documentation API](https://github.com/hueitan/angular-validation/blob/master/API.md)
 
 Built-in validation <small>in angular-validation-rule</small>
 ===
@@ -142,8 +142,9 @@ MIT
 
 CHANGELOG
 =====
-See [release](https://github.com/huei90/angular-validation/releases)
+See [release](https://github.com/hueitan/angular-validation/releases)
 
 CONTRIBUTORS
 =====
-Thanks for all [contributors](https://github.com/huei90/angular-validation/graphs/contributors)
+Thank you for your contribution [@lvarayut](https://github.com/lvarayut) and [@Nazanin1369](https://github.com/Nazanin1369) :heart: <br/>
+Thanks for all [contributors](https://github.com/hueitan/angular-validation/graphs/contributors)

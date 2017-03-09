@@ -2,7 +2,7 @@
   "quotmark": "single",
   "node": true,
   "globals": {
-    "angular": false,
+    "angular": true,
     "document": false,
     "jasmine": false,
     "module": false,

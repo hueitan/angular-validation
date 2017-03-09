@@ -1,4 +1,33 @@
-27 Jan 2016 v1.4.1 
+24 Jan 2017 v1.4.3
+===
+
+**Fix**
+
+[#257](https://github.com/huei90/angular-validation/commit/0640de71ab045037b0fba86fd0a278e748d67786) Fix for initialValidity set up
+
+**Improvement**
+
+[#231](https://github.com/huei90/angular-validation/pull/231) improve valid result, you can set success or error message when valid
+<br/>[#266](https://github.com/huei90/angular-validation/pull/266) Observe validator changes
+<br/>[#271](https://github.com/huei90/angular-validation/pull/271) Using model value
+
+22 Jul 2016 v1.4.2
+===
+
+**Fix**
+
+[#206](https://github.com/huei90/angular-validation/pull/206) Fixed calls for validCallback/invalidCallback
+<br/>[#215](https://github.com/huei90/angular-validation/pull/215) Fix validation-group not working properly
+
+**Improvement**
+
+[#223](https://github.com/huei90/angular-validation/pull/223) Track originalViewValue
+
+**Documentation**
+
+[#204](https://github.com/huei90/angular-validation/pull/204) Webpack integration + design improvements
+
+27 Jan 2016 v1.4.1
 ===
 
 **Improvement**

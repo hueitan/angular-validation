@@ -13,7 +13,9 @@ describe('callback', function() {
 
   // spy
   var validSpy = null;
+  var validAttrSpy = null;
   var invalidSpy = null;
+  var invalidAttrSpy = null;
   var resetSpy = null;
 
   beforeEach(function() {
@@ -22,7 +24,9 @@ describe('callback', function() {
         validationProvider = $validationProvider;
 
         validSpy = jasmine.createSpy('validSpy');
+        validAttrSpy = jasmine.createSpy('validAttrSpy');
         invalidSpy = jasmine.createSpy('invalidSpy');
+        invalidAttrSpy = jasmine.createSpy('invalidAttrSpy');
         resetSpy = jasmine.createSpy('resetSpy');
 
         validationProvider.validCallback = function() {
@@ -47,7 +51,14 @@ describe('callback', function() {
     $scope = $rootScope.$new();
     $timeout = $injector.get('$timeout');
 
-    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" valid-method="submit"></form>')($scope);
+    $scope.validCallback = function() {
+      validAttrSpy();
+    };
+    $scope.invalidCallback = function() {
+      invalidAttrSpy();
+    };
+
+    element = $compile('<form name="Form"><input type="text" name="required" ng-model="required" validator="required" valid-method="submit" valid-callback="validCallback()" invalid-callback="invalidCallback()"></form>')($scope);
     angular.element(document.body).append(element);
     $scope.$digest();
   }));
@@ -63,7 +74,9 @@ describe('callback', function() {
     $timeout.flush();
 
     expect(validSpy).toHaveBeenCalled();
+    expect(validAttrSpy).toHaveBeenCalled();
     expect(invalidSpy).not.toHaveBeenCalled();
+    expect(invalidAttrSpy).not.toHaveBeenCalled();
     expect(resetSpy).not.toHaveBeenCalled();
   }));
 
@@ -78,7 +91,9 @@ describe('callback', function() {
     $timeout.flush();
 
     expect(validSpy).not.toHaveBeenCalled();
+    expect(validAttrSpy).not.toHaveBeenCalled();
     expect(invalidSpy).toHaveBeenCalled();
+    expect(invalidAttrSpy).toHaveBeenCalled();
     expect(resetSpy).not.toHaveBeenCalled();
   }));
 

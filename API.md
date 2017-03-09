@@ -148,6 +148,9 @@ You can also add a `validation-group` directive to group many elements into a gr
 
 <label>Huei (Custom setup the new validator - Function)</label>
 <input type="text" name="huei" ng-model="form.huei" validator="huei"/>
+
+<label>Kuaisheng (Custom setup the new validator - Function)</label>
+<input type="text" name="kuaisheng" ng-model="form.kuaisheng" validator="kuaisheng"/>
 ```
 
 ```javascript
@@ -187,6 +190,37 @@ angular.module('yourApp', ['validation'])
                     success: 'Thanks!'
                 }
             });
+
+        // Setup `kuaisheng` validation
+        $validationProvider
+            .setExpression({
+                kuaisheng: function(value, scope, element, attrs, param) {
+                  var errorStr = [
+                    'errorStr1',
+                    'errorStr2'
+                  ];
+                  var len = errorStr.length;
+                  for (var i = len - 1; i >= 0; i--) {
+                    if (value.indexOf(errorStr[i]) > -1) {
+                      return {
+                        result: false,
+                        message: 'input should not include ' + errorStr[i]
+                      };
+                    }
+                  }
+                  return {
+                    result: true,
+                    message: ''
+                  };
+                }
+            })
+            .setDefaultMsg({
+                kuaisheng: {
+                  error: 'valid is error',
+                  success: 'Thanks!'
+                }
+            });
+
     }]);
 ```
 
@@ -197,9 +231,9 @@ angular.module('yourApp', ['validation'])
 <form name="Form">
     ...
     <!-- Check the entire form valid from angular-validation `valid` -->
-    <button ng-disabled="form.checkValid()"></button>
+    <button ng-disabled="!form.checkValid()"></button>
     <!-- or Check the specific form(Form) valid from angular `$valid` -->
-    <button ng-disabled="form.checkValid(Form)"></button>
+    <button ng-disabled="!form.checkValid(Form)"></button>
     <!-- Reset the specific Form -->
     <button ng-click="form.reset(Form)"></button>
     <!-- Clean Reset (angular validation 1.2.0) -->
@@ -351,14 +385,14 @@ scope.validationInvalidHandler = function(message){
 // your module
 angular.module('yourApp', ['validation'])
     .config(['$validationProvider', function ($validationProvider) {        
-		validationProvider.validCallback = function(element) {
-			$(element).parents('.validator-container:first').removeClass('has-error').addClass('has-success-tick');
+		$validationProvider.validCallback = function(element) {
+			element.parents('.validator-container:first').removeClass('has-error').addClass('has-success-tick');
 		};
-		validationProvider.invalidCallback = function(element) {
-			$(element).parents('.validator-container:first').removeClass('has-success-tick').addClass('has-error');
+		$validationProvider.invalidCallback = function(element) {
+			element.parents('.validator-container:first').removeClass('has-success-tick').addClass('has-error');
 		};
-		validationProvider.resetCallback = function(element) {
-			$(element).parents('.validator-container:first').removeClass('has-error');
+		$validationProvider.resetCallback = function(element) {
+			element.parents('.validator-container:first').removeClass('has-error');
 		};
     }]);
 ```

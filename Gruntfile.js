@@ -16,7 +16,10 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        files: [
+        files: [{
+            src: './bundle.js',
+            dest: 'dist/'
+          }
           // {expand: true, cwd: 'demo', src: ['script.js'], dest: 'dist'} // partials html file
           // {expand: true, cwd: 'app', src: ['*.*'], dest: 'dist/'}
         ]
@@ -39,7 +42,7 @@ module.exports = function(grunt) {
       }
     },
     jsbeautifier: {
-      files: ['*.js', 'src/**/*.js', 'test/unit/*.js', 'demo/*.js'],
+      files: ['src/**/*.js', 'test/unit/*.js', 'demo/*.js'],
       options: {
         js: {
           indent_size: 2
@@ -106,7 +109,8 @@ module.exports = function(grunt) {
   // Register Task
   grunt.registerTask('dev', ['browserSync', 'watch']);
   grunt.registerTask('check', ['jshint', 'jsbeautifier']); // use this before commit
-  grunt.registerTask('build', ['check', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('build', ['check', 'clean', 'concat', 'uglify', 'copy']);
   grunt.registerTask('test', ['build', 'karma']);
   grunt.registerTask('cov', ['coveralls']);
+  grunt.registerTask('default', ['build', 'test']);
 };
