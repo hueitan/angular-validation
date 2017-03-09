@@ -33,9 +33,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showSuccessMessage && messageToShow) {
-        messageToShow = angular.isFunction(messageToShow) 
-          ? messageToShow(element, attrs, param) 
-          : messageToShow;
+        messageToShow = angular.isFunction(messageToShow) ? messageToShow(element, attrs, param) : messageToShow;
 
         messageElem.html('').append($compile($validationProvider.getSuccessHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
@@ -75,9 +73,7 @@
       if (element.attr('no-validation-message')) {
         messageElem.css('display', 'none');
       } else if ($validationProvider.showErrorMessage && messageToShow) {
-        messageToShow = angular.isFunction(messageToShow) 
-          ? messageToShow(element, attrs, param) 
-          : messageToShow;
+        messageToShow = angular.isFunction(messageToShow) ? messageToShow(element, attrs, param) : messageToShow;
 
         messageElem.html('').append($compile($validationProvider.getErrorHTML(messageToShow, element, attrs))(scope));
         messageElem.css('display', '');
