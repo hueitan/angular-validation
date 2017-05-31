@@ -1,4 +1,4 @@
-angular-validation 1.4.3
+angular-validation 1.4.4
 =========================
 [![NPM version](https://badge.fury.io/js/angular-validation.svg)](http://badge.fury.io/js/angular-validation)
 [![Build Status](https://travis-ci.org/hueitan/angular-validation.png?branch=master)](https://travis-ci.org/hueitan/angular-validation)
