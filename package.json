@@ -26,7 +26,7 @@
     "validator",
     "client-side"
   ],
-  "main": "./dist/angular-validation.js",
+  "main": "./index.js",
   "bugs": "https://github.com/huei90/angular-validation/issues",
   "devDependencies": {
     "babel-core": "^6.7.7",
