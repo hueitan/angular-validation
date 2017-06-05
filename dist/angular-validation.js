@@ -748,6 +748,19 @@ angular.module('validation.directive', ['validation.provider']);
         validMethod = (angular.isUndefined(validMethod)) ? $validationProvider.getValidMethod() : validMethod;
 
         /**
+         * A simple hack to provide global validate
+         */
+        if(!$validationProvider.validators){
+          $validationProvider.validators = [];
+          $validationProvider.validAll = function () {
+            return $validationProvider.validators.map(x=>x()).reduce((x,y)=>x&&y);
+          };
+        }
+        $validationProvider.validators.push(function () {
+          return checkValidation(scope, element, attrs, ctrl, validation, ctrl.$viewValue)
+        });
+
+        /**
          * Click submit form, check the validity when submit
          */
         scope.$on(ctrl.$name + 'submit-' + uid, function(event, index) {
