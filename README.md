@@ -29,8 +29,6 @@ DEMO
 -----
 http://hueitan.github.io/angular-validation/
 
-http://plnkr.co/edit/rjIIkX (Bootstrap framework)
-
 Install
 -----
 Install with npm
