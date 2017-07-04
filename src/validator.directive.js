@@ -310,7 +310,7 @@
          * Set initial validity to undefined if no boolean value is transmitted
          */
         var initialValidity = void 0;
-        if (typeof attrs.initialValidity === 'boolean') {
+        if (typeof attrs.initialValidity === 'boolean' || attrs.initialValidity ==='true' || attrs.initialValidity ==='false') {
           initialValidity = attrs.initialValidity;
         }
 
@@ -319,6 +319,9 @@
          */
         attrs.$observe('validator', function(value) {
           validation = value.split(',');
+          // validation has been updated => make rule fire again
+          var theValue = useViewValue ? ctrl.$viewValue : ctrl.$modelValue;
+          checkValidation(scope, element, attrs, ctrl, validation, theValue);
         });
 
         /**
