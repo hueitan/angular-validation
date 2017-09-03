@@ -80,12 +80,16 @@ Writing your First Code
 Built-in validation <small>in angular-validation-rule</small>
 ===
 
-1. Required
-2. Url
-3. Email
-4. Number
-5. Min length
-6. Max length
+1.  Required
+2.  Url
+3.  Email
+4.  Number
+5.  Length
+6.  Min length
+7.  Max length
+8.  Equality
+9.  Date
+10. DateISO
 
 5 and 6 require you to pass an inline parameter to set the length limit. Eg, `maxlength=6`.
 
