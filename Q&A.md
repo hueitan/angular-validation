@@ -1,6 +1,6 @@
 Q & A
 =====
-###Can I validate multiple Checkbox?
+### Can I validate multiple Checkbox?
 
 Yes, you can do it by using `validation-group`
 
@@ -22,7 +22,7 @@ Yes, you can do it by using `validation-group`
 <span id="checkBlur"></span>
 ```
 
-###Can I validate the form when init ? [#10](https://github.com/huei90/angular-validation/issues/10)###
+### Can I validate the form when init ? [#10](https://github.com/huei90/angular-validation/issues/10)###
 
 ```html
 <form name="Form">
@@ -36,24 +36,24 @@ $timeout(function () { // call $timeout to make sure the Form Constructor is gen
 });
 ```
 
-###What's the differentiate between validator-method `submit` and `submit-only`[#4](https://github.com/huei90/angular-validation/issues/4)###
+### What's the differentiate between validator-method `submit` and `submit-only`[#4](https://github.com/huei90/angular-validation/issues/4)###
 
 `submit` : when user click submit, then start watching using `watch` to validate<br/>
 `submit-only` : when user click `submit`, doesn't validate through `watch` until `submit` button is clicked.
 
-###Use checkValid() manually [#19](https://github.com/huei90/angular-validation/issues/19)###
+### Use checkValid() manually [#19](https://github.com/huei90/angular-validation/issues/19)###
 
 Before using `checkValid()`, you have to execute `submit` first to get the latest result.
 
-###How do we do tooltips for error messages upon focusing? [#68](https://github.com/huei90/angular-validation/issues/68#issuecomment-86445467)
+### How do we do tooltips for error messages upon focusing? [#68](https://github.com/huei90/angular-validation/issues/68#issuecomment-86445467)
 
 Using `validCallback` and `invalidCallback` to implement
 
-###Can this works correctly with AngularUI, ui-select, others ... ?###
+### Can this works correctly with AngularUI, ui-select, others ... ?###
 
 Yes, `angular-validation` works perfectly with other directive. (isolation scope). Find out more from the demo page.
 
-###Working with `ng-submit` and submitting with enter, not click [#247](https://github.com/huei90/angular-validation/issues/247)###
+### Working with `ng-submit` and submitting with enter, not click [#247](https://github.com/huei90/angular-validation/issues/247)###
 
 As per plnkr - https://plnkr.co/edit/nwTEuxuTMmpEc4hrFwGp?p=preview
 
@@ -66,7 +66,7 @@ Add checkValid and submit into both ng-click and ng-submit
 </form>
 ```
 
-###Can I validate $modelValue instead of a $viewValue? [#272](https://github.com/huei90/angular-validation/pull/272)###
+### Can I validate $modelValue instead of a $viewValue? [#272](https://github.com/huei90/angular-validation/pull/272)###
 
 Yes, adding `use-view-value="false"` attribute forces to use $modelValue instead of a $viewValue for evaluation when form is submitted. By default $viewValue is used. This need raises from a need of localized number inputs, which have to be stored in a $viewValue as a string (e.g. "2 000,0"), however in a $modelValue they are stored as a properly formatted number (2000). This can be done e.g. by using a custom directive with properly specified $formatters and $parsers.
 
