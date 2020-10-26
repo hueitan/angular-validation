@@ -5,7 +5,7 @@ angular-validation 1.4.4
 [![Code Climate](https://codeclimate.com/github/hueitan/angular-validation/badges/gpa.svg)](https://codeclimate.com/github/hueitan/angular-validation)
 [![Coverage Status](https://coveralls.io/repos/hueitan/angular-validation/badge.svg?branch=master&service=github)](https://coveralls.io/github/hueitan/angular-validation?branch=master)
 [![devDependency Status](https://david-dm.org/hueitan/angular-validation/dev-status.png)](https://david-dm.org/hueitan/angular-validation#info=devDependencies)
-[![Gitter chat](https://badges.gitter.im/huei90/angular-validation.png)](https://gitter.im/huei90/angular-validation)
+[![Gitter chat](https://badges.gitter.im/hueitan/angular-validation.png)](https://gitter.im/hueitan/angular-validation)
 
 Client-side Validation should be simple and clean.
 <br/>Don't let Client-side Validation dirty your controller.

@@ -3,7 +3,7 @@ CONTRIBUTING
 
 **Clone the repo to your computer**
 ```sh
-git clone https://github.com/huei90/angular-validation.git
+git clone https://github.com/hueitan/angular-validation.git
 ```
 
 **Install Grunt and Download dependencies**

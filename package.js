@@ -1,7 +1,7 @@
 var options = {
   version: '1.4.4',
   where: 'client',
-  packageName: 'huei90:angular-validation'
+  packageName: 'hueitan:angular-validation'
 };
 
 // meta data
@@ -9,7 +9,7 @@ Package.describe({
   name: options.packageName,
   version: options.version,
   summary: 'Client-side Validation for AngularJS',
-  git: 'https://github.com/huei90/angular-validation',
+  git: 'https://github.com/hueitan/angular-validation',
   documentation: 'README.md'
 });
 

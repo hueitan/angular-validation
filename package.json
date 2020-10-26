@@ -4,9 +4,9 @@
   "description": "Client-side Validation for AngularJS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/huei90/angular-validation"
+    "url": "https://github.com/hueitan/angular-validation"
   },
-  "homepage": "http://huei90.github.io/angular-validation/",
+  "homepage": "http://hueitan.github.io/angular-validation/",
   "scripts": {
     "test": "grunt karma",
     "build": "grunt build",
@@ -14,8 +14,7 @@
   },
   "author": {
     "name": "Huei Tan",
-    "email": "huei90@gmail.com",
-    "url": "https://github.com/huei90"
+    "url": "https://github.com/hueitan"
   },
   "license": "MIT",
   "keywords": [
@@ -27,7 +26,7 @@
     "client-side"
   ],
   "main": "./dist/angular-validation.js",
-  "bugs": "https://github.com/huei90/angular-validation/issues",
+  "bugs": "https://github.com/hueitan/angular-validation/issues",
   "devDependencies": {
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",

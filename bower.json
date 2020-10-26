@@ -1,9 +1,9 @@
 {
   "name": "angular-validation",
   "version": "1.4.4",
-  "homepage": "https://github.com/huei90/angular-validation",
+  "homepage": "https://github.com/hueitan/angular-validation",
   "authors": [
-    "huei90"
+    "hueitan"
   ],
   "description": "Client-side Validation for AngularJS",
   "main": "dist/angular-validation.js",
