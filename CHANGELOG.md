@@ -1,3 +1,6 @@
+26 Oct 2020 v1.4.5
+===
+
 _As of today, this project is no longer maintained._
 
 31 May 2017 v1.4.4
