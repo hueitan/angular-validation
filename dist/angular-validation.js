@@ -366,7 +366,9 @@ angular.module('validation.directive', ['validation.provider']);
             e.preventDefault();
             $validationProvider.validate(form)
               .success(function() {
-                $parse(attrs.ngClick)(scope);
+                $parse(attrs.ngClick)(scope, {
+                  $event: e
+                });
               });
           });
         });
