@@ -14,6 +14,10 @@
         },
         maxlength: function(value, scope, element, attrs, param) {
           return !value || value.length <= param;
+        },
+        equality: function (value, scope, element, attrs, param) {
+          var paramVal = document.querySelector('input[name=' + param + ']').value
+          return value && paramVal && value == paramVal;
         }
       };
 
@@ -41,6 +45,10 @@
         maxlength: {
           error: 'This should be shorter',
           success: 'Short enough!'
+        },
+        equality: {
+          error: "Fields is not equal",
+          success: "Fields is equal!"
         }
       };
       $validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
